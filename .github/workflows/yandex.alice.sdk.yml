@@ -23,3 +23,4 @@ jobs:
       uses: rohith/publish-nuget@v2
       with:        
         PROJECT_FILE_PATH: ./src/Yandex.Alice.Sdk/Yandex.Alice.Sdk.csproj
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
