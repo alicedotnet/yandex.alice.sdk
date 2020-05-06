@@ -24,3 +24,4 @@ jobs:
       with:        
         PROJECT_FILE_PATH: ./src/Yandex.Alice.Sdk/Yandex.Alice.Sdk.csproj
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+        INCLUDE_SYMBOLS: false
