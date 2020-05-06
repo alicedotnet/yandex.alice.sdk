@@ -1,0 +1,25 @@
+name: yandex.alice.sdk
+
+on:
+  push:
+    branches: 
+      - master 
+env:  
+  DOTNET_VERSION: '3.1.101'           # set this to the dot net version to use
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+    - name: test
+      run: dotnet test ./src -c Release
+    - name: publish on version change
+      id: publish_nuget
+      uses: rohith/publish-nuget@v2
+      with:        
+        PROJECT_FILE_PATH: ./src/Yandex.Alice.Sdk/Yandex.Alice.Sdk.csproj
