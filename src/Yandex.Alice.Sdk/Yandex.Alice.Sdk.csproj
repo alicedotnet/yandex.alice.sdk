@@ -3,6 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <Authors>Alex Volchetsky</Authors>
+    <Company />
+    <Product />
+    <Description>SDK for Yandex Alice skills development</Description>
+    <PackageProjectUrl>https://github.com/alexvolchetsky/yandex.alice.sdk</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/alexvolchetsky/yandex.alice.sdk</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>yandex alice</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +36,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Yandex.Alice.Sdk.Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
