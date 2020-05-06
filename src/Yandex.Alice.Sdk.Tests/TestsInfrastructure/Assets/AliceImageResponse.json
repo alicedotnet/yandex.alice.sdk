@@ -1,0 +1,33 @@
+﻿{
+  "response": {
+    "text": "Здравствуйте! Это мы, хороводоведы.",
+    "tts": "Здравствуйте! Это мы, хоров+одо в+еды.",
+    "card": {
+      "type": "BigImage",
+      "image_id": "1027858/46r960da47f60207e924",
+      "title": "Заголовок для изображения",
+      "description": "Описание изображения.",
+      "button": {
+        "text": "Надпись на кнопке",
+        "url": "http://example.com/",
+        "payload": {}
+      }
+    },
+    "buttons": [
+      {
+        "title": "Надпись на кнопке",
+        "payload": {},
+        "url": "https://example.com/",
+        "hide": true
+      }
+    ],
+    "end_session": true
+  },
+  "session_state": {
+    "value": 10
+  },
+  "user_state_update": {
+    "value": 42
+  },
+  "version": "1.0"
+}

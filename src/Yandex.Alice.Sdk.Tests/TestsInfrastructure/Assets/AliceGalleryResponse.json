@@ -1,0 +1,48 @@
+﻿{
+  "response": {
+    "text": "Здравствуйте! Это мы, хороводоведы.",
+    "tts": "Здравствуйте! Это мы, хоров+одо в+еды.",
+    "card": {
+      "type": "ItemsList",
+      "header": {
+        "text": "Заголовок галереи изображений"
+      },
+      "items": [
+        {
+          "image_id": "<image_id>",
+          "title": "Заголовок для изображения.",
+          "description": "Описание изображения.",
+          "button": {
+            "text": "Надпись на кнопке",
+            "url": "http://example.com/",
+            "payload": {}
+          }
+        }
+      ],
+      "footer": {
+        "text": "Текст блока под изображением.",
+        "button": {
+          "text": "Надпись на кнопке",
+          "url": "https://example.com/",
+          "payload": {}
+        }
+      }
+    },
+    "buttons": [
+      {
+        "title": "Надпись на кнопке",
+        "payload": {},
+        "url": "https://example.com/",
+        "hide": true
+      }
+    ],
+    "end_session": true
+  },
+  "session_state": {
+    "value": 10
+  },
+  "user_state_update": {
+    "value": 42
+  },
+  "version": "1.0"
+}
