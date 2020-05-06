@@ -12,7 +12,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>yandex alice</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,6 +40,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="Resources\icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
