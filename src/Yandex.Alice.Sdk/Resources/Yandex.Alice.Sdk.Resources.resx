@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Error_Required" xml:space="preserve">
+    <value>Field is required</value>
+  </data>
   <data name="Error_TooLongString" xml:space="preserve">
-    <value>String lenght exceeds {0} symbols. Use {1} to reduce string length</value>
+    <value>String lenght exceeds {0} symbols. You can use {1} to reduce string length</value>
   </data>
   <data name="Error_Unknown_Request_Type" xml:space="preserve">
     <value>Request type '{0}' is unknown</value>

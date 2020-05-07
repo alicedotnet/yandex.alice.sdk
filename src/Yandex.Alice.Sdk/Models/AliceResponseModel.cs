@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
+using Yandex.Alice.Sdk.Helpers;
 
 namespace Yandex.Alice.Sdk.Models
 {
@@ -17,8 +19,9 @@ namespace Yandex.Alice.Sdk.Models
             get { return _text; }
             set
             {
-                ValidateMaxLength(value, TextMaxLenght);
                 _text = value;
+                ValidateNotNull(_text);
+                ValidateMaxLength(_text, TextMaxLenght);                
             }
         }
 
@@ -30,8 +33,8 @@ namespace Yandex.Alice.Sdk.Models
             get { return _tts; }
             set
             {
-                ValidateMaxLength(value, TtsMaxLenght);
                 _tts = value;
+                ValidateMaxLength(AliceTtsHelper.GetTtsStringWithoutTags(_tts), TtsMaxLenght);
             }
         }
 

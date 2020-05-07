@@ -61,7 +61,16 @@ namespace Yandex.Alice.Sdk.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to String lenght exceeds {0} symbols. Use {1} to reduce string length.
+        ///   Looks up a localized string similar to Field is required.
+        /// </summary>
+        internal static string Error_Required {
+            get {
+                return ResourceManager.GetString("Error_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String lenght exceeds {0} symbols. You can use {1} to reduce string length.
         /// </summary>
         internal static string Error_TooLongString {
             get {

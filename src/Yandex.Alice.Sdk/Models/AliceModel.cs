@@ -18,5 +18,13 @@ namespace Yandex.Alice.Sdk.Models
                 throw new ArgumentException(errorText, propertyName);
             }
         }
+
+        protected static void ValidateNotNull(string value, [CallerMemberName] string propertyName = null)
+        {
+            if(value == null)
+            {
+                throw new ArgumentException(Yandex_Alice_Sdk_Resources.Error_Required, propertyName);
+            }
+        }
     }
 }

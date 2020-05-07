@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Yandex.Alice.Sdk.Helpers
 {
@@ -19,6 +20,16 @@ namespace Yandex.Alice.Sdk.Helpers
         public static string GetSilenceString(long milliseconds)
         {
             return $"sil<[{milliseconds}]>";
+        }
+
+        public static string GetSpeakerTag(string audio)
+        {
+            return $"<speaker audio=\"{audio}\">";
+        }
+
+        internal static string GetTtsStringWithoutTags(string value)
+        {
+            return Regex.Replace(value, "<speaker audio=\".*\">", string.Empty, RegexOptions.IgnoreCase);
         }
     }
 }

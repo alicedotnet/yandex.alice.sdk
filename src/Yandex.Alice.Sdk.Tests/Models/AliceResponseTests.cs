@@ -4,6 +4,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Yandex.Alice.Sdk.Models;
 using Yandex.Alice.Sdk.Tests.TestsInfrastructure;
+using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Wrappers;
 
 namespace Yandex.Alice.Sdk.Tests.Models
 {
@@ -17,7 +18,7 @@ namespace Yandex.Alice.Sdk.Tests.Models
         public void AliceResponse()
         {
             string json = File.ReadAllText(TestsConstants.Assets.AliceResponseFilePath);
-            var aliceResponse = JsonSerializer.Deserialize<AliceResponse>(json);
+            var aliceResponse = JsonSerializer.Deserialize<AliceResponseWrapper>(json);
             Assert.NotNull(aliceResponse);
             Assert.NotEmpty(aliceResponse.Version);
             Assert.NotNull(aliceResponse.SessionState);
@@ -42,7 +43,7 @@ namespace Yandex.Alice.Sdk.Tests.Models
         public void AliceImageResponse()
         {
             string json = File.ReadAllText(TestsConstants.Assets.AliceImageResponseFilePath);
-            var aliceResponse = JsonSerializer.Deserialize<AliceImageResponse>(json);
+            var aliceResponse = JsonSerializer.Deserialize<AliceImageResponseWrapper>(json);
             Assert.NotNull(aliceResponse);
             Assert.NotEmpty(aliceResponse.Version);
             Assert.NotNull(aliceResponse.SessionState);
@@ -76,7 +77,7 @@ namespace Yandex.Alice.Sdk.Tests.Models
         public void AliceGalleryResponse()
         {
             string json = File.ReadAllText(TestsConstants.Assets.AliceGalleryResponseFilePath);
-            var aliceResponse = JsonSerializer.Deserialize<AliceGalleryResponse>(json);
+            var aliceResponse = JsonSerializer.Deserialize<AliceGalleryResponseWrapper>(json);
             Assert.NotNull(aliceResponse);
             Assert.NotEmpty(aliceResponse.Version);
             Assert.NotNull(aliceResponse.SessionState);
