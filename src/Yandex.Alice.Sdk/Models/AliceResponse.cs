@@ -24,14 +24,8 @@ namespace Yandex.Alice.Sdk.Models
 
 
         public AliceResponse(AliceRequest request, string text, string tts, List<AliceButtonModel> buttons)
-            : base(request)
-        {
-            Response = new AliceResponseModel()
-            {
-                Text = text,
-                Tts = tts,
-                Buttons = buttons
-            };
+            : base(request, text, tts, buttons)
+        {            
         }
     }
 }

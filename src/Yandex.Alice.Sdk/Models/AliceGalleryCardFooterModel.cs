@@ -11,5 +11,16 @@ namespace Yandex.Alice.Sdk.Models
         public string Text { get; set; }
         [JsonPropertyName("button")]
         public AliceImageCardButtonModel Button { get; set; }
+
+        public AliceGalleryCardFooterModel()
+        {
+
+        }
+
+        public AliceGalleryCardFooterModel(string text , AliceImageCardButtonModel button)
+        {
+            Text = text;
+            Button = button;
+        }
     }
 }

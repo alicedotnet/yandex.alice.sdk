@@ -19,5 +19,10 @@ namespace Yandex.Alice.Sdk.Models
         public string Description { get; set; }
         [JsonPropertyName("button")]
         public AliceImageCardButtonModel Button { get; set; }
+
+        public AliceImageCardModel()
+        {
+            Type = AliceCardType.BigImage;
+        }
     }
 }

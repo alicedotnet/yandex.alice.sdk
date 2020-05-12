@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 namespace Yandex.Alice.Sdk.Models
 {
     public abstract class AliceResponseBase<T> : AliceResponseBase
+        where T : AliceResponseModel, new()
     {
         [JsonPropertyName("response")]
         public T Response { get; set; }
@@ -15,10 +16,15 @@ namespace Yandex.Alice.Sdk.Models
 
         }
 
-        protected AliceResponseBase(AliceRequest request)
+        protected AliceResponseBase(AliceRequest request, string text, string tts, List<AliceButtonModel> buttons)
             :base(request)
         {
-
+            Response = new T()
+            {
+                Text = text,
+                Tts = tts,
+                Buttons = buttons
+            };
         }
     }
 

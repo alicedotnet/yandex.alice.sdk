@@ -8,7 +8,7 @@ namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Wrappers
     public class AliceImageResponseWrapper : AliceImageResponse
     {
         public AliceImageResponseWrapper() 
-            : base(new AliceRequest())
+            : base(new AliceRequest(), "sample")
         {
         }
     }
