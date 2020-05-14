@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,6 +19,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
         private const string _noImageButtonTitle = "ответ без изображений";
         private const string _oneImageButtonTitle = "ответ с одним изображением";
         private const string _galleryButtonTitle = "ответ с галереей из нескольких изображений";
+        private const string _githubLink = "https://github.com/alexvolchetsky/yandex.alice.sdk";
 
         [HttpPost]
         [Route("/alice")]
@@ -34,25 +36,50 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("/alice1")]
+        public IActionResult Temp([FromBody] JsonElement request)
+        {
+            try
+            {
+                return Ok(new AliceResponse(new AliceRequest() { Version = "1.0"}, request.ToString()));
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                return Content(e.ToString());
+            }
+        }
+
         private static AliceResponseBase GetAliceResponse(AliceRequest aliceRequest)
         {
-            if (aliceRequest.Request.Command == _noImageButtonTitle)
+            if(aliceRequest.Request.Command == _codeButtonTitle)
+            {
+                string text = $"Вот ссылка на github";
+                var buttons = new List<AliceButtonModel>()
+                    {
+                        new AliceButtonModel(_githubLink, false, null, new Uri(_githubLink))
+                    };
+                return new AliceResponse(aliceRequest, text, buttons);
+            }
+            else if (aliceRequest.Request.Command == _noImageButtonTitle)
             {
                 string text = $"Это пример ответа без изображений. Здесь может быть текст или например эмодзи {char.ConvertFromUtf32(0x1F60E)}";
                 var buttons = new List<AliceButtonModel>()
                     {
-                        new AliceButtonModel(_codeButtonTitle, false, null, new Uri("https://github.com/alexvolchetsky/yandex.alice.sdk")),
+                        new AliceButtonModel(_codeButtonTitle, false, null, new Uri(_githubLink)),
                         new AliceButtonModel(_oneImageButtonTitle),
                         new AliceButtonModel(_galleryButtonTitle)
                     };
                 return new AliceResponse(aliceRequest, text, buttons);
             }
-            else if (aliceRequest.Request.Command == _oneImageButtonTitle)
+            else if (aliceRequest.Request.Command == _oneImageButtonTitle ||
+                aliceRequest.Request.Command == "ответ с 1 изображением")
             {
                 string text = $"Здесь можно отобразить только одно большое фото. Например котика";
                 var buttons = new List<AliceButtonModel>()
                     {
-                        new AliceButtonModel(_codeButtonTitle, true, null, new Uri("https://github.com/alexvolchetsky/yandex.alice.sdk")),
+                        new AliceButtonModel(_codeButtonTitle, true, null, new Uri(_githubLink)),
                         new AliceButtonModel(_noImageButtonTitle, true),
                         new AliceButtonModel(_galleryButtonTitle, true)
                     };
@@ -75,7 +102,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                 string text = $"В ответе такого типа можно отобразить несколько фотографий";
                 var buttons = new List<AliceButtonModel>()
                     {
-                        new AliceButtonModel(_codeButtonTitle, true, null, new Uri("https://github.com/alexvolchetsky/yandex.alice.sdk")),
+                        new AliceButtonModel(_codeButtonTitle, true, null, new Uri(_githubLink)),
                         new AliceButtonModel(_noImageButtonTitle, true),
                         new AliceButtonModel(_oneImageButtonTitle, true)
                     };
@@ -135,7 +162,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     : "Выберите действие";
                 var buttons = new List<AliceButtonModel>()
                     {
-                        new AliceButtonModel(_codeButtonTitle, false, null, new Uri("https://github.com/alexvolchetsky/yandex.alice.sdk")),
+                        new AliceButtonModel(_codeButtonTitle, false, null, new Uri(_githubLink)),
                         new AliceButtonModel(_noImageButtonTitle),
                         new AliceButtonModel(_oneImageButtonTitle),
                         new AliceButtonModel(_galleryButtonTitle)
