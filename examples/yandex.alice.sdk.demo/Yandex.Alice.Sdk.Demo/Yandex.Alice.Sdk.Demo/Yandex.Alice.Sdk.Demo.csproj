@@ -9,10 +9,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\Yandex.Alice.Sdk\Yandex.Alice.Sdk.csproj" />
+    <PackageReference Include="Yandex.Alice.Sdk" Version="1.0.3" />
   </ItemGroup>
 
 
