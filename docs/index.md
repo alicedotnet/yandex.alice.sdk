@@ -13,6 +13,10 @@ layout: default
 # Использование
 Репозиторий содержит [тестовый проект](https://github.com/alexvolchetsky/yandex.alice.sdk/tree/master/examples/yandex.alice.sdk.demo) на ASP.NET Core Web Api, который демонстрирует работу с SDK.
 
+Для тестового проекта был опубликован навык в каталоге Алисы:
+
+[![alice](https://dialogs.s3.yandex.net/badges/v1-term1.svg)](https://dialogs.yandex.ru/store/skills/245ea3a4-net-sdk?utm_source=https://github.com&utm_medium=badge&utm_campaign=v1&utm_term=d1)
+
 В целом вам нужно будет создать контроллер с POST методом действия, принимающим объект класса AliceRequest в качестве параметра.
 
 Метод может вернуть один из 3-х типов ответов в соответствии с [протоколом алисы](https://yandex.ru/dev/dialogs/alice/doc/protocol-docpage/#response):
