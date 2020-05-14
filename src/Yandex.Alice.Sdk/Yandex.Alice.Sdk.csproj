@@ -7,12 +7,12 @@
     <Company />
     <Product />
     <Description>SDK for Yandex Alice skills development</Description>
-    <PackageProjectUrl>https://github.com/alexvolchetsky/yandex.alice.sdk</PackageProjectUrl>
+    <PackageProjectUrl>https://alexvolchetsky.github.io/yandex.alice.sdk</PackageProjectUrl>
     <RepositoryUrl>https://github.com/alexvolchetsky/yandex.alice.sdk</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>yandex alice</PackageTags>
+    <PackageTags>yandex alice skill</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
 
