@@ -3,6 +3,7 @@
 .Net SDK для разработки навыков Яндекс Алисы на языке C#
 
 ![yandex.alice.sdk](https://github.com/alexvolchetsky/yandex.alice.sdk/workflows/yandex.alice.sdk/badge.svg)
+[![NuGet](https://buildstats.info/nuget/Yandex.Alice.Sdk)](https://www.nuget.org/packages/Yandex.Alice.Sdk)
 
 # Установка
 Установите пакет c SDK: 
