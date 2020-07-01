@@ -34,6 +34,11 @@ namespace Yandex.Alice.Sdk.Converters
 
         protected abstract TItem ToItem(ref Utf8JsonReader reader, JsonSerializerOptions options);
 
+        protected virtual void WriteItem(Utf8JsonWriter writer, TItem item, JsonSerializerOptions options)
+        {
+            JsonSerializer.Serialize(writer, item, options);
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
         public override void Write(Utf8JsonWriter writer, IEnumerable<TItem> value, JsonSerializerOptions options)
         {
@@ -42,7 +47,7 @@ namespace Yandex.Alice.Sdk.Converters
                 writer.WriteStartArray();
                 foreach (var item in value)
                 {
-                    JsonSerializer.Serialize(writer, item, options);
+                    WriteItem(writer, item, options);
                 }
                 writer.WriteEndArray();
             }

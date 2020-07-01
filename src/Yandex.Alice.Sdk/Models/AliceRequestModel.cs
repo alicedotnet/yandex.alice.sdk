@@ -6,7 +6,7 @@ using Yandex.Alice.Sdk.Converters;
 
 namespace Yandex.Alice.Sdk.Models
 {
-    public class AliceRequestModel
+    public class AliceRequestModel<TIntents>
     {
         [JsonPropertyName("command")]
         public string Command { get; set; }
@@ -25,6 +25,6 @@ namespace Yandex.Alice.Sdk.Models
         public AliceMarkupModel Markup { get; set; }
 
         [JsonPropertyName("nlu")]
-        public AliceNLUModel Nlu { get; set; }
+        public AliceNLUModel<TIntents> Nlu { get; set; }
     }
 }

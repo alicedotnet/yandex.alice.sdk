@@ -17,6 +17,7 @@ namespace Yandex.Alice.Sdk
             public const string Fio = "YANDEX.FIO";
             public const string Geo = "YANDEX.GEO";
             public const string Number = "YANDEX.NUMBER";
+            public const string String = "YANDEX.STRING";
         }
 
         public static class AliceCardTypeValues

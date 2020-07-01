@@ -23,6 +23,8 @@ namespace Yandex.Alice.Sdk.Converters
                     return AliceEntityType.GEO;
                 case Constants.AliceEntityTypeValues.Number:
                     return AliceEntityType.NUMBER;
+                case Constants.AliceEntityTypeValues.String:
+                    return AliceEntityType.STRING;
                 default:
                     return AliceEntityType.Unknown;
             }
@@ -48,6 +50,9 @@ namespace Yandex.Alice.Sdk.Converters
                     break;
                 case AliceEntityType.NUMBER:
                     result = Constants.AliceEntityTypeValues.Number;
+                    break;
+                case AliceEntityType.STRING:
+                    result = Constants.AliceEntityTypeValues.String;
                     break;
                 default:
                     result = "unknown";

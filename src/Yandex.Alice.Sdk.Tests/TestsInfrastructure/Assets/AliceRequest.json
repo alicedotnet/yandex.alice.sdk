@@ -68,7 +68,41 @@
             "day_is_relative": true
           }
         }
-      ]
+      ],
+      "intents": {
+        "main_secondary": {
+          "slots": {
+            "who": {
+              "type": "YANDEX.STRING",
+              "tokens": {
+                "start": 1,
+                "end": 2
+              },
+              "value": "кукушка"
+            }            
+          }
+        },
+        "main": {
+          "slots": {
+            "what": {
+              "type": "YANDEX.STRING",
+              "tokens": {
+                "start": 1,
+                "end": 2
+              },
+              "value": "погоду"
+            },
+            "where": {
+              "type": "YANDEX.STRING",
+              "tokens": {
+                "start": 2,
+                "end": 3
+              },
+              "value": "дома"
+            }
+          }
+        }
+      }
     }
   },
   "session": {
@@ -94,4 +128,4 @@
     }
   },
   "version": "1.0"
-}
+} 

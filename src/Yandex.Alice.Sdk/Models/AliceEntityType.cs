@@ -10,6 +10,7 @@ namespace Yandex.Alice.Sdk.Models
         DATETIME,
         FIO,
         GEO,
-        NUMBER
+        NUMBER,
+        STRING
     }
 }

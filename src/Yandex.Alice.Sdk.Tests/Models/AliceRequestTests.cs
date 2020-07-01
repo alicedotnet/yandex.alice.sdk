@@ -7,6 +7,7 @@ using Xunit.Abstractions;
 using Yandex.Alice.Sdk.Models;
 using Yandex.Alice.Sdk.Resources;
 using Yandex.Alice.Sdk.Tests.TestsInfrastructure;
+using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models;
 
 namespace Yandex.Alice.Sdk.Tests.Models
 {
@@ -17,10 +18,48 @@ namespace Yandex.Alice.Sdk.Tests.Models
         }
 
         [Fact]
+        public void Deserialization_Generic_Ok()
+        {
+            string requestJson = File.ReadAllText(TestsConstants.Assets.AliceRequestFilePath);
+            var aliceRequest = JsonSerializer.Deserialize<AliceRequest<TestIntents>>(requestJson);
+            TestModel(aliceRequest);
+            Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main);
+            Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main.Slots);
+
+            Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot);
+            Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot.Tokens);
+            Assert.Equal(AliceEntityType.STRING, aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot.Type);
+            Assert.True(aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot is AliceEntityStringModel);
+            Assert.NotNull((aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot as AliceEntityStringModel).Value);
+            
+            Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main.Slots.WhereSlot);
+            Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main.Slots.WhereSlot.Tokens);
+            Assert.Equal(AliceEntityType.STRING, aliceRequest.Request.Nlu.Intents.Main.Slots.WhereSlot.Type);
+            Assert.True(aliceRequest.Request.Nlu.Intents.Main.Slots.WhereSlot is AliceEntityStringModel);
+            Assert.NotNull((aliceRequest.Request.Nlu.Intents.Main.Slots.WhereSlot as AliceEntityStringModel).Value);
+
+            Assert.NotNull(aliceRequest.Request.Nlu.Intents.MainSecondary);
+            Assert.NotNull(aliceRequest.Request.Nlu.Intents.MainSecondary.Slots);
+            Assert.NotNull(aliceRequest.Request.Nlu.Intents.MainSecondary.Slots.WhoSlot);
+            Assert.NotNull(aliceRequest.Request.Nlu.Intents.MainSecondary.Slots.WhoSlot.Tokens);
+            Assert.Equal(AliceEntityType.STRING, aliceRequest.Request.Nlu.Intents.MainSecondary.Slots.WhoSlot.Type);
+            Assert.True(aliceRequest.Request.Nlu.Intents.MainSecondary.Slots.WhoSlot is AliceEntityStringModel);
+            Assert.NotNull((aliceRequest.Request.Nlu.Intents.MainSecondary.Slots.WhoSlot as AliceEntityStringModel).Value);
+
+            WritePrettyJson(aliceRequest);
+        }
+
+        [Fact]
         public void Deserialization_Ok()
         {
             string requestJson = File.ReadAllText(TestsConstants.Assets.AliceRequestFilePath);
             var aliceRequest = JsonSerializer.Deserialize<AliceRequest>(requestJson);
+            TestModel(aliceRequest);
+            WritePrettyJson(aliceRequest);
+        }
+
+        private void TestModel<T>(AliceRequest<T> aliceRequest)
+        {
             Assert.NotNull(aliceRequest);
             Assert.NotNull(aliceRequest.State);
             Assert.NotNull(aliceRequest.State.Session);
@@ -42,7 +81,12 @@ namespace Yandex.Alice.Sdk.Tests.Models
             Assert.NotEmpty(aliceRequest.Request.Nlu.Tokens);
             Assert.NotNull(aliceRequest.Request.Nlu.Entities);
             Assert.NotEmpty(aliceRequest.Request.Nlu.Entities);
-            WritePrettyJson(aliceRequest);
+            foreach (AliceEntityModel entity in aliceRequest.Request.Nlu.Entities)
+            {
+                Assert.NotNull(entity.Tokens);
+                Assert.NotEqual(AliceEntityType.Unknown, entity.Type);
+            }
+            Assert.NotNull(aliceRequest.Request.Nlu.Intents);
         }
 
         [Fact]

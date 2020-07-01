@@ -5,13 +5,18 @@ using System.Text.Json.Serialization;
 
 namespace Yandex.Alice.Sdk.Models
 {
-    public class AliceRequest
+    public class AliceRequest : AliceRequest<object>
+    {
+
+    }
+
+    public class AliceRequest<TIntents>
     {
         [JsonPropertyName("meta")]
         public AliceMetaModel Meta { get; set; }
 
         [JsonPropertyName("request")]
-        public AliceRequestModel Request { get; set; }
+        public AliceRequestModel<TIntents> Request { get; set; }
 
         [JsonPropertyName("session")]
         public AliceSessionModel Session { get; set; }
