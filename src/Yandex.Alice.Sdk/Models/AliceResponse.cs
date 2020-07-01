@@ -7,23 +7,23 @@ namespace Yandex.Alice.Sdk.Models
 {
     public class AliceResponse : AliceResponseBase<AliceResponseModel>
     {
-        public AliceResponse(AliceRequest request, string text)
+        public AliceResponse(AliceRequestBase request, string text)
             : this(request, text, text, null)
         {
         }
 
-        public AliceResponse(AliceRequest request, string text, string tts)
+        public AliceResponse(AliceRequestBase request, string text, string tts)
             : this(request, text, tts, null)
         {
         }
 
-        public AliceResponse(AliceRequest request, string text, List<AliceButtonModel> buttons)
+        public AliceResponse(AliceRequestBase request, string text, List<AliceButtonModel> buttons)
             : this(request, text, text, buttons)
         {
         }
 
 
-        public AliceResponse(AliceRequest request, string text, string tts, List<AliceButtonModel> buttons)
+        public AliceResponse(AliceRequestBase request, string text, string tts, List<AliceButtonModel> buttons)
             : base(request, text, tts, buttons)
         {            
         }

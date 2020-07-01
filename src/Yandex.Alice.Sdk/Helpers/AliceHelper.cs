@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using Yandex.Alice.Sdk.Models;
 
 namespace Yandex.Alice.Sdk.Helpers
@@ -43,6 +44,21 @@ namespace Yandex.Alice.Sdk.Helpers
             int lastWhitespaceIndex = reducedString.LastIndexOf(" ", StringComparison.OrdinalIgnoreCase);
             reducedString = reducedString.Substring(0, lastWhitespaceIndex);
             return reducedString.TrimEnd('.', ',', '-', ':') + reducedEnding + mandatoryEnding;
+        }
+
+        public static T JsonElementToObject<T>(object jsonElement)
+        {
+            if(jsonElement is JsonElement element)
+            {
+                return JsonElementToObject<T>(element);
+            }
+            return default;
+        }
+
+        public static T JsonElementToObject<T>(JsonElement jsonElement)
+        {
+            var json = jsonElement.GetRawText();
+            return JsonSerializer.Deserialize<T>(json);
         }
     }
 }

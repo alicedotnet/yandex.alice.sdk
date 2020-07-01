@@ -16,7 +16,7 @@ namespace Yandex.Alice.Sdk.Models
 
         }
 
-        protected AliceResponseBase(AliceRequest request, string text, string tts, List<AliceButtonModel> buttons)
+        protected AliceResponseBase(AliceRequestBase request, string text, string tts, List<AliceButtonModel> buttons)
             :base(request)
         {
             Response = new T()
@@ -43,7 +43,7 @@ namespace Yandex.Alice.Sdk.Models
 
         }
 
-        protected AliceResponseBase(AliceRequest request)
+        protected AliceResponseBase(AliceRequestBase request)
         {
             if(request == null)
             {
