@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "locale": "ru-RU",
+    "timezone": "UTC",
+    "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)",
+    "interfaces": {
+      "screen": {},
+      "payments": {},
+      "account_linking": {}
+    }
+  },
+  "session": {
+    "message_id": 0,
+    "session_id": "3bc606d4-14d2-4201-b36b-db803127e0f1",
+    "skill_id": "38cfdd61-7473-4b54-aae2-612434056e3f",
+    "user_id": "658EAD936800B51CBE8A219E851A223FCE1616456E9A20F76835D6BE4C4C3D49",
+    "user": {
+      "user_id": "74C6368C315E99DAA44012442407ADCAF7BA7716C5192D1B2EA3E5CF395E669E"
+    },
+    "application": {
+      "application_id": "658EAD936800B51CBE8A219E851A223FCE1616456E9A20F76835D6BE4C4C3D49"
+    },
+    "new": true
+  },
+  "request": {
+    "command": "",
+    "original_utterance": "",
+    "nlu": {
+      "tokens": [],
+      "entities": [],
+      "intents": {}
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {},
+    "user": {}
+  },
+  "version": "1.0"
+}
