@@ -10,10 +10,11 @@
     <PackageProjectUrl>https://alexvolchetsky.github.io/yandex.alice.sdk</PackageProjectUrl>
     <RepositoryUrl>https://github.com/alexvolchetsky/yandex.alice.sdk</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>yandex alice skill</PackageTags>
+    <PackageTags>yandex alice skill dialogs models</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageReleaseNotes>Add intents integration</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
