@@ -41,3 +41,6 @@ public class AliceController : ControllerBase
     }
 }
 ```
+
+# Документация
+Больше информации о работе с библиотекой смотрите в [wiki](https://github.com/alexvolchetsky/yandex.alice.sdk/wiki)
