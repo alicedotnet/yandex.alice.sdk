@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo", "Yandex.Alice.Sdk.Demo\Yandex.Alice.Sdk.Demo.csproj", "{45F0A3C4-1F24-408F-83EA-DE72A02BFE19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yandex.Alice.Sdk.Demo.Tests", "Yandex.Alice.Sdk.Demo.Tests\Yandex.Alice.Sdk.Demo.Tests.csproj", "{76D415CA-E42C-4C35-9A30-750CC9C01E59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo.Tests", "Yandex.Alice.Sdk.Demo.Tests\Yandex.Alice.Sdk.Demo.Tests.csproj", "{76D415CA-E42C-4C35-9A30-750CC9C01E59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

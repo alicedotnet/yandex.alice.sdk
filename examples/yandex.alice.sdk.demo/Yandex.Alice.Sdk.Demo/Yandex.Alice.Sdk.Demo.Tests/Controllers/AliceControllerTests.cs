@@ -18,26 +18,28 @@ namespace Yandex.Alice.Sdk.Demo.Tests.Controllers
     public class AliceControllerTests
     {
         private readonly ITestOutputHelper _testOutputHelper;
+        private readonly HttpClient _client;
 
         public AliceControllerTests(ITestOutputHelper testOutputHelper)
         {
             _testOutputHelper = testOutputHelper;
-        }
-
-        [Fact]
-        public async Task TestAlice()
-        {
             var hostBuilder = Program.CreateHostBuilder(Array.Empty<string>())
                 .ConfigureWebHost(webhost => webhost.UseTestServer());
-            var host = await hostBuilder.StartAsync();
-            var client = host.GetTestClient();
+            var host = hostBuilder.Start();
+            _client = host.GetTestClient();
+        }
 
-            string json = File.ReadAllText(TestsConstants.AliceRequestFilePath);
+        [Theory]
+        [InlineData(TestsConstants.AliceRequestFilePath)]
+        [InlineData(TestsConstants.AliceRequestInvalidIntentFilePath)]
+        public async Task TestAlice(string filePath)
+        {
+            string json = File.ReadAllText(filePath);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("alice", content).ConfigureAwait(false);
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-
+            var response = await _client.PostAsync("alice", content).ConfigureAwait(false);
             string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            Assert.True(HttpStatusCode.OK == response.StatusCode, responseContent);
+
             _testOutputHelper.WriteLine(responseContent);
         }
     }

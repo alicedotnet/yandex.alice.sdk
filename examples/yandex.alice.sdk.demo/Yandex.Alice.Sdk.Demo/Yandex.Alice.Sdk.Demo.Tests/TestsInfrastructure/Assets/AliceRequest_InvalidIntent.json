@@ -10,8 +10,8 @@
     }
   },
   "session": {
-    "message_id": 0,
-    "session_id": "3bc606d4-14d2-4201-b36b-db803127e0f1",
+    "message_id": 19,
+    "session_id": "7dce3a23-3fd6-419a-9731-0f6463a2cfd3",
     "skill_id": "38cfdd61-7473-4b54-aae2-612434056e3f",
     "user_id": "658EAD936800B51CBE8A219E851A223FCE1616456E9A20F76835D6BE4C4C3D49",
     "user": {
@@ -20,36 +20,17 @@
     "application": {
       "application_id": "658EAD936800B51CBE8A219E851A223FCE1616456E9A20F76835D6BE4C4C3D49"
     },
-    "new": true
+    "new": false
   },
   "request": {
-    "command": "",
-    "original_utterance": "",
+    "command": "sdfdsf",
+    "original_utterance": "sdfdsf",
     "nlu": {
-      "tokens": [],
+      "tokens": [
+        "sdfdsf"
+      ],
       "entities": [],
-      "intents": {
-        "turn.on": {
-          "slots": {
-            "what": {
-              "type": "YANDEX.STRING",
-              "tokens": {
-                "start": 1,
-                "end": 2
-              },
-              "value": "свет"
-            },
-            "where": {
-              "type": "YANDEX.STRING",
-              "tokens": {
-                "start": 2,
-                "end": 4
-              },
-              "value": "в ванной"
-            }
-          }
-        }
-      }
+      "intents": {}
     },
     "markup": {
       "dangerous_context": false
@@ -57,7 +38,9 @@
     "type": "SimpleUtterance"
   },
   "state": {
-    "session": {},
+    "session": {
+      "isInIntentsTestingMode": true
+    },
     "user": {}
   },
   "version": "1.0"
