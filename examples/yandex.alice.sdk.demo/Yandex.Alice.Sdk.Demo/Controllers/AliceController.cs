@@ -171,7 +171,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
             }
             if(aliceRequest.Request.Command != _homeButtonTitle && aliceRequest.Request.Nlu?.Intents?.TurnOn == null)
             {
-                var session = AliceHelper.JsonElementToObject<CustomSessionState>(aliceRequest.State.Session);
+                var session = AliceHelper.JsonElementToObject<CustomSessionState>(aliceRequest.State?.Session);
                 if(session?.IsInIntentsTestingMode == true)
                 {
                     string text = "Не удалось распознать интент. Попробуйте еще раз";

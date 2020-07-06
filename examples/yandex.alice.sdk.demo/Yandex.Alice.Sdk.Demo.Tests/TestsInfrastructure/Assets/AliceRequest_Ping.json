@@ -10,8 +10,8 @@
     }
   },
   "session": {
-    "message_id": 0,
-    "session_id": "3bc606d4-14d2-4201-b36b-db803127e0f1",
+    "message_id": 1,
+    "session_id": "21543e97-20cf-4b62-9950-99e90c34c852",
     "skill_id": "38cfdd61-7473-4b54-aae2-612434056e3f",
     "user_id": "658EAD936800B51CBE8A219E851A223FCE1616456E9A20F76835D6BE4C4C3D49",
     "user": {
@@ -20,16 +20,20 @@
     "application": {
       "application_id": "658EAD936800B51CBE8A219E851A223FCE1616456E9A20F76835D6BE4C4C3D49"
     },
-    "new": true
+    "new": false
   },
   "request": {
-    "command": "",
+    "command": "ping",
     "original_utterance": "ping",
+    "nlu": {
+      "tokens": [],
+      "entities": [],
+      "intents": {}
+    },
+    "markup": {
+      "dangerous_context": false
+    },
     "type": "SimpleUtterance"
-  },
-  "state": {
-    "session": {},
-    "user": {}
   },
   "version": "1.0"
 }
