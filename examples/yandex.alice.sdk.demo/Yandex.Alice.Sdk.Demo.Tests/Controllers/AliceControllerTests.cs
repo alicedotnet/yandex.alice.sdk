@@ -32,6 +32,7 @@ namespace Yandex.Alice.Sdk.Demo.Tests.Controllers
         [Theory]
         [InlineData(TestsConstants.AliceRequestFilePath)]
         [InlineData(TestsConstants.AliceRequestInvalidIntentFilePath)]
+        [InlineData(TestsConstants.AliceRequestPingFilePath)]
         public async Task TestAlice(string filePath)
         {
             string json = File.ReadAllText(filePath);

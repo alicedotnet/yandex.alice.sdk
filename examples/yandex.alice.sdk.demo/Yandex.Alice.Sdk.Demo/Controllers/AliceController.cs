@@ -169,7 +169,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     SessionState = new CustomSessionState(true)
                 };
             }
-            if(aliceRequest.Request.Command != _homeButtonTitle && aliceRequest.Request.Nlu.Intents?.TurnOn == null)
+            if(aliceRequest.Request.Command != _homeButtonTitle && aliceRequest.Request.Nlu?.Intents?.TurnOn == null)
             {
                 var session = AliceHelper.JsonElementToObject<CustomSessionState>(aliceRequest.State.Session);
                 if(session?.IsInIntentsTestingMode == true)
@@ -187,7 +187,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     };
                 }
             }
-            if (aliceRequest.Request.Nlu.Intents?.TurnOn != null)
+            if (aliceRequest.Request.Nlu?.Intents?.TurnOn != null)
             {
                 var what = aliceRequest.Request.Nlu.Intents.TurnOn.Slots.What as AliceEntityStringModel;
                 var where = aliceRequest.Request.Nlu.Intents.TurnOn.Slots.Where as AliceEntityStringModel;
