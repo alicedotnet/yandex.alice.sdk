@@ -1,0 +1,41 @@
+name: yandex.alice.sdk.demo
+
+on:
+  push:
+    branches: 
+      - master 
+env:
+  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+    - name: test
+      run: dotnet test ./examples/yandex.alice.sdk.demo -c Release
+    - name: publish site
+      run: dotnet publish -c Release -o demo ./examples/yandex.alice.sdk.demo/Yandex.Alice.Sdk.Demo/Yandex.Alice.Sdk.Demo.csproj
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with: 
+        name: demo
+        path: demo
+        
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Download a Build Artifact'
+      uses: actions/download-artifact@v2
+      with:
+        name: demo
+        path: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/demo'
+    - name: 'Run Azure webapp deploy action using publish profile credentials'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ secrets.azure_web_app_name }}  # Replace with your app name
+        publish-profile: ${{ secrets.azure_publish_profile  }} # Define secret variable in repository settings as per action documentation
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/demo'
