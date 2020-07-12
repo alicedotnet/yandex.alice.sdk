@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 using Yandex.Alice.Sdk.Models.DialogsApi;
+using Yandex.Alice.Sdk.Resources;
 using Yandex.Alice.Sdk.Services;
-using Yandex.Alice.Sdk.Services.Interfaces;
 using Yandex.Alice.Sdk.Tests.TestsInfrastructure;
 using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Fixtures;
 
@@ -26,7 +26,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
             :base(testOutputHelper)
         {
             _dialogsApiService = dialogsApiFixture.DialogsApiService;
-            _skillId = dialogsApiFixture.SkillId;
+            _skillId = dialogsApiFixture.SkillSettings.SkillId;
         }
 
         [Fact]
@@ -71,9 +71,8 @@ namespace Yandex.Alice.Sdk.Tests.Services
         public async Task UploadImage_InvalidSkillId_Fail()
         {
             var request = new DialogsWebUploadRequest(new Uri(_imageUrl));
-            var response = await _dialogsApiService.UploadImageAsync(Guid.Empty, request).ConfigureAwait(false);
-            Assert.False(response.IsSuccess);
-            Assert.Contains("Resource not found", response.ErrorMessage, StringComparison.OrdinalIgnoreCase);
+            var exception = await Assert.ThrowsAsync<ArgumentException>(() => _dialogsApiService.UploadImageAsync(Guid.Empty, request)).ConfigureAwait(false);
+            Assert.Contains(Yandex_Alice_Sdk_Resources.Error_NoSkillId, exception.Message, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]

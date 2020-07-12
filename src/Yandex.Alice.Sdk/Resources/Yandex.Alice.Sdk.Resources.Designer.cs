@@ -61,6 +61,15 @@ namespace Yandex.Alice.Sdk.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SkillId is invalid or not set.
+        /// </summary>
+        internal static string Error_NoSkillId {
+            get {
+                return ResourceManager.GetString("Error_NoSkillId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Field is required.
         /// </summary>
         internal static string Error_Required {

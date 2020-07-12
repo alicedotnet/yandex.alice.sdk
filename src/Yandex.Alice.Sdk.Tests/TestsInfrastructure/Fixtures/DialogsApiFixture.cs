@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using System.Text;
 using Yandex.Alice.Sdk.Models.DialogsApi;
 using Yandex.Alice.Sdk.Services;
-using Yandex.Alice.Sdk.Services.Interfaces;
 
 namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Fixtures
 {
     public class DialogsApiFixture
     {
         public IDialogsApiService DialogsApiService { get; }
-        public Guid SkillId { get; }
+        public SkillSettings SkillSettings { get; }
 
         public DialogsApiFixture()
         {
@@ -20,11 +19,13 @@ namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Fixtures
                 .AddUserSecrets<DialogsApiFixture>()
                 .Build();
             var dialogsApiSection = configuration.GetSection("DialogsApi");
-            var settings = new DialogsApiSettings();
-            dialogsApiSection.Bind(settings);
-            DialogsApiService = new DialogsApiService(settings);
+            var dialogsApiSettings = new DialogsApiSettings();
+            dialogsApiSection.Bind(dialogsApiSettings);
+            DialogsApiService = new DialogsApiService(dialogsApiSettings);
 
-            SkillId = new Guid(configuration.GetSection("SkillId").Value);
+            var skillSection = configuration.GetSection("Skill");
+            SkillSettings = new SkillSettings();
+            skillSection.Bind(SkillSettings);
         }
     }
 }

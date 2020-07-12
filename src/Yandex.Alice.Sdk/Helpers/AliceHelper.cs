@@ -47,7 +47,7 @@ namespace Yandex.Alice.Sdk.Helpers
             return reducedString.TrimEnd('.', ',', '-', ':') + reducedEnding + mandatoryEnding;
         }
 
-        public static T JsonElementToObject<T>(object jsonElement)
+        internal static T JsonElementToObject<T>(object jsonElement)
         {
             if(jsonElement is JsonElement element)
             {
@@ -56,7 +56,7 @@ namespace Yandex.Alice.Sdk.Helpers
             return default;
         }
 
-        public static T JsonElementToObject<T>(JsonElement jsonElement)
+        internal static T JsonElementToObject<T>(JsonElement jsonElement)
         {
             var json = jsonElement.GetRawText();
             return JsonSerializer.Deserialize<T>(json);

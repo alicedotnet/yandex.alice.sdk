@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
@@ -7,13 +8,19 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Yandex.Alice.Sdk.Models.DialogsApi;
-using Yandex.Alice.Sdk.Services.Interfaces;
+using Yandex.Alice.Sdk.Resources;
 
 namespace Yandex.Alice.Sdk.Services
 {
     public class DialogsApiService : IDialogsApiService, IDisposable
     {
         private readonly HttpClient _dialogsApiClient;
+
+        public DialogsApiService(IOptions<DialogsApiSettings> dialogsApiSettings)
+            : this(dialogsApiSettings?.Value)
+        {
+
+        }
 
         public DialogsApiService(DialogsApiSettings dialogsApiSettings)
         {
@@ -39,7 +46,7 @@ namespace Yandex.Alice.Sdk.Services
 
         public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsWebUploadRequest request)
         {
-            string requestUri = $"/api/v1/skills/{skillId}/images";
+            string requestUri = $"{GetSkillUrl(skillId)}/images";
             string json = JsonSerializer.Serialize(request);
             using (HttpContent requestContent = new StringContent(json, Encoding.UTF8, "application/json"))
             {
@@ -49,19 +56,19 @@ namespace Yandex.Alice.Sdk.Services
 
         public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsFileUploadRequest request)
         {
-            string url = $"/api/v1/skills/{skillId}/images";
+            string url = $"{GetSkillUrl(skillId)}/images";
             return await PostFileAsync<DialogsImageUploadResponse>(url, request).ConfigureAwait(false);
         }
 
         public async Task<DialogsApiResponse<DialogsImagesInfoList>> GetImagesAsync(Guid skillId)
         {
-            string url = $"/api/v1/skills/{skillId}/images";
+            string url = $"{GetSkillUrl(skillId)}/images";
             return await GetAsync<DialogsImagesInfoList>(url).ConfigureAwait(false);
         }
 
         public async Task<DialogsApiResponse<DialogsDeleteResponse>> DeleteImageAsync(Guid skillId, string imageId)
         {
-            string url = $"/api/v1/skills/{skillId}/images/{imageId}";
+            string url = $"{GetSkillUrl(skillId)}/images/{imageId}";
             return await DeleteAsync<DialogsDeleteResponse>(url).ConfigureAwait(false);
         }
 
@@ -71,30 +78,39 @@ namespace Yandex.Alice.Sdk.Services
 
         public async Task<DialogsApiResponse<DialogsSoundResponse>> UploadSoundAsync(Guid skillId, DialogsFileUploadRequest request)
         {
-            string url = $"/api/v1/skills/{skillId}/sounds";
+            string url = $"{GetSkillUrl(skillId)}/sounds";
             return await PostFileAsync<DialogsSoundResponse>(url, request).ConfigureAwait(false);
         }
 
         public async Task<DialogsApiResponse<DialogsSoundResponse>> GetSoundAsync(Guid skillId, Guid soundId)
         {
-            string url = $"/api/v1/skills/{skillId}/sounds/{soundId}";
+            string url = $"{GetSkillUrl(skillId)}/sounds/{soundId}";
             return await GetAsync<DialogsSoundResponse>(url).ConfigureAwait(false);
         }
 
         public async Task<DialogsApiResponse<DialogsSoundsInfoList>> GetSoundsAsync(Guid skillId)
         {
-            string url = $"/api/v1/skills/{skillId}/sounds";
+            string url = $"{GetSkillUrl(skillId)}/sounds";
             return await GetAsync<DialogsSoundsInfoList>(url).ConfigureAwait(false);
         }
 
         public async Task<DialogsApiResponse<DialogsDeleteResponse>> DeleteSoundAsync(Guid skillId, Guid soundId)
         {
-            string url = $"/api/v1/skills/{skillId}/sounds/{soundId}";
+            string url = $"{GetSkillUrl(skillId)}/sounds/{soundId}";
             return await DeleteAsync<DialogsDeleteResponse>(url).ConfigureAwait(false);
         }
 
         #endregion
         
+        private string GetSkillUrl(Guid skillId)
+        {
+            if(skillId == Guid.Empty)
+            {
+                throw new ArgumentException(Yandex_Alice_Sdk_Resources.Error_NoSkillId, nameof(skillId));
+            }
+            return $"/api/v1/skills/{skillId}";
+        }
+
         private async Task<DialogsApiResponse<TContent>> GetAsync<TContent>(string url)
         {
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, url))

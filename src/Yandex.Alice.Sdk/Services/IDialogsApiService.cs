@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Yandex.Alice.Sdk.Models.DialogsApi;
 
-namespace Yandex.Alice.Sdk.Services.Interfaces
+namespace Yandex.Alice.Sdk.Services
 {
     public interface IDialogsApiService
     {
