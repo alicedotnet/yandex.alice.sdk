@@ -30,45 +30,29 @@ namespace Yandex.Alice.Sdk.Services
                 new AuthenticationHeaderValue("OAuth", dialogsApiSettings.DialogsOAuthToken);
         }
 
-        public async Task<DialogsApiResponse<DialogsStatusResponse>> StatusAsync()
+        public async Task<DialogsApiResponse<DialogsStatus>> StatusAsync()
         {
-            var apiResponse = await _dialogsApiClient.GetAsync("/api/v1/status").ConfigureAwait(false);
-            string contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            DialogsApiResponse<DialogsStatusResponse> response;
-            if (apiResponse.IsSuccessStatusCode)
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/v1/status"))
             {
-                var content = JsonSerializer.Deserialize<DialogsStatusResponse>(contentString);
-                response = new DialogsApiResponse<DialogsStatusResponse>(content);
+                return await SendAsync<DialogsStatus>(requestMessage).ConfigureAwait(false);
             }
-            else
-            {
-                response = new DialogsApiResponse<DialogsStatusResponse>(contentString);
-            }
-            return response;
-        }
+        }        
 
         public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsImageUploadRequest request)
         {
             string requestUri = $"/api/v1/skills/{skillId}/images";
             string json = JsonSerializer.Serialize(request);
-            DialogsApiResponse<DialogsImageUploadResponse> response = null;
             using (HttpContent requestContent = new StringContent(json, Encoding.UTF8, "application/json"))
             {
-                var apiResponse = await _dialogsApiClient.PostAsync(requestUri, requestContent).ConfigureAwait(false);
-                string contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                if(apiResponse.IsSuccessStatusCode)
+                using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, requestUri)
+                    {
+                        Content = requestContent
+                    })
                 {
-                    var content = JsonSerializer.Deserialize<DialogsImageUploadResponse>(contentString);
-                    response = new DialogsApiResponse<DialogsImageUploadResponse>(content);
-                }
-                else
-                {
-                    var content = JsonSerializer.Deserialize<DialogsResponseContent>(contentString);
-                    response = new DialogsApiResponse<DialogsImageUploadResponse>(content.Message);
+                    return await SendAsync<DialogsImageUploadResponse>(requestMessage).ConfigureAwait(false);
                 }
             }
-            return response;
-        }
+        }        
 
         public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsImageFileUploadRequest request)
         {
@@ -78,7 +62,6 @@ namespace Yandex.Alice.Sdk.Services
             }
 
             string url = $"/api/v1/skills/{skillId}/images";
-            DialogsApiResponse<DialogsImageUploadResponse> response = null;
             using (var streamContent = new StreamContent(request.Content))
             {
                 using (var formContent = new MultipartFormDataContent
@@ -86,64 +69,55 @@ namespace Yandex.Alice.Sdk.Services
                         {streamContent,"file", request.FileName}
                     })
                 {
-                    var apiResponse = await _dialogsApiClient.PostAsync(url, formContent).ConfigureAwait(false);
-                    var contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    if(apiResponse.IsSuccessStatusCode)
+                    using(var requestMessage = new HttpRequestMessage(HttpMethod.Post, url)
+                        { 
+                            Content = formContent
+                        }
+                    )
                     {
-                        var content = JsonSerializer.Deserialize<DialogsImageUploadResponse>(contentString);
-                        response = new DialogsApiResponse<DialogsImageUploadResponse>(content);
-                    }
-                    else
-                    {
-                        var content = JsonSerializer.Deserialize<DialogsResponseContent>(contentString);
-                        response = new DialogsApiResponse<DialogsImageUploadResponse>(content.Message);
+                        return await SendAsync<DialogsImageUploadResponse>(requestMessage).ConfigureAwait(false);
                     }
                 }
             }
-            return response;
         }
 
 
         public async Task<DialogsApiResponse<DialogsImagesInfoList>> GetImagesAsync(Guid skillId)
         {
             string url = $"/api/v1/skills/{skillId}/images";
-            var apiResponse = await _dialogsApiClient.GetAsync(url).ConfigureAwait(false);
-            string contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            DialogsApiResponse<DialogsImagesInfoList> response;
-            if (apiResponse.IsSuccessStatusCode)
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var content = JsonSerializer.Deserialize<DialogsImagesInfoList>(contentString);
-                response = new DialogsApiResponse<DialogsImagesInfoList>(content);
-            }
-            else
-            {
-                var content = JsonSerializer.Deserialize<DialogsResponseContent>(contentString);
-                response = new DialogsApiResponse<DialogsImagesInfoList>(content.Message);
-            }
-            return response;
+                return await SendAsync<DialogsImagesInfoList>(requestMessage).ConfigureAwait(false);
+            }            
         }
 
-        public async Task<DialogsApiResponse> DeleteImageAsync(Guid skillId, string imageId)
+        public async Task<DialogsApiResponse<DialogsDeleteResponse>> DeleteImageAsync(Guid skillId, string imageId)
         {
             string url = $"/api/v1/skills/{skillId}/images/{imageId}";
-            var apiResponse = await _dialogsApiClient.DeleteAsync(url).ConfigureAwait(false);
+            using(var httpRequestMessage = new HttpRequestMessage(HttpMethod.Delete, url))
+            {
+                return await SendAsync<DialogsDeleteResponse>(httpRequestMessage).ConfigureAwait(false);
+            }            
+        }
+
+        private async Task<DialogsApiResponse<TContent>> SendAsync<TContent>(HttpRequestMessage message)
+        {
+            var apiResponse = await _dialogsApiClient.SendAsync(message).ConfigureAwait(false);
             string contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var content = JsonSerializer.Deserialize<DialogsResponseContent>(contentString);
-            DialogsApiResponse response;
+            DialogsApiResponse<TContent> response;
             if (apiResponse.IsSuccessStatusCode)
             {
-                if(content.Result == "ok")
-                {
-                    response = new DialogsApiResponse();
-                }
-                else
-                {
-                    response = new DialogsApiResponse(content.Result);
-                }
+                var content = JsonSerializer.Deserialize<TContent>(contentString);
+                response = new DialogsApiResponse<TContent>(content);
+            }
+            else if (apiResponse.Content.Headers.ContentType.MediaType == "application/json")
+            {
+                var content = JsonSerializer.Deserialize<DialogsResponseContent>(contentString);
+                response = new DialogsApiResponse<TContent>(content.Message);
             }
             else
             {
-                response = new DialogsApiResponse(content.Message);
+                response = new DialogsApiResponse<TContent>(contentString);
             }
             return response;
         }
