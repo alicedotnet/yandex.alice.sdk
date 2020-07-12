@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using Yandex.Alice.Sdk.Models;
 
 namespace Yandex.Alice.Sdk.Helpers
@@ -60,5 +61,35 @@ namespace Yandex.Alice.Sdk.Helpers
             var json = jsonElement.GetRawText();
             return JsonSerializer.Deserialize<T>(json);
         }
+
+        #region Text to speach
+
+        /// <summary>
+        /// Silence equal to 500ms
+        /// </summary>
+        public static readonly string SilenceString500 = GetSilenceString(500);
+
+        /// <summary>
+        /// Silence equal to 1000ms
+        /// </summary>
+        public static readonly string SilenceString1000 = GetSilenceString(1000);
+
+        public static string GetSilenceString(long milliseconds)
+        {
+            return $"sil<[{milliseconds}]>";
+        }
+
+        public static string GetSpeakerTag(string audio)
+        {
+            return $"<speaker audio=\"{audio}\">";
+        }
+
+        internal static string GetTtsStringWithoutTags(string value)
+        {
+            return Regex.Replace(value, "<speaker audio=\".*\">", string.Empty, RegexOptions.IgnoreCase);
+        }
+
+
+        #endregion
     }
 }

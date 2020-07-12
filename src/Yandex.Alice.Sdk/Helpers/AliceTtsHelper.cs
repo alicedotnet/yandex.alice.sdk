@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Yandex.Alice.Sdk.Helpers
 {
+    [Obsolete("Use AliceHelper class instead")]
     public static class AliceTtsHelper
     {
         /// <summary>

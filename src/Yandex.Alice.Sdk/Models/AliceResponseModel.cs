@@ -34,7 +34,7 @@ namespace Yandex.Alice.Sdk.Models
             set
             {
                 _tts = value;
-                ValidateMaxLength(AliceTtsHelper.GetTtsStringWithoutTags(_tts), TtsMaxLenght);
+                ValidateMaxLength(AliceHelper.GetTtsStringWithoutTags(_tts), TtsMaxLenght);
             }
         }
 
