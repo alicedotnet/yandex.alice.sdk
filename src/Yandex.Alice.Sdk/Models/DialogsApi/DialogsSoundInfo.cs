@@ -9,7 +9,7 @@ namespace Yandex.Alice.Sdk.Models.DialogsApi
     public class DialogsSoundInfo
     {
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonPropertyName("skillId")]
         public Guid SkillId { get; set; }

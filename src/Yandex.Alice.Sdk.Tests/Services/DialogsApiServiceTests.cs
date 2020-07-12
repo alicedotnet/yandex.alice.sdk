@@ -197,7 +197,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
             Assert.True(uploadResponse.IsSuccess);
             Assert.NotNull(uploadResponse.Content);
             Assert.NotNull(uploadResponse.Content.Sound);
-            Assert.NotNull(uploadResponse.Content.Sound.Id);
+            Assert.NotEqual(Guid.Empty, uploadResponse.Content.Sound.Id);
             Assert.NotEqual(Guid.Empty, uploadResponse.Content.Sound.SkillId);
             Assert.Null(uploadResponse.Content.Sound.Size);
             Assert.NotNull(uploadResponse.Content.Sound.OriginalName);
@@ -205,6 +205,28 @@ namespace Yandex.Alice.Sdk.Tests.Services
             Assert.Null(uploadResponse.Content.Sound.Error);
 
             //await _dialogsApiService.DeleteImageAsync(_skillId, uploadResponse.Content.Image.Id).ConfigureAwait(false);
+        }
+
+        [Fact]
+        public async Task GetSound_InvalidSoundId_Fail()
+        {
+            var response = await _dialogsApiService.GetSoundAsync(_skillId, Guid.Empty).ConfigureAwait(false);
+            Assert.False(response.IsSuccess);
+        }
+
+        [Fact]
+        public async Task GetSound_Ok()
+        {
+            var bytes = File.ReadAllBytes(TestsConstants.Assets.SoundFilePath);
+            var request = new DialogsFileUploadRequest(TestsConstants.Assets.SoundFileName, bytes);
+            var uploadResponse = await _dialogsApiService.UploadSoundAsync(_skillId, request).ConfigureAwait(false);
+
+            Guid soundId = uploadResponse.Content.Sound.Id;
+            var response = await _dialogsApiService.GetSoundAsync(_skillId, soundId).ConfigureAwait(false);
+            Assert.True(response.IsSuccess);
+            Assert.NotNull(response.Content);
+            Assert.NotNull(response.Content.Sound);
+            Assert.NotEqual(Guid.Empty, response.Content.Sound.Id);
         }
     }
 }
