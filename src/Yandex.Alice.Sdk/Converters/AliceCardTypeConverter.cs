@@ -14,9 +14,9 @@ namespace Yandex.Alice.Sdk.Converters
             string input = reader.GetString();
             switch (input)
             {
-                case Constants.AliceCardTypeValues.BigImage:
+                case AliceConstants.AliceCardTypeValues.BigImage:
                     return AliceCardType.BigImage;
-                case Constants.AliceCardTypeValues.ItemsList:
+                case AliceConstants.AliceCardTypeValues.ItemsList:
                     return AliceCardType.ItemsList;
                 default:
                     return AliceCardType.Undefined;
@@ -30,10 +30,10 @@ namespace Yandex.Alice.Sdk.Converters
             switch (cardType)
             {
                 case AliceCardType.BigImage:
-                    result = Constants.AliceCardTypeValues.BigImage;
+                    result = AliceConstants.AliceCardTypeValues.BigImage;
                     break;
                 case AliceCardType.ItemsList:
-                    result = Constants.AliceCardTypeValues.ItemsList;
+                    result = AliceConstants.AliceCardTypeValues.ItemsList;
                     break;
                 default:
                     result = "unknown";

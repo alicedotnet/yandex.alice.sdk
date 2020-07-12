@@ -8,6 +8,7 @@ namespace Yandex.Alice.Sdk.Services.Interfaces
 {
     public interface IDialogsApiService
     {
-        Task<DialogsApiResponse<DialogsStatusModel>> StatusAsync();
+        Task<DialogsApiResponse<DialogsStatusResponse>> StatusAsync();
+        Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImage(Guid skillId, DialogsImageUploadRequest request);
     }
 }

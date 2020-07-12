@@ -15,15 +15,15 @@ namespace Yandex.Alice.Sdk.Converters
             string input = reader.GetString();
             switch (input)
             {
-                case Constants.AliceEntityTypeValues.DateTime:
+                case AliceConstants.AliceEntityTypeValues.DateTime:
                     return AliceEntityType.DATETIME;
-                case Constants.AliceEntityTypeValues.Fio:
+                case AliceConstants.AliceEntityTypeValues.Fio:
                     return AliceEntityType.FIO;
-                case Constants.AliceEntityTypeValues.Geo:
+                case AliceConstants.AliceEntityTypeValues.Geo:
                     return AliceEntityType.GEO;
-                case Constants.AliceEntityTypeValues.Number:
+                case AliceConstants.AliceEntityTypeValues.Number:
                     return AliceEntityType.NUMBER;
-                case Constants.AliceEntityTypeValues.String:
+                case AliceConstants.AliceEntityTypeValues.String:
                     return AliceEntityType.STRING;
                 default:
                     return AliceEntityType.Unknown;
@@ -40,19 +40,19 @@ namespace Yandex.Alice.Sdk.Converters
             switch (entityType)
             {
                 case AliceEntityType.DATETIME:
-                    result = Constants.AliceEntityTypeValues.DateTime;
+                    result = AliceConstants.AliceEntityTypeValues.DateTime;
                     break;
                 case AliceEntityType.FIO:
-                    result = Constants.AliceEntityTypeValues.Fio;
+                    result = AliceConstants.AliceEntityTypeValues.Fio;
                     break;
                 case AliceEntityType.GEO:
-                    result = Constants.AliceEntityTypeValues.Geo;
+                    result = AliceConstants.AliceEntityTypeValues.Geo;
                     break;
                 case AliceEntityType.NUMBER:
-                    result = Constants.AliceEntityTypeValues.Number;
+                    result = AliceConstants.AliceEntityTypeValues.Number;
                     break;
                 case AliceEntityType.STRING:
-                    result = Constants.AliceEntityTypeValues.String;
+                    result = AliceConstants.AliceEntityTypeValues.String;
                     break;
                 default:
                     result = "unknown";

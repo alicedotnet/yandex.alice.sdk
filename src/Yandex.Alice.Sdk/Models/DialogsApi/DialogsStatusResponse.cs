@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Yandex.Alice.Sdk.Models.DialogsApi
 {
-    public class DialogsStatusModel
+    public class DialogsStatusResponse
     {
         [JsonPropertyName("images")]
         public DialogsDataUsageModel Images {get;set;}

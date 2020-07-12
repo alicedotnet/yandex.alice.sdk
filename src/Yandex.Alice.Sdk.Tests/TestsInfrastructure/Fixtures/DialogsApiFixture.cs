@@ -11,6 +11,7 @@ namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Fixtures
     public class DialogsApiFixture
     {
         public IDialogsApiService DialogsApiService { get; }
+        public Guid SkillId { get; }
 
         public DialogsApiFixture()
         {
@@ -21,8 +22,9 @@ namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Fixtures
             var dialogsApiSection = configuration.GetSection("DialogsApi");
             var settings = new DialogsApiSettings();
             dialogsApiSection.Bind(settings);
-
             DialogsApiService = new DialogsApiService(settings);
+
+            SkillId = new Guid(configuration.GetSection("SkillId").Value);
         }
     }
 }

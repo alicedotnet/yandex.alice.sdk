@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -16,13 +18,13 @@ namespace Yandex.Alice.Sdk.Tests.Services
     public class DialogsApiServiceTests : BaseTests
     {
         private readonly IDialogsApiService _dialogsApiService;
-        private readonly ITestOutputHelper _testOutputHelper;
+        private readonly Guid _skillId;
 
         public DialogsApiServiceTests(DialogsApiFixture dialogsApiFixture, ITestOutputHelper testOutputHelper)
             :base(testOutputHelper)
         {
             _dialogsApiService = dialogsApiFixture.DialogsApiService;
-            _testOutputHelper = testOutputHelper;
+            _skillId = dialogsApiFixture.SkillId;
         }
 
         [Fact]
@@ -50,6 +52,37 @@ namespace Yandex.Alice.Sdk.Tests.Services
         {
             Assert.NotNull(dialogsDataUsageModel);
             Assert.NotNull(dialogsDataUsageModel.Quota);            
+        }
+
+        [Fact]
+        public async Task UploadImage_InvalidSkillId_Fail()
+        {
+            var response = await _dialogsApiService.UploadImage(Guid.Empty, new DialogsImageUploadRequest(null)).ConfigureAwait(false);
+            Assert.False(response.IsSuccess);
+            Assert.Contains("Resource not found", response.ErrorMessage, StringComparison.OrdinalIgnoreCase);
+        }
+
+        [Fact]
+        public async Task UploadImage_InvalidUrl_Fail()
+        {
+            var response = await _dialogsApiService.UploadImage(_skillId, new DialogsImageUploadRequest(new Uri("https://www.google.com/"))).ConfigureAwait(false);
+            Assert.False(response.IsSuccess);
+            Assert.Contains("Invalid image", response.ErrorMessage, StringComparison.OrdinalIgnoreCase);
+        }
+
+        [Fact]
+        public async Task UploadImage_Ok()
+        {
+            string imageUrl = "https://previews.123rf.com/images/aquir/aquir1311/aquir131100316/23569861-sample-grunge-red-round-stamp.jpg";
+            var response = await _dialogsApiService.UploadImage(_skillId, new DialogsImageUploadRequest(new Uri(imageUrl))).ConfigureAwait(false);
+            Assert.True(response.IsSuccess, response.ErrorMessage);
+            Assert.NotNull(response.Content);
+            Assert.NotNull(response.Content.Image);
+            Assert.NotNull(response.Content.Image.Id);
+            Assert.NotNull(response.Content.Image.OriginalUrl);
+            Assert.True(response.Content.Image.Size > 0);
+            Assert.NotEqual(default, response.Content.Image.CreatedAt);
+            TestOutputHelper.WriteLine($"CreatedAt: {response.Content.Image.CreatedAt.ToString(AliceConstants.DateTimeFormat, CultureInfo.InvariantCulture)}");
         }
     }
 }

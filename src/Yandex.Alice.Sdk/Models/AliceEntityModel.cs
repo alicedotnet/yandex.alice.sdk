@@ -11,7 +11,7 @@ namespace Yandex.Alice.Sdk.Models
         [JsonPropertyName("tokens")]
         public AliceTokensModel Tokens { get; set; }
 
-        [JsonPropertyName(Constants.AliceEntityModelFields.Type)]
+        [JsonPropertyName(AliceConstants.AliceEntityModelFields.Type)]
         [JsonConverter(typeof(AliceEntityTypeConverter))]
         public AliceEntityType Type { get; set; }
     }

@@ -12,11 +12,11 @@ namespace Yandex.Alice.Sdk.Converters
     {
         private static readonly Dictionary<string, Type> _typeMap = new Dictionary<string, Type>()
         {
-            { Constants.AliceEntityTypeValues.Geo, typeof(AliceEntityGeoModel) },
-            { Constants.AliceEntityTypeValues.Fio, typeof(AliceEntityFioModel) },
-            { Constants.AliceEntityTypeValues.Number, typeof(AliceEntityNumberModel) },
-            { Constants.AliceEntityTypeValues.DateTime, typeof(AliceEntityDateTimeModel) },
-            { Constants.AliceEntityTypeValues.String, typeof(AliceEntityStringModel) }
+            { AliceConstants.AliceEntityTypeValues.Geo, typeof(AliceEntityGeoModel) },
+            { AliceConstants.AliceEntityTypeValues.Fio, typeof(AliceEntityFioModel) },
+            { AliceConstants.AliceEntityTypeValues.Number, typeof(AliceEntityNumberModel) },
+            { AliceConstants.AliceEntityTypeValues.DateTime, typeof(AliceEntityDateTimeModel) },
+            { AliceConstants.AliceEntityTypeValues.String, typeof(AliceEntityStringModel) }
         };
 
         public static AliceEntityModel ToItem(ref Utf8JsonReader reader, JsonSerializerOptions options)
@@ -32,7 +32,7 @@ namespace Yandex.Alice.Sdk.Converters
 
                 type = jsonObject
                     .EnumerateObject()
-                    .FirstOrDefault(x => x.Name == Constants.AliceEntityModelFields.Type)
+                    .FirstOrDefault(x => x.Name == AliceConstants.AliceEntityModelFields.Type)
                     .Value.GetString();
             }
 

@@ -29,22 +29,46 @@ namespace Yandex.Alice.Sdk.Services
                 new AuthenticationHeaderValue("OAuth", dialogsApiSettings.DialogsOAuthToken);
         }
 
-        public async Task<DialogsApiResponse<DialogsStatusModel>> StatusAsync()
+        public async Task<DialogsApiResponse<DialogsStatusResponse>> StatusAsync()
         {
             var apiResponse = await _dialogsApiClient.GetAsync("/api/v1/status").ConfigureAwait(false);
             string contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            DialogsApiResponse<DialogsStatusModel> response;
+            DialogsApiResponse<DialogsStatusResponse> response;
             if (apiResponse.IsSuccessStatusCode)
             {
-                var content = JsonSerializer.Deserialize<DialogsStatusModel>(contentString);
-                response = new DialogsApiResponse<DialogsStatusModel>(content);
+                var content = JsonSerializer.Deserialize<DialogsStatusResponse>(contentString);
+                response = new DialogsApiResponse<DialogsStatusResponse>(content);
             }
             else
             {
-                response = new DialogsApiResponse<DialogsStatusModel>(contentString);
+                response = new DialogsApiResponse<DialogsStatusResponse>(contentString);
             }
             return response;
         }
+
+        public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImage(Guid skillId, DialogsImageUploadRequest request)
+        {
+            string requestUri = $"/api/v1/skills/{skillId}/images";
+            string json = JsonSerializer.Serialize(request);
+            DialogsApiResponse<DialogsImageUploadResponse> response = null;
+            using (HttpContent requestContent = new StringContent(json, Encoding.UTF8, "application/json"))
+            {
+                var apiResponse = await _dialogsApiClient.PostAsync(requestUri, requestContent).ConfigureAwait(false);
+                string contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if(apiResponse.IsSuccessStatusCode)
+                {
+                    var content = JsonSerializer.Deserialize<DialogsImageUploadResponse>(contentString);
+                    response = new DialogsApiResponse<DialogsImageUploadResponse>(content);
+                }
+                else
+                {
+                    var content = JsonSerializer.Deserialize<DialogsResponseContent>(contentString);
+                    response = new DialogsApiResponse<DialogsImageUploadResponse>(content.Message);
+                }
+            }
+            return response;
+        }
+
 
         #region Dispose
 
@@ -56,17 +80,13 @@ namespace Yandex.Alice.Sdk.Services
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects)
                     _dialogsApiClient.Dispose();
                 }
 
-                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
-                // TODO: set large fields to null
                 disposedValue = true;
             }
         }
 
-        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
         // ~DialogsApiService()
         // {
         //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
