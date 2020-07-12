@@ -14,5 +14,8 @@ namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure
             public static readonly string AliceImageResponseFilePath = $"{_assetsFolderPath}/AliceImageResponse.json";
             public static readonly string AliceGalleryResponseFilePath = $"{_assetsFolderPath}/AliceGalleryResponse.json";
         }
+
+        public const string DialogsApiCollectionName = "DialogsApiCollection";
+
     }
 }
