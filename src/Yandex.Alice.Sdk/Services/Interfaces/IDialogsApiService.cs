@@ -16,5 +16,7 @@ namespace Yandex.Alice.Sdk.Services.Interfaces
         Task<DialogsApiResponse<DialogsSoundResponse>> UploadSoundAsync(Guid skillId, DialogsFileUploadRequest request);
         Task<DialogsApiResponse<DialogsSoundResponse>> GetSoundAsync(Guid skillId, Guid soundId);
         Task<DialogsApiResponse<DialogsSoundsInfoList>> GetSoundsAsync(Guid skillId);
+        Task<DialogsApiResponse<DialogsDeleteResponse>> DeleteSoundAsync(Guid skillId, Guid soundId);
+
     }
 }

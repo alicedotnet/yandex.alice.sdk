@@ -102,6 +102,15 @@ namespace Yandex.Alice.Sdk.Services
             }
         }
 
+        public async Task<DialogsApiResponse<DialogsDeleteResponse>> DeleteSoundAsync(Guid skillId, Guid soundId)
+        {
+            string url = $"/api/v1/skills/{skillId}/sounds/{soundId}";
+            using (var httpRequestMessage = new HttpRequestMessage(HttpMethod.Delete, url))
+            {
+                return await SendAsync<DialogsDeleteResponse>(httpRequestMessage).ConfigureAwait(false);
+            }
+        }
+
         #endregion
 
         public async Task<DialogsApiResponse<DialogsStatus>> StatusAsync()

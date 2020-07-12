@@ -204,7 +204,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
             Assert.NotEqual(default, uploadResponse.Content.Sound.CreatedAt);
             Assert.Null(uploadResponse.Content.Sound.Error);
 
-            //await _dialogsApiService.DeleteImageAsync(_skillId, uploadResponse.Content.Image.Id).ConfigureAwait(false);
+            await _dialogsApiService.DeleteSoundAsync(_skillId, uploadResponse.Content.Sound.Id).ConfigureAwait(false);
         }
 
         [Fact]
@@ -227,6 +227,8 @@ namespace Yandex.Alice.Sdk.Tests.Services
             Assert.NotNull(response.Content);
             Assert.NotNull(response.Content.Sound);
             Assert.NotEqual(Guid.Empty, response.Content.Sound.Id);
+
+            await _dialogsApiService.DeleteSoundAsync(_skillId, uploadResponse.Content.Sound.Id).ConfigureAwait(false);
         }
 
         [Fact]
@@ -234,11 +236,25 @@ namespace Yandex.Alice.Sdk.Tests.Services
         {
             var bytes = File.ReadAllBytes(TestsConstants.Assets.SoundFilePath);
             var request = new DialogsFileUploadRequest(TestsConstants.Assets.SoundFileName, bytes);
-            await _dialogsApiService.UploadSoundAsync(_skillId, request).ConfigureAwait(false);
+            var uploadResponse = await _dialogsApiService.UploadSoundAsync(_skillId, request).ConfigureAwait(false);
 
             var response = await _dialogsApiService.GetSoundsAsync(_skillId).ConfigureAwait(false);
             Assert.NotEmpty(response.Content.Sounds);
             Assert.True(response.Content.Total > 0);
+
+            await _dialogsApiService.DeleteSoundAsync(_skillId, uploadResponse.Content.Sound.Id).ConfigureAwait(false);
+        }
+
+        [Fact]
+        public async Task DeleteSound_Ok()
+        {
+            var bytes = File.ReadAllBytes(TestsConstants.Assets.SoundFilePath);
+            var request = new DialogsFileUploadRequest(TestsConstants.Assets.SoundFileName, bytes);
+            var uploadResponse = await _dialogsApiService.UploadSoundAsync(_skillId, request).ConfigureAwait(false);
+            Guid soundId = uploadResponse.Content.Sound.Id;
+            var response = await _dialogsApiService.DeleteSoundAsync(_skillId, soundId).ConfigureAwait(false);
+            Assert.True(response.IsSuccess);
+            Assert.Equal("ok", response.Content.Result);
         }
     }
 }
