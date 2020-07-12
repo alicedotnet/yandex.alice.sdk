@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using Yandex.Alice.Sdk.Converters;
 
 namespace Yandex.Alice.Sdk.Models.DialogsApi
 {
     public class DialogsDeleteResponse
     {
         [JsonPropertyName("result")]
-        public string Result { get; set; }
+        [JsonConverter(typeof(DialogsResultTypeConverter))]
+        public DialogsResultType Result { get; set; }
     }
 }

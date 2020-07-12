@@ -185,7 +185,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
             string imageId = uploadResponse.Content.Image.Id;
             var response = await _dialogsApiService.DeleteImageAsync(_skillId, imageId).ConfigureAwait(false);
             Assert.True(response.IsSuccess);
-            Assert.Equal("ok", response.Content.Result);
+            Assert.Equal(DialogsResultType.Ok, response.Content.Result);
         }        
 
         [Fact]
@@ -254,7 +254,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
             Guid soundId = uploadResponse.Content.Sound.Id;
             var response = await _dialogsApiService.DeleteSoundAsync(_skillId, soundId).ConfigureAwait(false);
             Assert.True(response.IsSuccess);
-            Assert.Equal("ok", response.Content.Result);
+            Assert.Equal(DialogsResultType.Ok, response.Content.Result);
         }
     }
 }
