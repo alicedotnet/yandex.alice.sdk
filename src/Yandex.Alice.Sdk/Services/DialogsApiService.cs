@@ -93,6 +93,15 @@ namespace Yandex.Alice.Sdk.Services
             }
         }
 
+        public async Task<DialogsApiResponse<DialogsSoundsInfoList>> GetSoundsAsync(Guid skillId)
+        {
+            string url = $"/api/v1/skills/{skillId}/sounds";
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, url))
+            {
+                return await SendAsync<DialogsSoundsInfoList>(requestMessage).ConfigureAwait(false);
+            }
+        }
+
         #endregion
 
         public async Task<DialogsApiResponse<DialogsStatus>> StatusAsync()
@@ -180,7 +189,6 @@ namespace Yandex.Alice.Sdk.Services
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
-
 
         #endregion
     }

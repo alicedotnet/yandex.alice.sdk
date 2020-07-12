@@ -15,5 +15,6 @@ namespace Yandex.Alice.Sdk.Services.Interfaces
         Task<DialogsApiResponse<DialogsDeleteResponse>> DeleteImageAsync(Guid skillId, string imageId);
         Task<DialogsApiResponse<DialogsSoundResponse>> UploadSoundAsync(Guid skillId, DialogsFileUploadRequest request);
         Task<DialogsApiResponse<DialogsSoundResponse>> GetSoundAsync(Guid skillId, Guid soundId);
+        Task<DialogsApiResponse<DialogsSoundsInfoList>> GetSoundsAsync(Guid skillId);
     }
 }

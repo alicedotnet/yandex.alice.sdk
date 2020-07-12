@@ -15,7 +15,7 @@ namespace Yandex.Alice.Sdk.Models.DialogsApi
         public Uri OriginalUrl { get; set; }
 
         [JsonPropertyName("size")]
-        public int Size { get; set; }
+        public int? Size { get; set; }
 
         [JsonPropertyName("createdAt")]
         [JsonConverter(typeof(DialogsDateTimeOffsetConverter))]

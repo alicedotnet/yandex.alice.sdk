@@ -228,5 +228,17 @@ namespace Yandex.Alice.Sdk.Tests.Services
             Assert.NotNull(response.Content.Sound);
             Assert.NotEqual(Guid.Empty, response.Content.Sound.Id);
         }
+
+        [Fact]
+        public async Task GetSounds_Ok()
+        {
+            var bytes = File.ReadAllBytes(TestsConstants.Assets.SoundFilePath);
+            var request = new DialogsFileUploadRequest(TestsConstants.Assets.SoundFileName, bytes);
+            await _dialogsApiService.UploadSoundAsync(_skillId, request).ConfigureAwait(false);
+
+            var response = await _dialogsApiService.GetSoundsAsync(_skillId).ConfigureAwait(false);
+            Assert.NotEmpty(response.Content.Sounds);
+            Assert.True(response.Content.Total > 0);
+        }
     }
 }
