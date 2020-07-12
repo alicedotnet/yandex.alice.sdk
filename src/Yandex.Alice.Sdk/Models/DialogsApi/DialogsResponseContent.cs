@@ -9,5 +9,8 @@ namespace Yandex.Alice.Sdk.Models.DialogsApi
     {
         [JsonPropertyName("message")]
         public string Message { get; set; }
+
+        [JsonPropertyName("result")]
+        public string Result { get; set; }
     }
 }

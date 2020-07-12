@@ -46,7 +46,7 @@ namespace Yandex.Alice.Sdk.Services
             return response;
         }
 
-        public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImage(Guid skillId, DialogsImageUploadRequest request)
+        public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsImageUploadRequest request)
         {
             string requestUri = $"/api/v1/skills/{skillId}/images";
             string json = JsonSerializer.Serialize(request);
@@ -65,6 +65,31 @@ namespace Yandex.Alice.Sdk.Services
                     var content = JsonSerializer.Deserialize<DialogsResponseContent>(contentString);
                     response = new DialogsApiResponse<DialogsImageUploadResponse>(content.Message);
                 }
+            }
+            return response;
+        }
+
+        public async Task<DialogsApiResponse> DeleteImageAsync(Guid skillId, string imageId)
+        {
+            string url = $"/api/v1/skills/{skillId}/images/{imageId}";
+            var apiResponse = await _dialogsApiClient.DeleteAsync(url).ConfigureAwait(false);
+            string contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var content = JsonSerializer.Deserialize<DialogsResponseContent>(contentString);
+            DialogsApiResponse response;
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                if(content.Result == "ok")
+                {
+                    response = new DialogsApiResponse();
+                }
+                else
+                {
+                    response = new DialogsApiResponse(content.Result);
+                }
+            }
+            else
+            {
+                response = new DialogsApiResponse(content.Message);
             }
             return response;
         }

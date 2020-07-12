@@ -19,6 +19,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
     {
         private readonly IDialogsApiService _dialogsApiService;
         private readonly Guid _skillId;
+        private const string _imageUrl = "https://previews.123rf.com/images/aquir/aquir1311/aquir131100316/23569861-sample-grunge-red-round-stamp.jpg";
 
         public DialogsApiServiceTests(DialogsApiFixture dialogsApiFixture, ITestOutputHelper testOutputHelper)
             :base(testOutputHelper)
@@ -57,7 +58,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         [Fact]
         public async Task UploadImage_InvalidSkillId_Fail()
         {
-            var response = await _dialogsApiService.UploadImage(Guid.Empty, new DialogsImageUploadRequest(null)).ConfigureAwait(false);
+            var response = await _dialogsApiService.UploadImageAsync(Guid.Empty, new DialogsImageUploadRequest(null)).ConfigureAwait(false);
             Assert.False(response.IsSuccess);
             Assert.Contains("Resource not found", response.ErrorMessage, StringComparison.OrdinalIgnoreCase);
         }
@@ -65,7 +66,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         [Fact]
         public async Task UploadImage_InvalidUrl_Fail()
         {
-            var response = await _dialogsApiService.UploadImage(_skillId, new DialogsImageUploadRequest(new Uri("https://www.google.com/"))).ConfigureAwait(false);
+            var response = await _dialogsApiService.UploadImageAsync(_skillId, new DialogsImageUploadRequest(new Uri("https://www.google.com/"))).ConfigureAwait(false);
             Assert.False(response.IsSuccess);
             Assert.Contains("Invalid image", response.ErrorMessage, StringComparison.OrdinalIgnoreCase);
         }
@@ -73,8 +74,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         [Fact]
         public async Task UploadImage_Ok()
         {
-            string imageUrl = "https://previews.123rf.com/images/aquir/aquir1311/aquir131100316/23569861-sample-grunge-red-round-stamp.jpg";
-            var response = await _dialogsApiService.UploadImage(_skillId, new DialogsImageUploadRequest(new Uri(imageUrl))).ConfigureAwait(false);
+            var response = await _dialogsApiService.UploadImageAsync(_skillId, new DialogsImageUploadRequest(new Uri(_imageUrl))).ConfigureAwait(false);
             Assert.True(response.IsSuccess, response.ErrorMessage);
             Assert.NotNull(response.Content);
             Assert.NotNull(response.Content.Image);
@@ -83,6 +83,23 @@ namespace Yandex.Alice.Sdk.Tests.Services
             Assert.True(response.Content.Image.Size > 0);
             Assert.NotEqual(default, response.Content.Image.CreatedAt);
             TestOutputHelper.WriteLine($"CreatedAt: {response.Content.Image.CreatedAt.ToString(AliceConstants.DateTimeFormat, CultureInfo.InvariantCulture)}");
+            await _dialogsApiService.DeleteImageAsync(_skillId, response.Content.Image.Id).ConfigureAwait(false);
+        }
+
+        [Fact]
+        public async Task DeleteImage_InvalidImageId_Fail()
+        {
+            var response = await _dialogsApiService.DeleteImageAsync(_skillId, "iaminvalid").ConfigureAwait(false);
+            Assert.False(response.IsSuccess);
+        }
+
+        [Fact]
+        public async Task DeleteImage_Ok()
+        {
+            var uploadResponse = await _dialogsApiService.UploadImageAsync(_skillId, new DialogsImageUploadRequest(new Uri(_imageUrl))).ConfigureAwait(false);
+            string imageId = uploadResponse.Content.Image.Id;
+            var response = await _dialogsApiService.DeleteImageAsync(_skillId, imageId).ConfigureAwait(false);
+            Assert.True(response.IsSuccess);
         }
     }
 }
