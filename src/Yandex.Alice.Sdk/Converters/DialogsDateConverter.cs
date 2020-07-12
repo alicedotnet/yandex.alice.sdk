@@ -11,10 +11,5 @@ namespace Yandex.Alice.Sdk.Converters
             : base(AliceConstants.DateTimeFormat)
         {
         }
-
-        public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            return base.Read(ref reader, typeToConvert, options);
-        }
     }
 }

@@ -103,6 +103,26 @@ namespace Yandex.Alice.Sdk.Services
             return response;
         }
 
+
+        public async Task<DialogsApiResponse<DialogsImagesInfoList>> GetImagesAsync(Guid skillId)
+        {
+            string url = $"/api/v1/skills/{skillId}/images";
+            var apiResponse = await _dialogsApiClient.GetAsync(url).ConfigureAwait(false);
+            string contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            DialogsApiResponse<DialogsImagesInfoList> response;
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                var content = JsonSerializer.Deserialize<DialogsImagesInfoList>(contentString);
+                response = new DialogsApiResponse<DialogsImagesInfoList>(content);
+            }
+            else
+            {
+                var content = JsonSerializer.Deserialize<DialogsResponseContent>(contentString);
+                response = new DialogsApiResponse<DialogsImagesInfoList>(content.Message);
+            }
+            return response;
+        }
+
         public async Task<DialogsApiResponse> DeleteImageAsync(Guid skillId, string imageId)
         {
             string url = $"/api/v1/skills/{skillId}/images/{imageId}";
@@ -157,7 +177,6 @@ namespace Yandex.Alice.Sdk.Services
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
-
 
         #endregion
     }

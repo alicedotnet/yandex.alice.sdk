@@ -108,6 +108,15 @@ namespace Yandex.Alice.Sdk.Tests.Services
         }
 
         [Fact]
+        public async Task GetImages_Ok()
+        {
+            var imagesResponse = await _dialogsApiService.GetImagesAsync(_skillId).ConfigureAwait(false);
+            Assert.True(imagesResponse.IsSuccess);
+            Assert.NotEmpty(imagesResponse.Content.Images);
+            Assert.True(imagesResponse.Content.Total > 0);
+        }
+
+        [Fact]
         public async Task DeleteImage_InvalidImageId_Fail()
         {
             var response = await _dialogsApiService.DeleteImageAsync(_skillId, "iaminvalid").ConfigureAwait(false);

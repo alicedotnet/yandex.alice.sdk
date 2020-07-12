@@ -16,12 +16,6 @@ namespace Yandex.Alice.Sdk.Converters
             _format = format;
         }
 
-        public override bool CanConvert(Type typeToConvert)
-        {
-            var a =  base.CanConvert(typeToConvert);
-            return a;
-        }
-
         public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string input = reader.GetString();
