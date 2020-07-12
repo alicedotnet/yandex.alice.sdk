@@ -5,9 +5,9 @@ using System.Text.Json;
 
 namespace Yandex.Alice.Sdk.Converters
 {
-    public class DialogsDateConverter : DateTimeOffsetConverter
+    public class DialogsDateTimeOffsetConverter : DateTimeOffsetConverter
     {
-        public DialogsDateConverter() 
+        public DialogsDateTimeOffsetConverter() 
             : base(AliceConstants.DateTimeFormat)
         {
         }

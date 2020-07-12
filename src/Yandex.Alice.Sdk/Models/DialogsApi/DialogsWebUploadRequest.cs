@@ -5,12 +5,12 @@ using System.Text.Json.Serialization;
 
 namespace Yandex.Alice.Sdk.Models.DialogsApi
 {
-    public class DialogsImageUploadRequest
+    public class DialogsWebUploadRequest
     {
         [JsonPropertyName("url")]
         public Uri Url { get; set; }
 
-        public DialogsImageUploadRequest(Uri url)
+        public DialogsWebUploadRequest(Uri url)
         {
             Url = url;
         }

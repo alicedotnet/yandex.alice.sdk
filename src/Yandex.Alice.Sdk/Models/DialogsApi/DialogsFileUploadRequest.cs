@@ -5,17 +5,17 @@ using System.Text;
 
 namespace Yandex.Alice.Sdk.Models.DialogsApi
 {
-    public class DialogsImageFileUploadRequest
+    public class DialogsFileUploadRequest
     {
         public Stream Content { get; }
         public string FileName { get; }
 
-        public DialogsImageFileUploadRequest(string fileName, byte[] content)
+        public DialogsFileUploadRequest(string fileName, byte[] content)
             : this(fileName, new MemoryStream(content))
         {
         }
 
-        public DialogsImageFileUploadRequest(string fileName, Stream content)
+        public DialogsFileUploadRequest(string fileName, Stream content)
         {
             Content = content;
             FileName = fileName;

@@ -6,19 +6,28 @@ using Yandex.Alice.Sdk.Converters;
 
 namespace Yandex.Alice.Sdk.Models.DialogsApi
 {
-    public class DialogsImageInfo
+    public class DialogsSoundInfo
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }
 
-        [JsonPropertyName("origUrl")]
-        public Uri OriginalUrl { get; set; }
+        [JsonPropertyName("skillId")]
+        public Guid SkillId { get; set; }
 
         [JsonPropertyName("size")]
-        public int Size { get; set; }
+        public int? Size { get; set; }
+
+        [JsonPropertyName("originalName")]
+        public string OriginalName { get; set; }
 
         [JsonPropertyName("createdAt")]
         [JsonConverter(typeof(DialogsDateTimeOffsetConverter))]
         public DateTimeOffset CreatedAt { get; set; }
+
+        [JsonPropertyName("isProcessed")]
+        public bool IsProcessed { get; set; }
+
+        [JsonPropertyName("error")]
+        public string Error { get; set; }
     }
 }

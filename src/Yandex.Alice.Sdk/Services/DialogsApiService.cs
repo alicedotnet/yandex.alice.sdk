@@ -30,15 +30,9 @@ namespace Yandex.Alice.Sdk.Services
                 new AuthenticationHeaderValue("OAuth", dialogsApiSettings.DialogsOAuthToken);
         }
 
-        public async Task<DialogsApiResponse<DialogsStatus>> StatusAsync()
-        {
-            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/v1/status"))
-            {
-                return await SendAsync<DialogsStatus>(requestMessage).ConfigureAwait(false);
-            }
-        }        
+        #region Image       
 
-        public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsImageUploadRequest request)
+        public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsWebUploadRequest request)
         {
             string requestUri = $"/api/v1/skills/{skillId}/images";
             string json = JsonSerializer.Serialize(request);
@@ -54,31 +48,10 @@ namespace Yandex.Alice.Sdk.Services
             }
         }        
 
-        public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsImageFileUploadRequest request)
+        public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsFileUploadRequest request)
         {
-            if(request == null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
             string url = $"/api/v1/skills/{skillId}/images";
-            using (var streamContent = new StreamContent(request.Content))
-            {
-                using (var formContent = new MultipartFormDataContent
-                    {
-                        {streamContent,"file", request.FileName}
-                    })
-                {
-                    using(var requestMessage = new HttpRequestMessage(HttpMethod.Post, url)
-                        { 
-                            Content = formContent
-                        }
-                    )
-                    {
-                        return await SendAsync<DialogsImageUploadResponse>(requestMessage).ConfigureAwait(false);
-                    }
-                }
-            }
+            return await SendFileAsync<DialogsImageUploadResponse>(url, request).ConfigureAwait(false);
         }
 
 
@@ -98,6 +71,52 @@ namespace Yandex.Alice.Sdk.Services
             {
                 return await SendAsync<DialogsDeleteResponse>(httpRequestMessage).ConfigureAwait(false);
             }            
+        }
+
+        #endregion
+
+        #region Sound
+
+        public async Task<DialogsApiResponse<DialogsSoundResponse>> UploadSoundAsync(Guid skillId, DialogsFileUploadRequest request)
+        {
+            string url = $"/api/v1/skills/{skillId}/sounds";
+            return await SendFileAsync<DialogsSoundResponse>(url, request).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        public async Task<DialogsApiResponse<DialogsStatus>> StatusAsync()
+        {
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/api/v1/status"))
+            {
+                return await SendAsync<DialogsStatus>(requestMessage).ConfigureAwait(false);
+            }
+        }
+
+        private async Task<DialogsApiResponse<TContent>> SendFileAsync<TContent>(string url, DialogsFileUploadRequest request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            using (var streamContent = new StreamContent(request.Content))
+            {
+                using (var formContent = new MultipartFormDataContent
+                    {
+                        {streamContent,"file", request.FileName}
+                    })
+                {
+                    using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, url)
+                    {
+                        Content = formContent
+                    }
+                    )
+                    {
+                        return await SendAsync<TContent>(requestMessage).ConfigureAwait(false);
+                    }
+                }
+            }
         }
 
         private async Task<DialogsApiResponse<TContent>> SendAsync<TContent>(HttpRequestMessage message)

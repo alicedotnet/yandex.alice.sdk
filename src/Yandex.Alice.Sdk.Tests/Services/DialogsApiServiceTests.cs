@@ -59,7 +59,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         [Fact]
         public async Task UploadImage_NoAuthToken_Fail()
         {
-            var request = new DialogsImageUploadRequest(new Uri(_imageUrl));
+            var request = new DialogsWebUploadRequest(new Uri(_imageUrl));
             var settings = new DialogsApiSettings();
             using var dialogsApiService = new DialogsApiService(settings);
             var response = await dialogsApiService.UploadImageAsync(_skillId, request).ConfigureAwait(false);
@@ -70,7 +70,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         [Fact]
         public async Task UploadImage_InvalidSkillId_Fail()
         {
-            var request = new DialogsImageUploadRequest(new Uri(_imageUrl));
+            var request = new DialogsWebUploadRequest(new Uri(_imageUrl));
             var response = await _dialogsApiService.UploadImageAsync(Guid.Empty, request).ConfigureAwait(false);
             Assert.False(response.IsSuccess);
             Assert.Contains("Resource not found", response.ErrorMessage, StringComparison.OrdinalIgnoreCase);
@@ -79,7 +79,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         [Fact]
         public async Task UploadImage_InvalidUrl_Fail()
         {
-            var response = await _dialogsApiService.UploadImageAsync(_skillId, new DialogsImageUploadRequest(new Uri("https://www.google.com/"))).ConfigureAwait(false);
+            var response = await _dialogsApiService.UploadImageAsync(_skillId, new DialogsWebUploadRequest(new Uri("https://www.google.com/"))).ConfigureAwait(false);
             Assert.False(response.IsSuccess);
             Assert.Contains("Invalid image", response.ErrorMessage, StringComparison.OrdinalIgnoreCase);
         }
@@ -87,7 +87,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         [Fact]
         public async Task UploadImage_Ok()
         {
-            var uploadRequest = new DialogsImageUploadRequest(new Uri(_imageUrl));
+            var uploadRequest = new DialogsWebUploadRequest(new Uri(_imageUrl));
             var uploadResponse = await _dialogsApiService.UploadImageAsync(_skillId, uploadRequest).ConfigureAwait(false);
             Assert.True(uploadResponse.IsSuccess, uploadResponse.ErrorMessage);
             Assert.NotNull(uploadResponse.Content);
@@ -106,7 +106,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
             var settings = new DialogsApiSettings();
             using var dialogsApiService = new DialogsApiService(settings);
             var bytes = File.ReadAllBytes(TestsConstants.Assets.IconFilePath);
-            var request = new DialogsImageFileUploadRequest(TestsConstants.Assets.IconFileName, bytes);
+            var request = new DialogsFileUploadRequest(TestsConstants.Assets.IconFileName, bytes);
             var uploadResponse = await dialogsApiService.UploadImageAsync(_skillId, request).ConfigureAwait(false);
             Assert.False(uploadResponse.IsSuccess);
             Assert.Contains("Unauthorized", uploadResponse.ErrorMessage, StringComparison.OrdinalIgnoreCase);
@@ -116,7 +116,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         public async Task UploadFileImage_NotImage_Fail()
         {
             var bytes = File.ReadAllBytes(TestsConstants.Assets.DialogsImageInfoFilePath);
-            var request = new DialogsImageFileUploadRequest("test.jpg", bytes);
+            var request = new DialogsFileUploadRequest("test.jpg", bytes);
             var response = await _dialogsApiService.UploadImageAsync(_skillId, request).ConfigureAwait(false);
             Assert.False(response.IsSuccess);
         }
@@ -125,7 +125,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         public async Task UploadFileImage_Ok()
         {
             var bytes = File.ReadAllBytes(TestsConstants.Assets.IconFilePath);
-            var request = new DialogsImageFileUploadRequest(TestsConstants.Assets.IconFileName, bytes);
+            var request = new DialogsFileUploadRequest(TestsConstants.Assets.IconFileName, bytes);
             var uploadResponse = await _dialogsApiService.UploadImageAsync(_skillId, request).ConfigureAwait(false);
             Assert.True(uploadResponse.IsSuccess);
 
@@ -145,7 +145,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         [Fact]
         public async Task GetImages_Ok()
         {
-            var uploadRequest = new DialogsImageUploadRequest(new Uri(_imageUrl));
+            var uploadRequest = new DialogsWebUploadRequest(new Uri(_imageUrl));
             var uploadResponse = await _dialogsApiService.UploadImageAsync(_skillId, uploadRequest).ConfigureAwait(false);
 
             var imagesResponse = await _dialogsApiService.GetImagesAsync(_skillId).ConfigureAwait(false);
@@ -159,7 +159,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         [Fact]
         public async Task DeleteImage_NoAuthToken_Fail()
         {
-            var uploadResponse = await _dialogsApiService.UploadImageAsync(_skillId, new DialogsImageUploadRequest(new Uri(_imageUrl))).ConfigureAwait(false);
+            var uploadResponse = await _dialogsApiService.UploadImageAsync(_skillId, new DialogsWebUploadRequest(new Uri(_imageUrl))).ConfigureAwait(false);
             string imageId = uploadResponse.Content.Image.Id;
 
             var settings = new DialogsApiSettings();
@@ -181,11 +181,30 @@ namespace Yandex.Alice.Sdk.Tests.Services
         [Fact]
         public async Task DeleteImage_Ok()
         {
-            var uploadResponse = await _dialogsApiService.UploadImageAsync(_skillId, new DialogsImageUploadRequest(new Uri(_imageUrl))).ConfigureAwait(false);
+            var uploadResponse = await _dialogsApiService.UploadImageAsync(_skillId, new DialogsWebUploadRequest(new Uri(_imageUrl))).ConfigureAwait(false);
             string imageId = uploadResponse.Content.Image.Id;
             var response = await _dialogsApiService.DeleteImageAsync(_skillId, imageId).ConfigureAwait(false);
             Assert.True(response.IsSuccess);
             Assert.Equal("ok", response.Content.Result);
+        }        
+
+        [Fact]
+        public async Task UploadSound_Ok()
+        {
+            var bytes = File.ReadAllBytes(TestsConstants.Assets.SoundFilePath);
+            var request = new DialogsFileUploadRequest(TestsConstants.Assets.SoundFileName, bytes);
+            var uploadResponse = await _dialogsApiService.UploadSoundAsync(_skillId, request).ConfigureAwait(false);
+            Assert.True(uploadResponse.IsSuccess);
+            Assert.NotNull(uploadResponse.Content);
+            Assert.NotNull(uploadResponse.Content.Sound);
+            Assert.NotNull(uploadResponse.Content.Sound.Id);
+            Assert.NotEqual(Guid.Empty, uploadResponse.Content.Sound.SkillId);
+            Assert.Null(uploadResponse.Content.Sound.Size);
+            Assert.NotNull(uploadResponse.Content.Sound.OriginalName);
+            Assert.NotEqual(default, uploadResponse.Content.Sound.CreatedAt);
+            Assert.Null(uploadResponse.Content.Sound.Error);
+
+            //await _dialogsApiService.DeleteImageAsync(_skillId, uploadResponse.Content.Image.Id).ConfigureAwait(false);
         }
     }
 }

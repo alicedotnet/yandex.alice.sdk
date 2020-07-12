@@ -16,6 +16,8 @@ namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure
             public static readonly string DialogsImageInfoFilePath = $"{_assetsFolderPath}/DialogsImageInfo.json";
             public const string IconFileName = "icon.png";
             public static readonly string IconFilePath = $"{_assetsFolderPath}/{IconFileName}";
+            public const string SoundFileName = "sound.mp3";
+            public static readonly string SoundFilePath = $"{_assetsFolderPath}/{SoundFileName}";
         }
 
         public const string DialogsApiCollectionName = "DialogsApiCollection";
