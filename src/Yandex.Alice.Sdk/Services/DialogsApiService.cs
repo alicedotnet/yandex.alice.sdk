@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -69,6 +70,39 @@ namespace Yandex.Alice.Sdk.Services
             return response;
         }
 
+        public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsImageFileUploadRequest request)
+        {
+            if(request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            string url = $"/api/v1/skills/{skillId}/images";
+            DialogsApiResponse<DialogsImageUploadResponse> response = null;
+            using (var streamContent = new StreamContent(request.Content))
+            {
+                using (var formContent = new MultipartFormDataContent
+                    {
+                        {streamContent,"file", request.FileName}
+                    })
+                {
+                    var apiResponse = await _dialogsApiClient.PostAsync(url, formContent).ConfigureAwait(false);
+                    var contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    if(apiResponse.IsSuccessStatusCode)
+                    {
+                        var content = JsonSerializer.Deserialize<DialogsImageUploadResponse>(contentString);
+                        response = new DialogsApiResponse<DialogsImageUploadResponse>(content);
+                    }
+                    else
+                    {
+                        var content = JsonSerializer.Deserialize<DialogsResponseContent>(contentString);
+                        response = new DialogsApiResponse<DialogsImageUploadResponse>(content.Message);
+                    }
+                }
+            }
+            return response;
+        }
+
         public async Task<DialogsApiResponse> DeleteImageAsync(Guid skillId, string imageId)
         {
             string url = $"/api/v1/skills/{skillId}/images/{imageId}";
@@ -93,7 +127,6 @@ namespace Yandex.Alice.Sdk.Services
             }
             return response;
         }
-
 
         #region Dispose
 
@@ -124,6 +157,7 @@ namespace Yandex.Alice.Sdk.Services
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
+
 
         #endregion
     }

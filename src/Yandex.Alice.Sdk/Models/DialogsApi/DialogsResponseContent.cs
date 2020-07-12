@@ -12,5 +12,14 @@ namespace Yandex.Alice.Sdk.Models.DialogsApi
 
         [JsonPropertyName("result")]
         public string Result { get; set; }
+
+        [JsonPropertyName("payload")]
+        public DialogsResponsePayload Payload { get; set; }
+    }
+
+    public class DialogsResponsePayload
+    {
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
     }
 }

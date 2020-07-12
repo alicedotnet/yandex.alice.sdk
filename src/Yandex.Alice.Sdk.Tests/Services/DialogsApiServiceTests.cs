@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
     {
         private readonly IDialogsApiService _dialogsApiService;
         private readonly Guid _skillId;
-        private const string _imageUrl = "https://previews.123rf.com/images/aquir/aquir1311/aquir131100316/23569861-sample-grunge-red-round-stamp.jpg";
+        private const string _imageUrl = "https://raw.githubusercontent.com/alexvolchetsky/yandex.alice.sdk/master/src/Yandex.Alice.Sdk/Resources/icon.png";
 
         public DialogsApiServiceTests(DialogsApiFixture dialogsApiFixture, ITestOutputHelper testOutputHelper)
             :base(testOutputHelper)
@@ -84,6 +85,26 @@ namespace Yandex.Alice.Sdk.Tests.Services
             Assert.NotEqual(default, response.Content.Image.CreatedAt);
             TestOutputHelper.WriteLine($"CreatedAt: {response.Content.Image.CreatedAt.ToString(AliceConstants.DateTimeFormat, CultureInfo.InvariantCulture)}");
             await _dialogsApiService.DeleteImageAsync(_skillId, response.Content.Image.Id).ConfigureAwait(false);
+        }
+
+        [Fact]
+        public async Task UploadFileImage_NotImage_Fail()
+        {
+            var bytes = File.ReadAllBytes(TestsConstants.Assets.DialogsImageInfoFilePath);
+            var request = new DialogsImageFileUploadRequest("test.jpg", bytes);
+            var response = await _dialogsApiService.UploadImageAsync(_skillId, request).ConfigureAwait(false);
+            Assert.False(response.IsSuccess);
+        }
+
+        [Fact]
+        public async Task UploadFileImage_Ok()
+        {
+            var bytes = File.ReadAllBytes(TestsConstants.Assets.IconFilePath);
+            var request = new DialogsImageFileUploadRequest(TestsConstants.Assets.IconFileName, bytes);
+            var uploadResponse = await _dialogsApiService.UploadImageAsync(_skillId, request).ConfigureAwait(false);
+            Assert.True(uploadResponse.IsSuccess);
+
+            await _dialogsApiService.DeleteImageAsync(_skillId, uploadResponse.Content.Image.Id).ConfigureAwait(false);
         }
 
         [Fact]
