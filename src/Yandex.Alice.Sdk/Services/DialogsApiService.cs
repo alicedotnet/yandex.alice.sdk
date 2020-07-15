@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -15,12 +12,6 @@ namespace Yandex.Alice.Sdk.Services
     public class DialogsApiService : IDialogsApiService, IDisposable
     {
         private readonly HttpClient _dialogsApiClient;
-
-        public DialogsApiService(IOptions<DialogsApiSettings> dialogsApiSettings)
-            : this(dialogsApiSettings?.Value)
-        {
-
-        }
 
         public DialogsApiService(DialogsApiSettings dialogsApiSettings)
         {

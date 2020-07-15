@@ -26,13 +26,13 @@ namespace Yandex.Alice.Sdk.Tests.Services
             :base(testOutputHelper)
         {
             _dialogsApiService = dialogsApiFixture.DialogsApiService;
-            _skillId = dialogsApiFixture.SkillSettings.SkillId;
+            _skillId = dialogsApiFixture.AliceSettings.SkillId;
         }
 
         [Fact]
         public async Task Status_NoAuthToken_Fail()
         {
-            var settings = new DialogsApiSettings();
+            var settings = new DialogsApiSettings(null);
             using var dialogsApiService = new DialogsApiService(settings);
             var response = await dialogsApiService.StatusAsync().ConfigureAwait(false);
             Assert.False(response.IsSuccess);
@@ -60,7 +60,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         public async Task UploadImage_NoAuthToken_Fail()
         {
             var request = new DialogsWebUploadRequest(new Uri(_imageUrl));
-            var settings = new DialogsApiSettings();
+            var settings = new DialogsApiSettings(null);
             using var dialogsApiService = new DialogsApiService(settings);
             var response = await dialogsApiService.UploadImageAsync(_skillId, request).ConfigureAwait(false);
             Assert.False(response.IsSuccess);
@@ -102,7 +102,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         [Fact]
         public async Task UploadFileImage_NoAuthToken_Fail()
         {
-            var settings = new DialogsApiSettings();
+            var settings = new DialogsApiSettings(null);
             using var dialogsApiService = new DialogsApiService(settings);
             var bytes = File.ReadAllBytes(TestsConstants.Assets.IconFilePath);
             var request = new DialogsFileUploadRequest(TestsConstants.Assets.IconFileName, bytes);
@@ -134,7 +134,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         [Fact]
         public async Task GetImages_NoAuthToken_Fail()
         {
-            var settings = new DialogsApiSettings();
+            var settings = new DialogsApiSettings(null);
             using var dialogsApiService = new DialogsApiService(settings);
             var imagesResponse = await dialogsApiService.GetImagesAsync(_skillId).ConfigureAwait(false);
             Assert.False(imagesResponse.IsSuccess);
@@ -161,7 +161,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
             var uploadResponse = await _dialogsApiService.UploadImageAsync(_skillId, new DialogsWebUploadRequest(new Uri(_imageUrl))).ConfigureAwait(false);
             string imageId = uploadResponse.Content.Image.Id;
 
-            var settings = new DialogsApiSettings();
+            var settings = new DialogsApiSettings(null);
             using var dialogsApiService = new DialogsApiService(settings);
             var response = await dialogsApiService.DeleteImageAsync(_skillId, imageId).ConfigureAwait(false);
             Assert.False(response.IsSuccess);
