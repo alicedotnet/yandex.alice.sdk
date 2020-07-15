@@ -20,8 +20,8 @@ jobs:
       with:
         files: './examples/yandex.alice.sdk.demo/Yandex.Alice.Sdk.Demo/appsettings.json'
       env:
-        Skill.SkillId: ${{ secrets.SKILL_SKILLID }}
-        DialogsApi.DialogsOAuthToken: ${{ secrets.DIALOGSAPI_DIALOGSOAUTHTOKEN }}
+        AliceSettings.SkillId: ${{ secrets.SKILL_SKILLID }}
+        AliceSettings.DialogsOAuthToken: ${{ secrets.DIALOGSAPI_DIALOGSOAUTHTOKEN }}
     - name: test
       run: dotnet test ./examples/yandex.alice.sdk.demo -c Release
     - name: publish site
