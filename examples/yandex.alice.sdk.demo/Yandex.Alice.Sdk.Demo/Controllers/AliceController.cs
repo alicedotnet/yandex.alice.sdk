@@ -6,10 +6,14 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Yandex.Alice.Sdk.Demo.Models;
 using Yandex.Alice.Sdk.Demo.Models.Intents;
+using Yandex.Alice.Sdk.Demo.Models.Session;
 using Yandex.Alice.Sdk.Helpers;
 using Yandex.Alice.Sdk.Models;
+using Yandex.Alice.Sdk.Models.DialogsApi;
+using Yandex.Alice.Sdk.Services;
 
 namespace Yandex.Alice.Sdk.Demo.Controllers
 {
@@ -22,23 +26,31 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
         private const string _oneImageButtonTitle = "ответ с одним изображением";
         private const string _galleryButtonTitle = "ответ с галереей из нескольких изображений";
         private const string _testIntentButtonTitle = "протестировать интент";
+        private const string _resourcesWorkButtonTitle = "работа с ресурсами";
         private const string _homeButtonTitle = "назад";
         private const string _githubLink = "https://github.com/alexvolchetsky/yandex.alice.sdk";
         
         private readonly ILogger<AliceController> _logger;
+        private readonly IDialogsApiService _dialogsApiService;
+        private readonly SkillSettings _skillSettings;
 
-        public AliceController(ILogger<AliceController> logger)
+
+        public AliceController(ILogger<AliceController> logger, IDialogsApiService dialogsApiService,
+            IOptions<SkillSettings> skillSettings)
         {
             _logger = logger;
+            _dialogsApiService = dialogsApiService;
+            _skillSettings = skillSettings.Value;
         }
 
         [HttpPost]
         [Route("/alice")]
-        public IActionResult Get(AliceRequest<CustomIntents> aliceRequest)
+        public async Task<IActionResult> Get(AliceRequest<CustomIntents> aliceRequest)
         {
             try
             {
-                return Ok(GetAliceResponse(aliceRequest));
+                var response = await GetAliceResponseAsync(aliceRequest).ConfigureAwait(false);
+                return Ok(response);
             }
             catch(Exception e)
             {
@@ -48,7 +60,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
             }
         }        
 
-        private static AliceResponseBase GetAliceResponse(AliceRequest<CustomIntents> aliceRequest)
+        private async Task<AliceResponseBase> GetAliceResponseAsync(AliceRequest<CustomIntents> aliceRequest)
         {
             if(aliceRequest.Request.Command == _codeButtonTitle)
             {
@@ -67,7 +79,8 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceButtonModel(_codeButtonTitle, false, null, new Uri(_githubLink)),
                         new AliceButtonModel(_oneImageButtonTitle),
                         new AliceButtonModel(_galleryButtonTitle),
-                        new AliceButtonModel(_testIntentButtonTitle)
+                        new AliceButtonModel(_testIntentButtonTitle),
+                        new AliceButtonModel(_resourcesWorkButtonTitle)
                     };
                 return new AliceResponse(aliceRequest, text, buttons);
             }
@@ -80,14 +93,15 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceButtonModel(_codeButtonTitle, true, null, new Uri(_githubLink)),
                         new AliceButtonModel(_noImageButtonTitle, true),
                         new AliceButtonModel(_galleryButtonTitle, true),
-                        new AliceButtonModel(_testIntentButtonTitle, true)
+                        new AliceButtonModel(_testIntentButtonTitle, true),
+                        new AliceButtonModel(_resourcesWorkButtonTitle, true)
                     };
                 var aliceResponse = new AliceImageResponse(aliceRequest, text, buttons);
                 aliceResponse.Response.Card = new AliceImageCardModel
                 {
                     Title = "Манчкин",
                     Description = "Современная порода кошек. При средней длине тела их лапки короче, чем у обычных кошек в 2-3 раза.",
-                    ImageId = "937455/748ce93e9e77af0a53d1",
+                    ImageId = DemoResources.Images.CatImageId1,
                     Button = new AliceImageCardButtonModel()
                     {
                         Text = "подробнее",
@@ -104,7 +118,8 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceButtonModel(_codeButtonTitle, true, null, new Uri(_githubLink)),
                         new AliceButtonModel(_noImageButtonTitle, true),
                         new AliceButtonModel(_oneImageButtonTitle, true),
-                        new AliceButtonModel(_testIntentButtonTitle, true)
+                        new AliceButtonModel(_testIntentButtonTitle, true),
+                        new AliceButtonModel(_resourcesWorkButtonTitle, true)
                     };
                 var aliceResponse = new AliceGalleryResponse(aliceRequest, text, buttons);
                 aliceResponse.Response.Card = new AliceGalleryCardModel
@@ -115,7 +130,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceGalleryCardItem()
                         {
                             Title = "Ягдтерьер",
-                            ImageId = "1656841/2ffd3010e6df3d0fd513",
+                            ImageId = DemoResources.Images.DogImageId1,
                             Description = "Порода универсальных охотничьих собак.",
                             Button = new AliceImageCardButtonModel()
                             {
@@ -126,7 +141,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceGalleryCardItem()
                         {
                             Title = "Хаски",
-                            ImageId = "965417/8d82b0800c9cf1cdcf78",
+                            ImageId = DemoResources.Images.DogImageId2,
                             Description = "Общее название для нескольких пород ездовых собак, выведенных в северных регионах, которые отличаются быстрой манерой тянуть упряжку.",
                             Button = new AliceImageCardButtonModel()
                             {
@@ -137,7 +152,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceGalleryCardItem()
                         {
                             Title = "Лабрадор",
-                            ImageId = "965417/6ac8614766ecc99a3967",
+                            ImageId = DemoResources.Images.DogImageId3,
                             Description = "Порода собак. Первоначально была выведена в качестве охотничьей подружейной собаки.",
                             Button = new AliceImageCardButtonModel()
                             {
@@ -166,13 +181,62 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     };
                 return new AliceResponse(aliceRequest, text, buttons)
                 {
-                    SessionState = new CustomSessionState(true)
+                    SessionState = new CustomSessionState(ModeType.IntentsTesting)
                 };
+            }
+            if(aliceRequest.Request.Command == _resourcesWorkButtonTitle)
+            {
+                string text = "Так же я могу управлять файлами изображений и звуков в навыке, используя HTTP API. Попробуйте отправить мне ссылку на изображение и я отображу его в ответе";
+                var buttons = new List<AliceButtonModel>()
+                    {
+                        new AliceButtonModel(_homeButtonTitle)
+                    };
+                return new AliceResponse(aliceRequest, text, buttons)
+                {
+                    SessionState = new CustomSessionState(ModeType.ResourcesTesting)
+                };
+            }
+            if(aliceRequest.Request.Command != _homeButtonTitle)
+            {
+                var session = aliceRequest.State.TryGetSession<CustomSessionState>();
+                if(session?.Mode == ModeType.ResourcesTesting)
+                {
+                    if(Uri.TryCreate(aliceRequest.Request.Command, UriKind.Absolute, out Uri uri))
+                    {
+                        var response = await _dialogsApiService.UploadImageAsync(_skillSettings.SkillId, new DialogsWebUploadRequest(uri)).ConfigureAwait(false);
+                        if(response.IsSuccess)
+                        {
+                            var uploadedButtons = new List<AliceButtonModel>()
+                            {
+                                new AliceButtonModel(_homeButtonTitle, true)
+                            };
+                            var aliceResponse = new AliceImageResponse(aliceRequest, "Изображение загружено", uploadedButtons);
+                            aliceResponse.Response.Card = new AliceImageCardModel
+                            {
+                                Title = "Изображение загружено",
+                                Description = "Вы можете попробовать загрузить другое изображение",
+                                ImageId = response.Content.Image.Id,
+                            };
+                            aliceResponse.SessionState = new CustomSessionState(ModeType.ResourcesTesting);
+                            return aliceResponse;
+                        }
+                    }
+                    string text = "Не удалось загрузить изображение. Попробуйте еще раз";
+                    var buttons = new List<AliceButtonModel>()
+                    {
+                        new AliceButtonModel(_homeButtonTitle)
+                    };
+                    return new AliceResponse(aliceRequest, text, buttons)
+                    {
+                        SessionState = new CustomSessionState(ModeType.ResourcesTesting)
+                    };
+                }
+
             }
             if(aliceRequest.Request.Command != _homeButtonTitle && aliceRequest.Request.Nlu?.Intents?.TurnOn == null)
             {
-                var session = AliceHelper.JsonElementToObject<CustomSessionState>(aliceRequest.State?.Session);
-                if(session?.IsInIntentsTestingMode == true)
+                var session = aliceRequest.State.TryGetSession<CustomSessionState>();
+                if(session?.Mode == ModeType.IntentsTesting)
                 {
                     string text = "Не удалось распознать интент. Попробуйте еще раз";
                     var buttons = new List<AliceButtonModel>()
@@ -183,7 +247,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     };
                     return new AliceResponse(aliceRequest, text, buttons)
                     {
-                        SessionState = new CustomSessionState(true)
+                        SessionState = new CustomSessionState(ModeType.IntentsTesting)
                     };
                 }
             }
@@ -198,7 +262,8 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceButtonModel(_noImageButtonTitle),
                         new AliceButtonModel(_oneImageButtonTitle),
                         new AliceButtonModel(_galleryButtonTitle),
-                        new AliceButtonModel(_testIntentButtonTitle)
+                        new AliceButtonModel(_testIntentButtonTitle),
+                        new AliceButtonModel(_resourcesWorkButtonTitle)
                     };
                 return new AliceResponse(aliceRequest, text, buttons);
             }
@@ -213,7 +278,8 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceButtonModel(_noImageButtonTitle),
                         new AliceButtonModel(_oneImageButtonTitle),
                         new AliceButtonModel(_galleryButtonTitle),
-                        new AliceButtonModel(_testIntentButtonTitle)
+                        new AliceButtonModel(_testIntentButtonTitle),
+                        new AliceButtonModel(_resourcesWorkButtonTitle)
                     };
                 return new AliceResponse(aliceRequest, text, buttons);
             }

@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Yandex.Alice.Sdk.Demo.Services;
+using Yandex.Alice.Sdk.Demo.Services.Interfaces;
+using Yandex.Alice.Sdk.Demo.Workers;
+using Yandex.Alice.Sdk.Models.DialogsApi;
+using Yandex.Alice.Sdk.Services;
 
 namespace Yandex.Alice.Sdk.Demo
 {
@@ -23,9 +21,16 @@ namespace Yandex.Alice.Sdk.Demo
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public static void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSingleton<IDialogsApiService, DialogsApiService>();
+            services.Configure<DialogsApiSettings>(Configuration.GetSection("DialogsApi"));
+            services.Configure<SkillSettings>(Configuration.GetSection("Skill"));
+
+            services.AddSingleton<ICleanService, CleanService>();
+            services.AddHostedService<CleanResourcesWorker>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,7 +9,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Yandex.Alice.Sdk" Version="1.0.4" />
+    <PackageReference Include="Yandex.Alice.Sdk" Version="1.0.5" />
   </ItemGroup>
 
 
