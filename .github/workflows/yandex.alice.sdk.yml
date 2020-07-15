@@ -17,8 +17,8 @@ jobs:
       with:
         files: './src/Yandex.Alice.Sdk.Tests/appsettings.json'
       env:
-        Skill.SkillId: ${{ secrets.SKILL_SKILLID }}
-        DialogsApi.DialogsOAuthToken: ${{ secrets.DIALOGSAPI_DIALOGSOAUTHTOKEN }}
+        AliceSettings.SkillId: ${{ secrets.SKILL_SKILLID }}
+        AliceSettings.DialogsOAuthToken: ${{ secrets.DIALOGSAPI_DIALOGSOAUTHTOKEN }}
     - name: test
       run: dotnet test ./src -c Release
     - name: publish on version change
