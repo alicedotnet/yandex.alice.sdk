@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Yandex.Alice.Sdk.Demo.Models;
 using Yandex.Alice.Sdk.Demo.Services.Interfaces;
-using Yandex.Alice.Sdk.Models.DialogsApi;
 using Yandex.Alice.Sdk.Services;
 
 namespace Yandex.Alice.Sdk.Demo.Services
@@ -15,10 +13,10 @@ namespace Yandex.Alice.Sdk.Demo.Services
         private readonly IDialogsApiService _dialogsApiService;
         private Guid _skillId;
 
-        public CleanService(IDialogsApiService dialogsApiService, IOptions<SkillSettings> skillSettings)
+        public CleanService(IDialogsApiService dialogsApiService, AliceSettings aliceSettings)
         {
             _dialogsApiService = dialogsApiService;
-            _skillId = skillSettings.Value.SkillId;
+            _skillId = aliceSettings.SkillId;
         }
 
         public async Task CleanResourcesAsync()

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Yandex.Alice.Sdk.Demo.Models;
 using Yandex.Alice.Sdk.Demo.Services;
 using Yandex.Alice.Sdk.Demo.Services.Interfaces;
 using Yandex.Alice.Sdk.Demo.Workers;
@@ -25,9 +26,12 @@ namespace Yandex.Alice.Sdk.Demo
         {
             services.AddControllers();
 
-            services.AddSingleton<IDialogsApiService, DialogsApiService>();
-            services.Configure<DialogsApiSettings>(Configuration.GetSection("DialogsApi"));
-            services.Configure<SkillSettings>(Configuration.GetSection("Skill"));
+            var skillIdSection = Configuration.GetSection("AliceSettings:SkillId");
+            var aliceSettings = new AliceSettings(skillIdSection.Value);
+            var apiSettings = new DialogsApiSettings(Configuration.GetSection("AliceSettings:DialogsOAuthToken").Value);
+            services.AddSingleton(apiSettings);
+            services.AddSingleton<IDialogsApiService,DialogsApiService>();
+            services.AddSingleton(aliceSettings);
 
             services.AddSingleton<ICleanService, CleanService>();
             services.AddHostedService<CleanResourcesWorker>();

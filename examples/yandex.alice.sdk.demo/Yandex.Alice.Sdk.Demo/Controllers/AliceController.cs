@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Yandex.Alice.Sdk.Demo.Models;
 using Yandex.Alice.Sdk.Demo.Models.Intents;
 using Yandex.Alice.Sdk.Demo.Models.Session;
-using Yandex.Alice.Sdk.Helpers;
 using Yandex.Alice.Sdk.Models;
 using Yandex.Alice.Sdk.Models.DialogsApi;
 using Yandex.Alice.Sdk.Services;
@@ -32,15 +28,15 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
         
         private readonly ILogger<AliceController> _logger;
         private readonly IDialogsApiService _dialogsApiService;
-        private readonly SkillSettings _skillSettings;
+        private readonly AliceSettings _aliceSettings;
 
 
         public AliceController(ILogger<AliceController> logger, IDialogsApiService dialogsApiService,
-            IOptions<SkillSettings> skillSettings)
+            AliceSettings aliceSettings)
         {
             _logger = logger;
             _dialogsApiService = dialogsApiService;
-            _skillSettings = skillSettings.Value;
+            _aliceSettings = aliceSettings;
         }
 
         [HttpPost]
@@ -58,7 +54,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                 _logger.LogError(e, string.Empty);
                 return Content(e.ToString());
             }
-        }        
+        }
 
         private async Task<AliceResponseBase> GetAliceResponseAsync(AliceRequest<CustomIntents> aliceRequest)
         {
@@ -203,7 +199,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                 {
                     if(Uri.TryCreate(aliceRequest.Request.Command, UriKind.Absolute, out Uri uri))
                     {
-                        var response = await _dialogsApiService.UploadImageAsync(_skillSettings.SkillId, new DialogsWebUploadRequest(uri)).ConfigureAwait(false);
+                        var response = await _dialogsApiService.UploadImageAsync(_aliceSettings.SkillId, new DialogsWebUploadRequest(uri)).ConfigureAwait(false);
                         if(response.IsSuccess)
                         {
                             var uploadedButtons = new List<AliceButtonModel>()
