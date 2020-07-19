@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Configurations>Debug;Release;Debug SDK</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,6 +11,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Yandex.Alice.Sdk" Version="1.0.6" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Debug SDK'">
+    <ProjectReference Include="..\..\..\src\Yandex.Alice.Sdk\Yandex.Alice.Sdk.csproj" />
   </ItemGroup>
 
 

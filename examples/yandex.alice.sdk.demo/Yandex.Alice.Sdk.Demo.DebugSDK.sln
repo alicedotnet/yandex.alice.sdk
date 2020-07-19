@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo", "Yandex.Alice.Sdk.Demo\Yandex.Alice.Sdk.Demo.csproj", "{45F0A3C4-1F24-408F-83EA-DE72A02BFE19}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo.Tests", "Yandex.Alice.Sdk.Demo.Tests\Yandex.Alice.Sdk.Demo.Tests.csproj", "{76D415CA-E42C-4C35-9A30-750CC9C01E59}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk", "..\..\src\Yandex.Alice.Sdk\Yandex.Alice.Sdk.csproj", "{7949AFD2-666E-4296-858B-612107D7FF51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug SDK|Any CPU = Debug SDK|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45F0A3C4-1F24-408F-83EA-DE72A02BFE19}.Debug SDK|Any CPU.ActiveCfg = Debug SDK|Any CPU
+		{45F0A3C4-1F24-408F-83EA-DE72A02BFE19}.Debug SDK|Any CPU.Build.0 = Debug SDK|Any CPU
+		{45F0A3C4-1F24-408F-83EA-DE72A02BFE19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45F0A3C4-1F24-408F-83EA-DE72A02BFE19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45F0A3C4-1F24-408F-83EA-DE72A02BFE19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45F0A3C4-1F24-408F-83EA-DE72A02BFE19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76D415CA-E42C-4C35-9A30-750CC9C01E59}.Debug SDK|Any CPU.ActiveCfg = Debug SDK|Any CPU
+		{76D415CA-E42C-4C35-9A30-750CC9C01E59}.Debug SDK|Any CPU.Build.0 = Debug SDK|Any CPU
+		{76D415CA-E42C-4C35-9A30-750CC9C01E59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76D415CA-E42C-4C35-9A30-750CC9C01E59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76D415CA-E42C-4C35-9A30-750CC9C01E59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76D415CA-E42C-4C35-9A30-750CC9C01E59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7949AFD2-666E-4296-858B-612107D7FF51}.Debug SDK|Any CPU.ActiveCfg = Debug SDK|Any CPU
+		{7949AFD2-666E-4296-858B-612107D7FF51}.Debug SDK|Any CPU.Build.0 = Debug SDK|Any CPU
+		{7949AFD2-666E-4296-858B-612107D7FF51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7949AFD2-666E-4296-858B-612107D7FF51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7949AFD2-666E-4296-858B-612107D7FF51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7949AFD2-666E-4296-858B-612107D7FF51}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8ADF218B-EEE2-4E0F-B0A9-C7F34A5B7434}
+	EndGlobalSection
+EndGlobal

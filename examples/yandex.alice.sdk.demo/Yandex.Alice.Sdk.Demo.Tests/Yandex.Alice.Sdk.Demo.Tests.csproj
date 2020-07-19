@@ -6,6 +6,8 @@
     <IsPackable>false</IsPackable>
 
     <UserSecretsId>eff717cc-c337-4141-b247-603690a26a75</UserSecretsId>
+
+    <Configurations>Debug;Release;Debug SDK</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
