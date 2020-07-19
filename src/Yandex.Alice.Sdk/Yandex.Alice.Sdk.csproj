@@ -14,7 +14,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <Version>1.0.6</Version>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <PackageReleaseNotes>Add integration with API to work with image and sound resources</PackageReleaseNotes>
+    <PackageReleaseNotes>Remove obsolete AliceTtsHelper</PackageReleaseNotes>
     <Configurations>Debug;Release;Debug SDK</Configurations>
   </PropertyGroup>
 

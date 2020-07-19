@@ -5,11 +5,17 @@ using System.Text.Json.Serialization;
 
 namespace Yandex.Alice.Sdk.Models
 {
-    public abstract class AliceResponseBase<T> : AliceResponseBase
-        where T : AliceResponseModel, new()
+    public abstract class AliceResponseBase<TResponse, TSession, TUser> : AliceResponseBase
+        where TResponse : AliceResponseModel, new()
     {
         [JsonPropertyName("response")]
-        public T Response { get; set; }
+        public TResponse Response { get; set; }
+
+        [JsonPropertyName("session_state")]
+        public TSession SessionState { get; set; }
+
+        [JsonPropertyName("user_state_update")]
+        public TUser UserStateUpdate { get; set; }
 
         protected AliceResponseBase()
         {
@@ -19,7 +25,7 @@ namespace Yandex.Alice.Sdk.Models
         protected AliceResponseBase(AliceRequestBase request, string text, string tts, List<AliceButtonModel> buttons)
             :base(request)
         {
-            Response = new T()
+            Response = new TResponse()
             {
                 Text = text,
                 Tts = tts,
@@ -32,11 +38,6 @@ namespace Yandex.Alice.Sdk.Models
     {
         [JsonPropertyName("version")]
         public string Version { get; set; }
-
-        [JsonPropertyName("session_state")]
-        public object SessionState { get; set; }
-        [JsonPropertyName("user_state_update")]
-        public object UserStateUpdate { get; set; }
 
         protected AliceResponseBase()
         {

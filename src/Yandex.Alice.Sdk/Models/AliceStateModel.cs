@@ -6,11 +6,6 @@ using Yandex.Alice.Sdk.Helpers;
 
 namespace Yandex.Alice.Sdk.Models
 {
-    public class AliceStateModel : AliceStateModel<object, object>
-    {
-
-    }
-
     public class AliceStateModel<TSession, TUser>
     {
         [JsonPropertyName("session")]
@@ -18,18 +13,15 @@ namespace Yandex.Alice.Sdk.Models
 
         [JsonPropertyName("user")]
         public TUser User { get; set; }
-    }
 
-    public static class AliceStateModelExtensions
-    {
-        public static T TryGetSession<T>(this AliceStateModel<object, object> aliceStateModel)
+        public T TryGetSession<T>()
         {
-            return AliceHelper.JsonElementToObject<T>(aliceStateModel?.Session);
+            return AliceHelper.JsonElementToObject<T>(Session);
         }
 
-        public static T TryGetUser<T>(this AliceStateModel<object, object> aliceStateModel)
+        public T TryGetUser<T>()
         {
-            return AliceHelper.JsonElementToObject<T>(aliceStateModel?.User);
+            return AliceHelper.JsonElementToObject<T>(User);
         }
     }
 }
