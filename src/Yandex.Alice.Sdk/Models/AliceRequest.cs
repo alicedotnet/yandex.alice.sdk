@@ -5,17 +5,30 @@ using System.Text.Json.Serialization;
 
 namespace Yandex.Alice.Sdk.Models
 {
-    public class AliceRequest<TIntents> : AliceRequestBase
+    public class AliceRequest 
+        : AliceRequest<object>
+    {
+    }
+
+    public class AliceRequest<TIntents> : 
+        AliceRequest<TIntents, object, object>
+    {
+    }
+
+    public class AliceRequest<TIntents, TSession, TUser> 
+        : AliceRequestStateBase<TSession, TUser>
     {
         [JsonPropertyName("request")]
         public AliceRequestModel<TIntents> Request { get; set; }
     }
 
-    public class AliceRequest : AliceRequestBase
+    public abstract class AliceRequestStateBase<TSession, TUser>
+        : AliceRequestBase
     {
-        [JsonPropertyName("request")]
-        public AliceRequestModel<object> Request { get; set; }
+        [JsonPropertyName("state")]
+        public AliceStateModel<TSession, TUser> State { get; set; }
     }
+
 
     public abstract class AliceRequestBase
     {
@@ -24,9 +37,6 @@ namespace Yandex.Alice.Sdk.Models
 
         [JsonPropertyName("session")]
         public AliceSessionModel Session { get; set; }
-
-        [JsonPropertyName("state")]
-        public AliceStateModel State { get; set; }
 
         [JsonPropertyName("version")]
         public string Version { get; set; }
