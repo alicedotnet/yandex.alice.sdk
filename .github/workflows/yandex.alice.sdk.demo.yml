@@ -23,7 +23,7 @@ jobs:
         AliceSettings.SkillId: ${{ secrets.SKILL_SKILLID }}
         AliceSettings.DialogsOAuthToken: ${{ secrets.DIALOGSAPI_DIALOGSOAUTHTOKEN }}
     - name: test
-      run: dotnet test ./examples/yandex.alice.sdk.demo -c Release
+      run: dotnet test ./examples/yandex.alice.sdk.demo/Yandex.Alice.Sdk.Demo.sln -c Release
     - name: publish site
       run: dotnet publish -c Release -o demo ./examples/yandex.alice.sdk.demo/Yandex.Alice.Sdk.Demo/Yandex.Alice.Sdk.Demo.csproj
     - name: Upload a Build Artifact
