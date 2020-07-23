@@ -1,30 +1,30 @@
 ![Yandex.Alice.SDK](src/Yandex.Alice.Sdk/Resources/icon.png "Yandex.Alice.SDK")
 
-.Net SDK для разработки навыков Яндекс Алисы на языке C#
+.Net SDK for development of Yandex Alice skills using C# language.
 
 ![yandex.alice.sdk](https://github.com/alexvolchetsky/yandex.alice.sdk/workflows/yandex.alice.sdk/badge.svg)
 ![yandex.alice.sdk.demo](https://github.com/alexvolchetsky/yandex.alice.sdk/workflows/yandex.alice.sdk.demo/badge.svg)
 [![NuGet](https://buildstats.info/nuget/Yandex.Alice.Sdk)](https://www.nuget.org/packages/Yandex.Alice.Sdk)
 
-# Установка
-Установите пакет c SDK: 
+# Installation
+Install NuGet package with SDK: 
 
 `Install-Package Yandex.Alice.Sdk`
-# Использование
-Репозиторий содержит [тестовый проект](examples/yandex.alice.sdk.demo) на ASP.NET Core Web Api, который демонстрирует работу с SDK.
+# Usage
+This repository has [demo project](examples/yandex.alice.sdk.demo) written on ASP.NET Core Web Api, which demonstrates usage of SDK.
 
-Для тестового проекта был опубликован навык в каталоге Алисы:
+Demo project skill was publish in Alice catalogue:
 
 [![alice](https://dialogs.s3.yandex.net/badges/v1-term1.svg)](https://dialogs.yandex.ru/store/skills/245ea3a4-net-sdk?utm_source=https://github.com&utm_medium=badge&utm_campaign=v1&utm_term=d1)
 
-В целом вам нужно будет создать контроллер с POST методом действия, принимающим объект класса AliceRequest в качестве параметра.
+In general you would need to create controller with POST action method which receive object of AliceRequest class as parameter. 
 
-Метод может вернуть один из 3-х типов ответов в соответствии с [протоколом алисы](https://yandex.ru/dev/dialogs/alice/doc/protocol-docpage/#response):
-* AliceResponse - без изображений
-* AliceImageResponse - с одним изображением
-* AliceGalleryResponse - с галереей из нескольких изображений
+Method can return one of three response types according to [Alice protocol](https://yandex.ru/dev/dialogs/alice/doc/protocol-docpage/?ncrnd=4989):
+* AliceResponse - without images
+* AliceImageResponse - with one image
+* AliceGalleryResponse - with gallery of several images
 
-Простой пример реализации описанной выше функциональности:
+Simple example of implementation of functionality described above:
 
 ```c#
 using Microsoft.AspNetCore.Mvc;
@@ -38,10 +38,10 @@ public class AliceController : ControllerBase
     [Route("/alice")]
     public IActionResult Get(AliceRequest aliceRequest)
     {
-        return Ok(new AliceResponse(aliceRequest, "Привет"));
+        return Ok(new AliceResponse(aliceRequest, "Hello"));
     }
 }
 ```
 
-# Документация
-Больше информации о работе с библиотекой смотрите в [wiki](https://github.com/alexvolchetsky/yandex.alice.sdk/wiki)
+# Documentation
+More info about library you can find in [wiki](https://github.com/alexvolchetsky/yandex.alice.sdk/wiki)
