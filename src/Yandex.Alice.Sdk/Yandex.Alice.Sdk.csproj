@@ -12,9 +12,10 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>yandex alice sdk skill dialogs models</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <PackageReleaseNotes>Remove obsolete AliceTtsHelper</PackageReleaseNotes>
+    <PackageReleaseNotes>Remove obsolete AliceTtsHelper
+Add generic Session and User state</PackageReleaseNotes>
     <Configurations>Debug;Release;Debug SDK</Configurations>
   </PropertyGroup>
 

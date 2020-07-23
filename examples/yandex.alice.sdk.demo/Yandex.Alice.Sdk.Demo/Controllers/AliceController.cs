@@ -41,7 +41,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
 
         [HttpPost]
         [Route("/alice")]
-        public async Task<IActionResult> Get(AliceRequest<CustomIntents> aliceRequest)
+        public async Task<IActionResult> Get(DemoAliceRequest aliceRequest)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
             }
         }
 
-        private async Task<AliceResponseBase> GetAliceResponseAsync(AliceRequest<CustomIntents> aliceRequest)
+        private async Task<AliceResponseBase> GetAliceResponseAsync(DemoAliceRequest aliceRequest)
         {
             if(aliceRequest.Request.Command == _codeButtonTitle)
             {
@@ -192,60 +192,54 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     SessionState = new CustomSessionState(ModeType.ResourcesTesting)
                 };
             }
-            if(aliceRequest.Request.Command != _homeButtonTitle)
+            if (aliceRequest.Request.Command != _homeButtonTitle
+                && aliceRequest.State?.Session?.Mode == ModeType.ResourcesTesting)
             {
-                var session = aliceRequest.State.TryGetSession<CustomSessionState>();
-                if(session?.Mode == ModeType.ResourcesTesting)
+                if (Uri.TryCreate(aliceRequest.Request.Command, UriKind.Absolute, out Uri uri))
                 {
-                    if(Uri.TryCreate(aliceRequest.Request.Command, UriKind.Absolute, out Uri uri))
+                    var response = await _dialogsApiService.UploadImageAsync(_aliceSettings.SkillId, new DialogsWebUploadRequest(uri)).ConfigureAwait(false);
+                    if (response.IsSuccess)
                     {
-                        var response = await _dialogsApiService.UploadImageAsync(_aliceSettings.SkillId, new DialogsWebUploadRequest(uri)).ConfigureAwait(false);
-                        if(response.IsSuccess)
-                        {
-                            var uploadedButtons = new List<AliceButtonModel>()
+                        var uploadedButtons = new List<AliceButtonModel>()
                             {
                                 new AliceButtonModel(_homeButtonTitle, true)
                             };
-                            var aliceResponse = new AliceImageResponse(aliceRequest, "Изображение загружено", uploadedButtons);
-                            aliceResponse.Response.Card = new AliceImageCardModel
-                            {
-                                Title = "Изображение загружено",
-                                Description = "Вы можете попробовать загрузить другое изображение",
-                                ImageId = response.Content.Image.Id,
-                            };
-                            aliceResponse.SessionState = new CustomSessionState(ModeType.ResourcesTesting);
-                            return aliceResponse;
-                        }
+                        var aliceResponse = new AliceImageResponse(aliceRequest, "Изображение загружено", uploadedButtons);
+                        aliceResponse.Response.Card = new AliceImageCardModel
+                        {
+                            Title = "Изображение загружено",
+                            Description = "Вы можете попробовать загрузить другое изображение",
+                            ImageId = response.Content.Image.Id,
+                        };
+                        aliceResponse.SessionState = new CustomSessionState(ModeType.ResourcesTesting);
+                        return aliceResponse;
                     }
-                    string text = "Не удалось загрузить изображение. Попробуйте еще раз";
-                    var buttons = new List<AliceButtonModel>()
+                }
+                string text = "Не удалось загрузить изображение. Попробуйте еще раз";
+                var buttons = new List<AliceButtonModel>()
                     {
                         new AliceButtonModel(_homeButtonTitle)
                     };
-                    return new AliceResponse(aliceRequest, text, buttons)
-                    {
-                        SessionState = new CustomSessionState(ModeType.ResourcesTesting)
-                    };
-                }
-
-            }
-            if(aliceRequest.Request.Command != _homeButtonTitle && aliceRequest.Request.Nlu?.Intents?.TurnOn == null)
-            {
-                var session = aliceRequest.State.TryGetSession<CustomSessionState>();
-                if(session?.Mode == ModeType.IntentsTesting)
+                return new AliceResponse(aliceRequest, text, buttons)
                 {
-                    string text = "Не удалось распознать интент. Попробуйте еще раз";
-                    var buttons = new List<AliceButtonModel>()
+                    SessionState = new CustomSessionState(ModeType.ResourcesTesting)
+                };
+            }
+            if (aliceRequest.Request.Command != _homeButtonTitle &&
+                aliceRequest.Request.Nlu?.Intents?.TurnOn == null &&
+                aliceRequest.State?.Session?.Mode == ModeType.IntentsTesting)
+            {
+                string text = "Не удалось распознать интент. Попробуйте еще раз";
+                var buttons = new List<AliceButtonModel>()
                     {
                         new AliceButtonModel("включи свет в ванной"),
                         new AliceButtonModel("включи кондиционер на кухне"),
                         new AliceButtonModel(_homeButtonTitle)
                     };
-                    return new AliceResponse(aliceRequest, text, buttons)
-                    {
-                        SessionState = new CustomSessionState(ModeType.IntentsTesting)
-                    };
-                }
+                return new AliceResponse(aliceRequest, text, buttons)
+                {
+                    SessionState = new CustomSessionState(ModeType.IntentsTesting)
+                };
             }
             if (aliceRequest.Request.Nlu?.Intents?.TurnOn != null)
             {
