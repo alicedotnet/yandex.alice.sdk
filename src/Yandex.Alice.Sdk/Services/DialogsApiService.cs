@@ -93,7 +93,7 @@ namespace Yandex.Alice.Sdk.Services
 
         #endregion
         
-        private string GetSkillUrl(Guid skillId)
+        private static string GetSkillUrl(Guid skillId)
         {
             if(skillId == Guid.Empty)
             {

@@ -21,7 +21,6 @@ namespace Yandex.Alice.Sdk.Converters
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
         public override void Write(Utf8JsonWriter writer, DialogsResultType value, JsonSerializerOptions options)
         {
             string result;

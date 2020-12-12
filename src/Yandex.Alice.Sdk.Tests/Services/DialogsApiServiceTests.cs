@@ -50,7 +50,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
             WritePrettyJson(response);
         }
 
-        private void ValidateDataUsage(DialogsDataUsageModel dialogsDataUsageModel)
+        private static void ValidateDataUsage(DialogsDataUsageModel dialogsDataUsageModel)
         {
             Assert.NotNull(dialogsDataUsageModel);
             Assert.NotNull(dialogsDataUsageModel.Quota);            
