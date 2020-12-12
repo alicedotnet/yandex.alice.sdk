@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+[assembly:CLSCompliant(false)]
 namespace Yandex.Alice.Sdk.Demo
 {
     public static class Program
