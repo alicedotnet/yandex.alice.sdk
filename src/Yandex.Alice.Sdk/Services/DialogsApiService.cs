@@ -21,7 +21,7 @@ namespace Yandex.Alice.Sdk.Services
             }
             if(string.IsNullOrEmpty(dialogsApiSettings.DialogsOAuthToken))
             {
-                throw new ArgumentException("OAuth token is empty or not set");
+                throw new ArgumentException(Yandex_Alice_Sdk_Resources.Error_NoOAuthToken);
             }
 
             _dialogsApiClient = new HttpClient()

@@ -30,9 +30,9 @@ namespace Yandex.Alice.Sdk.Tests.Services
         }
 
         [Fact]
-        public async Task Status_NoAuthToken_Fail()
+        public async Task Status_InvalidAuthToken_Fail()
         {
-            var settings = new DialogsApiSettings(null);
+            var settings = new DialogsApiSettings("i'm invalid for sure");
             using var dialogsApiService = new DialogsApiService(settings);
             var response = await dialogsApiService.StatusAsync().ConfigureAwait(false);
             Assert.False(response.IsSuccess);
@@ -57,10 +57,10 @@ namespace Yandex.Alice.Sdk.Tests.Services
         }
 
         [Fact]
-        public async Task UploadImage_NoAuthToken_Fail()
+        public async Task UploadImage_InvalidAuthToken_Fail()
         {
             var request = new DialogsWebUploadRequest(new Uri(_imageUrl));
-            var settings = new DialogsApiSettings(null);
+            var settings = new DialogsApiSettings("i'm invalid");
             using var dialogsApiService = new DialogsApiService(settings);
             var response = await dialogsApiService.UploadImageAsync(_skillId, request).ConfigureAwait(false);
             Assert.False(response.IsSuccess);
@@ -102,7 +102,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
         [Fact]
         public async Task UploadFileImage_NoAuthToken_Fail()
         {
-            var settings = new DialogsApiSettings(null);
+            var settings = new DialogsApiSettings("i'm invalid for sure");
             using var dialogsApiService = new DialogsApiService(settings);
             var bytes = File.ReadAllBytes(TestsConstants.Assets.IconFilePath);
             var request = new DialogsFileUploadRequest(TestsConstants.Assets.IconFileName, bytes);
@@ -132,9 +132,9 @@ namespace Yandex.Alice.Sdk.Tests.Services
         }
 
         [Fact]
-        public async Task GetImages_NoAuthToken_Fail()
+        public async Task GetImages_InvalidAuthToken_Fail()
         {
-            var settings = new DialogsApiSettings(null);
+            var settings = new DialogsApiSettings("i'm invalid for sure");
             using var dialogsApiService = new DialogsApiService(settings);
             var imagesResponse = await dialogsApiService.GetImagesAsync(_skillId).ConfigureAwait(false);
             Assert.False(imagesResponse.IsSuccess);
@@ -156,12 +156,20 @@ namespace Yandex.Alice.Sdk.Tests.Services
         }
 
         [Fact]
-        public async Task DeleteImage_NoAuthToken_Fail()
+        public void NoAuthToken_Fail()
+        {
+            var settings = new DialogsApiSettings(null);
+            var exception = Assert.Throws<ArgumentException>(() => new DialogsApiService(settings));
+            Assert.Equal(Yandex_Alice_Sdk_Resources.Error_NoOAuthToken, exception.Message);
+        }
+
+        [Fact]
+        public async Task DeleteImage_InvalidAuthToken_Fail()
         {
             var uploadResponse = await _dialogsApiService.UploadImageAsync(_skillId, new DialogsWebUploadRequest(new Uri(_imageUrl))).ConfigureAwait(false);
             string imageId = uploadResponse.Content.Image.Id;
 
-            var settings = new DialogsApiSettings(null);
+            var settings = new DialogsApiSettings("i'm invalid for sure");
             using var dialogsApiService = new DialogsApiService(settings);
             var response = await dialogsApiService.DeleteImageAsync(_skillId, imageId).ConfigureAwait(false);
             Assert.False(response.IsSuccess);

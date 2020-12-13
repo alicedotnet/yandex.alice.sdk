@@ -61,6 +61,15 @@ namespace Yandex.Alice.Sdk.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OAuth token is empty or not set.
+        /// </summary>
+        internal static string Error_NoOAuthToken {
+            get {
+                return ResourceManager.GetString("Error_NoOAuthToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SkillId is invalid or not set.
         /// </summary>
         internal static string Error_NoSkillId {
