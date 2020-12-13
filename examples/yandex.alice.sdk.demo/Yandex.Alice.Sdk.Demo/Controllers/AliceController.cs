@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Yandex.Alice.Sdk.Demo.Models;
 using Yandex.Alice.Sdk.Demo.Models.Intents;
 using Yandex.Alice.Sdk.Demo.Models.Session;
+using Yandex.Alice.Sdk.Demo.Resources;
 using Yandex.Alice.Sdk.Models;
 using Yandex.Alice.Sdk.Models.DialogsApi;
 using Yandex.Alice.Sdk.Services;
@@ -195,7 +196,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
             if (aliceRequest.Request.Command != _homeButtonTitle
                 && aliceRequest.State?.Session?.Mode == ModeType.ResourcesTesting)
             {
-                if (Uri.TryCreate(aliceRequest.Request.Command, UriKind.Absolute, out Uri uri))
+                if (Uri.TryCreate(aliceRequest.Request.OriginalUtterance, UriKind.Absolute, out Uri uri))
                 {
                     var response = await _dialogsApiService.UploadImageAsync(_aliceSettings.SkillId, new DialogsWebUploadRequest(uri)).ConfigureAwait(false);
                     if (response.IsSuccess)
@@ -207,7 +208,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         var aliceResponse = new AliceImageResponse(aliceRequest, "Изображение загружено", uploadedButtons);
                         aliceResponse.Response.Card = new AliceImageCardModel
                         {
-                            Title = "Изображение загружено",
+                            Title = Yandex_Alice_Sdk_Demo_Resources.Image_Upload_Success,
                             Description = "Вы можете попробовать загрузить другое изображение",
                             ImageId = response.Content.Image.Id,
                         };

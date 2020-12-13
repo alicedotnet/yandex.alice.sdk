@@ -23,8 +23,8 @@
     "new": true
   },
   "request": {
-    "command": "https://raw.githubusercontent.com/alexvolchetsky/yandex.alice.sdk/master/src/Yandex.Alice.Sdk/Resources/icon.png",
-    "original_utterance": "",
+    "command": "https / / raw githubusercontent com/alexvolchetsky/yandex alice sdk/master/src/yandex alice sdk/resources/icon png",
+    "original_utterance": "https://raw.githubusercontent.com/alexvolchetsky/yandex.alice.sdk/master/src/Yandex.Alice.Sdk/Resources/icon.png",
     "nlu": {
       "tokens": [],
       "entities": [],

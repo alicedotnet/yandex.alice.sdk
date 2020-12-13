@@ -17,5 +17,20 @@
     <ProjectReference Include="..\..\..\src\Yandex.Alice.Sdk\Yandex.Alice.Sdk.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\Yandex.Alice.Sdk.Demo.Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Yandex.Alice.Sdk.Demo.Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Yandex.Alice.Sdk.Demo.Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Yandex.Alice.Sdk.Demo.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 
 </Project>
