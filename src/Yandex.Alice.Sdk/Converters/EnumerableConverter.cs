@@ -39,7 +39,6 @@ namespace Yandex.Alice.Sdk.Converters
             JsonSerializer.Serialize(writer, item, options);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
         public override void Write(Utf8JsonWriter writer, IEnumerable<TItem> value, JsonSerializerOptions options)
         {
             if(value != null && CanWrite)

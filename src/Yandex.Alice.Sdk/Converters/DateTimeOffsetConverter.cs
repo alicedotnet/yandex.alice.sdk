@@ -23,7 +23,6 @@ namespace Yandex.Alice.Sdk.Converters
             return response;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>")]
         public override void Write(Utf8JsonWriter writer, DateTimeOffset dateTime, JsonSerializerOptions options)
         {
             string result = dateTime.ToString(_format, CultureInfo.InvariantCulture);

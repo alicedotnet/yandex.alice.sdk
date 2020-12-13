@@ -1,49 +1,35 @@
-name: yandex.alice.sdk.demo
+name: yandex.alice.sdk.demo.docker
 
 on:
   push:
     branches: 
-      - master 
-env:
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+    - master
 
 jobs:
-  build:
+  path-context:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-    
-    - name: App Settings Variable Substitution
-      uses: microsoft/variable-substitution@v1
-      with:
-        files: './examples/yandex.alice.sdk.demo/Yandex.Alice.Sdk.Demo/appsettings.json'
-      env:
-        AliceSettings.SkillId: ${{ secrets.SKILL_SKILLID }}
-        AliceSettings.DialogsOAuthToken: ${{ secrets.DIALOGSAPI_DIALOGSOAUTHTOKEN }}
-    - name: test
-      run: dotnet test ./examples/yandex.alice.sdk.demo/Yandex.Alice.Sdk.Demo.sln -c Release
-    - name: publish site
-      run: dotnet publish -c Release -o demo ./examples/yandex.alice.sdk.demo/Yandex.Alice.Sdk.Demo/Yandex.Alice.Sdk.Demo.csproj
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2
-      with: 
-        name: demo
-        path: demo
-        
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - name: 'Download a Build Artifact'
-      uses: actions/download-artifact@v2
-      with:
-        name: demo
-        path: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/demo'
-    - name: 'Run Azure webapp deploy action using publish profile credentials'
-      uses: azure/webapps-deploy@v2
-      with: 
-        app-name: ${{ secrets.azure_web_app_name }}  # Replace with your app name
-        publish-profile: ${{ secrets.azure_publish_profile  }} # Define secret variable in repository settings as per action documentation
-        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/demo'
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64,linux/386
+          push: true
+          tags: user/app:latest

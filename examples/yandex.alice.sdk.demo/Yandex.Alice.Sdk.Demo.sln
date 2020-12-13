@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo", "Ya
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo.Tests", "Yandex.Alice.Sdk.Demo.Tests\Yandex.Alice.Sdk.Demo.Tests.csproj", "{76D415CA-E42C-4C35-9A30-750CC9C01E59}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yandex.Alice.Sdk.Demo.IntegrationTests", "Yandex.Alice.Sdk.Demo.IntegrationTests\Yandex.Alice.Sdk.Demo.IntegrationTests.csproj", "{811C8632-C624-4D0A-A2BD-A6318097AB95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{76D415CA-E42C-4C35-9A30-750CC9C01E59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76D415CA-E42C-4C35-9A30-750CC9C01E59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76D415CA-E42C-4C35-9A30-750CC9C01E59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{811C8632-C624-4D0A-A2BD-A6318097AB95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{811C8632-C624-4D0A-A2BD-A6318097AB95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{811C8632-C624-4D0A-A2BD-A6318097AB95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{811C8632-C624-4D0A-A2BD-A6318097AB95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

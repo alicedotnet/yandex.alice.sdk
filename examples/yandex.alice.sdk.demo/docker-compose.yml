@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+      - "8001:443"
+    environment:
+      - AliceSettings__SkillId=${ALICESETTINGS_SKILLID}
+      - AliceSettings__DialogsOAuthToken=${ALICESETTINGS_DIALOGSOAUTHTOKEN}

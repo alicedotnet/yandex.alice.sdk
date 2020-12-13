@@ -19,6 +19,10 @@ namespace Yandex.Alice.Sdk.Services
             {
                 throw new ArgumentNullException(nameof(dialogsApiSettings));
             }
+            if(string.IsNullOrEmpty(dialogsApiSettings.DialogsOAuthToken))
+            {
+                throw new ArgumentException("OAuth token is empty or not set");
+            }
 
             _dialogsApiClient = new HttpClient()
             {
@@ -93,7 +97,7 @@ namespace Yandex.Alice.Sdk.Services
 
         #endregion
         
-        private string GetSkillUrl(Guid skillId)
+        private static string GetSkillUrl(Guid skillId)
         {
             if(skillId == Guid.Empty)
             {

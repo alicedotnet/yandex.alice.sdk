@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -10,11 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
+using Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures;
 using Yandex.Alice.Sdk.Demo.Services.Interfaces;
-using Yandex.Alice.Sdk.Demo.Tests.TestsInfrastructure;
-using Yandex.Alice.Sdk.Demo.Tests.TestsInfrastructure.Fixtures;
 
-namespace Yandex.Alice.Sdk.Demo.Tests.Controllers
+namespace Yandex.Alice.Sdk.Demo.IntegrationTests.Controllers
 {
     [Collection(TestsConstants.TestServerCollectionName)]
     public class AliceControllerTests
@@ -31,9 +26,7 @@ namespace Yandex.Alice.Sdk.Demo.Tests.Controllers
         }
 
         [Theory]
-        [InlineData(TestsConstants.AliceRequestFilePath, false)]
-        [InlineData(TestsConstants.AliceRequestInvalidIntentFilePath, false)]
-        [InlineData(TestsConstants.AliceRequestPingFilePath, false)]
+        [InlineData(TestsConstants.AliceRequestResourcesFilePath, true)]
         public async Task TestAlice(string filePath, bool cleanResources)
         {
             string json = File.ReadAllText(filePath);
@@ -44,7 +37,7 @@ namespace Yandex.Alice.Sdk.Demo.Tests.Controllers
 
             _testOutputHelper.WriteLine(responseContent);
 
-            if(cleanResources)
+            if (cleanResources)
             {
                 await _cleanService.CleanResourcesAsync().ConfigureAwait(false);
             }
