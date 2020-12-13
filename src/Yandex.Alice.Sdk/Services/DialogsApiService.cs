@@ -19,6 +19,10 @@ namespace Yandex.Alice.Sdk.Services
             {
                 throw new ArgumentNullException(nameof(dialogsApiSettings));
             }
+            if(string.IsNullOrEmpty(dialogsApiSettings.DialogsOAuthToken))
+            {
+                throw new ArgumentException("OAuth token is empty or not set");
+            }
 
             _dialogsApiClient = new HttpClient()
             {

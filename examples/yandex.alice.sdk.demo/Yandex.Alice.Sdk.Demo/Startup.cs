@@ -26,9 +26,9 @@ namespace Yandex.Alice.Sdk.Demo
         {
             services.AddControllers();
 
-            var skillIdSection = Configuration.GetSection("AliceSettings:SkillId");
-            var aliceSettings = new AliceSettings(skillIdSection.Value);
-            var apiSettings = new DialogsApiSettings(Configuration.GetSection("AliceSettings:DialogsOAuthToken").Value);
+            string skillId = Configuration["AliceSettings:SkillId"];
+            var aliceSettings = new AliceSettings(skillId);
+            var apiSettings = new DialogsApiSettings(Configuration["AliceSettings:DialogsOAuthToken"]);
             services.AddSingleton(apiSettings);
             services.AddSingleton<IDialogsApiService,DialogsApiService>();
             services.AddSingleton(aliceSettings);

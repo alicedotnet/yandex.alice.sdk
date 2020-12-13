@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using Yandex.Alice.Sdk.Demo.Services.Interfaces;
-using Yandex.Alice.Sdk.Demo.Tests.TestsInfrastructure;
-using Yandex.Alice.Sdk.Demo.Tests.TestsInfrastructure.Fixtures;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures;
 
-namespace Yandex.Alice.Sdk.Demo.Tests.Services
+namespace Yandex.Alice.Sdk.Demo.IntegrationTests.Services
 {
-    [Collection(TestsConstants.ServiceProviderCollection)]
+    [Collection(TestsConstants.TestServerCollectionName)]
     public class CleanServiceTests
     {
         private readonly ICleanService _cleanService;
 
-        public CleanServiceTests(ServiceProviderFixture serviceProviderFixture)
+        public CleanServiceTests(TestServerFixture serviceProviderFixture)
         {
             _cleanService = serviceProviderFixture.Services.GetRequiredService<ICleanService>();
         }
