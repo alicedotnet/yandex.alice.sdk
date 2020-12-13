@@ -1,4 +1,4 @@
-name: yandex.alice.sdk.demo.docker
+name: yandex.alice.sdk.demo
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
     - master
 
 jobs:
-  path-context:
+  build:
     runs-on: ubuntu-latest
     steps:
       -
@@ -28,8 +28,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/386
+          context: ./examples/yandex.alice.sdk.demo
+          file: ./examples/yandex.alice.sdk.demo/Dockerfile
           push: true
-          tags: user/app:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/yandex.alice.sdk.demo:latest
