@@ -57,7 +57,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
             }
         }
 
-        private async Task<AliceResponseBase> GetAliceResponseAsync(DemoAliceRequest aliceRequest)
+        private async Task<IAliceResponseBase<AliceResponseModel>> GetAliceResponseAsync(DemoAliceRequest aliceRequest)
         {
             if(aliceRequest.Request.Command == _codeButtonTitle)
             {
@@ -66,7 +66,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     {
                         new AliceButtonModel(_githubLink, false, null, new Uri(_githubLink))
                     };
-                return new AliceResponse(aliceRequest, text, buttons);
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons);
             }
             if (aliceRequest.Request.Command == _noImageButtonTitle)
             {
@@ -79,7 +79,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceButtonModel(_testIntentButtonTitle),
                         new AliceButtonModel(_resourcesWorkButtonTitle)
                     };
-                return new AliceResponse(aliceRequest, text, buttons);
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons);
             }
             if (aliceRequest.Request.Command == _oneImageButtonTitle ||
                 aliceRequest.Request.Command == "ответ с 1 изображением")
@@ -93,7 +93,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceButtonModel(_testIntentButtonTitle, true),
                         new AliceButtonModel(_resourcesWorkButtonTitle, true)
                     };
-                var aliceResponse = new AliceImageResponse(aliceRequest, text, buttons);
+                var aliceResponse = new AliceImageResponse<CustomSessionState, object>(aliceRequest, text, buttons);
                 aliceResponse.Response.Card = new AliceImageCardModel
                 {
                     Title = "Манчкин",
@@ -118,7 +118,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceButtonModel(_testIntentButtonTitle, true),
                         new AliceButtonModel(_resourcesWorkButtonTitle, true)
                     };
-                var aliceResponse = new AliceGalleryResponse(aliceRequest, text, buttons);
+                var aliceResponse = new AliceGalleryResponse<CustomSessionState, object>(aliceRequest, text, buttons);
                 aliceResponse.Response.Card = new AliceGalleryCardModel
                 {
                     Header = new AliceGalleryCardHeaderModel("Щеночки"),
@@ -176,7 +176,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceButtonModel("включи кондиционер на кухне"),
                         new AliceButtonModel(_homeButtonTitle)
                     };
-                return new AliceResponse(aliceRequest, text, buttons)
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons)
                 {
                     SessionState = new CustomSessionState(ModeType.IntentsTesting)
                 };
@@ -188,7 +188,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     {
                         new AliceButtonModel(_homeButtonTitle)
                     };
-                return new AliceResponse(aliceRequest, text, buttons)
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons)
                 {
                     SessionState = new CustomSessionState(ModeType.ResourcesTesting)
                 };
@@ -205,7 +205,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                             {
                                 new AliceButtonModel(_homeButtonTitle, true)
                             };
-                        var aliceResponse = new AliceImageResponse(aliceRequest, "Изображение загружено", uploadedButtons);
+                        var aliceResponse = new AliceImageResponse<CustomSessionState, object>(aliceRequest, "Изображение загружено", uploadedButtons);
                         aliceResponse.Response.Card = new AliceImageCardModel
                         {
                             Title = Yandex_Alice_Sdk_Demo_Resources.Image_Upload_Success,
@@ -221,7 +221,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     {
                         new AliceButtonModel(_homeButtonTitle)
                     };
-                return new AliceResponse(aliceRequest, text, buttons)
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons)
                 {
                     SessionState = new CustomSessionState(ModeType.ResourcesTesting)
                 };
@@ -237,7 +237,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceButtonModel("включи кондиционер на кухне"),
                         new AliceButtonModel(_homeButtonTitle)
                     };
-                return new AliceResponse(aliceRequest, text, buttons)
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons)
                 {
                     SessionState = new CustomSessionState(ModeType.IntentsTesting)
                 };
@@ -256,7 +256,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceButtonModel(_testIntentButtonTitle),
                         new AliceButtonModel(_resourcesWorkButtonTitle)
                     };
-                return new AliceResponse(aliceRequest, text, buttons);
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons);
             }
             else
             {
@@ -272,7 +272,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         new AliceButtonModel(_testIntentButtonTitle),
                         new AliceButtonModel(_resourcesWorkButtonTitle)
                     };
-                return new AliceResponse(aliceRequest, text, buttons);
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons);
             }
         }
     }

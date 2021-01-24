@@ -35,5 +35,9 @@
     },
     "type": "SimpleUtterance"
   },
+  "state": {
+    "session": {},
+    "user": {}
+  },
   "version": "1.0"
 }
