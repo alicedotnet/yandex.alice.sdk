@@ -8,7 +8,7 @@ namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Wrappers
     public class AliceImageResponseWrapper : AliceImageResponse
     {
         public AliceImageResponseWrapper() 
-            : base(new AliceRequest(), "sample")
+            : base(new AliceRequest() { State = new AliceStateModel<object, object>() }, "sample")
         {
         }
     }

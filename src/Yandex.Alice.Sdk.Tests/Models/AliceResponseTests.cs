@@ -14,6 +14,30 @@ namespace Yandex.Alice.Sdk.Tests.Models
         {
         }
 
+        class TestSession
+        {
+            public int TestProperty { get; set; }
+        }
+
+
+        [Fact]
+        public void AliceResponse_KeepSession_HasSession()
+        {
+            var aliceRequest = new AliceRequest<object, TestSession, object>
+            {
+                State = new AliceStateModel<TestSession, object>
+                {
+                    Session = new TestSession()
+                    {
+                        TestProperty = 1
+                    }
+                }
+            };
+            var aliceResponse = new AliceResponse<TestSession, object>(aliceRequest, string.Empty);
+            Assert.NotNull(aliceResponse.SessionState);
+            Assert.Equal(aliceRequest.State.Session.TestProperty, aliceResponse.SessionState.TestProperty);
+        }
+
         [Fact]
         public void AliceResponse()
         {

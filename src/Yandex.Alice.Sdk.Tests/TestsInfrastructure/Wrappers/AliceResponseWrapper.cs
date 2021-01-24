@@ -9,7 +9,7 @@ namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Wrappers
     {
         //empty constructor to test deserialization
         public AliceResponseWrapper()
-            : this(new AliceRequest(), string.Empty, null)
+            : this(new AliceRequest() { State = new AliceStateModel<object, object>()}, string.Empty, null)
         {
 
         }

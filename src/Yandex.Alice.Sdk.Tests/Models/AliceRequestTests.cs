@@ -21,7 +21,7 @@ namespace Yandex.Alice.Sdk.Tests.Models
         public void Deserialization_Generic_Ok()
         {
             string requestJson = File.ReadAllText(TestsConstants.Assets.AliceRequestFilePath);
-            var aliceRequest = JsonSerializer.Deserialize<AliceRequest<TestIntents>>(requestJson);
+            var aliceRequest = JsonSerializer.Deserialize<AliceRequest<TestIntents, object, object>>(requestJson);
             Assert.NotNull(aliceRequest);
             Assert.NotNull(aliceRequest.State);
             Assert.NotNull(aliceRequest.State.Session);
