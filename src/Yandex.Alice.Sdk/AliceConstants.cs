@@ -21,6 +21,14 @@ namespace Yandex.Alice.Sdk
             public const string String = "YANDEX.STRING";
         }
 
+        public static class AliceIntents
+        {
+            public const string Confirm = "YANDEX.CONFIRM";
+            public const string Reject = "YANDEX.REJECT";
+            public const string Help = "YANDEX.HELP";
+            public const string Repeat = "YANDEX.REPEAT";
+        }
+
         public static class AliceCardTypeValues
         {
             public const string BigImage = "BigImage";
