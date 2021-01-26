@@ -5,6 +5,12 @@ using System.Text.Json.Serialization;
 
 namespace Yandex.Alice.Sdk.Models
 {
+    public class AliceIntentModel
+        : AliceIntentModel<object>
+    {
+
+    }
+
     public class AliceIntentModel<TSlots>
     {
         [JsonPropertyName("slots")]
