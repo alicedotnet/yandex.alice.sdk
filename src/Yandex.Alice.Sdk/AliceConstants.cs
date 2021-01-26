@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Yandex.Alice.Sdk
 {
-    internal static class AliceConstants
+    public static class AliceConstants
     {
         public const string DateTimeFormat = "yyyy-MM-ddTHH:mm:ss.fffZ";
         public static class AliceEntityModelFields
