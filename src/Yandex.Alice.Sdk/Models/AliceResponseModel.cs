@@ -21,7 +21,7 @@ namespace Yandex.Alice.Sdk.Models
             {
                 _text = value;
                 ValidateNotNull(_text);
-                ValidateMaxLength(_text, TextMaxLenght);                
+                ValidateMaxLength(_text, TextMaxLenght);
             }
         }
 
@@ -43,5 +43,14 @@ namespace Yandex.Alice.Sdk.Models
 
         [JsonPropertyName("buttons")]
         public List<AliceButtonModel> Buttons { get; set; }
+
+        public void SetText(string text, bool setTts = true)
+        {
+            Text = text;
+            if (setTts)
+            {
+                Tts = text;
+            }
+        }
     }
 }
