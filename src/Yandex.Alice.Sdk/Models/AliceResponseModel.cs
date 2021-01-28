@@ -52,5 +52,14 @@ namespace Yandex.Alice.Sdk.Models
                 Tts = text;
             }
         }
+
+        public void AppendText(string text, bool setTts = true)
+        {
+            Text += text;
+            if (setTts)
+            {
+                Tts += text;
+            }
+        }
     }
 }
