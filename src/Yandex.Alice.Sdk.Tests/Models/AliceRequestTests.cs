@@ -119,5 +119,16 @@ namespace Yandex.Alice.Sdk.Tests.Models
             string message = string.Format(CultureInfo.CurrentCulture, Yandex_Alice_Sdk_Resources.Error_Unknown_Request_Type, unknownTypeValue);
             Assert.Equal(message, exception.Message);
         }
+
+        [Fact]
+        public void NumberInPayload_CastToInt_Success()
+        {
+            int expectedPayload = 1;
+            string json = "{\"request\": { \"payload\":" + expectedPayload + "}}";
+            var request = JsonSerializer.Deserialize<AliceRequest>(json);
+            Assert.NotNull(request);
+            int actualPayload = request.Request.GetPayload<int>();
+            Assert.Equal(expectedPayload, actualPayload);
+        }
     }
 }
