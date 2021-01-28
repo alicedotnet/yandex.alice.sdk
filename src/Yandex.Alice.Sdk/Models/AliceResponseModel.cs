@@ -49,8 +49,13 @@ namespace Yandex.Alice.Sdk.Models
             Text = text;
             if (setTts)
             {
-                Tts = text;
+                SetTts(text);
             }
+        }
+
+        public void SetTts(string tts)
+        {
+            Tts = tts;
         }
 
         public void AppendText(string text, bool setTts = true)
@@ -58,8 +63,13 @@ namespace Yandex.Alice.Sdk.Models
             Text += text;
             if (setTts)
             {
-                Tts += text;
+                AppendTts(text);
             }
+        }
+
+        public void AppendTts(string tts)
+        {
+            Tts += tts;
         }
     }
 }
