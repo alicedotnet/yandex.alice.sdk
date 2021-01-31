@@ -32,7 +32,7 @@ namespace Yandex.Alice.Sdk.Models
 
         }
 
-        protected AliceResponseBase(AliceRequestBase<TSession, TUser> request, string text, string tts, List<AliceButtonModel> buttons, bool keepSessionState)
+        protected AliceResponseBase(AliceRequestBase<TSession, TUser> request, string text, string tts, List<AliceButtonModel> buttons, bool keepSessionState, bool keepUserState)
         {
             if (request == null)
             {
@@ -54,6 +54,15 @@ namespace Yandex.Alice.Sdk.Models
                     throw new NullReferenceException(nameof(request.State));
                 }
                 SessionState = request.State.Session;
+            }
+
+            if(keepUserState)
+            {
+                if (request.State == null)
+                {
+                    throw new NullReferenceException(nameof(request.State));
+                }
+                UserStateUpdate = request.State.User;
             }
         }
     }
