@@ -29,6 +29,19 @@ namespace Yandex.Alice.Sdk.Models
         [JsonPropertyName("version")]
         public string Version { get; set; }
 
+        [JsonIgnore]
+        public TUser UserOrApplicationState
+        {
+            get
+            {
+                if (UserStateUpdate != null)
+                {
+                    return UserStateUpdate;
+                }
+                return ApplicationState;
+            }
+        }
+
 
         protected AliceResponseBase()
         {
@@ -59,7 +72,7 @@ namespace Yandex.Alice.Sdk.Models
                 SessionState = request.State.Session;
             }
 
-            if(keepUserState)
+            if (keepUserState)
             {
                 if (request.State == null)
                 {
