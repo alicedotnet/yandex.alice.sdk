@@ -17,7 +17,13 @@ namespace Yandex.Alice.Sdk.Models
 
         }
 
-        public AliceGalleryCardFooterModel(string text , AliceImageCardButtonModel button)
+        public AliceGalleryCardFooterModel(string text)
+            : this(text, null)
+        {
+        }
+
+
+        public AliceGalleryCardFooterModel(string text, AliceImageCardButtonModel button)
         {
             Text = text;
             Button = button;
