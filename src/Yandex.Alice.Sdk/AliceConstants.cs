@@ -27,6 +27,7 @@ namespace Yandex.Alice.Sdk
             public const string Reject = "YANDEX.REJECT";
             public const string Help = "YANDEX.HELP";
             public const string Repeat = "YANDEX.REPEAT";
+            public const string WhatCanYouDo = "YANDEX.WHAT_CAN_YOU_DO";
         }
 
         public static class AliceCardTypeValues
