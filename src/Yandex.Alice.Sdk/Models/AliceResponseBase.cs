@@ -5,13 +5,13 @@ using System.Text.Json.Serialization;
 
 namespace Yandex.Alice.Sdk.Models
 {
-    public interface IAliceResponseBase<out TResponse>
+    public interface IAliceResponseBase
     {
 
     }
 
     public abstract class AliceResponseBase<TResponse, TSession, TUser>
-        : IAliceResponseBase<TResponse>
+        : IAliceResponseBase
         where TResponse : AliceResponseModel, new()
     {
         [JsonPropertyName("response")]
