@@ -14,6 +14,9 @@ namespace Yandex.Alice.Sdk.Models
         [JsonPropertyName("user")]
         public TUser User { get; set; }
 
+        [JsonPropertyName("application")]
+        public TUser Application { get; set; }
+
         public T TryGetSession<T>()
         {
             return AliceHelper.JsonElementToObject<T>(Session);

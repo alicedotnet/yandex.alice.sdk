@@ -23,6 +23,9 @@ namespace Yandex.Alice.Sdk.Models
         [JsonPropertyName("user_state_update")]
         public TUser UserStateUpdate { get; set; }
 
+        [JsonPropertyName("application_state")]
+        public TUser ApplicationState { get; set; }
+
         [JsonPropertyName("version")]
         public string Version { get; set; }
 
@@ -63,6 +66,7 @@ namespace Yandex.Alice.Sdk.Models
                     throw new NullReferenceException(nameof(request.State));
                 }
                 UserStateUpdate = request.State.User;
+                ApplicationState = request.State.Application;
             }
         }
     }
