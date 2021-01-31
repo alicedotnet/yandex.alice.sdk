@@ -32,7 +32,7 @@ namespace Yandex.Alice.Sdk.Models
 
         }
 
-        protected AliceResponseBase(AliceRequestBase<TSession, TUser> request, string text, string tts, List<AliceButtonModel> buttons, bool keepSessionState, bool keepUserState)
+        protected AliceResponseBase(AliceRequestBase<TSession, TUser> request, string text, string tts, List<AliceButtonModel> buttons, bool keepSessionState = true, bool keepUserState = true)
         {
             if (request == null)
             {
