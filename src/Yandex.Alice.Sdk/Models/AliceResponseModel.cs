@@ -47,6 +47,10 @@ namespace Yandex.Alice.Sdk.Models
         public void SetText(string text, bool setTts = true)
         {
             Text = text;
+            if(!string.IsNullOrEmpty(Text))
+            {
+                Text = Text.Replace("+", string.Empty);
+            }
             if (setTts)
             {
                 SetTts(text);
