@@ -84,9 +84,10 @@ namespace Yandex.Alice.Sdk.Helpers
             return $"<speaker audio=\"{audio}\">";
         }
 
-        internal static string GetTtsStringWithoutTags(string value)
+        internal static string GetStringWithoutTags(string value)
         {
-            return Regex.Replace(value, "<speaker audio=\".*\">", string.Empty, RegexOptions.IgnoreCase);
+            value = Regex.Replace(value, "<speaker audio=\".*\">", string.Empty, RegexOptions.IgnoreCase);
+            return Regex.Replace(value, "sil<\\[.*\\]>", string.Empty, RegexOptions.IgnoreCase);
         }
 
 

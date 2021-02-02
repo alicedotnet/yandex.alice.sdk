@@ -44,5 +44,16 @@ namespace Yandex.Alice.Sdk.Tests.Models
             model.Tts = tts1024Symbols;
             model.Tts += AliceHelper.GetSpeakerTag("test");
         }
+
+        [Fact]
+        public void SetText_WithSilenceTag_CutSilenceTagInTextButKeepInTTS()
+        {
+            string textWithoutSilence = "just text";
+            string textWithSilence = textWithoutSilence + "sil<[500]>";
+            var model = new AliceResponseModel();
+            model.SetText(textWithSilence);
+            Assert.Equal(textWithoutSilence, model.Text);
+            Assert.Equal(textWithSilence, model.Tts);
+        }
     }
 }

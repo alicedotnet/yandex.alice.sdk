@@ -34,7 +34,7 @@ namespace Yandex.Alice.Sdk.Models
             set
             {
                 _tts = value;
-                ValidateMaxLength(AliceHelper.GetTtsStringWithoutTags(_tts), TtsMaxLenght);
+                ValidateMaxLength(AliceHelper.GetStringWithoutTags(_tts), TtsMaxLenght);
             }
         }
 
@@ -50,6 +50,7 @@ namespace Yandex.Alice.Sdk.Models
             if(!string.IsNullOrEmpty(Text))
             {
                 Text = Text.Replace("+", string.Empty);
+                Text = AliceHelper.GetStringWithoutTags(Text);
             }
             if (setTts)
             {
