@@ -55,5 +55,17 @@ namespace Yandex.Alice.Sdk.Tests.Models
             Assert.Equal(textWithoutSilence, model.Text);
             Assert.Equal(textWithSilence, model.Tts);
         }
+
+        [Fact]
+        public void AppendText_WithSilenceTag_CutSilenceTagInTextButKeepInTTS()
+        {
+            string textWithoutSilence = "just text";
+            string textWithSilence = textWithoutSilence + "sil<[500]>";
+            var model = new AliceResponseModel();
+            model.AppendText(textWithSilence);
+            Assert.Equal(textWithoutSilence, model.Text);
+            Assert.Equal(textWithSilence, model.Tts);
+        }
+
     }
 }

@@ -46,12 +46,7 @@ namespace Yandex.Alice.Sdk.Models
 
         public void SetText(string text, bool setTts = true)
         {
-            Text = text;
-            if(!string.IsNullOrEmpty(Text))
-            {
-                Text = Text.Replace("+", string.Empty);
-                Text = AliceHelper.GetStringWithoutTags(Text);
-            }
+            Text = PrepareText(text);
             if (setTts)
             {
                 SetTts(text);
@@ -65,7 +60,7 @@ namespace Yandex.Alice.Sdk.Models
 
         public void AppendText(string text, bool setTts = true)
         {
-            Text += text;
+            Text += PrepareText(text);
             if (setTts)
             {
                 AppendTts(text);
@@ -75,6 +70,16 @@ namespace Yandex.Alice.Sdk.Models
         public void AppendTts(string tts)
         {
             Tts += tts;
+        }
+
+        private static string PrepareText(string text)
+        {
+            if (!string.IsNullOrEmpty(text))
+            {
+                text = text.Replace("+", string.Empty);
+                text = AliceHelper.GetStringWithoutTags(text);
+            }
+            return text;
         }
     }
 }
