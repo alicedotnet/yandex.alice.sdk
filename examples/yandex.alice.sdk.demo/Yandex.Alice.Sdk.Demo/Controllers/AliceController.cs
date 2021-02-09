@@ -24,6 +24,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
         private const string _galleryButtonTitle = "ответ с галереей из нескольких изображений";
         private const string _testIntentButtonTitle = "протестировать интент";
         private const string _resourcesWorkButtonTitle = "работа с ресурсами";
+        private const string _geolocationButtonTitle = "геолокация";
         private const string _homeButtonTitle = "назад";
         private const string _githubLink = "https://github.com/alexvolchetsky/yandex.alice.sdk";
         
@@ -59,40 +60,35 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
 
         private async Task<IAliceResponseBase> GetAliceResponseAsync(DemoAliceRequest aliceRequest)
         {
-            if(aliceRequest.Request.Command == _codeButtonTitle)
+            var buttons = new List<AliceButtonModel>()
+            {
+                new AliceButtonModel(_codeButtonTitle, true, null, new Uri(_githubLink)),
+                new AliceButtonModel(_noImageButtonTitle, true),
+                new AliceButtonModel(_oneImageButtonTitle, true),
+                new AliceButtonModel(_galleryButtonTitle, true),
+                new AliceButtonModel(_testIntentButtonTitle, true),
+                new AliceButtonModel(_resourcesWorkButtonTitle, true),
+                new AliceButtonModel(_geolocationButtonTitle, true)
+            };
+
+            if (aliceRequest.Request.Command == _codeButtonTitle)
             {
                 string text = $"Вот ссылка на github";
-                var buttons = new List<AliceButtonModel>()
+                var codeButtons = new List<AliceButtonModel>()
                     {
                         new AliceButtonModel(_githubLink, false, null, new Uri(_githubLink))
                     };
-                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons);
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, codeButtons);
             }
             if (aliceRequest.Request.Command == _noImageButtonTitle)
             {
                 string text = $"Это пример ответа без изображений. Здесь может быть текст или например эмодзи {char.ConvertFromUtf32(0x1F60E)}";
-                var buttons = new List<AliceButtonModel>()
-                    {
-                        new AliceButtonModel(_codeButtonTitle, false, null, new Uri(_githubLink)),
-                        new AliceButtonModel(_oneImageButtonTitle),
-                        new AliceButtonModel(_galleryButtonTitle),
-                        new AliceButtonModel(_testIntentButtonTitle),
-                        new AliceButtonModel(_resourcesWorkButtonTitle)
-                    };
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons);
             }
             if (aliceRequest.Request.Command == _oneImageButtonTitle ||
                 aliceRequest.Request.Command == "ответ с 1 изображением")
             {
                 string text = $"Здесь можно отобразить только одно большое фото. Например котика";
-                var buttons = new List<AliceButtonModel>()
-                    {
-                        new AliceButtonModel(_codeButtonTitle, true, null, new Uri(_githubLink)),
-                        new AliceButtonModel(_noImageButtonTitle, true),
-                        new AliceButtonModel(_galleryButtonTitle, true),
-                        new AliceButtonModel(_testIntentButtonTitle, true),
-                        new AliceButtonModel(_resourcesWorkButtonTitle, true)
-                    };
                 var aliceResponse = new AliceImageResponse<CustomSessionState, object>(aliceRequest, text, buttons);
                 aliceResponse.Response.Card = new AliceImageCardModel
                 {
@@ -110,14 +106,6 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
             if(aliceRequest.Request.Command == _galleryButtonTitle)
             {
                 string text = $"В ответе такого типа можно отобразить несколько фотографий";
-                var buttons = new List<AliceButtonModel>()
-                    {
-                        new AliceButtonModel(_codeButtonTitle, true, null, new Uri(_githubLink)),
-                        new AliceButtonModel(_noImageButtonTitle, true),
-                        new AliceButtonModel(_oneImageButtonTitle, true),
-                        new AliceButtonModel(_testIntentButtonTitle, true),
-                        new AliceButtonModel(_resourcesWorkButtonTitle, true)
-                    };
                 var aliceResponse = new AliceGalleryResponse<CustomSessionState, object>(aliceRequest, text, buttons);
                 aliceResponse.Response.Card = new AliceGalleryCardModel
                 {
@@ -170,13 +158,13 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
             if (aliceRequest.Request.Command == _testIntentButtonTitle)
             {
                 string text = "Для того чтобы протестировать интент, нажмите на одну из кнопок";
-                var buttons = new List<AliceButtonModel>()
+                var intentButtons = new List<AliceButtonModel>()
                     {
                         new AliceButtonModel("включи свет в ванной"),
                         new AliceButtonModel("включи кондиционер на кухне"),
                         new AliceButtonModel(_homeButtonTitle)
                     };
-                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons)
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, intentButtons)
                 {
                     SessionState = new CustomSessionState(ModeType.IntentsTesting)
                 };
@@ -184,15 +172,31 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
             if(aliceRequest.Request.Command == _resourcesWorkButtonTitle)
             {
                 string text = "Так же я могу управлять файлами изображений и звуков в навыке, используя HTTP API. Попробуйте отправить мне ссылку на изображение и я отображу его в ответе";
-                var buttons = new List<AliceButtonModel>()
+                var resourcesButtons = new List<AliceButtonModel>()
                     {
                         new AliceButtonModel(_homeButtonTitle)
                     };
-                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons)
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, resourcesButtons)
                 {
                     SessionState = new CustomSessionState(ModeType.ResourcesTesting)
                 };
             }
+            if (aliceRequest.Request.Command == _geolocationButtonTitle)
+            {
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, "Разрешите доступ к геолокации, чтобы навык смог ее узнать")
+                {
+                    SessionState = new CustomSessionState()
+                };
+            }
+            if (aliceRequest.Request.Type == AliceRequestType.GeolocationAllowed)
+            {
+                string text = $"Ваши координаты: {aliceRequest.Session.Location.Lat}, {aliceRequest.Session.Location.Lon}";
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons)
+                {
+                    SessionState = new CustomSessionState()
+                };
+            }
+
             if (aliceRequest.Request.Command != _homeButtonTitle
                 && aliceRequest.State?.Session?.Mode == ModeType.ResourcesTesting)
             {
@@ -217,11 +221,11 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     }
                 }
                 string text = "Не удалось загрузить изображение. Попробуйте еще раз";
-                var buttons = new List<AliceButtonModel>()
+                var resourcesButtons = new List<AliceButtonModel>()
                     {
                         new AliceButtonModel(_homeButtonTitle)
                     };
-                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons)
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, resourcesButtons)
                 {
                     SessionState = new CustomSessionState(ModeType.ResourcesTesting)
                 };
@@ -231,13 +235,13 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                 aliceRequest.State?.Session?.Mode == ModeType.IntentsTesting)
             {
                 string text = "Не удалось распознать интент. Попробуйте еще раз";
-                var buttons = new List<AliceButtonModel>()
+                var intentButtons = new List<AliceButtonModel>()
                     {
                         new AliceButtonModel("включи свет в ванной"),
                         new AliceButtonModel("включи кондиционер на кухне"),
                         new AliceButtonModel(_homeButtonTitle)
                     };
-                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons)
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, intentButtons)
                 {
                     SessionState = new CustomSessionState(ModeType.IntentsTesting)
                 };
@@ -247,15 +251,6 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                 var what = aliceRequest.Request.Nlu.Intents.TurnOn.Slots.What as AliceEntityStringModel;
                 var where = aliceRequest.Request.Nlu.Intents.TurnOn.Slots.Where as AliceEntityStringModel;
                 string text = $"Я распознал интент и понял что нужно включить {what.Value} {where.Value}. Но делать я этого конечно не буду " + char.ConvertFromUtf32(0x1F60E);
-                var buttons = new List<AliceButtonModel>()
-                    {
-                        new AliceButtonModel(_codeButtonTitle, false, null, new Uri(_githubLink)),
-                        new AliceButtonModel(_noImageButtonTitle),
-                        new AliceButtonModel(_oneImageButtonTitle),
-                        new AliceButtonModel(_galleryButtonTitle),
-                        new AliceButtonModel(_testIntentButtonTitle),
-                        new AliceButtonModel(_resourcesWorkButtonTitle)
-                    };
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons);
             }
             else
@@ -263,15 +258,6 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                 string text = aliceRequest.Session.New
                     ? "Привет! Это навык, демонстрирующий работу неофициального SDK для разработки навыков для Алисы на .Net"
                     : "Выберите действие";
-                var buttons = new List<AliceButtonModel>()
-                    {
-                        new AliceButtonModel(_codeButtonTitle, false, null, new Uri(_githubLink)),
-                        new AliceButtonModel(_noImageButtonTitle),
-                        new AliceButtonModel(_oneImageButtonTitle),
-                        new AliceButtonModel(_galleryButtonTitle),
-                        new AliceButtonModel(_testIntentButtonTitle),
-                        new AliceButtonModel(_resourcesWorkButtonTitle)
-                    };
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons);
             }
         }
