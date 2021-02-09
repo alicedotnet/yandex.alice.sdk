@@ -23,5 +23,8 @@ namespace Yandex.Alice.Sdk.Models
         public AliceSessionUserModel User { get; set; }
         [JsonPropertyName("application")]
         public AliceSessionApplicationModel Application { get; set; }
+
+        [JsonPropertyName("location")]
+        public AliceLocationModel Location { get; set; }
     }
 }

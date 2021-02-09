@@ -10,7 +10,10 @@
         "hide": true
       }
     ],
-    "end_session": true
+    "end_session": true,
+    "directives": {
+      "request_geolocation": {}
+    }
   },
   "session_state": {
     "value": 10

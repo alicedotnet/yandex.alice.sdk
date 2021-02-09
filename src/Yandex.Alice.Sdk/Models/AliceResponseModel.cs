@@ -41,6 +41,9 @@ namespace Yandex.Alice.Sdk.Models
         [JsonPropertyName("end_session")]
         public bool EndSession { get; set; }
 
+        [JsonPropertyName("directives")]
+        public AliceDirectivesModel Directives { get; set; }
+
         [JsonPropertyName("buttons")]
         public List<AliceButtonModel> Buttons { get; set; }
 
@@ -80,6 +83,11 @@ namespace Yandex.Alice.Sdk.Models
                 text = AliceHelper.GetStringWithoutTags(text);
             }
             return text;
+        }
+
+        public AliceResponseModel()
+        {
+            Directives = new AliceDirectivesModel();
         }
     }
 }

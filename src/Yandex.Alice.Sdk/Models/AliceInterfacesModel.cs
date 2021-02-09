@@ -13,5 +13,7 @@ namespace Yandex.Alice.Sdk.Models
         public object Payments { get; set; }
         [JsonPropertyName("account_linking")]
         public object AccountLinking { get; set; }
+        [JsonPropertyName("geolocation_sharing")]
+        public object GeolocationSharing { get; set; }
     }
 }

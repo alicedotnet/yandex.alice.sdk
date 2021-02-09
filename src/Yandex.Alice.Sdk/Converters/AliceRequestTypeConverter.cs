@@ -21,6 +21,10 @@ namespace Yandex.Alice.Sdk.Converters
                     return AliceRequestType.SimpleUtterance;
                 case "ButtonPressed":
                     return AliceRequestType.ButtonPressed;
+                case "Geolocation.Allowed":
+                    return AliceRequestType.GeolocationAllowed;
+                case "Geolocation.Rejected":
+                    return AliceRequestType.GeolocationRejected;
                 default:
                     string message = string.Format(CultureInfo.CurrentCulture, Yandex_Alice_Sdk_Resources.Error_Unknown_Request_Type, input);
                     throw new Exception(message);

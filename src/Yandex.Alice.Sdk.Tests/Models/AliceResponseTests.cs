@@ -51,6 +51,8 @@ namespace Yandex.Alice.Sdk.Tests.Models
             Assert.NotEmpty(aliceResponse.Response.Text);
             Assert.NotEmpty(aliceResponse.Response.Tts);
             Assert.True(aliceResponse.Response.EndSession);
+            Assert.NotNull(aliceResponse.Response.Directives);
+            Assert.NotNull(aliceResponse.Response.Directives.RequestGeolocation);
             Assert.NotNull(aliceResponse.Response.Buttons);
             Assert.NotEmpty(aliceResponse.Response.Buttons);
             foreach (var button in aliceResponse.Response.Buttons)

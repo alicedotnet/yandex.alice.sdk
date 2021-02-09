@@ -23,6 +23,9 @@ namespace Yandex.Alice.Sdk.Tests.Models
             string requestJson = File.ReadAllText(TestsConstants.Assets.AliceRequestFilePath);
             var aliceRequest = JsonSerializer.Deserialize<AliceRequest<TestIntents, object, object>>(requestJson);
             Assert.NotNull(aliceRequest);
+            Assert.NotNull(aliceRequest.Meta);
+            Assert.NotNull(aliceRequest.Meta.Interfaces);
+            Assert.NotNull(aliceRequest.Meta.Interfaces.GeolocationSharing);
             Assert.NotNull(aliceRequest.State);
             Assert.NotNull(aliceRequest.State.Session);
             Assert.NotNull(aliceRequest.State.User);
@@ -36,6 +39,10 @@ namespace Yandex.Alice.Sdk.Tests.Models
             Assert.NotEmpty(aliceRequest.Session.User.AccessToken);
             Assert.NotNull(aliceRequest.Session.Application);
             Assert.NotEmpty(aliceRequest.Session.Application.ApplicationId);
+            Assert.NotNull(aliceRequest.Session.Location);
+            Assert.True(aliceRequest.Session.Location.Lat > 0);
+            Assert.True(aliceRequest.Session.Location.Lon > 0);
+            Assert.True(aliceRequest.Session.Location.Accuracy > 0);
             Assert.True(aliceRequest.Session.New);
             Assert.NotNull(aliceRequest.Request);
             Assert.NotNull(aliceRequest.Request.Nlu);

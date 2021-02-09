@@ -7,6 +7,8 @@ namespace Yandex.Alice.Sdk.Models
     public enum AliceRequestType
     {
         SimpleUtterance,
-        ButtonPressed
+        ButtonPressed,
+        GeolocationAllowed,
+        GeolocationRejected
     }
 }

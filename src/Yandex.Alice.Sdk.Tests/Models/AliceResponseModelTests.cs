@@ -67,5 +67,13 @@ namespace Yandex.Alice.Sdk.Tests.Models
             Assert.Equal(textWithSilence, model.Tts);
         }
 
+        [Fact]
+        public void RequestGeolocation_Success()
+        {
+            var model = new AliceResponseModel();
+            model.Directives.SetRequestGeolocation();
+            Assert.NotNull(model.Directives.RequestGeolocation);
+        }
+
     }
 }

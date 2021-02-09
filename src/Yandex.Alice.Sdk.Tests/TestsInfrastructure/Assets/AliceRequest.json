@@ -4,7 +4,8 @@
     "timezone": "Europe/Moscow",
     "client_id": "ru.yandex.searchplugin/5.80 (Samsung Galaxy; Android 4.4)",
     "interfaces": {
-      "screen": {}
+      "screen": {},
+      "geolocation_sharing": {}
     }
   },
   "request": {
@@ -117,6 +118,11 @@
     },
     "application": {
       "application_id": "47C73714B580ED2469056E71081159529FFC676A4E5B059D629A819E857DC2F8"
+    },
+    "location": {
+      "lat": 55.753215,
+      "lon": 37.622504,
+      "accuracy": 15000.0
     }
   },
   "state": {
