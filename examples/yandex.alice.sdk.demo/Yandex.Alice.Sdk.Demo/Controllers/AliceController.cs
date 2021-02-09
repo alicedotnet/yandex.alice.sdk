@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -53,7 +54,8 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
             catch(Exception e)
             {
                 Response.StatusCode = (int) HttpStatusCode.InternalServerError;
-                _logger.LogError(e, string.Empty);
+                string requestText = JsonSerializer.Serialize(aliceRequest);
+                _logger.LogError(e, $"The following request produced exception: {requestText}");
                 return Content(e.ToString());
             }
         }
