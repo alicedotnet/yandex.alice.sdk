@@ -67,9 +67,12 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                 new AliceButtonModel(_oneImageButtonTitle, true),
                 new AliceButtonModel(_galleryButtonTitle, true),
                 new AliceButtonModel(_testIntentButtonTitle, true),
-                new AliceButtonModel(_resourcesWorkButtonTitle, true),
-                new AliceButtonModel(_geolocationButtonTitle, true)
+                new AliceButtonModel(_resourcesWorkButtonTitle, true)
             };
+            if(aliceRequest.Meta.Interfaces.GeolocationSharing != null)
+            {
+                buttons.Add(new AliceButtonModel(_geolocationButtonTitle, true));
+            }
 
             if (aliceRequest.Request.Command == _codeButtonTitle)
             {
@@ -183,10 +186,12 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
             }
             if (aliceRequest.Request.Command == _geolocationButtonTitle)
             {
-                return new AliceResponse<CustomSessionState, object>(aliceRequest, "Разрешите доступ к геолокации, чтобы навык смог ее узнать")
+                var response = new AliceResponse<CustomSessionState, object>(aliceRequest, "Разрешите доступ к геолокации, чтобы навык смог ее узнать")
                 {
                     SessionState = new CustomSessionState()
                 };
+                response.Response.Directives.SetRequestGeolocation();
+                return response;
             }
             if (aliceRequest.Request.Type == AliceRequestType.GeolocationAllowed)
             {
