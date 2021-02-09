@@ -57,7 +57,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
             }
         }
 
-        private async Task<IAliceResponseBase<AliceResponseModel>> GetAliceResponseAsync(DemoAliceRequest aliceRequest)
+        private async Task<IAliceResponseBase> GetAliceResponseAsync(DemoAliceRequest aliceRequest)
         {
             if(aliceRequest.Request.Command == _codeButtonTitle)
             {
