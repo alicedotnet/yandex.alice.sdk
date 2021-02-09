@@ -145,5 +145,14 @@ namespace Yandex.Alice.Sdk.Tests.Models
             }
             WritePrettyJson(aliceResponse);
         }
+
+        [Fact]
+        public void Alice_GetResponseFromPing_Success()
+        {
+            string requestJson = File.ReadAllText(TestsConstants.Assets.AliceRequestPingFilePath);
+            var aliceRequest = JsonSerializer.Deserialize<AliceRequest<object, object, object>>(requestJson);
+            var response = new AliceResponse(aliceRequest, string.Empty);
+            Assert.NotNull(response);
+        }
     }
 }

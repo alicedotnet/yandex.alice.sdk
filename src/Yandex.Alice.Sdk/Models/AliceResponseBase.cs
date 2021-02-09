@@ -63,23 +63,17 @@ namespace Yandex.Alice.Sdk.Models
                 Buttons = buttons
             };
 
-            if (keepSessionState)
+            if(request.State != null)
             {
-                if (request.State == null)
+                if (keepSessionState)
                 {
-                    throw new NullReferenceException(nameof(request.State));
+                    SessionState = request.State.Session;
                 }
-                SessionState = request.State.Session;
-            }
-
-            if (keepUserState)
-            {
-                if (request.State == null)
+                if (keepUserState)
                 {
-                    throw new NullReferenceException(nameof(request.State));
+                    UserStateUpdate = request.State.User;
+                    ApplicationState = request.State.Application;
                 }
-                UserStateUpdate = request.State.User;
-                ApplicationState = request.State.Application;
             }
         }
     }

@@ -1,0 +1,43 @@
+﻿{
+  "request": {
+    "command": "ping",
+    "type": "SimpleUtterance",
+    "original_utterance": "ping",
+    "payload": null,
+    "markup": {
+      "dangerous_context": false
+    },
+    "nlu": {
+      "tokens": [],
+      "entities": [],
+      "intents": {
+        "turn.on": null
+      }
+    }
+  },
+  "state": null,
+  "meta": {
+    "locale": "ru-RU",
+    "timezone": "UTC",
+    "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)",
+    "interfaces": {
+      "screen": {},
+      "payments": {},
+      "account_linking": {},
+      "geolocation_sharing": {}
+    }
+  },
+  "session": {
+    "new": true,
+    "session_id": "e34f010e-08aa-4ce0-aa23-7be7ca64f475",
+    "message_id": 0,
+    "skill_id": "38cfdd61-7473-4b54-aae2-612434056e3f",
+    "user_id": "658EAD936800B51CBE8A219E851A223FCE1616456E9A20F76835D6BE4C4C3D49",
+    "user": null,
+    "application": {
+      "application_id": "658EAD936800B51CBE8A219E851A223FCE1616456E9A20F76835D6BE4C4C3D49"
+    },
+    "location": null
+  },
+  "version": "1.0"
+}
