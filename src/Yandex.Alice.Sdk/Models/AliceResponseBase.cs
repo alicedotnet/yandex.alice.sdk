@@ -10,8 +10,23 @@ namespace Yandex.Alice.Sdk.Models
 
     }
 
+    public interface IAliceResponseStateBase<TSession, TUser>
+    {
+        [JsonPropertyName("session_state")]
+        TSession SessionState { get; set; }
+
+        [JsonPropertyName("user_state_update")]
+        TUser UserStateUpdate { get; set; }
+
+        [JsonPropertyName("application_state")]
+        TUser ApplicationState { get; set; }
+
+        [JsonIgnore]
+        TUser UserOrApplicationState { get; }
+    }
+
     public abstract class AliceResponseBase<TResponse, TSession, TUser>
-        : IAliceResponseBase
+        : IAliceResponseBase, IAliceResponseStateBase<TSession, TUser>
         where TResponse : AliceResponseModel, new()
     {
         [JsonPropertyName("response")]
@@ -26,9 +41,6 @@ namespace Yandex.Alice.Sdk.Models
         [JsonPropertyName("application_state")]
         public TUser ApplicationState { get; set; }
 
-        [JsonPropertyName("version")]
-        public string Version { get; set; }
-
         [JsonIgnore]
         public TUser UserOrApplicationState
         {
@@ -41,6 +53,10 @@ namespace Yandex.Alice.Sdk.Models
                 return ApplicationState;
             }
         }
+
+        [JsonPropertyName("version")]
+        public string Version { get; set; }
+
 
 
         protected AliceResponseBase()
