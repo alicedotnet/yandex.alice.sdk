@@ -14,8 +14,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <Version>2.0.2</Version>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <PackageReleaseNotes>Add Geolocation
-Fix issues</PackageReleaseNotes>
+    <PackageReleaseNotes>Move GetPayload to extension method</PackageReleaseNotes>
     <Configurations>Debug;Release</Configurations>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
