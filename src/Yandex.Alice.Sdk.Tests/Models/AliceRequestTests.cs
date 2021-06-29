@@ -1,19 +1,20 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Text.Json;
-using Xunit;
-using Xunit.Abstractions;
-using Yandex.Alice.Sdk.Models;
-using Yandex.Alice.Sdk.Resources;
-using Yandex.Alice.Sdk.Tests.TestsInfrastructure;
-using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models;
-
-namespace Yandex.Alice.Sdk.Tests.Models
+﻿namespace Yandex.Alice.Sdk.Tests.Models
 {
+    using System.Globalization;
+    using System.IO;
+    using System.Text.Json;
+    using Xunit;
+    using Xunit.Abstractions;
+    using Yandex.Alice.Sdk.Exceptions;
+    using Yandex.Alice.Sdk.Models;
+    using Yandex.Alice.Sdk.Resources;
+    using Yandex.Alice.Sdk.Tests.TestsInfrastructure;
+    using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models;
+
     public class AliceRequestTests : BaseTests
     {
-        public AliceRequestTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
+        public AliceRequestTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper)
         {
         }
 
@@ -55,6 +56,7 @@ namespace Yandex.Alice.Sdk.Tests.Models
                 Assert.NotNull(entity.Tokens);
                 Assert.NotEqual(AliceEntityType.Unknown, entity.Type);
             }
+
             Assert.NotNull(aliceRequest.Request.Nlu.Intents);
             Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main);
             Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main.Slots);
@@ -64,7 +66,7 @@ namespace Yandex.Alice.Sdk.Tests.Models
             Assert.Equal(AliceEntityType.STRING, aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot.Type);
             Assert.True(aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot is AliceEntityStringModel);
             Assert.NotNull((aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot as AliceEntityStringModel).Value);
-            
+
             Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main.Slots.WhereSlot);
             Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main.Slots.WhereSlot.Tokens);
             Assert.Equal(AliceEntityType.STRING, aliceRequest.Request.Nlu.Intents.Main.Slots.WhereSlot.Type);
@@ -113,6 +115,7 @@ namespace Yandex.Alice.Sdk.Tests.Models
                 Assert.NotNull(entity.Tokens);
                 Assert.NotEqual(AliceEntityType.Unknown, entity.Type);
             }
+
             Assert.NotNull(aliceRequest.Request.Nlu.Intents);
             WritePrettyJson(aliceRequest);
         }
@@ -122,7 +125,7 @@ namespace Yandex.Alice.Sdk.Tests.Models
         {
             const string unknownTypeValue = "iamunknown";
             string json = $"{{\"request\": {{ \"type\": \"{unknownTypeValue}\" }}}}";
-            var exception = Assert.Throws<Exception>(() => JsonSerializer.Deserialize<AliceRequest>(json));
+            var exception = Assert.Throws<UnknownRequestTypeException>(() => JsonSerializer.Deserialize<AliceRequest>(json));
             string message = string.Format(CultureInfo.CurrentCulture, Yandex_Alice_Sdk_Resources.Error_Unknown_Request_Type, unknownTypeValue);
             Assert.Equal(message, exception.Message);
         }

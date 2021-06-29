@@ -1,29 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using Xunit.Abstractions;
-using Yandex.Alice.Sdk.Models.DialogsApi;
-using Yandex.Alice.Sdk.Resources;
-using Yandex.Alice.Sdk.Services;
-using Yandex.Alice.Sdk.Tests.TestsInfrastructure;
-using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Fixtures;
-
-namespace Yandex.Alice.Sdk.Tests.Services
+﻿namespace Yandex.Alice.Sdk.Tests.Services
 {
+    using System;
+    using System.Globalization;
+    using System.IO;
+    using System.Threading.Tasks;
+    using Xunit;
+    using Xunit.Abstractions;
+    using Yandex.Alice.Sdk.Models.DialogsApi;
+    using Yandex.Alice.Sdk.Resources;
+    using Yandex.Alice.Sdk.Services;
+    using Yandex.Alice.Sdk.Tests.TestsInfrastructure;
+    using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Fixtures;
+
     [Collection(TestsConstants.DialogsApiCollectionName)]
     public class DialogsApiServiceTests : BaseTests
     {
-        private readonly IDialogsApiService _dialogsApiService;
-        private readonly Guid _skillId;
         private const string _imageUrl = "https://raw.githubusercontent.com/alexvolchetsky/yandex.alice.sdk/master/src/Yandex.Alice.Sdk/Resources/icon.png";
 
+        private readonly IDialogsApiService _dialogsApiService;
+        private readonly Guid _skillId;
+
         public DialogsApiServiceTests(DialogsApiFixture dialogsApiFixture, ITestOutputHelper testOutputHelper)
-            :base(testOutputHelper)
+            : base(testOutputHelper)
         {
             _dialogsApiService = dialogsApiFixture.DialogsApiService;
             _skillId = dialogsApiFixture.AliceSettings.SkillId;
@@ -48,12 +46,6 @@ namespace Yandex.Alice.Sdk.Tests.Services
             ValidateDataUsage(response.Content.Images);
             ValidateDataUsage(response.Content.Sounds);
             WritePrettyJson(response);
-        }
-
-        private static void ValidateDataUsage(DialogsDataUsageModel dialogsDataUsageModel)
-        {
-            Assert.NotNull(dialogsDataUsageModel);
-            Assert.NotNull(dialogsDataUsageModel.Quota);            
         }
 
         [Fact]
@@ -193,7 +185,7 @@ namespace Yandex.Alice.Sdk.Tests.Services
             var response = await _dialogsApiService.DeleteImageAsync(_skillId, imageId).ConfigureAwait(false);
             Assert.True(response.IsSuccess);
             Assert.Equal(DialogsResultType.Ok, response.Content.Result);
-        }        
+        }
 
         [Fact]
         public async Task UploadSound_Ok()
@@ -262,6 +254,12 @@ namespace Yandex.Alice.Sdk.Tests.Services
             var response = await _dialogsApiService.DeleteSoundAsync(_skillId, soundId).ConfigureAwait(false);
             Assert.True(response.IsSuccess);
             Assert.Equal(DialogsResultType.Ok, response.Content.Result);
+        }
+
+        private static void ValidateDataUsage(DialogsDataUsageModel dialogsDataUsageModel)
+        {
+            Assert.NotNull(dialogsDataUsageModel);
+            Assert.NotNull(dialogsDataUsageModel.Quota);
         }
     }
 }

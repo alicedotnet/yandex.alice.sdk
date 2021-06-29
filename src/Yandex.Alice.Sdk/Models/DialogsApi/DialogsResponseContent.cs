@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
-
-namespace Yandex.Alice.Sdk.Models.DialogsApi
+﻿namespace Yandex.Alice.Sdk.Models.DialogsApi
 {
+    using System.Text.Json.Serialization;
+
     public class DialogsResponseContent
     {
         [JsonPropertyName("message")]

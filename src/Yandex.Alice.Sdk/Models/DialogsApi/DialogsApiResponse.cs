@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
-
-namespace Yandex.Alice.Sdk.Models.DialogsApi
+﻿namespace Yandex.Alice.Sdk.Models.DialogsApi
 {
     public class DialogsApiResponse
     {
         public bool IsSuccess { get; }
+
         public string ErrorMessage { get; }
 
         public DialogsApiResponse(bool isSuccess = true)
@@ -35,7 +31,6 @@ namespace Yandex.Alice.Sdk.Models.DialogsApi
         public DialogsApiResponse(string errorMessage)
             : base(errorMessage)
         {
-
         }
     }
 }

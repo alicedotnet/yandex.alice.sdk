@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Yandex.Alice.Sdk.Models.DialogsApi;
-
-namespace Yandex.Alice.Sdk.Converters
+﻿namespace Yandex.Alice.Sdk.Converters
 {
+    using System;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
+    using Yandex.Alice.Sdk.Models.DialogsApi;
+
     public class DialogsResultTypeConverter : JsonConverter<DialogsResultType>
     {
         public override DialogsResultType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -23,6 +21,11 @@ namespace Yandex.Alice.Sdk.Converters
 
         public override void Write(Utf8JsonWriter writer, DialogsResultType value, JsonSerializerOptions options)
         {
+            if (writer == null)
+            {
+                throw new ArgumentNullException(nameof(writer));
+            }
+
             string result;
             switch (value)
             {
@@ -32,7 +35,8 @@ namespace Yandex.Alice.Sdk.Converters
                 default:
                     result = "fail";
                     break;
-            };
+            }
+
             writer.WriteStringValue(result);
         }
     }

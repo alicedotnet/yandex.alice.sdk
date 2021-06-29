@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
-using Yandex.Alice.Sdk.Converters;
-
-namespace Yandex.Alice.Sdk.Models.DialogsApi
+﻿namespace Yandex.Alice.Sdk.Models.DialogsApi
 {
+    using System;
+    using System.Text.Json.Serialization;
+    using Yandex.Alice.Sdk.Converters;
+
     public class DialogsImageInfo
     {
         [JsonPropertyName("id")]

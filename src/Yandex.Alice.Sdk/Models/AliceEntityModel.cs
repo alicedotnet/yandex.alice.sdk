@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
-using Yandex.Alice.Sdk.Converters;
-
-namespace Yandex.Alice.Sdk.Models
+﻿namespace Yandex.Alice.Sdk.Models
 {
+    using System.Text.Json.Serialization;
+    using Yandex.Alice.Sdk.Converters;
+
     public class AliceEntityModel
     {
         [JsonPropertyName("tokens")]

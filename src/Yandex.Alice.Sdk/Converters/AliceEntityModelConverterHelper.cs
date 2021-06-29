@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using Yandex.Alice.Sdk.Models;
-
-namespace Yandex.Alice.Sdk.Converters
+﻿namespace Yandex.Alice.Sdk.Converters
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Text.Json;
+    using Yandex.Alice.Sdk.Models;
+
     internal static class AliceEntityModelConverterHelper
     {
         private static readonly Dictionary<string, Type> _typeMap = new Dictionary<string, Type>()
@@ -16,12 +15,15 @@ namespace Yandex.Alice.Sdk.Converters
             { AliceConstants.AliceEntityTypeValues.Fio, typeof(AliceEntityFioModel) },
             { AliceConstants.AliceEntityTypeValues.Number, typeof(AliceEntityNumberModel) },
             { AliceConstants.AliceEntityTypeValues.DateTime, typeof(AliceEntityDateTimeModel) },
-            { AliceConstants.AliceEntityTypeValues.String, typeof(AliceEntityStringModel) }
+            { AliceConstants.AliceEntityTypeValues.String, typeof(AliceEntityStringModel) },
         };
 
         public static AliceEntityModel ToItem(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
-            if (reader.TokenType == JsonTokenType.Null) return null;
+            if (reader.TokenType == JsonTokenType.Null)
+            {
+                return null;
+            }
 
             var readerAtStart = reader;
 
@@ -51,8 +53,8 @@ namespace Yandex.Alice.Sdk.Converters
             {
                 newValue = Convert.ChangeType(value, value.GetType(), CultureInfo.InvariantCulture);
             }
+
             JsonSerializer.Serialize(writer, newValue, options);
         }
-
     }
 }

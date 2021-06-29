@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
-using Yandex.Alice.Sdk.Helpers;
-
-namespace Yandex.Alice.Sdk.Models
+﻿namespace Yandex.Alice.Sdk.Models
 {
+    using System.Text.Json.Serialization;
+    using Yandex.Alice.Sdk.Helpers;
+
     public class AliceStateModel<TSession, TUser>
     {
         [JsonPropertyName("session")]
@@ -26,6 +23,7 @@ namespace Yandex.Alice.Sdk.Models
                 {
                     return User;
                 }
+
                 return Application;
             }
         }

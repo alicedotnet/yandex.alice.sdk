@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
-
-namespace Yandex.Alice.Sdk.Converters
+﻿namespace Yandex.Alice.Sdk.Converters
 {
     public class DialogsDateTimeOffsetConverter : DateTimeOffsetConverter
     {
-        public DialogsDateTimeOffsetConverter() 
+        public DialogsDateTimeOffsetConverter()
             : base(AliceConstants.DateTimeFormat)
         {
         }

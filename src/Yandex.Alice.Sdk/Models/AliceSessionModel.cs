@@ -1,8 +1,7 @@
-﻿using System;
-using System.Text.Json.Serialization;
-
-namespace Yandex.Alice.Sdk.Models
+﻿namespace Yandex.Alice.Sdk.Models
 {
+    using System.Text.Json.Serialization;
+
     public class AliceSessionModel
     {
         [JsonPropertyName("new")]
@@ -19,8 +18,10 @@ namespace Yandex.Alice.Sdk.Models
 
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }
+
         [JsonPropertyName("user")]
         public AliceSessionUserModel User { get; set; }
+
         [JsonPropertyName("application")]
         public AliceSessionApplicationModel Application { get; set; }
 

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
-namespace Yandex.Alice.Sdk.Converters
+﻿namespace Yandex.Alice.Sdk.Converters
 {
+    using System;
+    using System.Globalization;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
+
     public abstract class DateTimeOffsetConverter : JsonConverter<DateTimeOffset>
     {
         private readonly string _format;
@@ -23,11 +21,15 @@ namespace Yandex.Alice.Sdk.Converters
             return response;
         }
 
-        public override void Write(Utf8JsonWriter writer, DateTimeOffset dateTime, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
         {
-            string result = dateTime.ToString(_format, CultureInfo.InvariantCulture);
+            if (writer == null)
+            {
+                throw new ArgumentNullException(nameof(writer));
+            }
+
+            string result = value.ToString(_format, CultureInfo.InvariantCulture);
             writer.WriteStringValue(result);
         }
-
     }
 }

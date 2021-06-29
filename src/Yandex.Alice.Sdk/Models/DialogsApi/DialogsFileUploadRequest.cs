@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-namespace Yandex.Alice.Sdk.Models.DialogsApi
+﻿namespace Yandex.Alice.Sdk.Models.DialogsApi
 {
+    using System.IO;
+
     public class DialogsFileUploadRequest
     {
         public Stream Content { get; }
+
         public string FileName { get; }
 
         public DialogsFileUploadRequest(string fileName, byte[] content)

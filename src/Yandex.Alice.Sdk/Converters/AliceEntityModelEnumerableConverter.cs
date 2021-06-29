@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using Yandex.Alice.Sdk.Models;
-
-namespace Yandex.Alice.Sdk.Converters
+﻿namespace Yandex.Alice.Sdk.Converters
 {
+    using System.Text.Json;
+    using Yandex.Alice.Sdk.Models;
+
     public class AliceEntityModelEnumerableConverter : EnumerableConverter<AliceEntityModel>
     {
         protected override AliceEntityModel ToItem(ref Utf8JsonReader reader, JsonSerializerOptions options)

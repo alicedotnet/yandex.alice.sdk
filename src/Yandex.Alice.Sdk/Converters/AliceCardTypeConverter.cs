@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Yandex.Alice.Sdk.Models;
-
-namespace Yandex.Alice.Sdk.Converters
+﻿namespace Yandex.Alice.Sdk.Converters
 {
+    using System;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
+    using Yandex.Alice.Sdk.Models;
+
     public class AliceCardTypeConverter : JsonConverter<AliceCardType>
     {
         public override AliceCardType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -23,10 +21,15 @@ namespace Yandex.Alice.Sdk.Converters
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, AliceCardType cardType, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, AliceCardType value, JsonSerializerOptions options)
         {
+            if (writer == null)
+            {
+                throw new ArgumentNullException(nameof(writer));
+            }
+
             string result;
-            switch (cardType)
+            switch (value)
             {
                 case AliceCardType.BigImage:
                     result = AliceConstants.AliceCardTypeValues.BigImage;
@@ -37,7 +40,8 @@ namespace Yandex.Alice.Sdk.Converters
                 default:
                     result = "unknown";
                     break;
-            };
+            }
+
             writer.WriteStringValue(result);
         }
     }

@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
-namespace Yandex.Alice.Sdk.Converters
+﻿namespace Yandex.Alice.Sdk.Converters
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
+
     public abstract class EnumerableConverter<TItem> : JsonConverter<IEnumerable<TItem>>
     {
-        public EnumerableConverter() : this(true) { }
-        public EnumerableConverter(bool canWrite) => CanWrite = canWrite;
+        protected EnumerableConverter()
+            : this(true)
+        {
+        }
+
+        protected EnumerableConverter(bool canWrite) => CanWrite = canWrite;
 
         public bool CanWrite { get; }
 
@@ -23,12 +25,35 @@ namespace Yandex.Alice.Sdk.Converters
                     while (reader.Read())
                     {
                         if (reader.TokenType == JsonTokenType.EndArray)
+                        {
                             break;
+                        }
+
                         list.Add(ToItem(ref reader, options));
                     }
+
                     return list.ToArray();
                 default:
                     return null;
+            }
+        }
+
+        public override void Write(Utf8JsonWriter writer, IEnumerable<TItem> value, JsonSerializerOptions options)
+        {
+            if (writer == null)
+            {
+                throw new ArgumentNullException(nameof(writer));
+            }
+
+            if (value != null && CanWrite)
+            {
+                writer.WriteStartArray();
+                foreach (var item in value)
+                {
+                    WriteItem(writer, item, options);
+                }
+
+                writer.WriteEndArray();
             }
         }
 
@@ -37,19 +62,6 @@ namespace Yandex.Alice.Sdk.Converters
         protected virtual void WriteItem(Utf8JsonWriter writer, TItem item, JsonSerializerOptions options)
         {
             JsonSerializer.Serialize(writer, item, options);
-        }
-
-        public override void Write(Utf8JsonWriter writer, IEnumerable<TItem> value, JsonSerializerOptions options)
-        {
-            if(value != null && CanWrite)
-            {
-                writer.WriteStartArray();
-                foreach (var item in value)
-                {
-                    WriteItem(writer, item, options);
-                }
-                writer.WriteEndArray();
-            }
         }
     }
 }

@@ -1,29 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
-
-namespace Yandex.Alice.Sdk.Models
+﻿namespace Yandex.Alice.Sdk.Models
 {
-    public interface IAliceResponseBase
-    {
-
-    }
-
-    public interface IAliceResponseStateBase<TSession, TUser>
-    {
-        [JsonPropertyName("session_state")]
-        TSession SessionState { get; set; }
-
-        [JsonPropertyName("user_state_update")]
-        TUser UserStateUpdate { get; set; }
-
-        [JsonPropertyName("application_state")]
-        TUser ApplicationState { get; set; }
-
-        [JsonIgnore]
-        TUser UserOrApplicationState { get; }
-    }
+    using System;
+    using System.Collections.Generic;
+    using System.Text.Json.Serialization;
 
     public abstract class AliceResponseBase<TResponse, TSession, TUser>
         : IAliceResponseBase, IAliceResponseStateBase<TSession, TUser>
@@ -50,6 +29,7 @@ namespace Yandex.Alice.Sdk.Models
                 {
                     return UserStateUpdate;
                 }
+
                 return ApplicationState;
             }
         }
@@ -57,11 +37,8 @@ namespace Yandex.Alice.Sdk.Models
         [JsonPropertyName("version")]
         public string Version { get; set; }
 
-
-
         protected AliceResponseBase()
         {
-
         }
 
         protected AliceResponseBase(AliceRequestBase<TSession, TUser> request, string text, string tts, List<AliceButtonModel> buttons, bool keepSessionState = true, bool keepUserState = true)
@@ -76,15 +53,16 @@ namespace Yandex.Alice.Sdk.Models
             {
                 Text = text,
                 Tts = tts,
-                Buttons = buttons
+                Buttons = buttons,
             };
 
-            if(request.State != null)
+            if (request.State != null)
             {
                 if (keepSessionState)
                 {
                     SessionState = request.State.Session;
                 }
+
                 if (keepUserState)
                 {
                     UserStateUpdate = request.State.User;
@@ -92,5 +70,24 @@ namespace Yandex.Alice.Sdk.Models
                 }
             }
         }
+    }
+
+    public interface IAliceResponseBase
+    {
+    }
+
+    public interface IAliceResponseStateBase<TSession, TUser>
+    {
+        [JsonPropertyName("session_state")]
+        TSession SessionState { get; set; }
+
+        [JsonPropertyName("user_state_update")]
+        TUser UserStateUpdate { get; set; }
+
+        [JsonPropertyName("application_state")]
+        TUser ApplicationState { get; set; }
+
+        [JsonIgnore]
+        TUser UserOrApplicationState { get; }
     }
 }

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Xunit;
-using Yandex.Alice.Sdk.Models;
-
-namespace Yandex.Alice.Sdk.Tests.Models
+﻿namespace Yandex.Alice.Sdk.Tests.Models
 {
+    using System.Text.Json;
+    using Xunit;
+    using Yandex.Alice.Sdk.Models;
+
     public class AliceRequestTypeTests
     {
         [Theory]

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
-
-namespace Yandex.Alice.Sdk.Models
+﻿namespace Yandex.Alice.Sdk.Models
 {
-    public class AliceRequest 
+    using System.Text.Json.Serialization;
+
+    public class AliceRequest
         : AliceRequest<object, object, object>
     {
     }
@@ -19,7 +16,6 @@ namespace Yandex.Alice.Sdk.Models
 
     public class AliceRequestBase<TSession, TUser>
     {
-
         [JsonPropertyName("state")]
         public AliceStateModel<TSession, TUser> State { get; set; }
 

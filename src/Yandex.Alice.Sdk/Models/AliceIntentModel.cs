@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
-
-namespace Yandex.Alice.Sdk.Models
+﻿namespace Yandex.Alice.Sdk.Models
 {
+    using System.Text.Json.Serialization;
+
     public class AliceIntentModel
         : AliceIntentModel<object>
     {
-
     }
 
     public class AliceIntentModel<TSlots>

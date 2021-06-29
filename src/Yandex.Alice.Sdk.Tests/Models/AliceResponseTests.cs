@@ -1,24 +1,19 @@
-﻿using System.IO;
-using System.Text.Json;
-using Xunit;
-using Xunit.Abstractions;
-using Yandex.Alice.Sdk.Models;
-using Yandex.Alice.Sdk.Tests.TestsInfrastructure;
-using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Wrappers;
-
-namespace Yandex.Alice.Sdk.Tests.Models
+﻿namespace Yandex.Alice.Sdk.Tests.Models
 {
+    using System.IO;
+    using System.Text.Json;
+    using Xunit;
+    using Xunit.Abstractions;
+    using Yandex.Alice.Sdk.Models;
+    using Yandex.Alice.Sdk.Tests.TestsInfrastructure;
+    using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Wrappers;
+
     public class AliceResponseTests : BaseTests
     {
-        public AliceResponseTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
+        public AliceResponseTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper)
         {
         }
-
-        class TestSession
-        {
-            public int TestProperty { get; set; }
-        }
-
 
         [Fact]
         public void AliceResponse_KeepSession_HasSession()
@@ -29,9 +24,9 @@ namespace Yandex.Alice.Sdk.Tests.Models
                 {
                     Session = new TestSession()
                     {
-                        TestProperty = 1
-                    }
-                }
+                        TestProperty = 1,
+                    },
+                },
             };
             var aliceResponse = new AliceResponse<TestSession, object>(aliceRequest, string.Empty);
             Assert.NotNull(aliceResponse.SessionState);
@@ -62,6 +57,7 @@ namespace Yandex.Alice.Sdk.Tests.Models
                 Assert.NotNull(button.Url);
                 Assert.True(button.Hide);
             }
+
             WritePrettyJson(aliceResponse);
         }
 
@@ -96,6 +92,7 @@ namespace Yandex.Alice.Sdk.Tests.Models
                 Assert.NotNull(button.Url);
                 Assert.True(button.Hide);
             }
+
             WritePrettyJson(aliceResponse);
         }
 
@@ -127,6 +124,7 @@ namespace Yandex.Alice.Sdk.Tests.Models
                 Assert.NotNull(item.Button.Url);
                 Assert.NotNull(item.Button.Payload);
             }
+
             Assert.NotNull(aliceResponse.Response.Card.Footer);
             Assert.NotEmpty(aliceResponse.Response.Card.Footer.Text);
             Assert.NotNull(aliceResponse.Response.Card.Footer.Button);
@@ -143,6 +141,7 @@ namespace Yandex.Alice.Sdk.Tests.Models
                 Assert.NotNull(button.Url);
                 Assert.True(button.Hide);
             }
+
             WritePrettyJson(aliceResponse);
         }
 
@@ -153,6 +152,11 @@ namespace Yandex.Alice.Sdk.Tests.Models
             var aliceRequest = JsonSerializer.Deserialize<AliceRequest<object, object, object>>(requestJson);
             var response = new AliceResponse(aliceRequest, string.Empty);
             Assert.NotNull(response);
+        }
+
+        private class TestSession
+        {
+            public int TestProperty { get; set; }
         }
     }
 }

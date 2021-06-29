@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Text;
-using System.Text.Json;
-using Xunit;
-using Xunit.Abstractions;
-using Yandex.Alice.Sdk.Models.DialogsApi;
-using Yandex.Alice.Sdk.Tests.TestsInfrastructure;
-
-namespace Yandex.Alice.Sdk.Tests.Models.DialogsApi
+﻿namespace Yandex.Alice.Sdk.Tests.Models.DialogsApi
 {
+    using System;
+    using System.Globalization;
+    using System.IO;
+    using System.Text.Json;
+    using Xunit;
+    using Xunit.Abstractions;
+    using Yandex.Alice.Sdk.Models.DialogsApi;
+    using Yandex.Alice.Sdk.Tests.TestsInfrastructure;
+
     public class DialogsImageInfoTests : BaseTests
     {
         public DialogsImageInfoTests(ITestOutputHelper testOutputHelper)
@@ -24,7 +22,6 @@ namespace Yandex.Alice.Sdk.Tests.Models.DialogsApi
             string fileContent = File.ReadAllText(TestsConstants.Assets.DialogsImageInfoFilePath);
             var options = new JsonSerializerOptions()
             {
-                
             };
             var imageInfo = JsonSerializer.Deserialize<DialogsImageInfo>(fileContent, options);
             Assert.NotEqual(default, imageInfo.CreatedAt);
@@ -38,7 +35,6 @@ namespace Yandex.Alice.Sdk.Tests.Models.DialogsApi
             DateTimeOffset.TryParseExact(sample, AliceConstants.DateTimeFormat, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out DateTimeOffset result);
             Assert.NotEqual(default, result);
             Assert.Equal(sample, result.ToString(AliceConstants.DateTimeFormat, CultureInfo.InvariantCulture));
-            
         }
     }
 }

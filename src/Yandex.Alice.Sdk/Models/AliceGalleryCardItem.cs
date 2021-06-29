@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
-
-namespace Yandex.Alice.Sdk.Models
+﻿namespace Yandex.Alice.Sdk.Models
 {
+    using System.Text.Json.Serialization;
+
     public class AliceGalleryCardItem : AliceModel
     {
         [JsonPropertyName("image_id")]
@@ -12,8 +9,9 @@ namespace Yandex.Alice.Sdk.Models
 
         public const int MaxTitleLength = 128;
         private string _title;
+
         [JsonPropertyName("title")]
-        public string Title 
+        public string Title
         {
             get => _title;
             set
@@ -25,6 +23,7 @@ namespace Yandex.Alice.Sdk.Models
 
         [JsonPropertyName("description")]
         public string Description { get; set; }
+
         [JsonPropertyName("button")]
         public AliceImageCardButtonModel Button { get; set; }
     }

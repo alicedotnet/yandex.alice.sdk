@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Yandex.Alice.Sdk.Converters;
-
-namespace Yandex.Alice.Sdk.Models
+﻿namespace Yandex.Alice.Sdk.Models
 {
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
+    using Yandex.Alice.Sdk.Converters;
+
     public class AliceRequestModel<TIntents>
     {
         [JsonPropertyName("command")]
@@ -24,11 +21,12 @@ namespace Yandex.Alice.Sdk.Models
 
         public T GetPayload<T>()
         {
-            if(Payload is JsonElement payloadJsonElement)
+            if (Payload is JsonElement payloadJsonElement)
             {
                 string text = payloadJsonElement.GetRawText();
                 return JsonSerializer.Deserialize<T>(text);
             }
+
             return default;
         }
 

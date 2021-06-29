@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
-using Yandex.Alice.Sdk.Converters;
-using Yandex.Alice.Sdk.Models;
-
-namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models
+﻿namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models
 {
+    using System.Text.Json.Serialization;
+    using Yandex.Alice.Sdk.Converters;
+    using Yandex.Alice.Sdk.Models;
+
     public class MainSecondaryIntentSlots
     {
         [JsonPropertyName("who")]

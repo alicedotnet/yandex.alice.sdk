@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
-using Yandex.Alice.Sdk.Helpers;
-
-namespace Yandex.Alice.Sdk.Models
+﻿namespace Yandex.Alice.Sdk.Models
 {
+    using System.Collections.Generic;
+    using System.Text.Json.Serialization;
+    using Yandex.Alice.Sdk.Helpers;
+
     public class AliceResponseModel : AliceModel
     {
         public const int TextMaxLenght = 1024;
@@ -16,7 +12,11 @@ namespace Yandex.Alice.Sdk.Models
         [JsonPropertyName("text")]
         public string Text
         {
-            get { return _text; }
+            get
+            {
+                return _text;
+            }
+
             set
             {
                 _text = value;
@@ -27,10 +27,15 @@ namespace Yandex.Alice.Sdk.Models
 
         public const int TtsMaxLenght = 1024;
         private string _tts;
+
         [JsonPropertyName("tts")]
         public string Tts
         {
-            get { return _tts; }
+            get
+            {
+                return _tts;
+            }
+
             set
             {
                 _tts = value;
@@ -46,6 +51,11 @@ namespace Yandex.Alice.Sdk.Models
 
         [JsonPropertyName("buttons")]
         public List<AliceButtonModel> Buttons { get; set; }
+
+        public AliceResponseModel()
+        {
+            Directives = new AliceDirectivesModel();
+        }
 
         public void SetText(string text, bool setTts = true)
         {
@@ -82,12 +92,8 @@ namespace Yandex.Alice.Sdk.Models
                 text = text.Replace("+", string.Empty);
                 text = AliceHelper.GetStringWithoutTags(text);
             }
-            return text;
-        }
 
-        public AliceResponseModel()
-        {
-            Directives = new AliceDirectivesModel();
+            return text;
         }
     }
 }

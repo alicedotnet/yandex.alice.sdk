@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using Yandex.Alice.Sdk.Helpers;
-
-namespace Yandex.Alice.Sdk.Tests.Helpers
+﻿namespace Yandex.Alice.Sdk.Tests.Helpers
 {
+    using Xunit;
+    using Yandex.Alice.Sdk.Helpers;
+
     public class AliceHelperTests
     {
         [Fact]

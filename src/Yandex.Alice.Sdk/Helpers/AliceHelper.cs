@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
-using System.Text.RegularExpressions;
-using Yandex.Alice.Sdk.Models;
-
-namespace Yandex.Alice.Sdk.Helpers
+﻿namespace Yandex.Alice.Sdk.Helpers
 {
+    using System;
+    using System.Text.Json;
+    using System.Text.RegularExpressions;
+    using Yandex.Alice.Sdk.Models;
+
     public static class AliceHelper
     {
         public const string DefaultReducedStringEnding = "...";
@@ -27,10 +25,12 @@ namespace Yandex.Alice.Sdk.Helpers
             {
                 throw new ArgumentNullException(nameof(value));
             }
-            if(mandatoryEnding == null)
+
+            if (mandatoryEnding == null)
             {
                 throw new ArgumentNullException(nameof(mandatoryEnding));
             }
+
             if (reducedEnding == null)
             {
                 throw new ArgumentNullException(nameof(reducedEnding));
@@ -40,6 +40,7 @@ namespace Yandex.Alice.Sdk.Helpers
             {
                 return value + mandatoryEnding;
             }
+
             int maxReducedStringLength = maxLenght - mandatoryEnding.Length - reducedEnding.Length;
             string reducedString = value.Substring(0, maxReducedStringLength);
             int lastWhitespaceIndex = reducedString.LastIndexOf(" ", StringComparison.OrdinalIgnoreCase);
@@ -49,10 +50,11 @@ namespace Yandex.Alice.Sdk.Helpers
 
         internal static T JsonElementToObject<T>(object jsonElement)
         {
-            if(jsonElement is JsonElement element)
+            if (jsonElement is JsonElement element)
             {
                 return JsonElementToObject<T>(element);
             }
+
             return default;
         }
 
@@ -62,15 +64,13 @@ namespace Yandex.Alice.Sdk.Helpers
             return JsonSerializer.Deserialize<T>(json);
         }
 
-        #region Text to speach
-
         /// <summary>
-        /// Silence equal to 500ms
+        /// Silence equal to 500ms.
         /// </summary>
         public static readonly string SilenceString500 = GetSilenceString(500);
 
         /// <summary>
-        /// Silence equal to 1000ms
+        /// Silence equal to 1000ms.
         /// </summary>
         public static readonly string SilenceString1000 = GetSilenceString(1000);
 
@@ -89,8 +89,5 @@ namespace Yandex.Alice.Sdk.Helpers
             value = Regex.Replace(value, "<speaker audio=\".*\">", string.Empty, RegexOptions.IgnoreCase);
             return Regex.Replace(value, "sil<\\[.*\\]>", string.Empty, RegexOptions.IgnoreCase);
         }
-
-
-        #endregion
     }
 }

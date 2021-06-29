@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Text;
-using Yandex.Alice.Sdk.Helpers;
-using Yandex.Alice.Sdk.Resources;
-
-namespace Yandex.Alice.Sdk.Models
+﻿namespace Yandex.Alice.Sdk.Models
 {
+    using System;
+    using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using Yandex.Alice.Sdk.Helpers;
+    using Yandex.Alice.Sdk.Resources;
+
     public abstract class AliceModel
     {
         protected static void ValidateMaxLength(string value, int maxLength, [CallerMemberName] string propertyName = null)
@@ -21,7 +19,7 @@ namespace Yandex.Alice.Sdk.Models
 
         protected static void ValidateNotNull(string value, [CallerMemberName] string propertyName = null)
         {
-            if(value == null)
+            if (value == null)
             {
                 throw new ArgumentException(Yandex_Alice_Sdk_Resources.Error_Required, propertyName);
             }

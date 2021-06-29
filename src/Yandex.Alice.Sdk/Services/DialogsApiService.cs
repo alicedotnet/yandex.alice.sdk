@@ -1,34 +1,36 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Yandex.Alice.Sdk.Models.DialogsApi;
-using Yandex.Alice.Sdk.Resources;
-
-namespace Yandex.Alice.Sdk.Services
+﻿namespace Yandex.Alice.Sdk.Services
 {
+    using System;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Text;
+    using System.Text.Json;
+    using System.Threading.Tasks;
+    using Yandex.Alice.Sdk.Models.DialogsApi;
+    using Yandex.Alice.Sdk.Resources;
+
     public class DialogsApiService : IDialogsApiService, IDisposable
     {
         private readonly HttpClient _dialogsApiClient;
+        private bool disposedValue;
 
         public DialogsApiService(DialogsApiSettings dialogsApiSettings)
         {
-            if(dialogsApiSettings == null)
+            if (dialogsApiSettings == null)
             {
                 throw new ArgumentNullException(nameof(dialogsApiSettings));
             }
-            if(string.IsNullOrEmpty(dialogsApiSettings.DialogsOAuthToken))
+
+            if (string.IsNullOrEmpty(dialogsApiSettings.DialogsOAuthToken))
             {
                 throw new ArgumentException(Yandex_Alice_Sdk_Resources.Error_NoOAuthToken);
             }
 
             _dialogsApiClient = new HttpClient()
             {
-                BaseAddress = new Uri("https://dialogs.yandex.net")
+                BaseAddress = new Uri("https://dialogs.yandex.net"),
             };
-            _dialogsApiClient.DefaultRequestHeaders.Authorization = 
+            _dialogsApiClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("OAuth", dialogsApiSettings.DialogsOAuthToken);
         }
 
@@ -36,8 +38,6 @@ namespace Yandex.Alice.Sdk.Services
         {
             return await GetAsync<DialogsStatus>("/api/v1/status").ConfigureAwait(false);
         }
-
-        #region Image       
 
         public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsWebUploadRequest request)
         {
@@ -67,10 +67,6 @@ namespace Yandex.Alice.Sdk.Services
             return await DeleteAsync<DialogsDeleteResponse>(url).ConfigureAwait(false);
         }
 
-        #endregion
-
-        #region Sound
-
         public async Task<DialogsApiResponse<DialogsSoundResponse>> UploadSoundAsync(Guid skillId, DialogsFileUploadRequest request)
         {
             string url = $"{GetSkillUrl(skillId)}/sounds";
@@ -95,14 +91,33 @@ namespace Yandex.Alice.Sdk.Services
             return await DeleteAsync<DialogsDeleteResponse>(url).ConfigureAwait(false);
         }
 
-        #endregion
-        
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    _dialogsApiClient.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
         private static string GetSkillUrl(Guid skillId)
         {
-            if(skillId == Guid.Empty)
+            if (skillId == Guid.Empty)
             {
                 throw new ArgumentException(Yandex_Alice_Sdk_Resources.Error_NoSkillId, nameof(skillId));
             }
+
             return $"/api/v1/skills/{skillId}";
         }
 
@@ -118,7 +133,7 @@ namespace Yandex.Alice.Sdk.Services
         {
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, url)
             {
-                Content = content
+                Content = content,
             })
             {
                 return await SendAsync<TContent>(requestMessage).ConfigureAwait(false);
@@ -144,7 +159,7 @@ namespace Yandex.Alice.Sdk.Services
             {
                 using (var formContent = new MultipartFormDataContent
                     {
-                        {streamContent,"file", request.FileName}
+                        { streamContent, "file", request.FileName },
                     })
                 {
                     return await PostAsync<TContent>(url, formContent).ConfigureAwait(false);
@@ -171,39 +186,8 @@ namespace Yandex.Alice.Sdk.Services
             {
                 response = new DialogsApiResponse<TContent>(contentString);
             }
+
             return response;
         }
-
-        #region Dispose
-
-        private bool disposedValue;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    _dialogsApiClient.Dispose();
-                }
-
-                disposedValue = true;
-            }
-        }
-
-        // ~DialogsApiService()
-        // {
-        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-        //     Dispose(disposing: false);
-        // }
-
-        public void Dispose()
-        {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
     }
 }

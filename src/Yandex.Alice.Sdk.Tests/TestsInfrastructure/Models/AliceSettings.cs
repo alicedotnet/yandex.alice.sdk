@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models
+﻿namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models
 {
+    using System;
+
     public class AliceSettings
     {
         public Guid SkillId { get; set; }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Yandex.Alice.Sdk
+﻿namespace Yandex.Alice.Sdk
 {
     public static class AliceConstants
     {
         public const string DateTimeFormat = "yyyy-MM-ddTHH:mm:ss.fffZ";
+
         public static class AliceEntityModelFields
         {
             public const string Type = "type";

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Yandex.Alice.Sdk.Models;
-
-namespace Yandex.Alice.Sdk.Converters
+﻿namespace Yandex.Alice.Sdk.Converters
 {
+    using System;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
+    using Yandex.Alice.Sdk.Models;
+
     public class AliceEntityTypeConverter : JsonConverter<AliceEntityType>
     {
         public override AliceEntityType Read(
@@ -32,11 +32,16 @@ namespace Yandex.Alice.Sdk.Converters
 
         public override void Write(
             Utf8JsonWriter writer,
-            AliceEntityType entityType,
+            AliceEntityType value,
             JsonSerializerOptions options)
         {
+            if (writer == null)
+            {
+                throw new ArgumentNullException(nameof(writer));
+            }
+
             string result;
-            switch (entityType)
+            switch (value)
             {
                 case AliceEntityType.DATETIME:
                     result = AliceConstants.AliceEntityTypeValues.DateTime;
@@ -56,7 +61,8 @@ namespace Yandex.Alice.Sdk.Converters
                 default:
                     result = "unknown";
                     break;
-            };
+            }
+
             writer.WriteStringValue(result);
         }
     }

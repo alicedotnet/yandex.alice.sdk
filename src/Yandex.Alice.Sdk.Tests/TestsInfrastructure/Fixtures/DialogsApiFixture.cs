@@ -1,16 +1,14 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Yandex.Alice.Sdk.Models.DialogsApi;
-using Yandex.Alice.Sdk.Services;
-using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models;
-
-namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Fixtures
+﻿namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Fixtures
 {
+    using Microsoft.Extensions.Configuration;
+    using Yandex.Alice.Sdk.Models.DialogsApi;
+    using Yandex.Alice.Sdk.Services;
+    using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models;
+
     public class DialogsApiFixture
     {
         public IDialogsApiService DialogsApiService { get; }
+
         public AliceSettings AliceSettings { get; }
 
         public DialogsApiFixture()
