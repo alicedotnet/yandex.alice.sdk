@@ -11,6 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2FC07DCD-958
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{93C5E538-7334-4E96-993F-9AB263BAB450}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo", "src\Yandex.Alice.Sdk.Demo\Yandex.Alice.Sdk.Demo.csproj", "{D9D479AB-293D-4943-8593-C7F206F4BC8F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo.Tests", "tests\Yandex.Alice.Sdk.Demo.Tests\Yandex.Alice.Sdk.Demo.Tests.csproj", "{B083E8BA-32F0-494F-AA02-F8B360BF1626}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo.IntegrationTests", "tests\Yandex.Alice.Sdk.Demo.IntegrationTests\Yandex.Alice.Sdk.Demo.IntegrationTests.csproj", "{3CE5AC83-EB74-46B0-B116-D84A10F931CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug SDK|Any CPU = Debug SDK|Any CPU
@@ -30,6 +36,24 @@ Global
 		{33AECE69-24B8-48F5-9D7F-90D51EA35BE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33AECE69-24B8-48F5-9D7F-90D51EA35BE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33AECE69-24B8-48F5-9D7F-90D51EA35BE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9D479AB-293D-4943-8593-C7F206F4BC8F}.Debug SDK|Any CPU.ActiveCfg = Debug SDK|Any CPU
+		{D9D479AB-293D-4943-8593-C7F206F4BC8F}.Debug SDK|Any CPU.Build.0 = Debug SDK|Any CPU
+		{D9D479AB-293D-4943-8593-C7F206F4BC8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9D479AB-293D-4943-8593-C7F206F4BC8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9D479AB-293D-4943-8593-C7F206F4BC8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9D479AB-293D-4943-8593-C7F206F4BC8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B083E8BA-32F0-494F-AA02-F8B360BF1626}.Debug SDK|Any CPU.ActiveCfg = Debug SDK|Any CPU
+		{B083E8BA-32F0-494F-AA02-F8B360BF1626}.Debug SDK|Any CPU.Build.0 = Debug SDK|Any CPU
+		{B083E8BA-32F0-494F-AA02-F8B360BF1626}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B083E8BA-32F0-494F-AA02-F8B360BF1626}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B083E8BA-32F0-494F-AA02-F8B360BF1626}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B083E8BA-32F0-494F-AA02-F8B360BF1626}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Debug SDK|Any CPU.ActiveCfg = Debug SDK|Any CPU
+		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Debug SDK|Any CPU.Build.0 = Debug SDK|Any CPU
+		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +61,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{064F4DD5-3DD9-4232-BE0F-3B8D4A6A0F5F} = {2FC07DCD-958C-4654-9A6D-543CACF1A10B}
 		{33AECE69-24B8-48F5-9D7F-90D51EA35BE8} = {93C5E538-7334-4E96-993F-9AB263BAB450}
+		{D9D479AB-293D-4943-8593-C7F206F4BC8F} = {2FC07DCD-958C-4654-9A6D-543CACF1A10B}
+		{B083E8BA-32F0-494F-AA02-F8B360BF1626} = {93C5E538-7334-4E96-993F-9AB263BAB450}
+		{3CE5AC83-EB74-46B0-B116-D84A10F931CF} = {93C5E538-7334-4E96-993F-9AB263BAB450}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {48F66109-72C4-46CC-BBE1-A2EE8CD2B48F}

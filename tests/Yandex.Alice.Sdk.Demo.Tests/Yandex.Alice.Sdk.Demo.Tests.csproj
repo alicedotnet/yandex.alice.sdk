@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Yandex.Alice.Sdk.Demo\Yandex.Alice.Sdk.Demo.csproj" />
+    <ProjectReference Include="..\..\src\Yandex.Alice.Sdk.Demo\Yandex.Alice.Sdk.Demo.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,11 +11,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
-    <PackageReference Include="Yandex.Alice.Sdk" Version="2.0.2" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(Configuration)' == 'Debug SDK'">
-    <ProjectReference Include="..\..\..\src\Yandex.Alice.Sdk\Yandex.Alice.Sdk.csproj" />
+  <ItemGroup>
+    <ProjectReference Include="..\Yandex.Alice.Sdk\Yandex.Alice.Sdk.csproj" />
   </ItemGroup>
 
   <ItemGroup>
