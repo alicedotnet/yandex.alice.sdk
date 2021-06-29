@@ -15,12 +15,12 @@ jobs:
     - name: App Settings Variable Substitution
       uses: microsoft/variable-substitution@v1
       with:
-        files: './src/Yandex.Alice.Sdk.Tests/appsettings.json'
+        files: './tests/Yandex.Alice.Sdk.Tests/appsettings.json'
       env:
         AliceSettings.SkillId: ${{ secrets.SKILL_SKILLID }}
         AliceSettings.DialogsOAuthToken: ${{ secrets.DIALOGSAPI_DIALOGSOAUTHTOKEN }}
     - name: test
-      run: dotnet test ./src -c Release
+      run: dotnet test ./tests/Yandex.Alice.Sdk.Tests -c Release
     - name: publish on version change
       id: publish_nuget
       uses: rohith/publish-nuget@v2

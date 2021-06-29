@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  webapp:
+  yandex.alice.sdk.demo:
     build:
       context: .
       dockerfile: Dockerfile
