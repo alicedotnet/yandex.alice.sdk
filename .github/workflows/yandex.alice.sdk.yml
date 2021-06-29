@@ -50,3 +50,6 @@ jobs:
           file: Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/yandex.alice.sdk.demo:latest
+          build-args: |
+            AliceSettings__SkillId=${{ secrets.SKILL_SKILLID }}
+            AliceSettings__DialogsOAuthToken=${{ secrets.DIALOGSAPI_DIALOGSOAUTHTOKEN }}

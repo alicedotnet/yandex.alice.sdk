@@ -4,9 +4,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        AliceSettings__SkillId: ${ALICESETTINGS_SKILLID}
+        AliceSettings__DialogsOAuthToken: ${ALICESETTINGS_DIALOGSOAUTHTOKEN}
     ports:
       - "8000:80"
-      - "8001:443"
+      - "8001:443"    
     environment:
       - AliceSettings__SkillId=${ALICESETTINGS_SKILLID}
       - AliceSettings__DialogsOAuthToken=${ALICESETTINGS_DIALOGSOAUTHTOKEN}
