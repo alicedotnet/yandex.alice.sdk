@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Yandex.Alice.Sdk\Yandex.Alice.Sdk.csproj" />
+    <ProjectReference Include="..\..\src\Yandex.Alice.Sdk\Yandex.Alice.Sdk.csproj" />
   </ItemGroup>
 
   <ItemGroup>
