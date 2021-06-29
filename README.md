@@ -6,8 +6,6 @@
 [![NuGet](https://buildstats.info/nuget/Yandex.Alice.Sdk)](https://www.nuget.org/packages/Yandex.Alice.Sdk)
 
 ![yandex.alice.sdk.demo](https://github.com/alexvolchetsky/yandex.alice.sdk/workflows/yandex.alice.sdk.demo/badge.svg)
-[![Pulls](https://shields.beevelop.com/docker/pulls/alexvolchetsky/yandex.alice.sdk.demo.svg?style=flat-square)](https://hub.docker.com/r/alexvolchetsky/yandex.alice.sdk.demo)
-
 
 # Installation
 Install NuGet package with SDK: 

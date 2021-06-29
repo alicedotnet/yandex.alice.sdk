@@ -16,7 +16,7 @@
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageReleaseNotes>Add Geolocation
 Fix issues</PackageReleaseNotes>
-    <Configurations>Debug;Release;Debug SDK</Configurations>
+    <Configurations>Debug;Release</Configurations>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>

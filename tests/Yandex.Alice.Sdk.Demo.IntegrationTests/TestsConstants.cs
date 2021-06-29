@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Yandex.Alice.Sdk.Demo.IntegrationTests
+﻿namespace Yandex.Alice.Sdk.Demo.IntegrationTests
 {
     public class TestsConstants
     {

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Yandex.Alice.Sdk.Demo.Services.Interfaces
+﻿namespace Yandex.Alice.Sdk.Demo.Services.Interfaces
 {
+    using System.Threading.Tasks;
+
     public interface ICleanService
     {
         Task CleanResourcesAsync();

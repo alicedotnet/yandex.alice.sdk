@@ -1,14 +1,15 @@
-﻿using System;
-using System.Net.Http;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-
-namespace Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures
+﻿namespace Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures
 {
+    using System;
+    using System.Net.Http;
+    using Microsoft.AspNetCore.TestHost;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Hosting;
+
     public class TestServerFixture
     {
         public HttpClient DemoClient { get; }
+
         public IServiceProvider Services { get; }
 
         public TestServerFixture()

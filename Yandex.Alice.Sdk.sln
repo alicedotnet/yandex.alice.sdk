@@ -19,45 +19,37 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo.Integ
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7162E358-FA20-43F3-9A11-E7EFC5CC2549}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug SDK|Any CPU = Debug SDK|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{064F4DD5-3DD9-4232-BE0F-3B8D4A6A0F5F}.Debug SDK|Any CPU.ActiveCfg = Debug SDK|Any CPU
-		{064F4DD5-3DD9-4232-BE0F-3B8D4A6A0F5F}.Debug SDK|Any CPU.Build.0 = Debug SDK|Any CPU
 		{064F4DD5-3DD9-4232-BE0F-3B8D4A6A0F5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{064F4DD5-3DD9-4232-BE0F-3B8D4A6A0F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{064F4DD5-3DD9-4232-BE0F-3B8D4A6A0F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{064F4DD5-3DD9-4232-BE0F-3B8D4A6A0F5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33AECE69-24B8-48F5-9D7F-90D51EA35BE8}.Debug SDK|Any CPU.ActiveCfg = Debug|Any CPU
-		{33AECE69-24B8-48F5-9D7F-90D51EA35BE8}.Debug SDK|Any CPU.Build.0 = Debug|Any CPU
 		{33AECE69-24B8-48F5-9D7F-90D51EA35BE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33AECE69-24B8-48F5-9D7F-90D51EA35BE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33AECE69-24B8-48F5-9D7F-90D51EA35BE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33AECE69-24B8-48F5-9D7F-90D51EA35BE8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D9D479AB-293D-4943-8593-C7F206F4BC8F}.Debug SDK|Any CPU.ActiveCfg = Debug SDK|Any CPU
-		{D9D479AB-293D-4943-8593-C7F206F4BC8F}.Debug SDK|Any CPU.Build.0 = Debug SDK|Any CPU
 		{D9D479AB-293D-4943-8593-C7F206F4BC8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D9D479AB-293D-4943-8593-C7F206F4BC8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9D479AB-293D-4943-8593-C7F206F4BC8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9D479AB-293D-4943-8593-C7F206F4BC8F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B083E8BA-32F0-494F-AA02-F8B360BF1626}.Debug SDK|Any CPU.ActiveCfg = Debug SDK|Any CPU
-		{B083E8BA-32F0-494F-AA02-F8B360BF1626}.Debug SDK|Any CPU.Build.0 = Debug SDK|Any CPU
 		{B083E8BA-32F0-494F-AA02-F8B360BF1626}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B083E8BA-32F0-494F-AA02-F8B360BF1626}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B083E8BA-32F0-494F-AA02-F8B360BF1626}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B083E8BA-32F0-494F-AA02-F8B360BF1626}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Debug SDK|Any CPU.ActiveCfg = Debug SDK|Any CPU
-		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Debug SDK|Any CPU.Build.0 = Debug SDK|Any CPU
 		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}.Debug SDK|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}.Debug SDK|Any CPU.Build.0 = Debug|Any CPU
 		{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,13 +1,12 @@
-﻿using Microsoft.Extensions.Options;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Yandex.Alice.Sdk.Demo.Models;
-using Yandex.Alice.Sdk.Demo.Services.Interfaces;
-using Yandex.Alice.Sdk.Services;
-
-namespace Yandex.Alice.Sdk.Demo.Services
+﻿namespace Yandex.Alice.Sdk.Demo.Services
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Yandex.Alice.Sdk.Demo.Models;
+    using Yandex.Alice.Sdk.Demo.Services.Interfaces;
+    using Yandex.Alice.Sdk.Services;
+
     public class CleanService : ICleanService
     {
         private readonly IDialogsApiService _dialogsApiService;

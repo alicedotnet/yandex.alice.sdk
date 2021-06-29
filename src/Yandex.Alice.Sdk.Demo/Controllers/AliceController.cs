@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Yandex.Alice.Sdk.Demo.Models;
-using Yandex.Alice.Sdk.Demo.Models.Intents;
-using Yandex.Alice.Sdk.Demo.Models.Session;
-using Yandex.Alice.Sdk.Demo.Resources;
-using Yandex.Alice.Sdk.Models;
-using Yandex.Alice.Sdk.Models.DialogsApi;
-using Yandex.Alice.Sdk.Services;
-
-namespace Yandex.Alice.Sdk.Demo.Controllers
+﻿namespace Yandex.Alice.Sdk.Demo.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Text.Json;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
+    using Yandex.Alice.Sdk.Demo.Models;
+    using Yandex.Alice.Sdk.Demo.Models.Session;
+    using Yandex.Alice.Sdk.Demo.Resources;
+    using Yandex.Alice.Sdk.Models;
+    using Yandex.Alice.Sdk.Models.DialogsApi;
+    using Yandex.Alice.Sdk.Services;
+
     [ApiController]
     [Route("[controller]")]
     public class AliceController : ControllerBase
@@ -28,13 +27,14 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
         private const string _geolocationButtonTitle = "геолокация";
         private const string _homeButtonTitle = "назад";
         private const string _githubLink = "https://github.com/alexvolchetsky/yandex.alice.sdk";
-        
+
         private readonly ILogger<AliceController> _logger;
         private readonly IDialogsApiService _dialogsApiService;
         private readonly AliceSettings _aliceSettings;
 
-
-        public AliceController(ILogger<AliceController> logger, IDialogsApiService dialogsApiService,
+        public AliceController(
+            ILogger<AliceController> logger,
+            IDialogsApiService dialogsApiService,
             AliceSettings aliceSettings)
         {
             _logger = logger;
@@ -51,9 +51,9 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                 var response = await GetAliceResponseAsync(aliceRequest).ConfigureAwait(false);
                 return Ok(response);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 string requestText = JsonSerializer.Serialize(aliceRequest);
                 _logger.LogError(e, $"The following request produced exception: {requestText}");
                 return Content(e.ToString());
@@ -69,9 +69,9 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                 new AliceButtonModel(_oneImageButtonTitle, true),
                 new AliceButtonModel(_galleryButtonTitle, true),
                 new AliceButtonModel(_testIntentButtonTitle, true),
-                new AliceButtonModel(_resourcesWorkButtonTitle, true)
+                new AliceButtonModel(_resourcesWorkButtonTitle, true),
             };
-            if(aliceRequest.Meta.Interfaces.GeolocationSharing != null)
+            if (aliceRequest.Meta.Interfaces.GeolocationSharing != null)
             {
                 buttons.Add(new AliceButtonModel(_geolocationButtonTitle, true));
             }
@@ -81,15 +81,17 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                 string text = $"Вот ссылка на github";
                 var codeButtons = new List<AliceButtonModel>()
                     {
-                        new AliceButtonModel(_githubLink, false, null, new Uri(_githubLink))
+                        new AliceButtonModel(_githubLink, false, null, new Uri(_githubLink)),
                     };
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, codeButtons);
             }
+
             if (aliceRequest.Request.Command == _noImageButtonTitle)
             {
                 string text = $"Это пример ответа без изображений. Здесь может быть текст или например эмодзи {char.ConvertFromUtf32(0x1F60E)}";
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons);
             }
+
             if (aliceRequest.Request.Command == _oneImageButtonTitle ||
                 aliceRequest.Request.Command == "ответ с 1 изображением")
             {
@@ -103,12 +105,13 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     Button = new AliceImageCardButtonModel()
                     {
                         Text = "подробнее",
-                        Url = new Uri("https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BD%D1%87%D0%BA%D0%B8%D0%BD_(%D0%BF%D0%BE%D1%80%D0%BE%D0%B4%D0%B0_%D0%BA%D0%BE%D1%88%D0%B5%D0%BA)")
-                    }
+                        Url = new Uri("https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BD%D1%87%D0%BA%D0%B8%D0%BD_(%D0%BF%D0%BE%D1%80%D0%BE%D0%B4%D0%B0_%D0%BA%D0%BE%D1%88%D0%B5%D0%BA)"),
+                    },
                 };
-                return aliceResponse;    
+                return aliceResponse;
             }
-            if(aliceRequest.Request.Command == _galleryButtonTitle)
+
+            if (aliceRequest.Request.Command == _galleryButtonTitle)
             {
                 string text = $"В ответе такого типа можно отобразить несколько фотографий";
                 var aliceResponse = new AliceGalleryResponse<CustomSessionState, object>(aliceRequest, text, buttons);
@@ -125,8 +128,8 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                             Button = new AliceImageCardButtonModel()
                             {
                                 Text = "подробнее",
-                                Url = new Uri("https://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%BC%D0%B5%D1%86%D0%BA%D0%B8%D0%B9_%D1%8F%D0%B3%D0%B4%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80")
-                            }
+                                Url = new Uri("https://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%BC%D0%B5%D1%86%D0%BA%D0%B8%D0%B9_%D1%8F%D0%B3%D0%B4%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80"),
+                            },
                         },
                         new AliceGalleryCardItem()
                         {
@@ -136,8 +139,8 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                             Button = new AliceImageCardButtonModel()
                             {
                                 Text = "подробнее",
-                                Url = new Uri("https://ru.wikipedia.org/wiki/%D0%A5%D0%B0%D1%81%D0%BA%D0%B8")
-                            }
+                                Url = new Uri("https://ru.wikipedia.org/wiki/%D0%A5%D0%B0%D1%81%D0%BA%D0%B8"),
+                            },
                         },
                         new AliceGalleryCardItem()
                         {
@@ -147,19 +150,21 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                             Button = new AliceImageCardButtonModel()
                             {
                                 Text = "подробнее",
-                                Url = new Uri("https://ru.wikipedia.org/wiki/%D0%9B%D0%B0%D0%B1%D1%80%D0%B0%D0%B4%D0%BE%D1%80-%D1%80%D0%B5%D1%82%D1%80%D0%B8%D0%B2%D0%B5%D1%80")
-                            }
-                        }
+                                Url = new Uri("https://ru.wikipedia.org/wiki/%D0%9B%D0%B0%D0%B1%D1%80%D0%B0%D0%B4%D0%BE%D1%80-%D1%80%D0%B5%D1%82%D1%80%D0%B8%D0%B2%D0%B5%D1%80"),
+                            },
+                        },
                     },
-                    Footer = new AliceGalleryCardFooterModel("больше щеночков",
-                    new AliceImageCardButtonModel()
-                    {
-                        Text = "больше щеночков",
-                        Url = new Uri("https://www.google.com/search?q=%D1%89%D0%B5%D0%BD%D0%BE%D1%87%D0%BA%D0%B8&sxsrf=ALeKk03SlYE13sTDiS7dm3TPL9e5Y3FEMw:1589313761070&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiW4qiRj6_pAhXsw8QBHVOqBHcQ_AUoAXoECAoQAw&biw=1216&bih=601")
-                    })
+                    Footer = new AliceGalleryCardFooterModel(
+                        "больше щеночков",
+                        new AliceImageCardButtonModel()
+                        {
+                            Text = "больше щеночков",
+                            Url = new Uri("https://www.google.com/search?q=%D1%89%D0%B5%D0%BD%D0%BE%D1%87%D0%BA%D0%B8&sxsrf=ALeKk03SlYE13sTDiS7dm3TPL9e5Y3FEMw:1589313761070&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiW4qiRj6_pAhXsw8QBHVOqBHcQ_AUoAXoECAoQAw&biw=1216&bih=601"),
+                        }),
                 };
                 return aliceResponse;
             }
+
             if (aliceRequest.Request.Command == _testIntentButtonTitle)
             {
                 string text = "Для того чтобы протестировать интент, нажмите на одну из кнопок";
@@ -167,40 +172,43 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     {
                         new AliceButtonModel("включи свет в ванной"),
                         new AliceButtonModel("включи кондиционер на кухне"),
-                        new AliceButtonModel(_homeButtonTitle)
+                        new AliceButtonModel(_homeButtonTitle),
                     };
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, intentButtons)
                 {
-                    SessionState = new CustomSessionState(ModeType.IntentsTesting)
+                    SessionState = new CustomSessionState(ModeType.IntentsTesting),
                 };
             }
-            if(aliceRequest.Request.Command == _resourcesWorkButtonTitle)
+
+            if (aliceRequest.Request.Command == _resourcesWorkButtonTitle)
             {
                 string text = "Так же я могу управлять файлами изображений и звуков в навыке, используя HTTP API. Попробуйте отправить мне ссылку на изображение и я отображу его в ответе";
                 var resourcesButtons = new List<AliceButtonModel>()
                     {
-                        new AliceButtonModel(_homeButtonTitle)
+                        new AliceButtonModel(_homeButtonTitle),
                     };
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, resourcesButtons)
                 {
-                    SessionState = new CustomSessionState(ModeType.ResourcesTesting)
+                    SessionState = new CustomSessionState(ModeType.ResourcesTesting),
                 };
             }
+
             if (aliceRequest.Request.Command == _geolocationButtonTitle)
             {
                 var response = new AliceResponse<CustomSessionState, object>(aliceRequest, "Разрешите доступ к геолокации, чтобы навык смог ее узнать")
                 {
-                    SessionState = new CustomSessionState()
+                    SessionState = new CustomSessionState(),
                 };
                 response.Response.Directives.SetRequestGeolocation();
                 return response;
             }
+
             if (aliceRequest.Request.Type == AliceRequestType.GeolocationAllowed)
             {
                 string text = $"Ваши координаты: {aliceRequest.Session.Location.Lat}, {aliceRequest.Session.Location.Lon}";
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons)
                 {
-                    SessionState = new CustomSessionState()
+                    SessionState = new CustomSessionState(),
                 };
             }
 
@@ -214,7 +222,7 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     {
                         var uploadedButtons = new List<AliceButtonModel>()
                             {
-                                new AliceButtonModel(_homeButtonTitle, true)
+                                new AliceButtonModel(_homeButtonTitle, true),
                             };
                         var aliceResponse = new AliceImageResponse<CustomSessionState, object>(aliceRequest, "Изображение загружено", uploadedButtons);
                         aliceResponse.Response.Card = new AliceImageCardModel
@@ -227,16 +235,18 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                         return aliceResponse;
                     }
                 }
+
                 string text = "Не удалось загрузить изображение. Попробуйте еще раз";
                 var resourcesButtons = new List<AliceButtonModel>()
                     {
-                        new AliceButtonModel(_homeButtonTitle)
+                        new AliceButtonModel(_homeButtonTitle),
                     };
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, resourcesButtons)
                 {
-                    SessionState = new CustomSessionState(ModeType.ResourcesTesting)
+                    SessionState = new CustomSessionState(ModeType.ResourcesTesting),
                 };
             }
+
             if (aliceRequest.Request.Command != _homeButtonTitle &&
                 aliceRequest.Request.Nlu?.Intents?.TurnOn == null &&
                 aliceRequest.State?.Session?.Mode == ModeType.IntentsTesting)
@@ -246,13 +256,14 @@ namespace Yandex.Alice.Sdk.Demo.Controllers
                     {
                         new AliceButtonModel("включи свет в ванной"),
                         new AliceButtonModel("включи кондиционер на кухне"),
-                        new AliceButtonModel(_homeButtonTitle)
+                        new AliceButtonModel(_homeButtonTitle),
                     };
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, intentButtons)
                 {
-                    SessionState = new CustomSessionState(ModeType.IntentsTesting)
+                    SessionState = new CustomSessionState(ModeType.IntentsTesting),
                 };
             }
+
             if (aliceRequest.Request.Nlu?.Intents?.TurnOn != null)
             {
                 var what = aliceRequest.Request.Nlu.Intents.TurnOn.Slots.What as AliceEntityStringModel;

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using Yandex.Alice.Sdk.Models;
-
-namespace Yandex.Alice.Sdk.Demo.Models.Intents
+﻿namespace Yandex.Alice.Sdk.Demo.Models.Intents
 {
+    using System.Text.Json.Serialization;
+    using Yandex.Alice.Sdk.Models;
+
     public class CustomIntents
     {
         [JsonPropertyName("turn.on")]

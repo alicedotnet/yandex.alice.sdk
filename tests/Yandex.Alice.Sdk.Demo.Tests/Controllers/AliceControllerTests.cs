@@ -1,15 +1,15 @@
-﻿using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using Xunit.Abstractions;
-using Yandex.Alice.Sdk.Demo.Tests.TestsInfrastructure;
-using Yandex.Alice.Sdk.Demo.Tests.TestsInfrastructure.Fixtures;
-
-namespace Yandex.Alice.Sdk.Demo.Tests.Controllers
+﻿namespace Yandex.Alice.Sdk.Demo.Tests.Controllers
 {
+    using System.IO;
+    using System.Net;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Xunit;
+    using Xunit.Abstractions;
+    using Yandex.Alice.Sdk.Demo.Tests.TestsInfrastructure;
+    using Yandex.Alice.Sdk.Demo.Tests.TestsInfrastructure.Fixtures;
+
     [Collection(TestsConstants.TestServerCollectionName)]
     public class AliceControllerTests
     {
@@ -32,7 +32,7 @@ namespace Yandex.Alice.Sdk.Demo.Tests.Controllers
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await _client.PostAsync("alice", content).ConfigureAwait(false);
             string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            Assert.True(HttpStatusCode.OK == response.StatusCode, responseContent);
+            Assert.True(response.StatusCode == HttpStatusCode.OK, responseContent);
 
             _testOutputHelper.WriteLine(responseContent);
         }

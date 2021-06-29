@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using Yandex.Alice.Sdk.Demo.Services.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
-using Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures;
-
-namespace Yandex.Alice.Sdk.Demo.IntegrationTests.Services
+﻿namespace Yandex.Alice.Sdk.Demo.IntegrationTests.Services
 {
+    using System.Threading.Tasks;
+    using Microsoft.Extensions.DependencyInjection;
+    using Xunit;
+    using Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures;
+    using Yandex.Alice.Sdk.Demo.Services.Interfaces;
+
     [Collection(TestsConstants.TestServerCollectionName)]
     public class CleanServiceTests
     {

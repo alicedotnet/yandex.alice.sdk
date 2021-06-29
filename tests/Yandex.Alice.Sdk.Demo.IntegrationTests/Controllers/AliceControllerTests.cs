@@ -1,17 +1,17 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using Xunit.Abstractions;
-using Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures;
-using Yandex.Alice.Sdk.Demo.Resources;
-using Yandex.Alice.Sdk.Demo.Services.Interfaces;
-
-namespace Yandex.Alice.Sdk.Demo.IntegrationTests.Controllers
+﻿namespace Yandex.Alice.Sdk.Demo.IntegrationTests.Controllers
 {
+    using System.IO;
+    using System.Net;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Microsoft.Extensions.DependencyInjection;
+    using Xunit;
+    using Xunit.Abstractions;
+    using Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures;
+    using Yandex.Alice.Sdk.Demo.Resources;
+    using Yandex.Alice.Sdk.Demo.Services.Interfaces;
+
     [Collection(TestsConstants.TestServerCollectionName)]
     public class AliceControllerTests
     {
@@ -33,12 +33,12 @@ namespace Yandex.Alice.Sdk.Demo.IntegrationTests.Controllers
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await _client.PostAsync("alice", content).ConfigureAwait(false);
             string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            Assert.True(HttpStatusCode.OK == response.StatusCode, responseContent);
+            Assert.True(response.StatusCode == HttpStatusCode.OK, responseContent);
             Assert.Contains(Yandex_Alice_Sdk_Demo_Resources.Image_Upload_Success, responseContent);
 
             _testOutputHelper.WriteLine(responseContent);
 
             await _cleanService.CleanResourcesAsync().ConfigureAwait(false);
-        }        
+        }
     }
 }

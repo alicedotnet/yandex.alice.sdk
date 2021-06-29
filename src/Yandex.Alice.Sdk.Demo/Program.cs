@@ -1,13 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
-[assembly:CLSCompliant(false)]
+[assembly: CLSCompliant(false)]
+
 namespace Yandex.Alice.Sdk.Demo
 {
     public static class Program

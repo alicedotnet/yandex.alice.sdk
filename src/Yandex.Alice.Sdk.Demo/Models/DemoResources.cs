@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Yandex.Alice.Sdk.Demo.Models
+﻿namespace Yandex.Alice.Sdk.Demo.Models
 {
     public static class DemoResources
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "<Pending>")]
         public static class Images
         {
             public const string CatImageId1 = "937455/748ce93e9e77af0a53d1";
@@ -17,7 +11,7 @@ namespace Yandex.Alice.Sdk.Demo.Models
 
             public static readonly string[] ImagesCollection = new string[]
                 {
-                    CatImageId1, DogImageId1, DogImageId2, DogImageId3
+                    CatImageId1, DogImageId1, DogImageId2, DogImageId3,
                 };
         }
     }
