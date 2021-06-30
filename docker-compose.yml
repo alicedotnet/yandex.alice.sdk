@@ -3,7 +3,7 @@ services:
   yandex.alice.sdk.demo:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-demo
       args:
         AliceSettings__SkillId: ${ALICESETTINGS_SKILLID}
         AliceSettings__DialogsOAuthToken: ${ALICESETTINGS_DIALOGSOAUTHTOKEN}
