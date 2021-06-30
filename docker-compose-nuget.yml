@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  yandex.alice.sdk:
+    build:
+      context: .
+      dockerfile: Dockerfile-nuget
+      args:
+        AliceSettings__SkillId: ${ALICESETTINGS_SKILLID}
+        AliceSettings__DialogsOAuthToken: ${ALICESETTINGS_DIALOGSOAUTHTOKEN}
+        Nuget_Url: ${NUGET_URL}
+        Nuget_Api_Key: ${NUGET_API_KEY}
