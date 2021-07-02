@@ -32,6 +32,9 @@ jobs:
           AliceSettings__DialogsOAuthToken=${{ secrets.DIALOGSAPI_DIALOGSOAUTHTOKEN }}
   push:
     needs: build
+    environment:
+      name: nuget
+    name: Push NuGet package
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
