@@ -22,6 +22,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo.SmartHome.IntegrationTests", "tests\Yandex.Alice.Sdk.Demo.SmartHome.IntegrationTests\Yandex.Alice.Sdk.Demo.SmartHome.IntegrationTests.csproj", "{75FA4014-6111-4371-A51A-AF0182709210}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo.SmartHome", "src\Yandex.Alice.Sdk.Demo.SmartHome\Yandex.Alice.Sdk.Demo.SmartHome.csproj", "{BB118B6E-AB4D-4787-9F74-14050CD1266F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +52,14 @@ Global
 		{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75FA4014-6111-4371-A51A-AF0182709210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75FA4014-6111-4371-A51A-AF0182709210}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75FA4014-6111-4371-A51A-AF0182709210}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75FA4014-6111-4371-A51A-AF0182709210}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB118B6E-AB4D-4787-9F74-14050CD1266F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB118B6E-AB4D-4787-9F74-14050CD1266F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB118B6E-AB4D-4787-9F74-14050CD1266F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB118B6E-AB4D-4787-9F74-14050CD1266F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +69,8 @@ Global
 		{33AECE69-24B8-48F5-9D7F-90D51EA35BE8} = {93C5E538-7334-4E96-993F-9AB263BAB450}
 		{D9D479AB-293D-4943-8593-C7F206F4BC8F} = {2FC07DCD-958C-4654-9A6D-543CACF1A10B}
 		{3CE5AC83-EB74-46B0-B116-D84A10F931CF} = {93C5E538-7334-4E96-993F-9AB263BAB450}
+		{75FA4014-6111-4371-A51A-AF0182709210} = {93C5E538-7334-4E96-993F-9AB263BAB450}
+		{BB118B6E-AB4D-4787-9F74-14050CD1266F} = {2FC07DCD-958C-4654-9A6D-543CACF1A10B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {48F66109-72C4-46CC-BBE1-A2EE8CD2B48F}

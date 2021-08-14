@@ -341,3 +341,6 @@ healthchecksdb
 
 # Custom Alice project specific
 .env
+tempkey.jwk
+profile.arm.json
+dotnet-tools.json
