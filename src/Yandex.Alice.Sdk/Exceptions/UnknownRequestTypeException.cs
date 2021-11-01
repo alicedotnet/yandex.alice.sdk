@@ -1,7 +1,9 @@
 ﻿namespace Yandex.Alice.Sdk.Exceptions
 {
     using System;
+    using System.Runtime.Serialization;
 
+    [Serializable]
     public class UnknownRequestTypeException : AliceException
     {
         public UnknownRequestTypeException(string message)
@@ -15,6 +17,11 @@
         }
 
         public UnknownRequestTypeException()
+        {
+        }
+
+        protected UnknownRequestTypeException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

@@ -1,6 +1,7 @@
 ﻿namespace Yandex.Alice.Sdk.Exceptions
 {
     using System;
+    using System.Runtime.Serialization;
 
     public abstract class AliceException : Exception
     {
@@ -15,6 +16,11 @@
         }
 
         protected AliceException()
+        {
+        }
+
+        protected AliceException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

@@ -21,6 +21,8 @@ jobs:
         build-args: |
           AliceSettings__SkillId=${{ secrets.SKILL_SKILLID }}
           AliceSettings__DialogsOAuthToken=${{ secrets.DIALOGSAPI_DIALOGSOAUTHTOKEN }}
+          AliceSettings__IoTOAuthToken=${{ secrets.ALICESETTINGS_IOTOAUTHTOKEN }}
+          AliceSettings__SmartHomeSkillId=${{ secrets.ALICESETTINGS_SMARTHOMESKILLID }}
   push:
     needs: build
     environment:
@@ -42,6 +44,8 @@ jobs:
         build-args: |
           AliceSettings__SkillId=${{ secrets.SKILL_SKILLID }}
           AliceSettings__DialogsOAuthToken=${{ secrets.DIALOGSAPI_DIALOGSOAUTHTOKEN }}
+          AliceSettings__IoTOAuthToken=${{ secrets.ALICESETTINGS_IOTOAUTHTOKEN }}
+          AliceSettings__SmartHomeSkillId=${{ secrets.ALICESETTINGS_SMARTHOMESKILLID }}
           Nuget_Api_Key=${{ secrets.NUGET_API_KEY }}
     - name: Create new git tag
       run: bash ./scripts/create-tag.sh

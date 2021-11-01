@@ -10,8 +10,8 @@
             Content = content;
         }
 
-        public DialogsApiResponse(string errorMessage)
-            : base(errorMessage)
+        public DialogsApiResponse(string errorMessage, string errorCode = null)
+            : base(errorMessage, errorCode)
         {
         }
     }

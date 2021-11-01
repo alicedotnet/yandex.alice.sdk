@@ -45,6 +45,10 @@ namespace Yandex.Alice.Sdk.Demo.SmartHome.SmartHomeIdentityServer
 
                     AllowedScopes = _allowedScopes,
                     RequirePkce = false,
+
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
+
+                    AccessTokenLifetime = 157784760, // 5 years
                 },
             };
         }

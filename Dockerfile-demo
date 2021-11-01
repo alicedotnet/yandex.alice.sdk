@@ -8,9 +8,12 @@ ARG AliceSettings__SkillId
 ENV AliceSettings__SkillId ${AliceSettings__SkillId}
 ARG AliceSettings__DialogsOAuthToken
 ENV AliceSettings__DialogsOAuthToken ${AliceSettings__DialogsOAuthToken}
+ARG AliceSettings__IoTOAuthToken
+ENV AliceSettings__IoTOAuthToken ${AliceSettings__IoTOAuthToken}
+ARG AliceSettings__SmartHomeSkillId
+ENV AliceSettings__SmartHomeSkillId ${AliceSettings__SmartHomeSkillId}
 WORKDIR /build
 COPY ./Yandex.Alice.Sdk.sln ./
-COPY ./docker-compose.dcproj ./
 COPY src/*/*.csproj ./
 RUN for file in $(ls *.csproj); do mkdir -p src/${file%.*}/ && mv $file src/${file%.*}/; done
 COPY tests/*/*.csproj ./  

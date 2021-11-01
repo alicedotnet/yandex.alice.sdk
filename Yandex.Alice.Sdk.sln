@@ -15,9 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yandex.Alice.Sdk.Demo.IntegrationTests", "tests\Yandex.Alice.Sdk.Demo.IntegrationTests\Yandex.Alice.Sdk.Demo.IntegrationTests.csproj", "{3CE5AC83-EB74-46B0-B116-D84A10F931CF}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7162E358-FA20-43F3-9A11-E7EFC5CC2549}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configuration", "configuration", "{7162E358-FA20-43F3-9A11-E7EFC5CC2549}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
@@ -48,10 +46,6 @@ Global
 		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CE5AC83-EB74-46B0-B116-D84A10F931CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E76A42E-5948-4829-A7DF-AC14A4A1C67A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75FA4014-6111-4371-A51A-AF0182709210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75FA4014-6111-4371-A51A-AF0182709210}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75FA4014-6111-4371-A51A-AF0182709210}.Release|Any CPU.ActiveCfg = Release|Any CPU
