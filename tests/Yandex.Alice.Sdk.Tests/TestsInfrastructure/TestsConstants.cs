@@ -13,7 +13,9 @@
             public static readonly string AliceResponseFilePath = $"{_assetsFolderPath}/AliceResponse.json";
             public static readonly string AliceImageResponseFilePath = $"{_assetsFolderPath}/AliceImageResponse.json";
             public static readonly string AliceGalleryResponseFilePath = $"{_assetsFolderPath}/AliceGalleryResponse.json";
+            public static readonly string ColorSettingStatesFilePath = $"{_assetsFolderPath}/ColorSettingStates.json";
             public static readonly string DialogsImageInfoFilePath = $"{_assetsFolderPath}/DialogsImageInfo.json";
+            public static readonly string IoTUserInfoFilePath = $"{_assetsFolderPath}/IoTUserInfo.json";
             public static readonly string IconFilePath = $"{_assetsFolderPath}/{IconFileName}";
             public static readonly string SoundFilePath = $"{_assetsFolderPath}/{SoundFileName}";
             private const string _assetsFolderPath = "TestsInfrastructure/Assets";

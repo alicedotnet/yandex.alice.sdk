@@ -344,3 +344,4 @@ healthchecksdb
 tempkey.jwk
 profile.arm.json
 dotnet-tools.json
+identityserver.db

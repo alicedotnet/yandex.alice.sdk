@@ -1,0 +1,2494 @@
+{
+  "status": "ok",
+  "request_id": "359deb42-00d7-4a1a-8883-ad25961b993f",
+  "rooms": [
+    {
+      "id": "898a1574-98e8-4c70-8901-50a0fd7c3959",
+      "name": "Спальня",
+      "household_id": "ab9272cf-16ec-483a-a0cf-5cc0c604952e",
+      "devices": [
+        "01c8b643-53e2-4de6-8b87-98c86f6b7932",
+        "2c7d2632-16d8-4b01-961d-89d6b0a9dc15",
+        "c192dc38-b3b1-4004-9cfc-2da5070265d3",
+        "c288dfff-b0d9-4deb-8051-d0ffe751194c"
+      ]
+    },
+    {
+      "id": "c73faf41-1cd9-43e1-8b33-b386e7bcb203",
+      "name": "Кухня",
+      "household_id": "ab9272cf-16ec-483a-a0cf-5cc0c604952e",
+      "devices": [
+        "66d18870-b760-4a9c-8b2f-83515385e667",
+        "6a230bd1-4e84-411f-9a88-f74e8d44b7c5",
+        "92ae8816-16f5-49fe-b8a4-90e891b65326"
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "dd9c62f7-c99e-4cfc-b0b4-0827c5a3be47",
+      "name": "Ненастоящие устройства",
+      "aliases": [],
+      "household_id": "ab9272cf-16ec-483a-a0cf-5cc0c604952e",
+      "type": "devices.types.light",
+      "devices": [
+        "c288dfff-b0d9-4deb-8051-d0ffe751194c"
+      ],
+      "capabilities": [
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.color_setting",
+          "parameters": {
+            "color_model": "rgb",
+            "temperature_k": {
+              "min": 2000,
+              "max": 9000
+            },
+            "color_scene": {
+              "scenes": [
+                {
+                  "id": "alarm"
+                },
+                {
+                  "id": "alice"
+                },
+                {
+                  "id": "candle"
+                },
+                {
+                  "id": "dinner"
+                },
+                {
+                  "id": "fantasy"
+                },
+                {
+                  "id": "garland"
+                },
+                {
+                  "id": "jungle"
+                },
+                {
+                  "id": "movie"
+                },
+                {
+                  "id": "neon"
+                },
+                {
+                  "id": "night"
+                },
+                {
+                  "id": "ocean"
+                },
+                {
+                  "id": "party"
+                },
+                {
+                  "id": "reading"
+                },
+                {
+                  "id": "rest"
+                },
+                {
+                  "id": "romance"
+                },
+                {
+                  "id": "siren"
+                },
+                {
+                  "id": "sunrise"
+                },
+                {
+                  "id": "sunset"
+                }
+              ]
+            }
+          },
+          "state": {
+            "instance": "scene",
+            "value": "jungle"
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "cleanup_mode",
+            "modes": [
+              {
+                "value": "auto"
+              },
+              {
+                "value": "eco"
+              },
+              {
+                "value": "turbo"
+              },
+              {
+                "value": "quiet"
+              }
+            ]
+          },
+          "state": {
+            "instance": "cleanup_mode",
+            "value": "quiet"
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "controls_locked"
+          },
+          "state": null
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "thermostat",
+            "modes": [
+              {
+                "value": "cool"
+              },
+              {
+                "value": "dry"
+              },
+              {
+                "value": "fan_only"
+              },
+              {
+                "value": "heat"
+              },
+              {
+                "value": "preheat"
+              }
+            ]
+          },
+          "state": {
+            "instance": "thermostat",
+            "value": "fan_only"
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "tea_mode",
+            "modes": [
+              {
+                "value": "black_tea"
+              },
+              {
+                "value": "green_tea"
+              },
+              {
+                "value": "flower_tea"
+              },
+              {
+                "value": "herbal_tea"
+              },
+              {
+                "value": "oolong_tea"
+              },
+              {
+                "value": "puerh_tea"
+              },
+              {
+                "value": "red_tea"
+              },
+              {
+                "value": "white_tea"
+              }
+            ]
+          },
+          "state": {
+            "instance": "tea_mode",
+            "value": "oolong_tea"
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "brightness",
+            "unit": "unit.percent",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 0,
+              "max": 100,
+              "precision": 1
+            }
+          },
+          "state": {
+            "instance": "brightness",
+            "value": 35
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "open",
+            "unit": "unit.percent",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 0,
+              "max": 100,
+              "precision": 1
+            }
+          },
+          "state": {
+            "instance": "open",
+            "value": 90
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "ionization"
+          },
+          "state": {
+            "instance": "ionization",
+            "value": false
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "swing",
+            "modes": [
+              {
+                "value": "vertical"
+              },
+              {
+                "value": "horizontal"
+              },
+              {
+                "value": "stationary"
+              }
+            ]
+          },
+          "state": {
+            "instance": "swing",
+            "value": "horizontal"
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "channel",
+            "unit": "",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 1,
+              "max": 50,
+              "precision": 1
+            }
+          },
+          "state": {
+            "instance": "channel",
+            "value": 2
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "pause"
+          },
+          "state": null
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "mute"
+          },
+          "state": null
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "input_source",
+            "modes": [
+              {
+                "value": "one"
+              },
+              {
+                "value": "two"
+              },
+              {
+                "value": "three"
+              },
+              {
+                "value": "four"
+              },
+              {
+                "value": "five"
+              },
+              {
+                "value": "six"
+              },
+              {
+                "value": "seven"
+              },
+              {
+                "value": "eight"
+              },
+              {
+                "value": "nine"
+              },
+              {
+                "value": "ten"
+              }
+            ]
+          },
+          "state": {
+            "instance": "input_source",
+            "value": "two"
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.on_off",
+          "parameters": {
+            "split": true
+          },
+          "state": {
+            "instance": "on",
+            "value": true
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "heat",
+            "modes": [
+              {
+                "value": "auto"
+              },
+              {
+                "value": "min"
+              },
+              {
+                "value": "max"
+              }
+            ]
+          },
+          "state": {
+            "instance": "heat",
+            "value": "min"
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "fan_speed",
+            "modes": [
+              {
+                "value": "high"
+              },
+              {
+                "value": "medium"
+              },
+              {
+                "value": "low"
+              }
+            ]
+          },
+          "state": {
+            "instance": "fan_speed",
+            "value": "medium"
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "oscillation"
+          },
+          "state": null
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "work_speed",
+            "modes": [
+              {
+                "value": "fast"
+              },
+              {
+                "value": "slow"
+              }
+            ]
+          },
+          "state": {
+            "instance": "work_speed",
+            "value": "slow"
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "humidity",
+            "unit": "unit.percent",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 0,
+              "max": 100,
+              "precision": 1
+            }
+          },
+          "state": {
+            "instance": "humidity",
+            "value": 45
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "backlight"
+          },
+          "state": null
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "coffee_mode",
+            "modes": [
+              {
+                "value": "americano"
+              },
+              {
+                "value": "cappuccino"
+              },
+              {
+                "value": "espresso"
+              },
+              {
+                "value": "double_espresso"
+              },
+              {
+                "value": "latte"
+              }
+            ]
+          },
+          "state": {
+            "instance": "coffee_mode",
+            "value": "cappuccino"
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "volume",
+            "unit": "unit.percent",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 0,
+              "max": 100,
+              "precision": 10
+            }
+          },
+          "state": {
+            "instance": "volume",
+            "value": 67
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "keep_warm"
+          },
+          "state": null
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "dishwashing",
+            "modes": [
+              {
+                "value": "auto"
+              },
+              {
+                "value": "normal"
+              },
+              {
+                "value": "intensive"
+              },
+              {
+                "value": "glass"
+              },
+              {
+                "value": "express"
+              },
+              {
+                "value": "pre_rinse"
+              }
+            ]
+          },
+          "state": {
+            "instance": "dishwashing",
+            "value": "glass"
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "temperature",
+            "unit": "unit.temperature.celsius",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 18,
+              "max": 40,
+              "precision": 1
+            }
+          },
+          "state": {
+            "instance": "temperature",
+            "value": 24
+          }
+        },
+        {
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "program",
+            "modes": [
+              {
+                "value": "aspic"
+              },
+              {
+                "value": "baby_food"
+              },
+              {
+                "value": "bread"
+              },
+              {
+                "value": "boiling"
+              },
+              {
+                "value": "cereals"
+              },
+              {
+                "value": "cheesecake"
+              },
+              {
+                "value": "deep_fryer"
+              },
+              {
+                "value": "dessert"
+              },
+              {
+                "value": "fowl"
+              },
+              {
+                "value": "frying"
+              },
+              {
+                "value": "macaroni"
+              },
+              {
+                "value": "milk_porridge"
+              },
+              {
+                "value": "multicooker"
+              },
+              {
+                "value": "pasta"
+              },
+              {
+                "value": "pilaf"
+              },
+              {
+                "value": "pizza"
+              },
+              {
+                "value": "sauce"
+              },
+              {
+                "value": "slow_cook"
+              },
+              {
+                "value": "soup"
+              },
+              {
+                "value": "steam"
+              },
+              {
+                "value": "stewing"
+              },
+              {
+                "value": "vacuum"
+              },
+              {
+                "value": "yogurt"
+              }
+            ]
+          },
+          "state": {
+            "instance": "program",
+            "value": "cheesecake"
+          }
+        }
+      ]
+    }
+  ],
+  "devices": [
+    {
+      "id": "01c8b643-53e2-4de6-8b87-98c86f6b7932",
+      "name": "Фантомная лампочка 1",
+      "aliases": [
+        "Альтернативное название"
+      ],
+      "type": "devices.types.light",
+      "external_id": "1234",
+      "skill_id": "bdd60590-e508-4a73-888f-c590c4db549d",
+      "household_id": "ab9272cf-16ec-483a-a0cf-5cc0c604952e",
+      "room": "898a1574-98e8-4c70-8901-50a0fd7c3959",
+      "groups": [],
+      "capabilities": [
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.on_off",
+          "parameters": {
+            "split": true
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.color_setting",
+          "parameters": {
+            "color_model": "rgb",
+            "temperature_k": {
+              "min": 2000,
+              "max": 9000
+            },
+            "color_scene": {
+              "scenes": [
+                {
+                  "id": "alarm"
+                },
+                {
+                  "id": "alice"
+                },
+                {
+                  "id": "candle"
+                },
+                {
+                  "id": "dinner"
+                },
+                {
+                  "id": "fantasy"
+                },
+                {
+                  "id": "garland"
+                },
+                {
+                  "id": "jungle"
+                },
+                {
+                  "id": "movie"
+                },
+                {
+                  "id": "neon"
+                },
+                {
+                  "id": "night"
+                },
+                {
+                  "id": "ocean"
+                },
+                {
+                  "id": "party"
+                },
+                {
+                  "id": "reading"
+                },
+                {
+                  "id": "rest"
+                },
+                {
+                  "id": "romance"
+                },
+                {
+                  "id": "siren"
+                },
+                {
+                  "id": "sunrise"
+                },
+                {
+                  "id": "sunset"
+                }
+              ]
+            }
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "cleanup_mode",
+            "modes": [
+              {
+                "value": "auto"
+              },
+              {
+                "value": "eco"
+              },
+              {
+                "value": "turbo"
+              },
+              {
+                "value": "quiet"
+              }
+            ]
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "coffee_mode",
+            "modes": [
+              {
+                "value": "americano"
+              },
+              {
+                "value": "cappuccino"
+              },
+              {
+                "value": "espresso"
+              },
+              {
+                "value": "double_espresso"
+              },
+              {
+                "value": "latte"
+              }
+            ]
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "dishwashing",
+            "modes": [
+              {
+                "value": "auto"
+              },
+              {
+                "value": "normal"
+              },
+              {
+                "value": "intensive"
+              },
+              {
+                "value": "glass"
+              },
+              {
+                "value": "express"
+              },
+              {
+                "value": "pre_rinse"
+              }
+            ]
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "fan_speed",
+            "modes": [
+              {
+                "value": "high"
+              },
+              {
+                "value": "medium"
+              },
+              {
+                "value": "low"
+              }
+            ]
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "heat",
+            "modes": [
+              {
+                "value": "auto"
+              },
+              {
+                "value": "min"
+              },
+              {
+                "value": "max"
+              }
+            ]
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "input_source",
+            "modes": [
+              {
+                "value": "one"
+              },
+              {
+                "value": "two"
+              },
+              {
+                "value": "three"
+              },
+              {
+                "value": "four"
+              },
+              {
+                "value": "five"
+              },
+              {
+                "value": "six"
+              },
+              {
+                "value": "seven"
+              },
+              {
+                "value": "eight"
+              },
+              {
+                "value": "nine"
+              },
+              {
+                "value": "ten"
+              }
+            ]
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "program",
+            "modes": [
+              {
+                "value": "aspic"
+              },
+              {
+                "value": "baby_food"
+              },
+              {
+                "value": "bread"
+              },
+              {
+                "value": "boiling"
+              },
+              {
+                "value": "cereals"
+              },
+              {
+                "value": "cheesecake"
+              },
+              {
+                "value": "deep_fryer"
+              },
+              {
+                "value": "dessert"
+              },
+              {
+                "value": "fowl"
+              },
+              {
+                "value": "frying"
+              },
+              {
+                "value": "macaroni"
+              },
+              {
+                "value": "milk_porridge"
+              },
+              {
+                "value": "multicooker"
+              },
+              {
+                "value": "pasta"
+              },
+              {
+                "value": "pilaf"
+              },
+              {
+                "value": "pizza"
+              },
+              {
+                "value": "sauce"
+              },
+              {
+                "value": "slow_cook"
+              },
+              {
+                "value": "soup"
+              },
+              {
+                "value": "steam"
+              },
+              {
+                "value": "stewing"
+              },
+              {
+                "value": "vacuum"
+              },
+              {
+                "value": "yogurt"
+              }
+            ]
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "swing",
+            "modes": [
+              {
+                "value": "vertical"
+              },
+              {
+                "value": "horizontal"
+              },
+              {
+                "value": "stationary"
+              }
+            ]
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "tea_mode",
+            "modes": [
+              {
+                "value": "black_tea"
+              },
+              {
+                "value": "green_tea"
+              },
+              {
+                "value": "flower_tea"
+              },
+              {
+                "value": "herbal_tea"
+              },
+              {
+                "value": "oolong_tea"
+              },
+              {
+                "value": "puerh_tea"
+              },
+              {
+                "value": "red_tea"
+              },
+              {
+                "value": "white_tea"
+              }
+            ]
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "thermostat",
+            "modes": [
+              {
+                "value": "cool"
+              },
+              {
+                "value": "dry"
+              },
+              {
+                "value": "fan_only"
+              },
+              {
+                "value": "heat"
+              },
+              {
+                "value": "preheat"
+              }
+            ]
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "work_speed",
+            "modes": [
+              {
+                "value": "fast"
+              },
+              {
+                "value": "slow"
+              }
+            ]
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "brightness",
+            "unit": "unit.percent",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 0,
+              "max": 100,
+              "precision": 1
+            }
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "channel",
+            "unit": "",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 1,
+              "max": 50,
+              "precision": 1
+            }
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "humidity",
+            "unit": "unit.percent",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 0,
+              "max": 100,
+              "precision": 1
+            }
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "open",
+            "unit": "unit.percent",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 0,
+              "max": 100,
+              "precision": 1
+            }
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "temperature",
+            "unit": "unit.temperature.celsius",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 18,
+              "max": 40,
+              "precision": 1
+            }
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "volume",
+            "unit": "unit.percent",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 0,
+              "max": 100,
+              "precision": 10
+            }
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "backlight"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "controls_locked"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "ionization"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "keep_warm"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "mute"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "oscillation"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "pause"
+          },
+          "state": null,
+          "last_updated": 0.0
+        }
+      ],
+      "properties": [
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "amperage",
+            "unit": "unit.ampere"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "battery_level",
+            "unit": "unit.percent"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "co2_level",
+            "unit": "unit.ppm"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "humidity",
+            "unit": "unit.percent"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "illumination",
+            "unit": "unit.illumination.lux"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "pm1_density",
+            "unit": "unit.density.mcg_m3"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "pm2.5_density",
+            "unit": "unit.density.mcg_m3"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "pm10_density",
+            "unit": "unit.density.mcg_m3"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "power",
+            "unit": "unit.watt"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "pressure",
+            "unit": "unit.pressure.atm"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "temperature",
+            "unit": "unit.temperature.celsius"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "tvoc",
+            "unit": "unit.density.mcg_m3"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "voltage",
+            "unit": "unit.volt"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "water_level",
+            "unit": "unit.percent"
+          },
+          "state": null,
+          "last_updated": 0.0
+        }
+      ]
+    },
+    {
+      "id": "2c7d2632-16d8-4b01-961d-89d6b0a9dc15",
+      "name": "Валли",
+      "aliases": [],
+      "type": "devices.types.vacuum_cleaner",
+      "external_id": "M1GAxtaW9A0LXNwZWMtdjIVjIAFGA1kcmVhbWUtbWMxODA4FRQYCTI5NDQyNzA4MhWKiggA",
+      "skill_id": "ad26f8c2-fc31-4928-a653-d829fda7e6c2",
+      "household_id": "ab9272cf-16ec-483a-a0cf-5cc0c604952e",
+      "room": "898a1574-98e8-4c70-8901-50a0fd7c3959",
+      "groups": [],
+      "capabilities": [
+        {
+          "reportable": false,
+          "retrievable": true,
+          "type": "devices.capabilities.on_off",
+          "parameters": {
+            "split": false
+          },
+          "state": {
+            "instance": "on",
+            "value": true
+          },
+          "last_updated": 1635597046.079923
+        },
+        {
+          "reportable": false,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "pause"
+          },
+          "state": {
+            "instance": "pause",
+            "value": false
+          },
+          "last_updated": 1635597046.079923
+        }
+      ],
+      "properties": [
+        {
+          "type": "devices.properties.float",
+          "reportable": false,
+          "retrievable": true,
+          "parameters": {
+            "instance": "battery_level",
+            "unit": "unit.percent"
+          },
+          "state": {
+            "instance": "battery_level",
+            "value": 100
+          },
+          "state_changed_at": 1632235070.0505438,
+          "last_updated": 1635597046.079923
+        }
+      ]
+    },
+    {
+      "id": "66d18870-b760-4a9c-8b2f-83515385e667",
+      "name": "Яндекс Мини Подлесейки",
+      "aliases": [],
+      "type": "devices.types.smart_speaker.yandex.station.mini",
+      "external_id": "FF98F029FE17CC84150B3AA1.yandexmini",
+      "skill_id": "Q",
+      "household_id": "ab9272cf-16ec-483a-a0cf-5cc0c604952e",
+      "room": "c73faf41-1cd9-43e1-8b33-b386e7bcb203",
+      "groups": [],
+      "capabilities": [],
+      "properties": [],
+      "quasar_info": {
+        "device_id": "FF98F029FE17CC84150B3AA1",
+        "platform": "yandexmini"
+      }
+    },
+    {
+      "id": "6a230bd1-4e84-411f-9a88-f74e8d44b7c5",
+      "name": "Бракованная мультиварка",
+      "aliases": [],
+      "type": "devices.types.cooking.multicooker",
+      "external_id": "1235",
+      "skill_id": "bdd60590-e508-4a73-888f-c590c4db549d-draft",
+      "household_id": "ab9272cf-16ec-483a-a0cf-5cc0c604952e",
+      "room": "c73faf41-1cd9-43e1-8b33-b386e7bcb203",
+      "groups": [],
+      "capabilities": [
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.on_off",
+          "parameters": {
+            "split": true
+          },
+          "state": null,
+          "last_updated": 0.0
+        }
+      ],
+      "properties": [
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "water_level",
+            "unit": "unit.percent"
+          },
+          "state": null,
+          "last_updated": 0.0
+        }
+      ]
+    },
+    {
+      "id": "92ae8816-16f5-49fe-b8a4-90e891b65326",
+      "name": "Бракованная мультиварка",
+      "aliases": [],
+      "type": "devices.types.cooking.multicooker",
+      "external_id": "1235",
+      "skill_id": "bdd60590-e508-4a73-888f-c590c4db549d",
+      "household_id": "ab9272cf-16ec-483a-a0cf-5cc0c604952e",
+      "room": "c73faf41-1cd9-43e1-8b33-b386e7bcb203",
+      "groups": [],
+      "capabilities": [
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.on_off",
+          "parameters": {
+            "split": true
+          },
+          "state": null,
+          "last_updated": 0.0
+        }
+      ],
+      "properties": [
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "water_level",
+            "unit": "unit.percent"
+          },
+          "state": null,
+          "last_updated": 0.0
+        }
+      ]
+    },
+    {
+      "id": "c192dc38-b3b1-4004-9cfc-2da5070265d3",
+      "name": "Яндекс Мини",
+      "aliases": [],
+      "type": "devices.types.smart_speaker.yandex.station.mini",
+      "external_id": "FF98F0293D2614A35C1EF922.yandexmini",
+      "skill_id": "Q",
+      "household_id": "ab9272cf-16ec-483a-a0cf-5cc0c604952e",
+      "room": "898a1574-98e8-4c70-8901-50a0fd7c3959",
+      "groups": [],
+      "capabilities": [],
+      "properties": [],
+      "quasar_info": {
+        "device_id": "FF98F0293D2614A35C1EF922",
+        "platform": "yandexmini"
+      }
+    },
+    {
+      "id": "c288dfff-b0d9-4deb-8051-d0ffe751194c",
+      "name": "Фантомная лампочка",
+      "aliases": [],
+      "type": "devices.types.light",
+      "external_id": "1234",
+      "skill_id": "bdd60590-e508-4a73-888f-c590c4db549d-draft",
+      "household_id": "ab9272cf-16ec-483a-a0cf-5cc0c604952e",
+      "room": "898a1574-98e8-4c70-8901-50a0fd7c3959",
+      "groups": [
+        "dd9c62f7-c99e-4cfc-b0b4-0827c5a3be47"
+      ],
+      "capabilities": [
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.on_off",
+          "parameters": {
+            "split": true
+          },
+          "state": {
+            "instance": "on",
+            "value": true
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.color_setting",
+          "parameters": {
+            "color_model": "rgb",
+            "temperature_k": {
+              "min": 2000,
+              "max": 9000
+            },
+            "color_scene": {
+              "scenes": [
+                {
+                  "id": "alarm"
+                },
+                {
+                  "id": "alice"
+                },
+                {
+                  "id": "candle"
+                },
+                {
+                  "id": "dinner"
+                },
+                {
+                  "id": "fantasy"
+                },
+                {
+                  "id": "garland"
+                },
+                {
+                  "id": "jungle"
+                },
+                {
+                  "id": "movie"
+                },
+                {
+                  "id": "neon"
+                },
+                {
+                  "id": "night"
+                },
+                {
+                  "id": "ocean"
+                },
+                {
+                  "id": "party"
+                },
+                {
+                  "id": "reading"
+                },
+                {
+                  "id": "rest"
+                },
+                {
+                  "id": "romance"
+                },
+                {
+                  "id": "siren"
+                },
+                {
+                  "id": "sunrise"
+                },
+                {
+                  "id": "sunset"
+                }
+              ]
+            }
+          },
+          "state": {
+            "instance": "scene",
+            "value": "jungle"
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "cleanup_mode",
+            "modes": [
+              {
+                "value": "auto"
+              },
+              {
+                "value": "eco"
+              },
+              {
+                "value": "turbo"
+              },
+              {
+                "value": "quiet"
+              }
+            ]
+          },
+          "state": {
+            "instance": "cleanup_mode",
+            "value": "quiet"
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "coffee_mode",
+            "modes": [
+              {
+                "value": "americano"
+              },
+              {
+                "value": "cappuccino"
+              },
+              {
+                "value": "espresso"
+              },
+              {
+                "value": "double_espresso"
+              },
+              {
+                "value": "latte"
+              }
+            ]
+          },
+          "state": {
+            "instance": "coffee_mode",
+            "value": "cappuccino"
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "dishwashing",
+            "modes": [
+              {
+                "value": "auto"
+              },
+              {
+                "value": "normal"
+              },
+              {
+                "value": "intensive"
+              },
+              {
+                "value": "glass"
+              },
+              {
+                "value": "express"
+              },
+              {
+                "value": "pre_rinse"
+              }
+            ]
+          },
+          "state": {
+            "instance": "dishwashing",
+            "value": "glass"
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "fan_speed",
+            "modes": [
+              {
+                "value": "high"
+              },
+              {
+                "value": "medium"
+              },
+              {
+                "value": "low"
+              }
+            ]
+          },
+          "state": {
+            "instance": "fan_speed",
+            "value": "medium"
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "heat",
+            "modes": [
+              {
+                "value": "auto"
+              },
+              {
+                "value": "min"
+              },
+              {
+                "value": "max"
+              }
+            ]
+          },
+          "state": {
+            "instance": "heat",
+            "value": "min"
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "input_source",
+            "modes": [
+              {
+                "value": "one"
+              },
+              {
+                "value": "two"
+              },
+              {
+                "value": "three"
+              },
+              {
+                "value": "four"
+              },
+              {
+                "value": "five"
+              },
+              {
+                "value": "six"
+              },
+              {
+                "value": "seven"
+              },
+              {
+                "value": "eight"
+              },
+              {
+                "value": "nine"
+              },
+              {
+                "value": "ten"
+              }
+            ]
+          },
+          "state": {
+            "instance": "input_source",
+            "value": "two"
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "program",
+            "modes": [
+              {
+                "value": "aspic"
+              },
+              {
+                "value": "baby_food"
+              },
+              {
+                "value": "bread"
+              },
+              {
+                "value": "boiling"
+              },
+              {
+                "value": "cereals"
+              },
+              {
+                "value": "cheesecake"
+              },
+              {
+                "value": "deep_fryer"
+              },
+              {
+                "value": "dessert"
+              },
+              {
+                "value": "fowl"
+              },
+              {
+                "value": "frying"
+              },
+              {
+                "value": "macaroni"
+              },
+              {
+                "value": "milk_porridge"
+              },
+              {
+                "value": "multicooker"
+              },
+              {
+                "value": "pasta"
+              },
+              {
+                "value": "pilaf"
+              },
+              {
+                "value": "pizza"
+              },
+              {
+                "value": "sauce"
+              },
+              {
+                "value": "slow_cook"
+              },
+              {
+                "value": "soup"
+              },
+              {
+                "value": "steam"
+              },
+              {
+                "value": "stewing"
+              },
+              {
+                "value": "vacuum"
+              },
+              {
+                "value": "yogurt"
+              }
+            ]
+          },
+          "state": {
+            "instance": "program",
+            "value": "cheesecake"
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "swing",
+            "modes": [
+              {
+                "value": "vertical"
+              },
+              {
+                "value": "horizontal"
+              },
+              {
+                "value": "stationary"
+              }
+            ]
+          },
+          "state": {
+            "instance": "swing",
+            "value": "horizontal"
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "tea_mode",
+            "modes": [
+              {
+                "value": "black_tea"
+              },
+              {
+                "value": "green_tea"
+              },
+              {
+                "value": "flower_tea"
+              },
+              {
+                "value": "herbal_tea"
+              },
+              {
+                "value": "oolong_tea"
+              },
+              {
+                "value": "puerh_tea"
+              },
+              {
+                "value": "red_tea"
+              },
+              {
+                "value": "white_tea"
+              }
+            ]
+          },
+          "state": {
+            "instance": "tea_mode",
+            "value": "oolong_tea"
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "thermostat",
+            "modes": [
+              {
+                "value": "cool"
+              },
+              {
+                "value": "dry"
+              },
+              {
+                "value": "fan_only"
+              },
+              {
+                "value": "heat"
+              },
+              {
+                "value": "preheat"
+              }
+            ]
+          },
+          "state": {
+            "instance": "thermostat",
+            "value": "fan_only"
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.mode",
+          "parameters": {
+            "instance": "work_speed",
+            "modes": [
+              {
+                "value": "fast"
+              },
+              {
+                "value": "slow"
+              }
+            ]
+          },
+          "state": {
+            "instance": "work_speed",
+            "value": "slow"
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "brightness",
+            "unit": "unit.percent",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 0,
+              "max": 100,
+              "precision": 1
+            }
+          },
+          "state": {
+            "instance": "brightness",
+            "value": 35
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "channel",
+            "unit": "",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 1,
+              "max": 50,
+              "precision": 1
+            }
+          },
+          "state": {
+            "instance": "channel",
+            "value": 2
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "humidity",
+            "unit": "unit.percent",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 0,
+              "max": 100,
+              "precision": 1
+            }
+          },
+          "state": {
+            "instance": "humidity",
+            "value": 45
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "open",
+            "unit": "unit.percent",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 0,
+              "max": 100,
+              "precision": 1
+            }
+          },
+          "state": {
+            "instance": "open",
+            "value": 90
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "temperature",
+            "unit": "unit.temperature.celsius",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 18,
+              "max": 40,
+              "precision": 1
+            }
+          },
+          "state": {
+            "instance": "temperature",
+            "value": 24
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.range",
+          "parameters": {
+            "instance": "volume",
+            "unit": "unit.percent",
+            "random_access": true,
+            "looped": false,
+            "range": {
+              "min": 0,
+              "max": 100,
+              "precision": 10
+            }
+          },
+          "state": {
+            "instance": "volume",
+            "value": 67
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "backlight"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "controls_locked"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "ionization"
+          },
+          "state": {
+            "instance": "ionization",
+            "value": false
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "keep_warm"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "mute"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "oscillation"
+          },
+          "state": null,
+          "last_updated": 0.0
+        },
+        {
+          "reportable": true,
+          "retrievable": true,
+          "type": "devices.capabilities.toggle",
+          "parameters": {
+            "instance": "pause"
+          },
+          "state": null,
+          "last_updated": 0.0
+        }
+      ],
+      "properties": [
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "amperage",
+            "unit": "unit.ampere"
+          },
+          "state": {
+            "instance": "amperage",
+            "value": 15
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "battery_level",
+            "unit": "unit.percent"
+          },
+          "state": {
+            "instance": "battery_level",
+            "value": 97
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "co2_level",
+            "unit": "unit.ppm"
+          },
+          "state": {
+            "instance": "co2_level",
+            "value": 13
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "humidity",
+            "unit": "unit.percent"
+          },
+          "state": {
+            "instance": "humidity",
+            "value": 55
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "illumination",
+            "unit": "unit.illumination.lux"
+          },
+          "state": {
+            "instance": "illumination",
+            "value": 8
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "pm1_density",
+            "unit": "unit.density.mcg_m3"
+          },
+          "state": {
+            "instance": "pm1_density",
+            "value": 5
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "pm2.5_density",
+            "unit": "unit.density.mcg_m3"
+          },
+          "state": {
+            "instance": "pm2.5_density",
+            "value": 6
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "pm10_density",
+            "unit": "unit.density.mcg_m3"
+          },
+          "state": {
+            "instance": "pm10_density",
+            "value": 9
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "power",
+            "unit": "unit.watt"
+          },
+          "state": {
+            "instance": "power",
+            "value": 25
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "pressure",
+            "unit": "unit.pressure.atm"
+          },
+          "state": {
+            "instance": "pressure",
+            "value": 115
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "temperature",
+            "unit": "unit.temperature.celsius"
+          },
+          "state": {
+            "instance": "temperature",
+            "value": 21
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "tvoc",
+            "unit": "unit.density.mcg_m3"
+          },
+          "state": {
+            "instance": "tvoc",
+            "value": 1
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "voltage",
+            "unit": "unit.volt"
+          },
+          "state": {
+            "instance": "voltage",
+            "value": 220
+          },
+          "last_updated": 1635597046.8651881
+        },
+        {
+          "type": "devices.properties.float",
+          "reportable": true,
+          "retrievable": true,
+          "parameters": {
+            "instance": "water_level",
+            "unit": "unit.percent"
+          },
+          "state": {
+            "instance": "water_level",
+            "value": 90
+          },
+          "last_updated": 1635597046.8651881
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "6d6199c5-a3a5-45d5-b546-0d955b2455e7",
+      "name": "Попроси валли прибраться",
+      "is_active": true
+    }
+  ],
+  "households": [
+    {
+      "id": "ab9272cf-16ec-483a-a0cf-5cc0c604952e",
+      "name": "Мой дом"
+    }
+  ]
+}
