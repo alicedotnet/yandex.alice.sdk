@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
     using System.Text.Json;
     using Yandex.Alice.Sdk.Models;
@@ -44,17 +43,6 @@
             }
 
             throw new NotSupportedException($"{type ?? "<unknown>"} can not be deserialized");
-        }
-
-        public static void WriteItem(Utf8JsonWriter writer, AliceEntityModel value, JsonSerializerOptions options)
-        {
-            object newValue = null;
-            if (value != null)
-            {
-                newValue = Convert.ChangeType(value, value.GetType(), CultureInfo.InvariantCulture);
-            }
-
-            JsonSerializer.Serialize(writer, newValue, options);
         }
     }
 }

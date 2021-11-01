@@ -3,16 +3,24 @@ namespace Yandex.Alice.Sdk.Demo.SmartHome
     using Host.IdentityServer.Extensions;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.HttpOverrides;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Yandex.Alice.Sdk.Demo.SmartHome.Services;
 
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
 
-            services.AddSmartHomeIdentityServer();
+            services.AddSmartHomeIdentityServer(Configuration);
 
             services.AddSmartHomeServices();
         }

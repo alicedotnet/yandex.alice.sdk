@@ -4,11 +4,14 @@
     <TargetFramework>net5.0</TargetFramework>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>false</IsPackable>
+    <UserSecretsId>648a49bf-137e-401d-9fa2-3060a5eecb19</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.36" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
@@ -29,4 +32,9 @@
     <ProjectReference Include="..\..\src\Yandex.Alice.Sdk.Demo.SmartHome\Yandex.Alice.Sdk.Demo.SmartHome.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="appsettings.tests.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 </Project>

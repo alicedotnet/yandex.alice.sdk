@@ -12,7 +12,7 @@
 
         protected override void WriteItem(Utf8JsonWriter writer, AliceEntityModel item, JsonSerializerOptions options)
         {
-            AliceEntityModelConverterHelper.WriteItem(writer, item, options);
+            ConverterHelper.WriteItem(writer, item, options);
         }
     }
 }

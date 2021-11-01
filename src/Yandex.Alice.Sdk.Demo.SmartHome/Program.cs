@@ -2,12 +2,13 @@ namespace Yandex.Alice.Sdk.Demo.SmartHome
 {
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
+    using Yandex.Alice.Sdk.Demo.SmartHome.Areas.IdentityServer.Extensions;
 
     public static class Program
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().MigrateDatabase().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

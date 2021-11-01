@@ -1,0 +1,22 @@
+﻿[
+  {
+    "instance": "rgb",
+    "value": 13910520
+  },
+  {
+    "instance": "temperature_k",
+    "value": 4500
+  },
+  {
+    "instance": "scene",
+    "value": "sunrise"
+  },
+  {
+    "instance": "hsv",
+    "value": {
+      "h": 255,
+      "s": 100,
+      "v": 50
+    }
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:IdentityServer",
+      "suggestion": "true",
+      "ignored": "true"
+    }
+  }
+}

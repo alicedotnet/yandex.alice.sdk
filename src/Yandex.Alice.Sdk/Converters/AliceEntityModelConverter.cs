@@ -14,7 +14,7 @@
 
         public override void Write(Utf8JsonWriter writer, AliceEntityModel value, JsonSerializerOptions options)
         {
-            AliceEntityModelConverterHelper.WriteItem(writer, value, options);
+            ConverterHelper.WriteItem(writer, value, options);
         }
     }
 }
