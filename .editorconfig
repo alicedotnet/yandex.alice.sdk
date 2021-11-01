@@ -36,6 +36,8 @@ dotnet_diagnostic.SA1201.severity = none
 # SA1602: Enumeration items should be documented
 dotnet_diagnostic.SA1602.severity = none
 csharp_using_directive_placement=inside_namespace:silent
+dotnet_diagnostic.SA1615.severity=silent
+dotnet_diagnostic.SA1611.severity=silent
 
 [*.{cs,vb}]
 dotnet_diagnostic.CA1031.severity=silent

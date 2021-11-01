@@ -25,14 +25,14 @@
         }
 
         [Fact]
-        public void GetUserInfo_NoAuthToken_ShouldThrowException()
+        public async Task GetUserInfo_NoAuthToken_ShouldThrowException()
         {
             // arrange
             // act
             Func<Task> act = async () => await _ioTApiService.GetUserInfoAsync(null);
 
             // assert
-            act.Should().Throw<ArgumentException>();
+            await act.Should().ThrowAsync<ArgumentException>();
         }
 
         [Fact]

@@ -34,7 +34,7 @@
 
                     return list.ToArray();
                 default:
-                    return null;
+                    return Array.Empty<TItem>();
             }
         }
 

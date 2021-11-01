@@ -29,3 +29,5 @@ jobs:
         build-args: |
           AliceSettings__SkillId=${{ secrets.SKILL_SKILLID }}
           AliceSettings__DialogsOAuthToken=${{ secrets.DIALOGSAPI_DIALOGSOAUTHTOKEN }}
+          AliceSettings__IoTOAuthToken=${{ secrets.ALICESETTINGS_IOTOAUTHTOKEN }}
+          AliceSettings__SmartHomeSkillId=${{ secrets.ALICESETTINGS_SMARTHOMESKILLID }}

@@ -4,7 +4,7 @@
     using System.Text.Json.Serialization;
     using Yandex.Alice.Sdk.Converters;
 
-    public class AliceNLUModel<TIntents>
+    public class AliceNluModel<TIntents>
     {
         [JsonPropertyName("tokens")]
         public IEnumerable<string> Tokens { get; set; }

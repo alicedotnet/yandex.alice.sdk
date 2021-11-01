@@ -10,16 +10,16 @@
     <PackageProjectUrl>https://alexvolchetsky.github.io/yandex.alice.sdk</PackageProjectUrl>
     <RepositoryUrl>https://github.com/alexvolchetsky/yandex.alice.sdk</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>yandex alice sdk skill dialogs models</PackageTags>
+    <PackageTags>yandex alice sdk skill dialogs models smart home</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>2.0.2</Version>
+    <Version>2.1.0</Version>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <PackageReleaseNotes>Move GetPayload to extension method</PackageReleaseNotes>
+    <PackageReleaseNotes>Add Smart Home support</PackageReleaseNotes>
     <Configurations>Debug;Release</Configurations>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -55,6 +55,10 @@
 
   <ItemGroup>
     <None Include="..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\README.md">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

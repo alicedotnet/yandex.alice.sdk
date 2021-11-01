@@ -5,6 +5,6 @@
     public class AliceRequestModel<TIntents> : AliceRequestModelBase
     {
         [JsonPropertyName("nlu")]
-        public AliceNLUModel<TIntents> Nlu { get; set; }
+        public AliceNluModel<TIntents> Nlu { get; set; }
     }
 }

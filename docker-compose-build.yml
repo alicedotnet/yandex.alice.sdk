@@ -7,3 +7,5 @@ services:
       args:
         AliceSettings__SkillId: ${ALICESETTINGS_SKILLID}
         AliceSettings__DialogsOAuthToken: ${ALICESETTINGS_DIALOGSOAUTHTOKEN}
+        AliceSettings__IoTOAuthToken: ${ALICESETTINGS_IOTOAUTHTOKEN}
+        AliceSettings__SmartHomeSkillId: ${ALICESETTINGS_SMARTHOMESKILLID}
