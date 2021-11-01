@@ -10,10 +10,4 @@
         [JsonPropertyName("payload")]
         public DialogsResponsePayload Payload { get; set; }
     }
-
-    public class DialogsResponsePayload
-    {
-        [JsonPropertyName("type")]
-        public string Type { get; set; }
-    }
 }

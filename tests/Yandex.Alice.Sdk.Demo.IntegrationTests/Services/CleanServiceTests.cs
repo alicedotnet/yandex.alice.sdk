@@ -1,6 +1,8 @@
 ﻿namespace Yandex.Alice.Sdk.Demo.IntegrationTests.Services
 {
+    using System;
     using System.Threading.Tasks;
+    using FluentAssertions;
     using Microsoft.Extensions.DependencyInjection;
     using Xunit;
     using Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures;
@@ -19,7 +21,12 @@
         [Fact]
         public async Task CleanResources()
         {
-            await _cleanService.CleanResourcesAsync().ConfigureAwait(false);
+            // arrange
+            // act
+            Func<Task> act = async () => await _cleanService.CleanResourcesAsync().ConfigureAwait(false);
+
+            // assert
+            await act.Should().NotThrowAsync();
         }
     }
 }

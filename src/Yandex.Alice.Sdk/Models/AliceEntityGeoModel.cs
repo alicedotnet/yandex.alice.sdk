@@ -7,13 +7,4 @@
         [JsonPropertyName("value")]
         public AliceEntityGeoValueModel Value { get; set; }
     }
-
-    public class AliceEntityGeoValueModel
-    {
-        [JsonPropertyName("house_number")]
-        public string HouseNumber { get; set; }
-
-        [JsonPropertyName("street")]
-        public string Street { get; set; }
-    }
 }

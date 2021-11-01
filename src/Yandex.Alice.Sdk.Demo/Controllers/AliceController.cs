@@ -27,6 +27,11 @@
         private const string _geolocationButtonTitle = "геолокация";
         private const string _homeButtonTitle = "назад";
         private const string _githubLink = "https://github.com/alexvolchetsky/yandex.alice.sdk";
+        private const string _munchkinInfoLink = "https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BD%D1%87%D0%BA%D0%B8%D0%BD_(%D0%BF%D0%BE%D1%80%D0%BE%D0%B4%D0%B0_%D0%BA%D0%BE%D1%88%D0%B5%D0%BA)";
+        private const string _jagdterrierInfoLink = "https://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%BC%D0%B5%D1%86%D0%BA%D0%B8%D0%B9_%D1%8F%D0%B3%D0%B4%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80";
+        private const string _huskyInfoLink = "https://ru.wikipedia.org/wiki/%D0%A5%D0%B0%D1%81%D0%BA%D0%B8";
+        private const string _labradorInfoLink = "https://ru.wikipedia.org/wiki/%D0%9B%D0%B0%D0%B1%D1%80%D0%B0%D0%B4%D0%BE%D1%80-%D1%80%D0%B5%D1%82%D1%80%D0%B8%D0%B2%D0%B5%D1%80";
+        private const string _morePuppiesLink = "https://www.google.com/search?q=%D1%89%D0%B5%D0%BD%D0%BE%D1%87%D0%BA%D0%B8&sxsrf=ALeKk03SlYE13sTDiS7dm3TPL9e5Y3FEMw:1589313761070&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiW4qiRj6_pAhXsw8QBHVOqBHcQ_AUoAXoECAoQAw&biw=1216&bih=601";
 
         private readonly ILogger<AliceController> _logger;
         private readonly IDialogsApiService _dialogsApiService;
@@ -44,7 +49,17 @@
 
         [HttpPost]
         [Route("/alice")]
-        public async Task<IActionResult> Get(DemoAliceRequest aliceRequest)
+        public Task<IActionResult> Get(DemoAliceRequest aliceRequest)
+        {
+            if (aliceRequest == null)
+            {
+                throw new ArgumentNullException(nameof(aliceRequest));
+            }
+
+            return GetAsync(aliceRequest);
+        }
+
+        private async Task<IActionResult> GetAsync(DemoAliceRequest aliceRequest)
         {
             try
             {
@@ -105,7 +120,7 @@
                     Button = new AliceImageCardButtonModel()
                     {
                         Text = "подробнее",
-                        Url = new Uri("https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BD%D1%87%D0%BA%D0%B8%D0%BD_(%D0%BF%D0%BE%D1%80%D0%BE%D0%B4%D0%B0_%D0%BA%D0%BE%D1%88%D0%B5%D0%BA)"),
+                        Url = new Uri(_munchkinInfoLink),
                     },
                 };
                 return aliceResponse;
@@ -128,7 +143,7 @@
                             Button = new AliceImageCardButtonModel()
                             {
                                 Text = "подробнее",
-                                Url = new Uri("https://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D0%BC%D0%B5%D1%86%D0%BA%D0%B8%D0%B9_%D1%8F%D0%B3%D0%B4%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80"),
+                                Url = new Uri(_jagdterrierInfoLink),
                             },
                         },
                         new AliceGalleryCardItem()
@@ -139,7 +154,7 @@
                             Button = new AliceImageCardButtonModel()
                             {
                                 Text = "подробнее",
-                                Url = new Uri("https://ru.wikipedia.org/wiki/%D0%A5%D0%B0%D1%81%D0%BA%D0%B8"),
+                                Url = new Uri(_huskyInfoLink),
                             },
                         },
                         new AliceGalleryCardItem()
@@ -150,7 +165,7 @@
                             Button = new AliceImageCardButtonModel()
                             {
                                 Text = "подробнее",
-                                Url = new Uri("https://ru.wikipedia.org/wiki/%D0%9B%D0%B0%D0%B1%D1%80%D0%B0%D0%B4%D0%BE%D1%80-%D1%80%D0%B5%D1%82%D1%80%D0%B8%D0%B2%D0%B5%D1%80"),
+                                Url = new Uri(_labradorInfoLink),
                             },
                         },
                     },
@@ -159,7 +174,7 @@
                         new AliceImageCardButtonModel()
                         {
                             Text = "больше щеночков",
-                            Url = new Uri("https://www.google.com/search?q=%D1%89%D0%B5%D0%BD%D0%BE%D1%87%D0%BA%D0%B8&sxsrf=ALeKk03SlYE13sTDiS7dm3TPL9e5Y3FEMw:1589313761070&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiW4qiRj6_pAhXsw8QBHVOqBHcQ_AUoAXoECAoQAw&biw=1216&bih=601"),
+                            Url = new Uri(_morePuppiesLink),
                         }),
                 };
                 return aliceResponse;

@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  yandex.alice.sdk:
+    build:
+      context: .
+      dockerfile: Dockerfile-build
+      args:
+        AliceSettings__SkillId: ${ALICESETTINGS_SKILLID}
+        AliceSettings__DialogsOAuthToken: ${ALICESETTINGS_DIALOGSOAUTHTOKEN}

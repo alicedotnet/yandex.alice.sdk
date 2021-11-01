@@ -40,5 +40,20 @@
 
             await _cleanService.CleanResourcesAsync().ConfigureAwait(false);
         }
+
+        [Theory]
+        [InlineData(TestsConstants.AliceRequestFilePath)]
+        [InlineData(TestsConstants.AliceRequestInvalidIntentFilePath)]
+        [InlineData(TestsConstants.AliceRequestPingFilePath)]
+        public async Task TestAlice(string filePath)
+        {
+            string json = File.ReadAllText(filePath);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync("alice", content).ConfigureAwait(false);
+            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            Assert.True(response.StatusCode == HttpStatusCode.OK, responseContent);
+
+            _testOutputHelper.WriteLine(responseContent);
+        }
     }
 }

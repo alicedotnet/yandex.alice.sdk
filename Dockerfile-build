@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim
+ARG AliceSettings__SkillId
+ENV AliceSettings__SkillId ${AliceSettings__SkillId}
+ARG AliceSettings__DialogsOAuthToken
+ENV AliceSettings__DialogsOAuthToken ${AliceSettings__DialogsOAuthToken}
+WORKDIR /build
+COPY ./Yandex.Alice.Sdk.sln ./
+COPY ./docker-compose.dcproj ./
+COPY src/*/*.csproj ./
+RUN for file in $(ls *.csproj); do mkdir -p src/${file%.*}/ && mv $file src/${file%.*}/; done
+COPY tests/*/*.csproj ./  
+RUN for file in $(ls *.csproj); do mkdir -p tests/${file%.*}/ && mv $file tests/${file%.*}/; done
+RUN dotnet restore Yandex.Alice.Sdk.sln
+COPY . .
+RUN dotnet test Yandex.Alice.Sdk.sln

@@ -14,6 +14,11 @@
 
         public CleanService(IDialogsApiService dialogsApiService, AliceSettings aliceSettings)
         {
+            if (aliceSettings == null)
+            {
+                throw new ArgumentNullException(nameof(aliceSettings));
+            }
+
             _dialogsApiService = dialogsApiService;
             _skillId = aliceSettings.SkillId;
         }
@@ -21,12 +26,12 @@
         public async Task CleanResourcesAsync()
         {
             var imagesResponse = await _dialogsApiService.GetImagesAsync(_skillId).ConfigureAwait(false);
-            foreach (var image in imagesResponse.Content.Images)
+            var images = imagesResponse.Content.Images
+                .Where(image => !DemoResources.Images.ImagesCollection.Contains(image.Id))
+                .ToArray();
+            foreach (var image in images)
             {
-                if (!DemoResources.Images.ImagesCollection.Contains(image.Id))
-                {
-                    await _dialogsApiService.DeleteImageAsync(_skillId, image.Id).ConfigureAwait(false);
-                }
+                await _dialogsApiService.DeleteImageAsync(_skillId, image.Id).ConfigureAwait(false);
             }
         }
     }
