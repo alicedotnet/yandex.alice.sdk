@@ -4,9 +4,12 @@
     {
         public string DialogsOAuthToken { get; }
 
-        public DialogsApiSettings(string dialogsOAuthToken)
+        public string BaseAddress { get; }
+
+        public DialogsApiSettings(string dialogsOAuthToken, string baseAddress = "https://dialogs.yandex.net")
         {
             DialogsOAuthToken = dialogsOAuthToken;
+            BaseAddress = baseAddress;
         }
     }
 }

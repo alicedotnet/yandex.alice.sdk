@@ -23,5 +23,9 @@
         Task<DialogsApiResponse<DialogsSoundsInfoList>> GetSoundsAsync(Guid skillId);
 
         Task<DialogsApiResponse<DialogsDeleteResponse>> DeleteSoundAsync(Guid skillId, Guid soundId);
+
+        Task<DialogsApiResponse<DialogsSmartHomeResponse>> CallbackStateAsync(Guid skillId, DialogsCallbackStateRequest request);
+
+        Task<DialogsApiResponse<DialogsSmartHomeResponse>> CallbackDiscoveryAsync(Guid skillId, DialogsCallbackDiscoveryRequest request);
     }
 }

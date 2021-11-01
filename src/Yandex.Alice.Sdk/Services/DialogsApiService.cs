@@ -9,11 +9,8 @@
     using Yandex.Alice.Sdk.Models.DialogsApi;
     using Yandex.Alice.Sdk.Resources;
 
-    public class DialogsApiService : IDialogsApiService, IDisposable
+    public class DialogsApiService : ApiServiceBase, IDialogsApiService
     {
-        private readonly HttpClient _dialogsApiClient;
-        private bool disposedValue;
-
         public DialogsApiService(DialogsApiSettings dialogsApiSettings)
         {
             if (dialogsApiSettings == null)
@@ -26,11 +23,11 @@
                 throw new ArgumentException(Yandex_Alice_Sdk_Resources.Error_NoOAuthToken);
             }
 
-            _dialogsApiClient = new HttpClient()
+            ApiClient = new HttpClient()
             {
-                BaseAddress = new Uri("https://dialogs.yandex.net"),
+                BaseAddress = new Uri(dialogsApiSettings.BaseAddress),
             };
-            _dialogsApiClient.DefaultRequestHeaders.Authorization =
+            ApiClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("OAuth", dialogsApiSettings.DialogsOAuthToken);
         }
 
@@ -39,14 +36,10 @@
             return await GetAsync<DialogsStatus>("/api/v1/status").ConfigureAwait(false);
         }
 
-        public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsWebUploadRequest request)
+        public Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsWebUploadRequest request)
         {
             string requestUri = $"{GetSkillUrl(skillId)}/images";
-            string json = JsonSerializer.Serialize(request);
-            using (HttpContent requestContent = new StringContent(json, Encoding.UTF8, "application/json"))
-            {
-                return await PostAsync<DialogsImageUploadResponse>(requestUri, requestContent).ConfigureAwait(false);
-            }
+            return PostAsync<DialogsImageUploadResponse, DialogsWebUploadRequest>(requestUri, request);
         }
 
         public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsFileUploadRequest request)
@@ -91,24 +84,16 @@
             return await DeleteAsync<DialogsDeleteResponse>(url).ConfigureAwait(false);
         }
 
-        public void Dispose()
+        public Task<DialogsApiResponse<DialogsSmartHomeResponse>> CallbackStateAsync(Guid skillId, DialogsCallbackStateRequest request)
         {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
+            string url = $"{GetSkillUrl(skillId)}/callback/state";
+            return PostAsync<DialogsSmartHomeResponse, DialogsCallbackStateRequest>(url, request);
         }
 
-        protected virtual void Dispose(bool disposing)
+        public Task<DialogsApiResponse<DialogsSmartHomeResponse>> CallbackDiscoveryAsync(Guid skillId, DialogsCallbackDiscoveryRequest request)
         {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    _dialogsApiClient.Dispose();
-                }
-
-                disposedValue = true;
-            }
+            string url = $"{GetSkillUrl(skillId)}/callback/discovery";
+            return PostAsync<DialogsSmartHomeResponse, DialogsCallbackDiscoveryRequest>(url, request);
         }
 
         private static string GetSkillUrl(Guid skillId)
@@ -127,6 +112,13 @@
             {
                 return await SendAsync<TContent>(requestMessage).ConfigureAwait(false);
             }
+        }
+
+        private Task<DialogsApiResponse<TContent>> PostAsync<TContent, TPayload>(string url, TPayload payload)
+        {
+            string json = JsonSerializer.Serialize(payload);
+            HttpContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            return PostAsync<TContent>(url, requestContent);
         }
 
         private async Task<DialogsApiResponse<TContent>> PostAsync<TContent>(string url, HttpContent content)
@@ -148,13 +140,18 @@
             }
         }
 
-        private async Task<DialogsApiResponse<TContent>> PostFileAsync<TContent>(string url, DialogsFileUploadRequest request)
+        private Task<DialogsApiResponse<TContent>> PostFileAsync<TContent>(string url, DialogsFileUploadRequest request)
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
+            return PostFileInternalAsync<TContent>(url, request);
+        }
+
+        private async Task<DialogsApiResponse<TContent>> PostFileInternalAsync<TContent>(string url, DialogsFileUploadRequest request)
+        {
             using (var streamContent = new StreamContent(request.Content))
             {
                 using (var formContent = new MultipartFormDataContent
@@ -169,7 +166,7 @@
 
         private async Task<DialogsApiResponse<TContent>> SendAsync<TContent>(HttpRequestMessage message)
         {
-            var apiResponse = await _dialogsApiClient.SendAsync(message).ConfigureAwait(false);
+            var apiResponse = await ApiClient.SendAsync(message).ConfigureAwait(false);
             string contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             DialogsApiResponse<TContent> response;
             if (apiResponse.IsSuccessStatusCode)
@@ -179,8 +176,22 @@
             }
             else if (apiResponse.Content.Headers.ContentType.MediaType == "application/json")
             {
-                var content = JsonSerializer.Deserialize<DialogsResponseContent>(contentString);
-                response = new DialogsApiResponse<TContent>(content.Message);
+                var requestUrl = apiResponse.RequestMessage.RequestUri.AbsolutePath;
+                string errorMessage, errorCode = null;
+                if (requestUrl.EndsWith("/callback/state", StringComparison.OrdinalIgnoreCase)
+                    || requestUrl.EndsWith("/callback/discovery", StringComparison.OrdinalIgnoreCase))
+                {
+                    var content = JsonSerializer.Deserialize<DialogsSmartHomeResponse>(contentString);
+                    errorMessage = content.ErrorMessage;
+                    errorCode = content.ErrorCode;
+                }
+                else
+                {
+                    var content = JsonSerializer.Deserialize<DialogsResponseContent>(contentString);
+                    errorMessage = content.Message;
+                }
+
+                response = new DialogsApiResponse<TContent>(errorMessage, errorCode);
             }
             else
             {
