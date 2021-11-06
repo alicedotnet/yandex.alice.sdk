@@ -1,0 +1,49 @@
+﻿{
+  "meta": {
+    "locale": "ru-RU",
+    "timezone": "Europe/Moscow",
+    "client_id": "ru.yandex.searchplugin/5.80 (Samsung Galaxy; Android 4.4)",
+    "interfaces": {
+      "screen": {},
+      "geolocation_sharing": {}
+    }
+  },
+  "request": {
+    "type": "Purchase.Confirmation",
+    "purchase_request_id": "d432de19be8347d09f656d9fe966e2f9",
+    "purchase_token": "token_value",
+    "order_id": "eeb59d64-9e6a-11ea-bb37-0242ac130002",
+    "purchase_timestamp": 1590399311,
+    "purchase_payload": 123,
+    "signed_data": "purchase_request_id=d432de19be8347d09f656d9fe966e2f9&purchase_token=token_value&order_id=eeb59d64-9e6a-11ea-bb37-0242ac130002&...",
+    "signature": "Pi6JNCFeeleRa..."
+  },
+  "session": {
+    "new": true,
+    "message_id": 4,
+    "session_id": "2eac4854-fce721f3-b845abba-20d60",
+    "skill_id": "3ad36498-f5rd-4079-a14b-788652932056",
+    "user_id": "AC9WC3DF6FCE052E45A4566A48E6B7193774B84814CE49A922E163B8B29881DC",
+    "user": {
+      "user_id": "6C91DA5198D1758C6A9F63A7C5CDDF09359F683B13A18A151FBF4C8B092BB0C2",
+      "access_token": "AgAAAAAB4vpbAAApoR1oaCd5yR6eiXSHqOGT8dT"
+    },
+    "application": {
+      "application_id": "47C73714B580ED2469056E71081159529FFC676A4E5B059D629A819E857DC2F8"
+    },
+    "location": {
+      "lat": 55.753215,
+      "lon": 37.622504,
+      "accuracy": 15000.0
+    }
+  },
+  "state": {
+    "session": {
+      "value": 10
+    },
+    "user": {
+      "value": 10
+    }
+  },
+  "version": "1.0"
+} 

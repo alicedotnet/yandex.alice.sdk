@@ -241,6 +241,9 @@
                 },
             };
 
+            // it can fail sometimes because of timeout. send first request to warm up skill server
+            await _ioTApiService.ManageDevicesAsync(_authToken, request);
+
             // act
             var response = await _ioTApiService.ManageDevicesAsync(_authToken, request);
 

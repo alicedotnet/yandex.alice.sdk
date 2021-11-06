@@ -3,7 +3,7 @@
     using System.Text.Json;
     using System.Text.Json.Serialization;
 
-    public abstract class SmartHomeConverter<T> : JsonConverter<T>
+    public abstract class AliceConverter<T> : JsonConverter<T>
     {
         protected virtual string GetPropertyValue(Utf8JsonReader reader, string propertyName)
         {

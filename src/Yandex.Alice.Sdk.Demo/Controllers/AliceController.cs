@@ -214,7 +214,7 @@
                 {
                     SessionState = new CustomSessionState(),
                 };
-                response.Response.Directives.SetRequestGeolocation();
+                response.Response.Directives.RequestGeolocation = new AliceRequestGeolocationDirective();
                 return response;
             }
 

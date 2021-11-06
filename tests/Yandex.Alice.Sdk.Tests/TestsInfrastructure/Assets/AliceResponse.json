@@ -12,7 +12,37 @@
     ],
     "end_session": true,
     "directives": {
-      "request_geolocation": {}
+      "request_geolocation": {},
+      "start_purchase": {
+        "purchase_request_id": "d432de19be8347d09f656d9fe966e2f9",
+        "image_url": "http://url_to_image_purchase.png",
+        "caption": "caption",
+        "description": "description",
+        "currency": "RUB",
+        "type": "BUY",
+        "payload": { "value": "payload" },
+        "merchant_key": "d1112abf-27d2-4005-8b47-6861555715d3",
+        "test_payment": true,
+        "products": [
+          {
+            "product_id": "5e4cf57a-8497-11ea-bc55-0242ac130209",
+            "title": "title 1",
+            "user_price": "120",
+            "price": "110",
+            "quantity": "2",
+            "nds_type": "nds_20"
+          },
+          {
+            "product_id": "9dc7c16a-9439-11ea-bb37-0242ac130002",
+            "title": "title 2",
+            "user_price": "420",
+            "price": "510",
+            "quantity": "2",
+            "nds_type": "nds_20"
+          }
+        ]
+      },
+      "confirm_purchase": {}
     }
   },
   "session_state": {

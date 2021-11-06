@@ -32,5 +32,32 @@
             public const string BigImage = "BigImage";
             public const string ItemsList = "ItemsList";
         }
+
+        public static class Currency
+        {
+            public const string Rub = "RUB";
+        }
+
+        public static class PurchaseType
+        {
+            public const string Buy = "BUY";
+        }
+
+        public static class RequestType
+        {
+            public const string SimpleUtterance = "SimpleUtterance";
+            public const string ButtonPressed = "ButtonPressed";
+            public const string GeolocationAllowed = "Geolocation.Allowed";
+            public const string GeolocationRejected = "Geolocation.Rejected";
+            public const string PurchaseConfirmation = "Purchase.Confirmation";
+        }
+
+        public static class NdsType
+        {
+            public const string Nds20 = "nds_20";
+            public const string Nds10 = "nds_10";
+            public const string Nds0 = "nds_0";
+            public const string NdsNone = "nds_none";
+        }
     }
 }

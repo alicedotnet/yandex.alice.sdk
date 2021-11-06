@@ -6,5 +6,6 @@
         ButtonPressed,
         GeolocationAllowed,
         GeolocationRejected,
+        PurchaseConfirmation,
     }
 }

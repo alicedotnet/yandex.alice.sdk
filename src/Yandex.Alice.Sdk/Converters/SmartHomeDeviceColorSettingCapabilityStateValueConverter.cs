@@ -4,7 +4,7 @@
     using System.Text.Json;
     using Yandex.Alice.Sdk.Models.SmartHome;
 
-    public class SmartHomeDeviceColorSettingCapabilityStateValueConverter : SmartHomeConverter<SmartHomeDeviceColorSettingCapabilityStateValue>
+    public class SmartHomeDeviceColorSettingCapabilityStateValueConverter : AliceConverter<SmartHomeDeviceColorSettingCapabilityStateValue>
     {
         public override SmartHomeDeviceColorSettingCapabilityStateValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

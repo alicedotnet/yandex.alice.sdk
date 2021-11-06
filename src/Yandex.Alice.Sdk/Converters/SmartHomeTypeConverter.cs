@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Text.Json;
 
-    public abstract class SmartHomeTypeConverter<T> : SmartHomeConverter<T>
+    public abstract class SmartHomeTypeConverter<T> : AliceConverter<T>
     {
         protected abstract IReadOnlyDictionary<string, Type> EntityNameTypeMap { get; }
 

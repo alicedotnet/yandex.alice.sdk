@@ -77,7 +77,7 @@
         public void RequestGeolocation_Success()
         {
             var model = new AliceResponseModel();
-            model.Directives.SetRequestGeolocation();
+            model.Directives.RequestGeolocation = new AliceRequestGeolocationDirective();
             Assert.NotNull(model.Directives.RequestGeolocation);
         }
     }

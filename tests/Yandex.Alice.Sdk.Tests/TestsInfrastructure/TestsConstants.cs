@@ -10,6 +10,7 @@
             public const string SoundFileName = "sound.mp3";
             public static readonly string AliceRequestFilePath = $"{_assetsFolderPath}/AliceRequest.json";
             public static readonly string AliceRequestPingFilePath = $"{_assetsFolderPath}/AliceRequest_Ping.json";
+            public static readonly string AliceRequestPurchaseConfirmationFilePath = $"{_assetsFolderPath}/AliceRequest_PurchaseConfirmation.json";
             public static readonly string AliceResponseFilePath = $"{_assetsFolderPath}/AliceResponse.json";
             public static readonly string AliceImageResponseFilePath = $"{_assetsFolderPath}/AliceImageResponse.json";
             public static readonly string AliceGalleryResponseFilePath = $"{_assetsFolderPath}/AliceGalleryResponse.json";

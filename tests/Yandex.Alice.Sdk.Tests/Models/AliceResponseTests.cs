@@ -1,7 +1,9 @@
 ﻿namespace Yandex.Alice.Sdk.Tests.Models
 {
     using System.IO;
+    using System.Linq;
     using System.Text.Json;
+    using FluentAssertions;
     using Xunit;
     using Xunit.Abstractions;
     using Yandex.Alice.Sdk.Models;
@@ -36,27 +38,64 @@
         [Fact]
         public void AliceResponse()
         {
+            // arrange
             string json = File.ReadAllText(TestsConstants.Assets.AliceResponseFilePath);
+
+            // act
             var aliceResponse = JsonSerializer.Deserialize<AliceResponseWrapper>(json);
-            Assert.NotNull(aliceResponse);
-            Assert.NotEmpty(aliceResponse.Version);
-            Assert.NotNull(aliceResponse.SessionState);
-            Assert.NotNull(aliceResponse.UserStateUpdate);
-            Assert.NotNull(aliceResponse.Response);
-            Assert.NotEmpty(aliceResponse.Response.Text);
-            Assert.NotEmpty(aliceResponse.Response.Tts);
-            Assert.True(aliceResponse.Response.EndSession);
-            Assert.NotNull(aliceResponse.Response.Directives);
-            Assert.NotNull(aliceResponse.Response.Directives.RequestGeolocation);
-            Assert.NotNull(aliceResponse.Response.Buttons);
-            Assert.NotEmpty(aliceResponse.Response.Buttons);
-            foreach (var button in aliceResponse.Response.Buttons)
-            {
-                Assert.NotEmpty(button.Title);
-                Assert.NotNull(button.Payload);
-                Assert.NotNull(button.Url);
-                Assert.True(button.Hide);
-            }
+
+            // assert
+            aliceResponse.Should().NotBeNull();
+            aliceResponse.Version.Should().NotBeNullOrEmpty();
+            aliceResponse.SessionState.Should().NotBeNull();
+            aliceResponse.UserStateUpdate.Should().NotBeNull();
+            aliceResponse.Response.Should().NotBeNull();
+            aliceResponse.Response.Text.Should().NotBeNullOrEmpty();
+            aliceResponse.Response.Tts.Should().NotBeNullOrEmpty();
+            aliceResponse.Response.EndSession.Should().BeTrue();
+            aliceResponse.Response.Directives.Should().NotBeNull();
+            aliceResponse.Response.Directives.RequestGeolocation.Should().NotBeNull();
+
+            aliceResponse.Response.Directives.StartPurchase.Should().NotBeNull();
+            aliceResponse.Response.Directives.StartPurchase.PurchaseRequestId.Should().NotBeNullOrEmpty()
+                .And.Be("d432de19be8347d09f656d9fe966e2f9");
+            aliceResponse.Response.Directives.StartPurchase.ImageUrl.Should().NotBeNull()
+                .And.Be("http://url_to_image_purchase.png/");
+            aliceResponse.Response.Directives.StartPurchase.Caption.Should().NotBeNullOrEmpty()
+                .And.Be("caption");
+            aliceResponse.Response.Directives.StartPurchase.Description.Should().NotBeNullOrEmpty()
+                .And.Be("description");
+            aliceResponse.Response.Directives.StartPurchase.Currency.Should().NotBeNullOrEmpty()
+                .And.Be(AliceConstants.Currency.Rub);
+            aliceResponse.Response.Directives.StartPurchase.Type.Should().NotBeNullOrEmpty()
+                .And.Be(AliceConstants.PurchaseType.Buy);
+            aliceResponse.Response.Directives.StartPurchase.Payload.Should().NotBeNull();
+            aliceResponse.Response.Directives.StartPurchase.MerchantKey.Should().NotBeNullOrEmpty()
+                .And.Be("d1112abf-27d2-4005-8b47-6861555715d3");
+            aliceResponse.Response.Directives.StartPurchase.TestPayment.Should().BeTrue();
+            aliceResponse.Response.Directives.StartPurchase.Products.Should().NotBeNullOrEmpty();
+
+            var product = aliceResponse.Response.Directives.StartPurchase.Products.First();
+            product.ProductId.Should().NotBeNullOrEmpty()
+                .And.Be("5e4cf57a-8497-11ea-bc55-0242ac130209");
+            product.Title.Should().NotBeNullOrEmpty()
+                .And.Be("title 1");
+            product.UserPrice.Should().NotBeNullOrEmpty()
+                .And.Be("120");
+            product.Price.Should().NotBeNullOrEmpty()
+                .And.Be("110");
+            product.NdsType.Should().NotBeNullOrEmpty()
+                .And.Be(AliceConstants.NdsType.Nds20);
+            product.Quantity.Should().NotBeNullOrEmpty()
+                .And.Be("2");
+
+            aliceResponse.Response.Directives.ConfirmPurchase.Should().NotBeNull();
+
+            aliceResponse.Response.Buttons.Should().NotBeNullOrEmpty()
+                .And.OnlyContain(x => !string.IsNullOrEmpty(x.Title))
+                .And.OnlyContain(x => x.Payload != null)
+                .And.OnlyContain(x => x.Url != null)
+                .And.OnlyContain(x => x.Hide);
 
             WritePrettyJson(aliceResponse);
         }

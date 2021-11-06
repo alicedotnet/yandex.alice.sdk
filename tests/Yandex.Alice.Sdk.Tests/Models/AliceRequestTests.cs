@@ -3,6 +3,7 @@
     using System.Globalization;
     using System.IO;
     using System.Text.Json;
+    using FluentAssertions;
     using Xunit;
     using Xunit.Abstractions;
     using Yandex.Alice.Sdk.Exceptions;
@@ -117,6 +118,37 @@
             }
 
             Assert.NotNull(aliceRequest.Request.Nlu.Intents);
+            WritePrettyJson(aliceRequest);
+        }
+
+        [Fact]
+        public void Deserialization_PurchaseConfirmation_Ok()
+        {
+            // arrange
+            string requestJson = File.ReadAllText(TestsConstants.Assets.AliceRequestPurchaseConfirmationFilePath);
+
+            // act
+            var aliceRequest = JsonSerializer.Deserialize<AliceRequest>(requestJson);
+
+            // assert
+            aliceRequest.Should().NotBeNull();
+            aliceRequest.Request.Should().NotBeNull();
+            aliceRequest.Request.Type.Should().Be(AliceRequestType.PurchaseConfirmation);
+            aliceRequest.Request.PurchaseRequestId.Should().NotBeNullOrEmpty()
+                .And.Be("d432de19be8347d09f656d9fe966e2f9");
+            aliceRequest.Request.PurchaseToken.Should().NotBeNullOrEmpty()
+                .And.Be("token_value");
+            aliceRequest.Request.OrderId.Should().NotBeNullOrEmpty()
+                .And.Be("eeb59d64-9e6a-11ea-bb37-0242ac130002");
+            aliceRequest.Request.PurchaseTimestamp.Should().Be(1590399311);
+
+            aliceRequest.Request.PurchasePayload.Should().NotBeNull();
+            aliceRequest.Request.GetPurchasePayload<int>().Should().Be(123);
+
+            aliceRequest.Request.SignedData.Should().NotBeNullOrEmpty()
+                .And.Be("purchase_request_id=d432de19be8347d09f656d9fe966e2f9&purchase_token=token_value&order_id=eeb59d64-9e6a-11ea-bb37-0242ac130002&...");
+            aliceRequest.Request.Signature.Should().NotBeNullOrEmpty()
+                .And.Be("Pi6JNCFeeleRa...");
             WritePrettyJson(aliceRequest);
         }
 

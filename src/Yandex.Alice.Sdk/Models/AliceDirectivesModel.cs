@@ -5,11 +5,12 @@
     public class AliceDirectivesModel
     {
         [JsonPropertyName("request_geolocation")]
-        public object RequestGeolocation { get; set; }
+        public AliceRequestGeolocationDirective RequestGeolocation { get; set; }
 
-        public void SetRequestGeolocation()
-        {
-            RequestGeolocation = new object();
-        }
+        [JsonPropertyName("start_purchase")]
+        public AliceStartPurchaseDirective StartPurchase { get; set; }
+
+        [JsonPropertyName("confirm_purchase")]
+        public AliceConfirmPurchaseDirective ConfirmPurchase { get; set; }
     }
 }
