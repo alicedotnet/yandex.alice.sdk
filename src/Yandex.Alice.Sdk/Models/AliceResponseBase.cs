@@ -11,6 +11,9 @@
         [JsonPropertyName("response")]
         public TResponse Response { get; set; }
 
+        [JsonPropertyName("analytics")]
+        public AliceAnalytics Analytics { get; set; }
+
         [JsonPropertyName("session_state")]
         public TSession SessionState { get; set; }
 
@@ -74,6 +77,8 @@
 
     public interface IAliceResponseBase
     {
+        [JsonPropertyName("analytics")]
+        AliceAnalytics Analytics { get; set; }
     }
 
     public interface IAliceResponseStateBase<TSession, TUser>

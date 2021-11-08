@@ -45,6 +45,23 @@
       "confirm_purchase": {}
     }
   },
+  "analytics": {
+    "events": [
+      {
+        "name": "custom event",
+        "value":  "value"
+      },
+      {
+        "name": "another custom event",
+        "value": {
+          "field": "some value",
+          "second field": {
+            "third field": "custom value"
+          }
+        }
+      }
+    ]
+  },
   "session_state": {
     "value": 10
   },

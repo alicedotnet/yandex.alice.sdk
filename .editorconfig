@@ -12,9 +12,6 @@ dotnet_diagnostic.CA1002.severity = none
 # CA1720: Identifier contains type name
 dotnet_diagnostic.CA1720.severity = none
 
-# CA1040: Avoid empty interfaces
-dotnet_diagnostic.CA1040.severity = none
-
 # SA1600: Elements should be documented
 dotnet_diagnostic.SA1600.severity = none
 

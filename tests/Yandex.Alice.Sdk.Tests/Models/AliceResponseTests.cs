@@ -97,7 +97,33 @@
                 .And.OnlyContain(x => x.Url != null)
                 .And.OnlyContain(x => x.Hide);
 
+            aliceResponse.Analytics.Should().NotBeNull();
+            aliceResponse.Analytics.Events.Should().NotBeNullOrEmpty()
+                .And.OnlyContain(x => !string.IsNullOrEmpty(x.Name))
+                .And.OnlyContain(x => x.Value != null);
+            var aliceEvent = aliceResponse.Analytics.Events.First();
+            aliceEvent.Name.Should().Be("custom event");
+            ((JsonElement)aliceEvent.Value).GetString().Should().Be("value");
+
             WritePrettyJson(aliceResponse);
+        }
+
+        [Fact]
+        public void AliceResponse_WithAnalyticsEventOnNullAnalyticsObject_ShouldCreateObjectAndAddEvent()
+        {
+            // arrange
+            var response = new AliceResponse(new AliceRequest(), string.Empty);
+            var eventName = "event";
+            var eventValue = "value";
+
+            // act
+            response = response.WithAnalyticsEvent(eventName, eventValue);
+
+            // assert
+            response.Analytics.Should().NotBeNull();
+            response.Analytics.Events.Should().NotBeNullOrEmpty()
+                .And.OnlyContain(x => x.Name == eventName)
+                .And.OnlyContain(x => Equals(x.Value, eventValue));
         }
 
         [Fact]

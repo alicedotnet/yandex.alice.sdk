@@ -98,13 +98,15 @@
                     {
                         new AliceButtonModel(_githubLink, false, null, new Uri(_githubLink)),
                     };
-                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, codeButtons);
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, codeButtons)
+                    .WithAnalyticsEvent("github");
             }
 
             if (aliceRequest.Request.Command == _noImageButtonTitle)
             {
                 string text = $"Это пример ответа без изображений. Здесь может быть текст или например эмодзи {char.ConvertFromUtf32(0x1F60E)}";
-                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons);
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons)
+                    .WithAnalyticsEvent("no_image");
             }
 
             if (aliceRequest.Request.Command == _oneImageButtonTitle ||
@@ -123,7 +125,7 @@
                         Url = new Uri(_munchkinInfoLink),
                     },
                 };
-                return aliceResponse;
+                return aliceResponse.WithAnalyticsEvent("one_image");
             }
 
             if (aliceRequest.Request.Command == _galleryButtonTitle)
@@ -177,7 +179,16 @@
                             Url = new Uri(_morePuppiesLink),
                         }),
                 };
-                return aliceResponse;
+                return aliceResponse.WithAnalyticsEvent(
+                    "gallery",
+                    new
+                    {
+                        field_one = "test",
+                        field_two = new
+                        {
+                            field_three = "another test",
+                        },
+                    });
             }
 
             if (aliceRequest.Request.Command == _testIntentButtonTitle)
@@ -192,7 +203,7 @@
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, intentButtons)
                 {
                     SessionState = new CustomSessionState(ModeType.IntentsTesting),
-                };
+                }.WithAnalyticsEvent("intent");
             }
 
             if (aliceRequest.Request.Command == _resourcesWorkButtonTitle)
@@ -205,7 +216,7 @@
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, resourcesButtons)
                 {
                     SessionState = new CustomSessionState(ModeType.ResourcesTesting),
-                };
+                }.WithAnalyticsEvent("file_upload");
             }
 
             if (aliceRequest.Request.Command == _geolocationButtonTitle)
@@ -215,7 +226,7 @@
                     SessionState = new CustomSessionState(),
                 };
                 response.Response.Directives.RequestGeolocation = new AliceRequestGeolocationDirective();
-                return response;
+                return response.WithAnalyticsEvent("request_geo");
             }
 
             if (aliceRequest.Request.Type == AliceRequestType.GeolocationAllowed)
@@ -224,7 +235,7 @@
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons)
                 {
                     SessionState = new CustomSessionState(),
-                };
+                }.WithAnalyticsEvent("response_geo");
             }
 
             if (aliceRequest.Request.Command != _homeButtonTitle
@@ -247,7 +258,7 @@
                             ImageId = response.Content.Image.Id,
                         };
                         aliceResponse.SessionState = new CustomSessionState(ModeType.ResourcesTesting);
-                        return aliceResponse;
+                        return aliceResponse.WithAnalyticsEvent("file_upload_success");
                     }
                 }
 
@@ -259,7 +270,7 @@
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, resourcesButtons)
                 {
                     SessionState = new CustomSessionState(ModeType.ResourcesTesting),
-                };
+                }.WithAnalyticsEvent("file_upload_fail");
             }
 
             if (aliceRequest.Request.Command != _homeButtonTitle &&
@@ -276,7 +287,7 @@
                 return new AliceResponse<CustomSessionState, object>(aliceRequest, text, intentButtons)
                 {
                     SessionState = new CustomSessionState(ModeType.IntentsTesting),
-                };
+                }.WithAnalyticsEvent("intent_fail");
             }
 
             if (aliceRequest.Request.Nlu?.Intents?.TurnOn != null)
@@ -284,14 +295,14 @@
                 var what = aliceRequest.Request.Nlu.Intents.TurnOn.Slots.What as AliceEntityStringModel;
                 var where = aliceRequest.Request.Nlu.Intents.TurnOn.Slots.Where as AliceEntityStringModel;
                 string text = $"Я распознал интент и понял что нужно включить {what.Value} {where.Value}. Но делать я этого конечно не буду " + char.ConvertFromUtf32(0x1F60E);
-                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons);
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons).WithAnalyticsEvent("intent_success");
             }
             else
             {
                 string text = aliceRequest.Session.New
                     ? "Привет! Это навык, демонстрирующий работу неофициального SDK для разработки навыков для Алисы на .Net"
                     : "Выберите действие";
-                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons);
+                return new AliceResponse<CustomSessionState, object>(aliceRequest, text, buttons).WithAnalyticsEvent("start");
             }
         }
     }
