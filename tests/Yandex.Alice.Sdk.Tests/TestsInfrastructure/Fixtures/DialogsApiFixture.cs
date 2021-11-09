@@ -16,7 +16,7 @@
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables()
-                .AddUserSecrets<DialogsApiFixture>()
+                .AddUserSecrets<DialogsApiFixture>(true)
                 .Build();
             var skillIdSection = configuration.GetSection("AliceSettings:SkillId");
             AliceSettings = new AliceSettings(skillIdSection.Value);

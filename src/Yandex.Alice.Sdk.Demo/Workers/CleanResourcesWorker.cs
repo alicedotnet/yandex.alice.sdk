@@ -3,6 +3,7 @@
     using System;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using Yandex.Alice.Sdk.Demo.Extensions;
     using Yandex.Alice.Sdk.Demo.Services.Interfaces;
 
     public class CleanResourcesWorker : Worker
@@ -26,7 +27,7 @@
             catch (Exception e)
             {
                 var logger = scope.ServiceProvider.GetRequiredService<ILogger<CleanResourcesWorker>>();
-                logger.LogError(e, string.Empty);
+                logger.UnexpectedError(e);
             }
         }
     }

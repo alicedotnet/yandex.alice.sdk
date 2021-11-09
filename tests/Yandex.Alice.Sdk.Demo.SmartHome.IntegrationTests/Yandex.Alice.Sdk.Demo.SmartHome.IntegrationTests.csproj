@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>false</IsPackable>
     <UserSecretsId>648a49bf-137e-401d-9fa2-3060a5eecb19</UserSecretsId>
@@ -10,8 +10,8 @@
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.2.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.37" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.11" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="8.30.0.37606">
       <PrivateAssets>all</PrivateAssets>

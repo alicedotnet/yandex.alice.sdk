@@ -25,7 +25,7 @@
             builder
                 .AddJsonFile(provider, "appsettings.tests.json", false, false)
                 .AddEnvironmentVariables()
-                .AddUserSecrets<WebApplicationFactoryExtended>();
+                .AddUserSecrets<WebApplicationFactoryExtended>(true);
         }
 
         private void ConfigureServices(HostBuilderContext context, IServiceCollection services)

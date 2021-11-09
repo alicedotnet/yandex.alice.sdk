@@ -1,9 +1,9 @@
-FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
 ARG AliceSettings__SkillId
 ENV AliceSettings__SkillId ${AliceSettings__SkillId}
 ARG AliceSettings__DialogsOAuthToken
@@ -20,7 +20,7 @@ COPY tests/*/*.csproj ./
 RUN for file in $(ls *.csproj); do mkdir -p tests/${file%.*}/ && mv $file tests/${file%.*}/; done
 RUN dotnet restore Yandex.Alice.Sdk.sln
 COPY . .
-RUN dotnet test Yandex.Alice.Sdk.sln
+RUN dotnet test Yandex.Alice.Sdk.sln --no-restore
 
 FROM build AS publish
 WORKDIR "/build/src/Yandex.Alice.Sdk.Demo"

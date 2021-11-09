@@ -25,7 +25,7 @@
         {
             return Program.CreateHostBuilder(Array.Empty<string>())
                 .ConfigureAppConfiguration(c => c
-                    .AddUserSecrets<TestServerFixture>()
+                    .AddUserSecrets<TestServerFixture>(true)
                     .AddEnvironmentVariables());
         }
     }

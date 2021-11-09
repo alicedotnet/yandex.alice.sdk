@@ -1,14 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Configurations>Debug;Release</Configurations>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <UserSecretsId>6b9234fe-892d-4b3c-a446-adebe3807444</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <NeutralLanguage>ru</NeutralLanguage>
-    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
-    <DockerfileContext>.</DockerfileContext>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>

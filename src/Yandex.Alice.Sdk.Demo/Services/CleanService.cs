@@ -10,7 +10,7 @@
     public class CleanService : ICleanService
     {
         private readonly IDialogsApiService _dialogsApiService;
-        private Guid _skillId;
+        private readonly Guid _skillId;
 
         public CleanService(IDialogsApiService dialogsApiService, AliceSettings aliceSettings)
         {

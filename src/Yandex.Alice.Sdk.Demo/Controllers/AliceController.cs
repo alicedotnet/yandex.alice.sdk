@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
+    using Yandex.Alice.Sdk.Demo.Extensions;
     using Yandex.Alice.Sdk.Demo.Models;
     using Yandex.Alice.Sdk.Demo.Models.Session;
     using Yandex.Alice.Sdk.Demo.Resources;
@@ -70,7 +71,7 @@
             {
                 Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 string requestText = JsonSerializer.Serialize(aliceRequest);
-                _logger.LogError(e, $"The following request produced exception: {requestText}");
+                _logger.UnexpectedRequestError(e, requestText);
                 return Content(e.ToString());
             }
         }

@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine
 ARG AliceSettings__SkillId
 ENV AliceSettings__SkillId ${AliceSettings__SkillId}
 ARG AliceSettings__DialogsOAuthToken
@@ -17,7 +17,7 @@ COPY tests/*/*.csproj ./
 RUN for file in $(ls *.csproj); do mkdir -p tests/${file%.*}/ && mv $file tests/${file%.*}/; done
 RUN dotnet restore Yandex.Alice.Sdk.sln
 COPY . .
-RUN dotnet test Yandex.Alice.Sdk.sln
+RUN dotnet test Yandex.Alice.Sdk.sln --no-restore
 
 RUN dotnet build ./src/Yandex.Alice.Sdk/*.csproj -c Release --no-restore
 RUN dotnet pack ./src/Yandex.Alice.Sdk/*.csproj -c Release --include-symbols -p:SymbolPackageFormat=snupkg -o ./packages/
