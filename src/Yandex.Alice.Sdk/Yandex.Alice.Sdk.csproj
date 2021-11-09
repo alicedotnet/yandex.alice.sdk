@@ -12,7 +12,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>yandex alice sdk skill dialogs models smart home</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageReleaseNotes>Add Smart Home support</PackageReleaseNotes>
     <Configurations>Debug;Release</Configurations>
@@ -20,6 +20,7 @@
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -60,7 +61,7 @@
     </None>
     <None Include="..\..\README.md">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>\</PackagePath>
     </None>
     <None Include="Resources\icon.png">
       <Pack>True</Pack>
