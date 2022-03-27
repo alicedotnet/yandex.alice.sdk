@@ -3,6 +3,7 @@
     internal static class TestsConstants
     {
         public const string DialogsApiCollectionName = "DialogsApiCollection";
+        public const string InvalidCredentialsMessage = "Forbidden (no credentials)";
 
         public static class Assets
         {

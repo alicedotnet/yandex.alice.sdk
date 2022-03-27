@@ -34,7 +34,7 @@
             using var dialogsApiService = new DialogsApiService(settings);
             var response = await dialogsApiService.StatusAsync().ConfigureAwait(false);
             Assert.False(response.IsSuccess);
-            Assert.Contains("Unauthorized", response.ErrorMessage, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains(TestsConstants.InvalidCredentialsMessage, response.ErrorMessage, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -56,7 +56,7 @@
             using var dialogsApiService = new DialogsApiService(settings);
             var response = await dialogsApiService.UploadImageAsync(_skillId, request).ConfigureAwait(false);
             Assert.False(response.IsSuccess);
-            Assert.Contains("Unauthorized", response.ErrorMessage, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains(TestsConstants.InvalidCredentialsMessage, response.ErrorMessage, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -100,7 +100,7 @@
             var request = new DialogsFileUploadRequest(TestsConstants.Assets.IconFileName, bytes);
             var uploadResponse = await dialogsApiService.UploadImageAsync(_skillId, request).ConfigureAwait(false);
             Assert.False(uploadResponse.IsSuccess);
-            Assert.Contains("Unauthorized", uploadResponse.ErrorMessage, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains(TestsConstants.InvalidCredentialsMessage, uploadResponse.ErrorMessage, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -130,7 +130,7 @@
             using var dialogsApiService = new DialogsApiService(settings);
             var imagesResponse = await dialogsApiService.GetImagesAsync(_skillId).ConfigureAwait(false);
             Assert.False(imagesResponse.IsSuccess);
-            Assert.Contains("Unauthorized", imagesResponse.ErrorMessage, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains(TestsConstants.InvalidCredentialsMessage, imagesResponse.ErrorMessage, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -165,7 +165,7 @@
             using var dialogsApiService = new DialogsApiService(settings);
             var response = await dialogsApiService.DeleteImageAsync(_skillId, imageId).ConfigureAwait(false);
             Assert.False(response.IsSuccess);
-            Assert.Contains("Unauthorized", response.ErrorMessage, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains(TestsConstants.InvalidCredentialsMessage, response.ErrorMessage, StringComparison.OrdinalIgnoreCase);
 
             await _dialogsApiService.DeleteImageAsync(_skillId, imageId).ConfigureAwait(false);
         }
