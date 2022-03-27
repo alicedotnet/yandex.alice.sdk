@@ -6,7 +6,7 @@
 
     public class IoTGroupCapabilityConverter : SmartHomeTypeConverter<IoTGroupCapability>
     {
-        protected override IReadOnlyDictionary<string, Type> EntityNameTypeMap => new Dictionary<string, Type>()
+        protected override IReadOnlyDictionary<string, Type> EntityNameTypeMap => new Dictionary<string, Type>
         {
             { SmartHomeConstants.Devices.Capabilities.OnOff, typeof(IoTGroupOnOffCapability) },
             { SmartHomeConstants.Devices.Capabilities.ColorSetting, typeof(IoTGroupColorSettingCapability) },

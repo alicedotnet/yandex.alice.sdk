@@ -1,4 +1,4 @@
-@model DiagnosticsViewModel
+@model Yandex.Alice.Sdk.Demo.SmartHome.Areas.IdentityServer.Quickstart.Diagnostics.DiagnosticsViewModel
 
 <div class="diagnostics-page">
     <div class="lead">
@@ -30,10 +30,10 @@
                 </div>
                 <div class="card-body">
                     <dl>
-                        @foreach (var prop in Model.AuthenticateResult.Properties.Items)
+                        @foreach (var (key, value) in Model.AuthenticateResult.Properties.Items)
                         {
-                            <dt>@prop.Key</dt>
-                            <dd>@prop.Value</dd>
+                            <dt>@key</dt>
+                            <dd>@value</dd>
                         }
                         @if (Model.Clients.Any())
                         {

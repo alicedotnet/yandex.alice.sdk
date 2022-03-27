@@ -1,13 +1,19 @@
-﻿namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models
-{
-    using System.Text.Json.Serialization;
-    using Yandex.Alice.Sdk.Converters;
-    using Yandex.Alice.Sdk.Models;
+﻿namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models;
 
-    public class MainSecondaryIntentSlots
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+using Yandex.Alice.Sdk.Converters;
+using Yandex.Alice.Sdk.Models;
+
+[UsedImplicitly]
+public class MainSecondaryIntentSlots
+{
+    public MainSecondaryIntentSlots(AliceEntityModel whoSlot)
     {
-        [JsonPropertyName("who")]
-        [JsonConverter(typeof(AliceEntityModelConverter))]
-        public AliceEntityModel WhoSlot { get; set; }
+        WhoSlot = whoSlot;
     }
+
+    [JsonPropertyName("who")]
+    [JsonConverter(typeof(AliceEntityModelConverter))]
+    public AliceEntityModel WhoSlot { get; }
 }

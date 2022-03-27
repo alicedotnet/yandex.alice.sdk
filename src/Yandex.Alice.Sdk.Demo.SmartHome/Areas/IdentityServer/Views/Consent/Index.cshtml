@@ -1,10 +1,11 @@
-@model ConsentViewModel
+@model Yandex.Alice.Sdk.Demo.SmartHome.Areas.IdentityServer.Quickstart.Consent.ConsentViewModel
 
 <div class="page-consent">
     <div class="lead">
         @if (Model.ClientLogoUrl != null)
         {
-            <div class="client-logo"><img src="@Model.ClientLogoUrl"></div>
+            <div class="client-logo">
+                <img src="@Model.ClientLogoUrl" alt=""></div>
         }
         <h1>
             @Model.ClientName

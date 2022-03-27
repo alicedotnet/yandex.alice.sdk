@@ -8,7 +8,7 @@
 
     internal static class AliceEntityModelConverterHelper
     {
-        private static readonly Dictionary<string, Type> _typeMap = new Dictionary<string, Type>()
+        private static readonly Dictionary<string, Type> _typeMap = new Dictionary<string, Type>
         {
             { AliceConstants.AliceEntityTypeValues.Geo, typeof(AliceEntityGeoModel) },
             { AliceConstants.AliceEntityTypeValues.Fio, typeof(AliceEntityFioModel) },

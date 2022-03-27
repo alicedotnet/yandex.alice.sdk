@@ -18,7 +18,7 @@
                 throw new ArgumentNullException(nameof(baseAddress));
             }
 
-            ApiClient = new HttpClient()
+            ApiClient = new HttpClient
             {
                 BaseAddress = new Uri(baseAddress),
             };
@@ -33,7 +33,7 @@
         {
             if (string.IsNullOrEmpty(deviceId))
             {
-                throw new ArgumentException("No Device Id provided", nameof(deviceId));
+                throw new ArgumentException(AliceResources.Error_NoDeviceId, nameof(deviceId));
             }
 
             return GetAsync<IoTDeviceResponse>(authToken, $"/v1.0/devices/{deviceId}");
@@ -46,14 +46,14 @@
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return PostAsync<IoTManageDevicesResponse, IoTManageDevicesRequest>(authToken, $"/v1.0/devices/actions", request);
+            return PostAsync<IoTManageDevicesResponse, IoTManageDevicesRequest>(authToken, "/v1.0/devices/actions", request);
         }
 
         public Task<IoTApiResponse<IoTGroupResponse>> GetGroupAsync(string authToken, string groupId)
         {
             if (string.IsNullOrEmpty(groupId))
             {
-                throw new ArgumentException("No Group Id provided", nameof(groupId));
+                throw new ArgumentException(AliceResources.Error_NoGroupId, nameof(groupId));
             }
 
             return GetAsync<IoTGroupResponse>(authToken, $"/v1.0/groups/{groupId}");
@@ -63,7 +63,7 @@
         {
             if (string.IsNullOrEmpty(groupId))
             {
-                throw new ArgumentException("No Group Id provided", nameof(groupId));
+                throw new ArgumentException(AliceResources.Error_NoGroupId, nameof(groupId));
             }
 
             if (request == null)
@@ -78,7 +78,7 @@
         {
             if (string.IsNullOrEmpty(scenarioId))
             {
-                throw new ArgumentException("No Scenario Id provided", nameof(scenarioId));
+                throw new ArgumentException(AliceResources.Error_NoScenarioId, nameof(scenarioId));
             }
 
             return PostAsync<IoTManageScenarioResponse, object>(authToken, $"/v1.0/scenarios/{scenarioId}/actions", null);
@@ -109,7 +109,7 @@
         {
             if (string.IsNullOrEmpty(authToken))
             {
-                throw new ArgumentException(Yandex_Alice_Sdk_Resources.Error_NoOAuthToken);
+                throw new ArgumentException(AliceResources.Error_NoOAuthToken);
             }
 
             message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
@@ -121,10 +121,10 @@
             where TContent : IoTResponseBase
         {
             var apiResponse = await ApiClient.SendAsync(message).ConfigureAwait(false);
-            string contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             TContent content = default;
             string errorMessage = null;
-            bool isSuccess = false;
+            var isSuccess = false;
             if (apiResponse.Content.Headers.ContentType.MediaType == "application/json")
             {
                 content = JsonSerializer.Deserialize<TContent>(contentString);

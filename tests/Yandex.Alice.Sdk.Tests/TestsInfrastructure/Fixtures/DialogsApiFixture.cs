@@ -1,27 +1,28 @@
-﻿namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Fixtures
+﻿namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Fixtures;
+
+using JetBrains.Annotations;
+using Microsoft.Extensions.Configuration;
+using Yandex.Alice.Sdk.Models.DialogsApi;
+using Yandex.Alice.Sdk.Services;
+using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models;
+
+[UsedImplicitly]
+public class DialogsApiFixture
 {
-    using Microsoft.Extensions.Configuration;
-    using Yandex.Alice.Sdk.Models.DialogsApi;
-    using Yandex.Alice.Sdk.Services;
-    using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models;
+    public IDialogsApiService DialogsApiService { get; }
 
-    public class DialogsApiFixture
+    public AliceSettings AliceSettings { get; }
+
+    public DialogsApiFixture()
     {
-        public IDialogsApiService DialogsApiService { get; }
-
-        public AliceSettings AliceSettings { get; }
-
-        public DialogsApiFixture()
-        {
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .AddEnvironmentVariables()
-                .AddUserSecrets<DialogsApiFixture>(true)
-                .Build();
-            var skillIdSection = configuration.GetSection("AliceSettings:SkillId");
-            AliceSettings = new AliceSettings(skillIdSection.Value);
-            var apiSettings = new DialogsApiSettings(configuration.GetSection("AliceSettings:DialogsOAuthToken").Value);
-            DialogsApiService = new DialogsApiService(apiSettings);
-        }
+        var configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .AddEnvironmentVariables()
+            .AddUserSecrets<DialogsApiFixture>(true)
+            .Build();
+        var skillIdSection = configuration.GetSection("AliceSettings:SkillId");
+        AliceSettings = new AliceSettings(skillIdSection.Value);
+        var apiSettings = new DialogsApiSettings(configuration.GetSection("AliceSettings:DialogsOAuthToken").Value);
+        DialogsApiService = new DialogsApiService(apiSettings);
     }
 }

@@ -19,7 +19,9 @@
             ConverterHelper.WriteItem(writer, value, options);
         }
 
-        protected virtual Type GetEntityType(Utf8JsonReader reader)
+        protected abstract string GetErrorMessage(string type);
+
+        private Type GetEntityType(Utf8JsonReader reader)
         {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
@@ -27,14 +29,12 @@
             }
 
             var type = GetPropertyValue(reader, "type");
-            if (!EntityNameTypeMap.TryGetValue(type, out Type capabilityType))
+            if (!EntityNameTypeMap.TryGetValue(type, out var capabilityType))
             {
                 throw new NotSupportedException(GetErrorMessage(type));
             }
 
             return capabilityType;
         }
-
-        protected abstract string GetErrorMessage(string type);
     }
 }

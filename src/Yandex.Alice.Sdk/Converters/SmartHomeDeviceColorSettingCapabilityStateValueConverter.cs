@@ -8,7 +8,7 @@
     {
         public override SmartHomeDeviceColorSettingCapabilityStateValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            var colorSettingState = new SmartHomeDeviceColorSettingCapabilityStateValue()
+            var colorSettingState = new SmartHomeDeviceColorSettingCapabilityStateValue
             {
                 Instance = GetPropertyValue(reader, "instance"),
             };

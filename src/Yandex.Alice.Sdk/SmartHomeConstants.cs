@@ -1,4 +1,5 @@
-﻿namespace Yandex.Alice.Sdk
+﻿// ReSharper disable UnusedMember.Global
+namespace Yandex.Alice.Sdk
 {
     public static class SmartHomeConstants
     {
@@ -97,7 +98,7 @@
             public const string WorkSpeed = "work_speed";
         }
 
-        public static class Mode
+        public static class DeviceMode
         {
             public const string Auto = "auto";
             public const string Eco = "eco";

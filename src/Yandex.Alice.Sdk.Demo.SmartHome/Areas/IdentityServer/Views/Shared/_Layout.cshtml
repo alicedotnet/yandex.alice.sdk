@@ -23,6 +23,6 @@
     <script src="~/lib/jquery/dist/jquery.slim.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-    @RenderSection("scripts", required: false)
+    @await RenderSectionAsync("scripts", false)
 </body>
 </html>

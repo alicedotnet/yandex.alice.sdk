@@ -1,4 +1,3 @@
-@using System.Diagnostics
 @using System.Reflection
 
 @{
@@ -7,7 +6,7 @@
 
 <div class="welcome-page">
     <h1>
-        <img src="~/icon.jpg">
+        <img src="~/icon.jpg" alt="">
         Welcome to IdentityServer4
         <small class="text-muted">(version @version)</small>
     </h1>
@@ -15,13 +14,17 @@
     <ul>
         <li>
             IdentityServer publishes a
+            @* ReSharper disable Html.PathError *@
             <a href="~/.well-known/openid-configuration">discovery document</a>
+            @* ReSharper restore Html.PathError *@
             where you can find metadata and links to all the endpoints, key material, etc.
         </li>
         <li>
+            @* ReSharper disable once Html.PathError *@
             Click <a href="~/diagnostics">here</a> to see the claims for your current session.
         </li>
         <li>
+            @* ReSharper disable once Html.PathError *@
             Click <a href="~/grants">here</a> to manage your stored grants.
         </li>
         <li>

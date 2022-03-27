@@ -1,9 +1,8 @@
-﻿namespace Yandex.Alice.Sdk.Demo.Models.Session
+﻿namespace Yandex.Alice.Sdk.Demo.Models.Session;
+
+public enum ModeType
 {
-    public enum ModeType
-    {
-        Undefined,
-        IntentsTesting,
-        ResourcesTesting,
-    }
+    Undefined,
+    IntentsTesting,
+    ResourcesTesting,
 }

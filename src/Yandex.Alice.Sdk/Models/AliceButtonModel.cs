@@ -2,7 +2,9 @@
 {
     using System;
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class AliceButtonModel
     {
         [JsonPropertyName("title")]
@@ -22,22 +24,7 @@
             Payload = new object();
         }
 
-        public AliceButtonModel(string title)
-            : this(title, false, null, null)
-        {
-        }
-
-        public AliceButtonModel(string title, bool hide)
-            : this(title, hide, null, null)
-        {
-        }
-
-        public AliceButtonModel(string title, bool hide, object payload)
-            : this(title, hide, payload, null)
-        {
-        }
-
-        public AliceButtonModel(string title, bool hide, object payload, Uri url)
+        public AliceButtonModel(string title, bool hide = false, object payload = null, Uri url = null)
         {
             Title = title;
             Hide = hide;

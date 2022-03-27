@@ -16,8 +16,8 @@
 
         public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            string input = reader.GetString();
-            DateTimeOffset.TryParseExact(input, _format, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out DateTimeOffset response);
+            var input = reader.GetString();
+            DateTimeOffset.TryParseExact(input, _format, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var response);
             return response;
         }
 
@@ -28,7 +28,7 @@
                 throw new ArgumentNullException(nameof(writer));
             }
 
-            string result = value.ToString(_format, CultureInfo.InvariantCulture);
+            var result = value.ToString(_format, CultureInfo.InvariantCulture);
             writer.WriteStringValue(result);
         }
     }

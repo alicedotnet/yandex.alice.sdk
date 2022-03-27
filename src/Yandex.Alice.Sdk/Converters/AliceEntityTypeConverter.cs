@@ -12,19 +12,19 @@
             Type typeToConvert,
             JsonSerializerOptions options)
         {
-            string input = reader.GetString();
+            var input = reader.GetString();
             switch (input)
             {
                 case AliceConstants.AliceEntityTypeValues.DateTime:
-                    return AliceEntityType.DATETIME;
+                    return AliceEntityType.Datetime;
                 case AliceConstants.AliceEntityTypeValues.Fio:
-                    return AliceEntityType.FIO;
+                    return AliceEntityType.Fio;
                 case AliceConstants.AliceEntityTypeValues.Geo:
-                    return AliceEntityType.GEO;
+                    return AliceEntityType.Geo;
                 case AliceConstants.AliceEntityTypeValues.Number:
-                    return AliceEntityType.NUMBER;
+                    return AliceEntityType.Number;
                 case AliceConstants.AliceEntityTypeValues.String:
-                    return AliceEntityType.STRING;
+                    return AliceEntityType.String;
                 default:
                     return AliceEntityType.Unknown;
             }
@@ -43,23 +43,26 @@
             string result;
             switch (value)
             {
-                case AliceEntityType.DATETIME:
+                case AliceEntityType.Datetime:
                     result = AliceConstants.AliceEntityTypeValues.DateTime;
                     break;
-                case AliceEntityType.FIO:
+                case AliceEntityType.Fio:
                     result = AliceConstants.AliceEntityTypeValues.Fio;
                     break;
-                case AliceEntityType.GEO:
+                case AliceEntityType.Geo:
                     result = AliceConstants.AliceEntityTypeValues.Geo;
                     break;
-                case AliceEntityType.NUMBER:
+                case AliceEntityType.Number:
                     result = AliceConstants.AliceEntityTypeValues.Number;
                     break;
-                case AliceEntityType.STRING:
+                case AliceEntityType.String:
                     result = AliceConstants.AliceEntityTypeValues.String;
                     break;
+                case AliceEntityType.Unknown:
+                    result = AliceConstants.AliceEntityTypeValues.Unknown;
+                    break;
                 default:
-                    result = "unknown";
+                    result = AliceConstants.AliceEntityTypeValues.Unknown;
                     break;
             }
 

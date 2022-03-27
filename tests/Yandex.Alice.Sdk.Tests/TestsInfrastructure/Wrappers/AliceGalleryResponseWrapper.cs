@@ -1,12 +1,11 @@
-﻿namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Wrappers
-{
-    using Yandex.Alice.Sdk.Models;
+﻿namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Wrappers;
 
-    public class AliceGalleryResponseWrapper : AliceGalleryResponse
+using Yandex.Alice.Sdk.Models;
+
+public class AliceGalleryResponseWrapper : AliceGalleryResponse
+{
+    public AliceGalleryResponseWrapper()
+        : base(new AliceRequest { State = new AliceStateModel<object, object>() }, string.Empty, string.Empty, null)
     {
-        public AliceGalleryResponseWrapper()
-            : base(new AliceRequest() { State = new AliceStateModel<object, object>() }, string.Empty, string.Empty, null)
-        {
-        }
     }
 }

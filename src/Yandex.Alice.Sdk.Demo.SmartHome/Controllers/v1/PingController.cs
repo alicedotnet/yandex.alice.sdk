@@ -1,15 +1,14 @@
-﻿namespace Yandex.Alice.Sdk.Demo.SmartHome.Controllers.V1
-{
-    using Microsoft.AspNetCore.Mvc;
+﻿namespace Yandex.Alice.Sdk.Demo.SmartHome.Controllers.v1;
 
-    [ApiController]
-    [Route("v1.0")]
-    public class PingController : ControllerBase
+using Microsoft.AspNetCore.Mvc;
+
+[ApiController]
+[Route("v1.0")]
+public class PingController : ControllerBase
+{
+    [HttpHead]
+    public IActionResult Ping()
     {
-        [HttpHead]
-        public IActionResult Ping()
-        {
-            return Ok();
-        }
+        return Ok();
     }
 }

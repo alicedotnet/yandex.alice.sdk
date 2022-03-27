@@ -1,7 +1,9 @@
 ﻿namespace Yandex.Alice.Sdk.Models.DialogsApi
 {
     using System.IO;
+    using JetBrains.Annotations;
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class DialogsFileUploadRequest
     {
         public Stream Content { get; }

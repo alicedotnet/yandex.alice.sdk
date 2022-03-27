@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class SmartHomeResponseDevicesActionPayload
     {
         [JsonPropertyName("devices")]

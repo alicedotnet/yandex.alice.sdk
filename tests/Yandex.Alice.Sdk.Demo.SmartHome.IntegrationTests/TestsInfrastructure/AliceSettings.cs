@@ -1,17 +1,16 @@
-﻿namespace Yandex.Alice.Sdk.Demo.SmartHome.IntegrationTests.TestsInfrastructure
+﻿namespace Yandex.Alice.Sdk.Demo.SmartHome.IntegrationTests.TestsInfrastructure;
+
+using System;
+
+public class AliceSettings
 {
-    using System;
+    public Guid SmartHomeSkillId { get; }
 
-    public class AliceSettings
+    public string IoTApiOAuthToken { get; }
+
+    public AliceSettings(string smartHomeSkillId, string ioTApiOAuthToken)
     {
-        public Guid SmartHomeSkillId { get; }
-
-        public string IoTApiOAuthToken { get; }
-
-        public AliceSettings(string smartHomeSkillId, string ioTApiOAuthToken)
-        {
-            SmartHomeSkillId = Guid.Parse(smartHomeSkillId);
-            IoTApiOAuthToken = ioTApiOAuthToken;
-        }
+        SmartHomeSkillId = Guid.Parse(smartHomeSkillId);
+        IoTApiOAuthToken = ioTApiOAuthToken;
     }
 }

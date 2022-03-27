@@ -12,7 +12,7 @@
             Type typeToConvert,
             JsonSerializerOptions options)
         {
-            string input = reader.GetString();
+            var input = reader.GetString();
             return AliceRequestTypeHelper.ConvertToType(input);
         }
 
@@ -26,7 +26,7 @@
                 throw new ArgumentNullException(nameof(writer));
             }
 
-            string result = AliceRequestTypeHelper.ConvertToString(value);
+            var result = AliceRequestTypeHelper.ConvertToString(value);
             writer.WriteStringValue(result);
         }
     }

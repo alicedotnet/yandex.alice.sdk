@@ -1,9 +1,8 @@
-﻿namespace Yandex.Alice.Sdk.Demo.Services.Interfaces
-{
-    using System.Threading.Tasks;
+﻿namespace Yandex.Alice.Sdk.Demo.Services.Interfaces;
 
-    public interface ICleanService
-    {
-        Task CleanResourcesAsync();
-    }
+using System.Threading.Tasks;
+
+public interface ICleanService
+{
+    Task CleanResourcesAsync();
 }

@@ -1,7 +1,6 @@
-﻿namespace Yandex.Alice.Sdk.Demo.SmartHome.Services
+﻿namespace Yandex.Alice.Sdk.Demo.SmartHome.Services;
+
+public interface IContextUserService
 {
-    public interface IContextUserService
-    {
-        string GetContextUserId();
-    }
+    string GetContextUserId();
 }

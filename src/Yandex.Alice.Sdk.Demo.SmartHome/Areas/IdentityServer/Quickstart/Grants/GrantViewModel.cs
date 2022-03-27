@@ -1,29 +1,26 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Yandex.Alice.Sdk.Demo.SmartHome.Areas.IdentityServer.Quickstart.Grants;
+
+using System;
+using System.Collections.Generic;
+
+public class GrantViewModel
 {
-    using System;
-    using System.Collections.Generic;
+    public string ClientId { get; init; }
 
-    public class GrantViewModel
-    {
-        public string ClientId { get; set; }
+    public string ClientName { get; init; }
 
-        public string ClientName { get; set; }
+    public string ClientLogoUrl { get; init; }
 
-        public string ClientUrl { get; set; }
+    public string Description { get; init; }
 
-        public string ClientLogoUrl { get; set; }
+    public DateTime Created { get; init; }
 
-        public string Description { get; set; }
+    public DateTime? Expires { get; init; }
 
-        public DateTime Created { get; set; }
+    public IEnumerable<string> IdentityGrantNames { get; init; }
 
-        public DateTime? Expires { get; set; }
-
-        public IEnumerable<string> IdentityGrantNames { get; set; }
-
-        public IEnumerable<string> ApiGrantNames { get; set; }
-    }
+    public IEnumerable<string> ApiGrantNames { get; init; }
 }

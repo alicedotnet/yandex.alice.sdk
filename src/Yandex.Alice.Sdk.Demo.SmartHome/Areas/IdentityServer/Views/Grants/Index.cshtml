@@ -1,4 +1,4 @@
-﻿@model GrantsViewModel
+﻿@model Yandex.Alice.Sdk.Demo.SmartHome.Areas.IdentityServer.Quickstart.Grants.GrantsViewModel
 
 <div class="grants-page">
     <div class="lead">
@@ -26,7 +26,7 @@
                         <div class="col-sm-8 card-title">
                             @if (grant.ClientLogoUrl != null)
                             {
-                                <img src="@grant.ClientLogoUrl">
+                                <img src="@grant.ClientLogoUrl" alt="">
                             }
                             <strong>@grant.ClientName</strong>
                         </div>

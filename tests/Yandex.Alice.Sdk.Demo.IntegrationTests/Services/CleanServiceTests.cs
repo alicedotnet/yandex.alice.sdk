@@ -1,32 +1,30 @@
-﻿namespace Yandex.Alice.Sdk.Demo.IntegrationTests.Services
+﻿namespace Yandex.Alice.Sdk.Demo.IntegrationTests.Services;
+
+using System.Threading.Tasks;
+using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
+using Xunit;
+using Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures;
+using Yandex.Alice.Sdk.Demo.Services.Interfaces;
+
+[Collection(TestsConstants.TestServerCollectionName)]
+public class CleanServiceTests
 {
-    using System;
-    using System.Threading.Tasks;
-    using FluentAssertions;
-    using Microsoft.Extensions.DependencyInjection;
-    using Xunit;
-    using Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures;
-    using Yandex.Alice.Sdk.Demo.Services.Interfaces;
+    private readonly ICleanService _cleanService;
 
-    [Collection(TestsConstants.TestServerCollectionName)]
-    public class CleanServiceTests
+    public CleanServiceTests(TestServerFixture serviceProviderFixture)
     {
-        private readonly ICleanService _cleanService;
+        _cleanService = serviceProviderFixture.Services.GetRequiredService<ICleanService>();
+    }
 
-        public CleanServiceTests(TestServerFixture serviceProviderFixture)
-        {
-            _cleanService = serviceProviderFixture.Services.GetRequiredService<ICleanService>();
-        }
+    [Fact]
+    public async Task CleanResources()
+    {
+        // arrange
+        // act
+        var act = async () => await _cleanService.CleanResourcesAsync().ConfigureAwait(false);
 
-        [Fact]
-        public async Task CleanResources()
-        {
-            // arrange
-            // act
-            Func<Task> act = async () => await _cleanService.CleanResourcesAsync().ConfigureAwait(false);
-
-            // assert
-            await act.Should().NotThrowAsync();
-        }
+        // assert
+        await act.Should().NotThrowAsync();
     }
 }

@@ -117,7 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Image_Upload_Success" xml:space="preserve">
-    <value>Изображение загружено</value>
+  <data name="Error_NoOAuthToken" xml:space="preserve">
+    <value>OAuth token is empty or not set</value>
+  </data>
+  <data name="Error_NoSkillId" xml:space="preserve">
+    <value>SkillId is invalid or not set</value>
+  </data>
+  <data name="Error_Required" xml:space="preserve">
+    <value>Field is required</value>
+  </data>
+  <data name="Error_TooLongString" xml:space="preserve">
+    <value>String length exceeds {0} symbols. You can use {1} to reduce string length</value>
+  </data>
+  <data name="Error_Unknown_Request_Type" xml:space="preserve">
+    <value>Request type '{0}' is unknown</value>
+  </data>
+  <data name="Error_NoDeviceId" xml:space="preserve">
+    <value>No Device Id provided</value>
+  </data>
+  <data name="Error_NoGroupId" xml:space="preserve">
+    <value>No Group Id provided</value>
+  </data>
+  <data name="Error_NoScenarioId" xml:space="preserve">
+    <value>No Scenario Id provided</value>
   </data>
 </root>

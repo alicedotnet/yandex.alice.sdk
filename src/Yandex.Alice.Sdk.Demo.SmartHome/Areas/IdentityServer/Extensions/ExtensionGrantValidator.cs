@@ -1,34 +1,24 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-namespace IdentityServerHost.Extensions
+namespace Yandex.Alice.Sdk.Demo.SmartHome.Areas.IdentityServer.Extensions;
+
+using System.Threading.Tasks;
+using IdentityServer4.Models;
+using IdentityServer4.Validation;
+using JetBrains.Annotations;
+
+[UsedImplicitly]
+public class ExtensionGrantValidator : IExtensionGrantValidator
 {
-    using System.Threading.Tasks;
-    using IdentityServer4.Models;
-    using IdentityServer4.Validation;
-
-    public class ExtensionGrantValidator : IExtensionGrantValidator
+    public Task ValidateAsync(ExtensionGrantValidationContext context)
     {
-        public Task ValidateAsync(ExtensionGrantValidationContext context)
-        {
-            var credential = context.Request.Raw.Get("custom_credential");
+        var credential = context.Request.Raw.Get("custom_credential");
 
-            if (credential != null)
-            {
-                context.Result = new GrantValidationResult(subject: "818727", authenticationMethod: "custom");
-            }
-            else
-            {
-                // custom error message
-                context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, "invalid custom credential");
-            }
+        context.Result = credential != null ? new GrantValidationResult("818727", "custom") : new GrantValidationResult(TokenRequestErrors.InvalidGrant, "invalid custom credential");
 
-            return Task.CompletedTask;
-        }
-
-        public string GrantType
-        {
-            get { return "custom"; }
-        }
+        return Task.CompletedTask;
     }
+
+    public string GrantType => "custom";
 }

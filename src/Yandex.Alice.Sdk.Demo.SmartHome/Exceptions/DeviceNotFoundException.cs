@@ -1,18 +1,17 @@
-﻿namespace Yandex.Alice.Sdk.Demo.SmartHome.Exceptions
+﻿namespace Yandex.Alice.Sdk.Demo.SmartHome.Exceptions;
+
+using System;
+using System.Runtime.Serialization;
+
+[Serializable]
+public class DeviceNotFoundException : Exception
 {
-    using System;
-    using System.Runtime.Serialization;
-
-    [Serializable]
-    public class DeviceNotFoundException : Exception
+    public DeviceNotFoundException()
     {
-        public DeviceNotFoundException()
-        {
-        }
+    }
 
-        protected DeviceNotFoundException(SerializationInfo info, StreamingContext context)
+    protected DeviceNotFoundException(SerializationInfo info, StreamingContext context)
         : base(info, context)
-        {
-        }
+    {
     }
 }

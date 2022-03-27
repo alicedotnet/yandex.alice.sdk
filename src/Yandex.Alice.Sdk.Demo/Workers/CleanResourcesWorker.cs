@@ -1,34 +1,33 @@
-﻿namespace Yandex.Alice.Sdk.Demo.Workers
+﻿namespace Yandex.Alice.Sdk.Demo.Workers;
+
+using System;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Yandex.Alice.Sdk.Demo.Extensions;
+using Yandex.Alice.Sdk.Demo.Services.Interfaces;
+
+public class CleanResourcesWorker : Worker
 {
-    using System;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
-    using Yandex.Alice.Sdk.Demo.Extensions;
-    using Yandex.Alice.Sdk.Demo.Services.Interfaces;
+    protected override TimeSpan TimerInterval { get; }
 
-    public class CleanResourcesWorker : Worker
+    public CleanResourcesWorker(IServiceProvider serviceProvider)
+        : base(serviceProvider)
     {
-        protected override TimeSpan TimerInterval { get; }
+        TimerInterval = TimeSpan.FromDays(1);
+    }
 
-        public CleanResourcesWorker(IServiceProvider serviceProvider)
-            : base(serviceProvider)
+    protected override void DoWork(object state)
+    {
+        using var scope = ServiceProvider.CreateScope();
+        try
         {
-            TimerInterval = TimeSpan.FromDays(1);
+            var cleanService = scope.ServiceProvider.GetRequiredService<ICleanService>();
+            cleanService.CleanResourcesAsync().Wait();
         }
-
-        protected override void DoWork(object state)
+        catch (Exception e)
         {
-            using var scope = ServiceProvider.CreateScope();
-            try
-            {
-                var cleanService = scope.ServiceProvider.GetRequiredService<ICleanService>();
-                cleanService.CleanResourcesAsync().Wait();
-            }
-            catch (Exception e)
-            {
-                var logger = scope.ServiceProvider.GetRequiredService<ILogger<CleanResourcesWorker>>();
-                logger.UnexpectedError(e);
-            }
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<CleanResourcesWorker>>();
+            logger.UnexpectedError(e);
         }
     }
 }

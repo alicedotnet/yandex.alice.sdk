@@ -2,8 +2,10 @@
 {
     using System;
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
     using Yandex.Alice.Sdk.Converters;
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class DialogsSoundInfo
     {
         [JsonPropertyName("id")]

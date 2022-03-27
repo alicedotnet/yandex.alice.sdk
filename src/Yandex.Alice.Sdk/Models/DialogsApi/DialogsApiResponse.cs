@@ -8,12 +8,12 @@
 
         public string ErrorCode { get; }
 
-        public DialogsApiResponse(bool isSuccess = true)
+        protected DialogsApiResponse(bool isSuccess = true)
         {
             IsSuccess = isSuccess;
         }
 
-        public DialogsApiResponse(string errorMessage, string errorCode = null)
+        protected DialogsApiResponse(string errorMessage, string errorCode = null)
         {
             IsSuccess = false;
             ErrorMessage = errorMessage;

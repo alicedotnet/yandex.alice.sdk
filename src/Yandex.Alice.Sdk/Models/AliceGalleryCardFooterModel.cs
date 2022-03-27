@@ -1,7 +1,9 @@
 ﻿namespace Yandex.Alice.Sdk.Models
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class AliceGalleryCardFooterModel
     {
         [JsonPropertyName("text")]
@@ -14,12 +16,7 @@
         {
         }
 
-        public AliceGalleryCardFooterModel(string text)
-            : this(text, null)
-        {
-        }
-
-        public AliceGalleryCardFooterModel(string text, AliceImageCardButtonModel button)
+        public AliceGalleryCardFooterModel(string text, AliceImageCardButtonModel button = null)
         {
             Text = text;
             Button = button;

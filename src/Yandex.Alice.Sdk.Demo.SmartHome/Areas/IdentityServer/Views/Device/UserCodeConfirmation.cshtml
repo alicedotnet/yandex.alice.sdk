@@ -1,10 +1,11 @@
-@model DeviceAuthorizationViewModel
+@model Yandex.Alice.Sdk.Demo.SmartHome.Areas.IdentityServer.Quickstart.Device.DeviceAuthorizationViewModel
 
 <div class="page-device-confirmation">
     <div class="lead">
         @if (Model.ClientLogoUrl != null)
         {
-            <div class="client-logo"><img src="@Model.ClientLogoUrl"></div>
+            <div class="client-logo">
+                <img src="@Model.ClientLogoUrl" alt=""></div>
         }
         <h1>
             @Model.ClientName

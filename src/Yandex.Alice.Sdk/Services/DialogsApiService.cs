@@ -20,10 +20,10 @@
 
             if (string.IsNullOrEmpty(dialogsApiSettings.DialogsOAuthToken))
             {
-                throw new ArgumentException(Yandex_Alice_Sdk_Resources.Error_NoOAuthToken);
+                throw new ArgumentException(AliceResources.Error_NoOAuthToken);
             }
 
-            ApiClient = new HttpClient()
+            ApiClient = new HttpClient
             {
                 BaseAddress = new Uri(dialogsApiSettings.BaseAddress),
             };
@@ -38,61 +38,61 @@
 
         public Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsWebUploadRequest request)
         {
-            string requestUri = $"{GetSkillUrl(skillId)}/images";
+            var requestUri = $"{GetSkillUrl(skillId)}/images";
             return PostAsync<DialogsImageUploadResponse, DialogsWebUploadRequest>(requestUri, request);
         }
 
         public async Task<DialogsApiResponse<DialogsImageUploadResponse>> UploadImageAsync(Guid skillId, DialogsFileUploadRequest request)
         {
-            string url = $"{GetSkillUrl(skillId)}/images";
+            var url = $"{GetSkillUrl(skillId)}/images";
             return await PostFileAsync<DialogsImageUploadResponse>(url, request).ConfigureAwait(false);
         }
 
         public async Task<DialogsApiResponse<DialogsImagesInfoList>> GetImagesAsync(Guid skillId)
         {
-            string url = $"{GetSkillUrl(skillId)}/images";
+            var url = $"{GetSkillUrl(skillId)}/images";
             return await GetAsync<DialogsImagesInfoList>(url).ConfigureAwait(false);
         }
 
         public async Task<DialogsApiResponse<DialogsDeleteResponse>> DeleteImageAsync(Guid skillId, string imageId)
         {
-            string url = $"{GetSkillUrl(skillId)}/images/{imageId}";
+            var url = $"{GetSkillUrl(skillId)}/images/{imageId}";
             return await DeleteAsync<DialogsDeleteResponse>(url).ConfigureAwait(false);
         }
 
         public async Task<DialogsApiResponse<DialogsSoundResponse>> UploadSoundAsync(Guid skillId, DialogsFileUploadRequest request)
         {
-            string url = $"{GetSkillUrl(skillId)}/sounds";
+            var url = $"{GetSkillUrl(skillId)}/sounds";
             return await PostFileAsync<DialogsSoundResponse>(url, request).ConfigureAwait(false);
         }
 
         public async Task<DialogsApiResponse<DialogsSoundResponse>> GetSoundAsync(Guid skillId, Guid soundId)
         {
-            string url = $"{GetSkillUrl(skillId)}/sounds/{soundId}";
+            var url = $"{GetSkillUrl(skillId)}/sounds/{soundId}";
             return await GetAsync<DialogsSoundResponse>(url).ConfigureAwait(false);
         }
 
         public async Task<DialogsApiResponse<DialogsSoundsInfoList>> GetSoundsAsync(Guid skillId)
         {
-            string url = $"{GetSkillUrl(skillId)}/sounds";
+            var url = $"{GetSkillUrl(skillId)}/sounds";
             return await GetAsync<DialogsSoundsInfoList>(url).ConfigureAwait(false);
         }
 
         public async Task<DialogsApiResponse<DialogsDeleteResponse>> DeleteSoundAsync(Guid skillId, Guid soundId)
         {
-            string url = $"{GetSkillUrl(skillId)}/sounds/{soundId}";
+            var url = $"{GetSkillUrl(skillId)}/sounds/{soundId}";
             return await DeleteAsync<DialogsDeleteResponse>(url).ConfigureAwait(false);
         }
 
         public Task<DialogsApiResponse<DialogsSmartHomeResponse>> CallbackStateAsync(Guid skillId, DialogsCallbackStateRequest request)
         {
-            string url = $"{GetSkillUrl(skillId)}/callback/state";
+            var url = $"{GetSkillUrl(skillId)}/callback/state";
             return PostAsync<DialogsSmartHomeResponse, DialogsCallbackStateRequest>(url, request);
         }
 
         public Task<DialogsApiResponse<DialogsSmartHomeResponse>> CallbackDiscoveryAsync(Guid skillId, DialogsCallbackDiscoveryRequest request)
         {
-            string url = $"{GetSkillUrl(skillId)}/callback/discovery";
+            var url = $"{GetSkillUrl(skillId)}/callback/discovery";
             return PostAsync<DialogsSmartHomeResponse, DialogsCallbackDiscoveryRequest>(url, request);
         }
 
@@ -100,7 +100,7 @@
         {
             if (skillId == Guid.Empty)
             {
-                throw new ArgumentException(Yandex_Alice_Sdk_Resources.Error_NoSkillId, nameof(skillId));
+                throw new ArgumentException(AliceResources.Error_NoSkillId, nameof(skillId));
             }
 
             return $"/api/v1/skills/{skillId}";
@@ -116,7 +116,7 @@
 
         private Task<DialogsApiResponse<TContent>> PostAsync<TContent, TPayload>(string url, TPayload payload)
         {
-            string json = JsonSerializer.Serialize(payload);
+            var json = JsonSerializer.Serialize(payload);
             HttpContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
             return PostAsync<TContent>(url, requestContent);
         }
@@ -167,7 +167,7 @@
         private async Task<DialogsApiResponse<TContent>> SendAsync<TContent>(HttpRequestMessage message)
         {
             var apiResponse = await ApiClient.SendAsync(message).ConfigureAwait(false);
-            string contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var contentString = await apiResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             DialogsApiResponse<TContent> response;
             if (apiResponse.IsSuccessStatusCode)
             {

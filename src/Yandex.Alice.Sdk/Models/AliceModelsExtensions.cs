@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Text.Json;
+    using JetBrains.Annotations;
 
     public static class AliceModelsExtensions
     {
@@ -11,12 +12,13 @@
             return response.WithAnalyticsEvent(new AliceAnalyticsEvent(eventName, eventValue));
         }
 
+        [UsedImplicitly]
         public static TResponse WithAnalyticsEvent<TResponse>(this TResponse response, AliceAnalyticsEvent analyticsEvent)
             where TResponse : IAliceResponseBase
         {
             if (response.Analytics == null)
             {
-                response.Analytics = new AliceAnalytics()
+                response.Analytics = new AliceAnalytics
                 {
                     Events = new List<AliceAnalyticsEvent>(),
                 };
@@ -38,13 +40,13 @@
 
         private static T GetObject<T>(object value)
         {
-            if (value is JsonElement payloadJsonElement)
+            if (!(value is JsonElement payloadJsonElement))
             {
-                string text = payloadJsonElement.GetRawText();
-                return JsonSerializer.Deserialize<T>(text);
+                return default;
             }
 
-            return default;
+            var text = payloadJsonElement.GetRawText();
+            return JsonSerializer.Deserialize<T>(text);
         }
     }
 }

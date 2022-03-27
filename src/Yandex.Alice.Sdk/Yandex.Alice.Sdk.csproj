@@ -24,11 +24,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.30.0.37606">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.37.0.45539">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -40,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\Yandex.Alice.Sdk.Resources.Designer.cs">
+    <Compile Update="Resources\AliceResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Yandex.Alice.Sdk.Resources.resx</DependentUpon>
@@ -48,9 +49,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Yandex.Alice.Sdk.Resources.resx">
+    <EmbeddedResource Update="Resources\AliceResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Yandex.Alice.Sdk.Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>AliceResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
@@ -67,6 +68,12 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Yandex.Alice.Sdk.Tests</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public abstract class AliceResponseBase<TResponse, TSession, TUser>
         : IAliceResponseBase, IAliceResponseStateBase<TSession, TUser>
         where TResponse : AliceResponseModel, new()
@@ -24,18 +26,7 @@
         public TUser ApplicationState { get; set; }
 
         [JsonIgnore]
-        public TUser UserOrApplicationState
-        {
-            get
-            {
-                if (UserStateUpdate != null)
-                {
-                    return UserStateUpdate;
-                }
-
-                return ApplicationState;
-            }
-        }
+        public TUser UserOrApplicationState => UserStateUpdate != null ? UserStateUpdate : ApplicationState;
 
         [JsonPropertyName("version")]
         public string Version { get; set; }
@@ -52,26 +43,30 @@
             }
 
             Version = request.Version;
-            Response = new TResponse()
+            Response = new TResponse
             {
                 Text = text,
                 Tts = tts,
                 Buttons = buttons,
             };
 
-            if (request.State != null)
+            if (request.State == null)
             {
-                if (keepSessionState)
-                {
-                    SessionState = request.State.Session;
-                }
-
-                if (keepUserState)
-                {
-                    UserStateUpdate = request.State.User;
-                    ApplicationState = request.State.Application;
-                }
+                return;
             }
+
+            if (keepSessionState)
+            {
+                SessionState = request.State.Session;
+            }
+
+            if (!keepUserState)
+            {
+                return;
+            }
+
+            UserStateUpdate = request.State.User;
+            ApplicationState = request.State.Application;
         }
     }
 
@@ -81,6 +76,7 @@
         AliceAnalytics Analytics { get; set; }
     }
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public interface IAliceResponseStateBase<TSession, TUser>
     {
         [JsonPropertyName("session_state")]

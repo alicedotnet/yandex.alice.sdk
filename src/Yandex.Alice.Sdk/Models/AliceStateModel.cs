@@ -1,8 +1,10 @@
 ﻿namespace Yandex.Alice.Sdk.Models
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
     using Yandex.Alice.Sdk.Helpers;
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class AliceStateModel<TSession, TUser>
     {
         [JsonPropertyName("session")]
@@ -15,18 +17,7 @@
         public TUser Application { get; set; }
 
         [JsonIgnore]
-        public TUser UserOrApplication
-        {
-            get
-            {
-                if (User != null)
-                {
-                    return User;
-                }
-
-                return Application;
-            }
-        }
+        public TUser UserOrApplication => User != null ? User : Application;
 
         public T TryGetSession<T>()
         {

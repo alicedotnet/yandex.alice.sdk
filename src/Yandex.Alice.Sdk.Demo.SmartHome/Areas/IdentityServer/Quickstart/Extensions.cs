@@ -1,26 +1,26 @@
-namespace IdentityServerHost.Quickstart.UI
+namespace Yandex.Alice.Sdk.Demo.SmartHome.Areas.IdentityServer.Quickstart;
+
+using System;
+using Account;
+using IdentityServer4.Models;
+using Microsoft.AspNetCore.Mvc;
+
+public static class Extensions
 {
-    using System;
-    using IdentityServer4.Models;
-    using Microsoft.AspNetCore.Mvc;
-
-    public static class Extensions
+    /// <summary>
+    /// Checks if the redirect URI is for a native client.
+    /// </summary>
+    public static bool IsNativeClient(this AuthorizationRequest context)
     {
-        /// <summary>
-        /// Checks if the redirect URI is for a native client.
-        /// </summary>
-        public static bool IsNativeClient(this AuthorizationRequest context)
-        {
-            return !context.RedirectUri.StartsWith("https", StringComparison.Ordinal)
+        return !context.RedirectUri.StartsWith("https", StringComparison.Ordinal)
                && !context.RedirectUri.StartsWith("http", StringComparison.Ordinal);
-        }
+    }
 
-        public static IActionResult LoadingPage(this Controller controller, string viewName, string redirectUri)
-        {
-            controller.HttpContext.Response.StatusCode = 200;
-            controller.HttpContext.Response.Headers["Location"] = string.Empty;
+    public static IActionResult LoadingPage(this Controller controller, string viewName, string redirectUri)
+    {
+        controller.HttpContext.Response.StatusCode = 200;
+        controller.HttpContext.Response.Headers["Location"] = string.Empty;
 
-            return controller.View(viewName, new RedirectViewModel { RedirectUrl = redirectUri });
-        }
+        return controller.View(viewName, new RedirectViewModel { RedirectUrl = redirectUri });
     }
 }

@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class AliceStartPurchaseDirective
     {
         [JsonPropertyName("purchase_request_id")]

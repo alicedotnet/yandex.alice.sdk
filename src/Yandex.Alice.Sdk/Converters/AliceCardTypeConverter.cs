@@ -9,7 +9,7 @@
     {
         public override AliceCardType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            string input = reader.GetString();
+            var input = reader.GetString();
             switch (input)
             {
                 case AliceConstants.AliceCardTypeValues.BigImage:
@@ -37,8 +37,11 @@
                 case AliceCardType.ItemsList:
                     result = AliceConstants.AliceCardTypeValues.ItemsList;
                     break;
+                case AliceCardType.Undefined:
+                    result = AliceConstants.AliceCardTypeValues.Undefined;
+                    break;
                 default:
-                    result = "unknown";
+                    result = AliceConstants.AliceCardTypeValues.Undefined;
                     break;
             }
 

@@ -1,17 +1,21 @@
-﻿namespace Yandex.Alice.Sdk.Demo.Models.Intents
+﻿namespace Yandex.Alice.Sdk.Demo.Models.Intents;
+
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+using Yandex.Alice.Sdk.Models;
+
+[UsedImplicitly]
+public class CustomTurnOnSlots
 {
-    using System.Text.Json.Serialization;
-    using Yandex.Alice.Sdk.Converters;
-    using Yandex.Alice.Sdk.Models;
-
-    public class CustomTurnOnSlots
+    public CustomTurnOnSlots(AliceEntityStringModel what, AliceEntityStringModel where)
     {
-        [JsonPropertyName("what")]
-        [JsonConverter(typeof(AliceEntityModelConverter))]
-        public AliceEntityModel What { get; set; }
-
-        [JsonPropertyName("where")]
-        [JsonConverter(typeof(AliceEntityModelConverter))]
-        public AliceEntityModel Where { get; set; }
+        What = what;
+        Where = where;
     }
+
+    [JsonPropertyName("what")]
+    public AliceEntityStringModel What { get; }
+
+    [JsonPropertyName("where")]
+    public AliceEntityStringModel Where { get; }
 }

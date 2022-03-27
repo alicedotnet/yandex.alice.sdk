@@ -1,20 +1,19 @@
 // Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-namespace IdentityServerHost.Quickstart.UI
+namespace Yandex.Alice.Sdk.Demo.SmartHome.Areas.IdentityServer.Quickstart.Account;
+
+using System.ComponentModel.DataAnnotations;
+
+public class LoginInputModel
 {
-    using System.ComponentModel.DataAnnotations;
+    [Required]
+    public string Username { get; set; }
 
-    public class LoginInputModel
-    {
-        [Required]
-        public string Username { get; set; }
+    [Required]
+    public string Password { get; init; }
 
-        [Required]
-        public string Password { get; set; }
+    public bool RememberLogin { get; set; }
 
-        public bool RememberLogin { get; set; }
-
-        public string ReturnUrl { get; set; }
-    }
+    public string ReturnUrl { get; init; }
 }

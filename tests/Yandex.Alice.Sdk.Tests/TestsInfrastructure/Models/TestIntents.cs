@@ -1,14 +1,21 @@
-﻿namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models
+﻿namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure.Models;
+
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+using Yandex.Alice.Sdk.Models;
+
+[UsedImplicitly]
+public class TestIntents
 {
-    using System.Text.Json.Serialization;
-    using Yandex.Alice.Sdk.Models;
-
-    public class TestIntents
+    public TestIntents(AliceIntentModel<MainIntentSlots> main, AliceIntentModel<MainSecondaryIntentSlots> mainSecondary)
     {
-        [JsonPropertyName("main")]
-        public AliceIntentModel<MainIntentSlots> Main { get; set; }
-
-        [JsonPropertyName("main_secondary")]
-        public AliceIntentModel<MainSecondaryIntentSlots> MainSecondary { get; set; }
+        Main = main;
+        MainSecondary = mainSecondary;
     }
+
+    [JsonPropertyName("main")]
+    public AliceIntentModel<MainIntentSlots> Main { get; }
+
+    [JsonPropertyName("main_secondary")]
+    public AliceIntentModel<MainSecondaryIntentSlots> MainSecondary { get; }
 }

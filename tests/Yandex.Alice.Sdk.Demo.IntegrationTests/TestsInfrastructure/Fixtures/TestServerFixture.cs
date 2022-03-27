@@ -1,32 +1,34 @@
-﻿namespace Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures
+﻿namespace Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures;
+
+using System;
+using System.Net.Http;
+using JetBrains.Annotations;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+
+[UsedImplicitly]
+public class TestServerFixture
 {
-    using System;
-    using System.Net.Http;
-    using Microsoft.AspNetCore.TestHost;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Hosting;
+    public HttpClient DemoClient { get; }
 
-    public class TestServerFixture
+    public IServiceProvider Services { get; }
+
+    public TestServerFixture()
     {
-        public HttpClient DemoClient { get; }
+        var hostBuilder = CreateHostBuilder()
+            .ConfigureWebHost(webHost => webHost.UseTestServer());
+        var host = hostBuilder.Start();
+        Services = host.Services;
+        DemoClient = host.GetTestClient();
+    }
 
-        public IServiceProvider Services { get; }
-
-        public TestServerFixture()
-        {
-            var hostBuilder = CreateHostBuilder()
-                .ConfigureWebHost(webhost => webhost.UseTestServer());
-            var host = hostBuilder.Start();
-            Services = host.Services;
-            DemoClient = host.GetTestClient();
-        }
-
-        private static IHostBuilder CreateHostBuilder()
-        {
-            return Program.CreateHostBuilder(Array.Empty<string>())
-                .ConfigureAppConfiguration(c => c
-                    .AddUserSecrets<TestServerFixture>(true)
-                    .AddEnvironmentVariables());
-        }
+    private static IHostBuilder CreateHostBuilder()
+    {
+        return Program.CreateHostBuilder(Array.Empty<string>())
+            .ConfigureAppConfiguration(c => c
+                .AddJsonFile("appsettings.json")
+                .AddUserSecrets<TestServerFixture>(true)
+                .AddEnvironmentVariables());
     }
 }

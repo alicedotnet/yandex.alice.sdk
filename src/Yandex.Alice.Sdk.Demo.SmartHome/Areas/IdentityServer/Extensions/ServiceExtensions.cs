@@ -1,27 +1,26 @@
-﻿namespace Host.IdentityServer.Extensions
+﻿namespace Yandex.Alice.Sdk.Demo.SmartHome.Areas.IdentityServer.Extensions;
+
+using System.Linq;
+using System.Reflection;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Logging;
+using Quickstart;
+
+public static class ServiceExtensions
 {
-    using System.Linq;
-    using System.Reflection;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
-    using IdentityServerHost.Configuration;
-    using IdentityServerHost.Extensions;
-    using IdentityServerHost.Quickstart.UI;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.IdentityModel.Logging;
-
-    public static class ServiceExtensions
+    public static IServiceCollection AddSmartHomeIdentityServer(this IServiceCollection services, IConfiguration configuration)
     {
-        public static IServiceCollection AddSmartHomeIdentityServer(this IServiceCollection services, IConfiguration configuration)
-        {
-            IdentityModelEventSource.ShowPII = true;
+        IdentityModelEventSource.ShowPII = true;
 
-            // cookie policy to deal with temporary browser incompatibilities
-            services.AddSameSiteCookiePolicy();
-
-            services.AddIdentityServer(options =>
+        // cookie policy to deal with temporary browser incompatibilities
+        services
+            .AddSameSiteCookiePolicy()
+            .AddIdentityServer(options =>
             {
                 options.Events.RaiseSuccessEvents = true;
                 options.Events.RaiseFailureEvents = true;
@@ -30,53 +29,48 @@
 
                 options.EmitScopesAsSpaceDelimitedStringInJwt = true;
             })
-                .Configure(configuration)
-                .AddDeveloperSigningCredential()
-                .AddExtensionGrantValidator<ExtensionGrantValidator>()
-                .AddExtensionGrantValidator<NoSubjectExtensionGrantValidator>()
-                .AddJwtBearerClientAuthentication()
-                .AddAppAuthRedirectUriValidator()
-                .AddTestUsers(TestUsers.Users)
-                .AddProfileService<HostProfileService>()
-                .AddCustomTokenRequestValidator<ParameterizedScopeTokenRequestValidator>()
-                .AddScopeParser<ParameterizedScopeParser>();
+            .Configure(configuration)
+            .AddDeveloperSigningCredential()
+            .AddExtensionGrantValidator<ExtensionGrantValidator>()
+            .AddExtensionGrantValidator<NoSubjectExtensionGrantValidator>()
+            .AddJwtBearerClientAuthentication()
+            .AddAppAuthRedirectUriValidator()
+            .AddTestUsers(TestUsers.Users)
+            .AddProfileService<HostProfileService>()
+            .AddCustomTokenRequestValidator<ParameterizedScopeTokenRequestValidator>()
+            .AddScopeParser<ParameterizedScopeParser>();
 
-            services.AddLocalApiAuthentication(principal =>
-            {
-                principal.Identities.First().AddClaim(new Claim("additional_claim", "additional_value"));
-
-                return Task.FromResult(principal);
-            });
-
-            return services;
-        }
-
-        private static IIdentityServerBuilder Configure(this IIdentityServerBuilder identityServerBuilder, IConfiguration configuration)
+        services.AddLocalApiAuthentication(principal =>
         {
-            var isPersistent = configuration.GetValue<bool>("IdentityServerPersistent");
-            if (isPersistent)
-            {
-                return identityServerBuilder.AddSmartHomePersistent(configuration);
-            }
+            principal.Identities.First().AddClaim(new Claim("additional_claim", "additional_value"));
 
-            return identityServerBuilder.AddSmartHomeInMemory();
-        }
+            return Task.FromResult(principal);
+        });
 
-        private static IIdentityServerBuilder AddSmartHomeInMemory(this IIdentityServerBuilder identityServerBuilder)
-        {
-            return identityServerBuilder
-                .AddInMemoryClients(Clients.Get())
-                .AddInMemoryIdentityResources(Resources.IdentityResources)
-                .AddInMemoryApiScopes(Resources.ApiScopes)
-                .AddInMemoryApiResources(Resources.ApiResources);
-        }
+        return services;
+    }
 
-        private static IIdentityServerBuilder AddSmartHomePersistent(this IIdentityServerBuilder identityServerBuilder, IConfiguration configuration)
-        {
-            var migrationAssembly = typeof(ServiceExtensions).GetTypeInfo().Assembly.GetName().Name;
-            var connectionString = configuration.GetConnectionString("IdentityServer");
+    private static IIdentityServerBuilder Configure(this IIdentityServerBuilder identityServerBuilder, IConfiguration configuration)
+    {
+        var isPersistent = configuration.GetValue<bool>("IdentityServerPersistent");
+        return isPersistent ? identityServerBuilder.AddSmartHomePersistent(configuration) : identityServerBuilder.AddSmartHomeInMemory();
+    }
 
-            return identityServerBuilder
+    private static IIdentityServerBuilder AddSmartHomeInMemory(this IIdentityServerBuilder identityServerBuilder)
+    {
+        return identityServerBuilder
+            .AddInMemoryClients(Clients.Get())
+            .AddInMemoryIdentityResources(Resources.IdentityResources)
+            .AddInMemoryApiScopes(Resources.ApiScopes)
+            .AddInMemoryApiResources(Resources.ApiResources);
+    }
+
+    private static IIdentityServerBuilder AddSmartHomePersistent(this IIdentityServerBuilder identityServerBuilder, IConfiguration configuration)
+    {
+        var migrationAssembly = typeof(ServiceExtensions).GetTypeInfo().Assembly.GetName().Name;
+        var connectionString = configuration.GetConnectionString("IdentityServer");
+
+        return identityServerBuilder
             .AddConfigurationStore(opt =>
             {
                 opt.ConfigureDbContext = c => c.UseSqlite(
@@ -89,6 +83,5 @@
                     connectionString,
                     sql => sql.MigrationsAssembly(migrationAssembly));
             });
-        }
     }
 }

@@ -7,15 +7,6 @@
 
     public abstract class EnumerableConverter<TItem> : JsonConverter<IEnumerable<TItem>>
     {
-        protected EnumerableConverter()
-            : this(true)
-        {
-        }
-
-        protected EnumerableConverter(bool canWrite) => CanWrite = canWrite;
-
-        public bool CanWrite { get; }
-
         public override IEnumerable<TItem> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             switch (reader.TokenType)
@@ -33,6 +24,17 @@
                     }
 
                     return list.ToArray();
+                case JsonTokenType.None:
+                case JsonTokenType.StartObject:
+                case JsonTokenType.EndObject:
+                case JsonTokenType.EndArray:
+                case JsonTokenType.PropertyName:
+                case JsonTokenType.Comment:
+                case JsonTokenType.String:
+                case JsonTokenType.Number:
+                case JsonTokenType.True:
+                case JsonTokenType.False:
+                case JsonTokenType.Null:
                 default:
                     return Array.Empty<TItem>();
             }
@@ -45,16 +47,18 @@
                 throw new ArgumentNullException(nameof(writer));
             }
 
-            if (value != null && CanWrite)
+            if (value == null)
             {
-                writer.WriteStartArray();
-                foreach (var item in value)
-                {
-                    WriteItem(writer, item, options);
-                }
-
-                writer.WriteEndArray();
+                return;
             }
+
+            writer.WriteStartArray();
+            foreach (var item in value)
+            {
+                WriteItem(writer, item, options);
+            }
+
+            writer.WriteEndArray();
         }
 
         protected abstract TItem ToItem(ref Utf8JsonReader reader, JsonSerializerOptions options);

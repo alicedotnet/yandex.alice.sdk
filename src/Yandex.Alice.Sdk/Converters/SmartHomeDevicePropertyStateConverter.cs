@@ -6,7 +6,7 @@
 
     public class SmartHomeDevicePropertyStateConverter : SmartHomeTypeConverter<SmartHomeDevicePropertyState>
     {
-        protected override IReadOnlyDictionary<string, Type> EntityNameTypeMap => new Dictionary<string, Type>()
+        protected override IReadOnlyDictionary<string, Type> EntityNameTypeMap => new Dictionary<string, Type>
         {
             { SmartHomeConstants.Devices.Properties.Float, typeof(SmartHomeDeviceFloatPropertyState) },
             { SmartHomeConstants.Devices.Properties.Event, typeof(SmartHomeDeviceEventPropertyState) },

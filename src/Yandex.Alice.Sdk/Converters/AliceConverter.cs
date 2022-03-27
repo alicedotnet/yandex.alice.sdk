@@ -5,7 +5,7 @@
 
     public abstract class AliceConverter<T> : JsonConverter<T>
     {
-        protected virtual string GetPropertyValue(Utf8JsonReader reader, string propertyName)
+        protected string GetPropertyValue(Utf8JsonReader reader, string propertyName)
         {
             while (reader.Read())
             {

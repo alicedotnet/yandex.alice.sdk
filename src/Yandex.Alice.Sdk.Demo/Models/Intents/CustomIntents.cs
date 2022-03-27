@@ -1,11 +1,17 @@
-﻿namespace Yandex.Alice.Sdk.Demo.Models.Intents
-{
-    using System.Text.Json.Serialization;
-    using Yandex.Alice.Sdk.Models;
+﻿namespace Yandex.Alice.Sdk.Demo.Models.Intents;
 
-    public class CustomIntents
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+using Yandex.Alice.Sdk.Models;
+
+[UsedImplicitly]
+public class CustomIntents
+{
+    public CustomIntents(AliceIntentModel<CustomTurnOnSlots> turnOn)
     {
-        [JsonPropertyName("turn.on")]
-        public AliceIntentModel<CustomTurnOnSlots> TurnOn { get; set; }
+        TurnOn = turnOn;
     }
+
+    [JsonPropertyName("turn.on")]
+    public AliceIntentModel<CustomTurnOnSlots> TurnOn { get; }
 }

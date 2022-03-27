@@ -1,19 +1,14 @@
-﻿namespace Yandex.Alice.Sdk.Demo.Models.Session
+﻿namespace Yandex.Alice.Sdk.Demo.Models.Session;
+
+using System.Text.Json.Serialization;
+
+public class CustomSessionState
 {
-    using System.Text.Json.Serialization;
+    [JsonPropertyName("mode")]
+    public ModeType Mode { get; }
 
-    public class CustomSessionState
+    public CustomSessionState(ModeType mode = ModeType.Undefined)
     {
-        [JsonPropertyName("mode")]
-        public ModeType Mode { get; set; }
-
-        public CustomSessionState(ModeType mode)
-        {
-            Mode = mode;
-        }
-
-        public CustomSessionState()
-        {
-        }
+        Mode = mode;
     }
 }

@@ -38,3 +38,9 @@ dotnet_diagnostic.SA1611.severity=silent
 
 [*.{cs,vb}]
 dotnet_diagnostic.CA1031.severity=silent
+
+[tests/**.cs]
+# Can be removed after https://github.com/fluentassertions/fluentassertions/issues/1074 is fixed
+resharper_possible_null_reference_exception_highlighting=none
+
+resharper_redundant_name_qualifier_highlighting=none

@@ -1,7 +1,9 @@
 ﻿namespace Yandex.Alice.Sdk.Models
 {
     using System.Collections.Generic;
+    using JetBrains.Annotations;
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class AliceGalleryResponse<TSession, TUser>
         : AliceResponseBase<AliceGalleryResponseModel, TSession, TUser>
     {

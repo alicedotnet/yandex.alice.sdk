@@ -1,14 +1,13 @@
-﻿namespace Yandex.Alice.Sdk.Demo.Models
+﻿namespace Yandex.Alice.Sdk.Demo.Models;
+
+using System;
+
+public class AliceSettings
 {
-    using System;
+    public Guid SkillId { get; }
 
-    public class AliceSettings
+    public AliceSettings(string skillId)
     {
-        public Guid SkillId { get; set; }
-
-        public AliceSettings(string skillId)
-        {
-            SkillId = Guid.Parse(skillId);
-        }
+        SkillId = Guid.Parse(skillId);
     }
 }

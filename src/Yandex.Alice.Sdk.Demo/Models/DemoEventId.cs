@@ -1,7 +1,6 @@
-﻿namespace Yandex.Alice.Sdk.Demo.Models
+﻿namespace Yandex.Alice.Sdk.Demo.Models;
+
+public enum DemoEventId
 {
-    public enum DemoEventId
-    {
-        UnexpectedError,
-    }
+    UnexpectedError,
 }

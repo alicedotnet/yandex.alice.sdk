@@ -2,44 +2,41 @@
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
     using Yandex.Alice.Sdk.Helpers;
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public class AliceResponseModel : AliceModel
     {
-        public const int TextMaxLenght = 1024;
+        private const int _textMaxLength = 1024;
+        private const int _ttsMaxLength = 1024;
+
         private string _text;
 
         [JsonPropertyName("text")]
         public string Text
         {
-            get
-            {
-                return _text;
-            }
+            get => _text;
 
             set
             {
                 _text = value;
                 ValidateNotNull(_text);
-                ValidateMaxLength(_text, TextMaxLenght);
+                ValidateMaxLength(_text, _textMaxLength);
             }
         }
 
-        public const int TtsMaxLenght = 1024;
         private string _tts;
 
         [JsonPropertyName("tts")]
         public string Tts
         {
-            get
-            {
-                return _tts;
-            }
+            get => _tts;
 
             set
             {
                 _tts = value;
-                ValidateMaxLength(AliceHelper.GetStringWithoutTags(_tts), TtsMaxLenght);
+                ValidateMaxLength(AliceHelper.GetStringWithoutTags(_tts), _ttsMaxLength);
             }
         }
 
@@ -66,11 +63,6 @@
             }
         }
 
-        public void SetTts(string tts)
-        {
-            Tts = tts;
-        }
-
         public void AppendText(string text, bool setTts = true)
         {
             Text += PrepareText(text);
@@ -80,20 +72,27 @@
             }
         }
 
-        public void AppendTts(string tts)
-        {
-            Tts += tts;
-        }
-
         private static string PrepareText(string text)
         {
-            if (!string.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(text))
             {
-                text = text.Replace("+", string.Empty);
-                text = AliceHelper.GetStringWithoutTags(text);
+                return text;
             }
 
+            text = text.Replace("+", string.Empty);
+            text = AliceHelper.GetStringWithoutTags(text);
+
             return text;
+        }
+
+        private void SetTts(string tts)
+        {
+            Tts = tts;
+        }
+
+        private void AppendTts(string tts)
+        {
+            Tts += tts;
         }
     }
 }

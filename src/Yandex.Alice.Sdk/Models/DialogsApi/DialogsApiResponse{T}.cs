@@ -5,7 +5,6 @@
         public T Content { get; }
 
         public DialogsApiResponse(T content)
-            : base(true)
         {
             Content = content;
         }

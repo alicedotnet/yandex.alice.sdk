@@ -1,9 +1,9 @@
-@model ErrorViewModel
+@model Yandex.Alice.Sdk.Demo.SmartHome.Areas.IdentityServer.Quickstart.Home.ErrorViewModel
 
 @{
     var error = Model?.Error?.Error;
     var errorDescription = Model?.Error?.ErrorDescription;
-    var request_id = Model?.Error?.RequestId;
+    var requestId = Model?.Error?.RequestId;
 }
 
 <div class="error-page">
@@ -31,9 +31,9 @@
                 }
             </div>
 
-            @if (request_id != null)
+            @if (requestId != null)
             {
-                <div class="request-id">Request Id: @request_id</div>
+                <div class="request-id">Request Id: @requestId</div>
             }
         </div>
     </div>

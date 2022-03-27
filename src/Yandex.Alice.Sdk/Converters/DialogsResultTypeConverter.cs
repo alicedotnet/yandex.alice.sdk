@@ -9,14 +9,8 @@
     {
         public override DialogsResultType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            string input = reader.GetString();
-            switch (input)
-            {
-                case "ok":
-                    return DialogsResultType.Ok;
-                default:
-                    return DialogsResultType.Fail;
-            }
+            var input = reader.GetString();
+            return input == "ok" ? DialogsResultType.Ok : DialogsResultType.Fail;
         }
 
         public override void Write(Utf8JsonWriter writer, DialogsResultType value, JsonSerializerOptions options)
@@ -26,16 +20,7 @@
                 throw new ArgumentNullException(nameof(writer));
             }
 
-            string result;
-            switch (value)
-            {
-                case DialogsResultType.Ok:
-                    result = "ok";
-                    break;
-                default:
-                    result = "fail";
-                    break;
-            }
+            var result = value == DialogsResultType.Ok ? "ok" : "fail";
 
             writer.WriteStringValue(result);
         }

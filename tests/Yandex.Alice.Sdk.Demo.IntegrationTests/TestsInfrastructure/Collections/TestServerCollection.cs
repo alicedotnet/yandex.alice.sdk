@@ -1,10 +1,9 @@
-﻿namespace Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Collections
-{
-    using Xunit;
-    using Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures;
+﻿namespace Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Collections;
 
-    [CollectionDefinition(TestsConstants.TestServerCollectionName)]
-    public class TestServerCollection : ICollectionFixture<TestServerFixture>
-    {
-    }
+using Xunit;
+using Yandex.Alice.Sdk.Demo.IntegrationTests.TestsInfrastructure.Fixtures;
+
+[CollectionDefinition(TestsConstants.TestServerCollectionName)]
+public class TestServerCollection : ICollectionFixture<TestServerFixture>
+{
 }

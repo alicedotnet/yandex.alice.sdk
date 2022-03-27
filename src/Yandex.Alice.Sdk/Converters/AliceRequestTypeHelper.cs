@@ -22,7 +22,7 @@
                 case AliceConstants.RequestType.PurchaseConfirmation:
                     return AliceRequestType.PurchaseConfirmation;
                 default:
-                    string message = string.Format(CultureInfo.CurrentCulture, Yandex_Alice_Sdk_Resources.Error_Unknown_Request_Type, value);
+                    var message = string.Format(CultureInfo.CurrentCulture, AliceResources.Error_Unknown_Request_Type, value);
                     throw new UnknownRequestTypeException(message);
             }
         }
@@ -42,7 +42,7 @@
                 case AliceRequestType.PurchaseConfirmation:
                     return AliceConstants.RequestType.PurchaseConfirmation;
                 default:
-                    string message = string.Format(CultureInfo.CurrentCulture, Yandex_Alice_Sdk_Resources.Error_Unknown_Request_Type, requestType);
+                    var message = string.Format(CultureInfo.CurrentCulture, AliceResources.Error_Unknown_Request_Type, requestType);
                     throw new UnknownRequestTypeException(message);
             }
         }

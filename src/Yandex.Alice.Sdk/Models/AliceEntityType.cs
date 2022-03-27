@@ -3,10 +3,10 @@
     public enum AliceEntityType
     {
         Unknown,
-        DATETIME,
-        FIO,
-        GEO,
-        NUMBER,
-        STRING,
+        Datetime,
+        Fio,
+        Geo,
+        Number,
+        String,
     }
 }

@@ -1,57 +1,55 @@
-namespace Yandex.Alice.Sdk.Demo.SmartHome
+namespace Yandex.Alice.Sdk.Demo.SmartHome;
+
+using Areas.IdentityServer.Extensions;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Yandex.Alice.Sdk.Demo.SmartHome.Services;
+
+public class Startup
 {
-    using Host.IdentityServer.Extensions;
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.HttpOverrides;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Yandex.Alice.Sdk.Demo.SmartHome.Services;
+    private IConfiguration Configuration { get; }
 
-    public class Startup
+    public Startup(IConfiguration configuration)
     {
-        public IConfiguration Configuration { get; }
+        Configuration = configuration;
+    }
 
-        public Startup(IConfiguration configuration)
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services
+            .AddSmartHomeIdentityServer(Configuration)
+            .AddSmartHomeServices()
+            .AddControllersWithViews();
+    }
+
+    public void Configure(IApplicationBuilder app)
+    {
+        app.UseForwardedHeaders(new ForwardedHeadersOptions
         {
-            Configuration = configuration;
-        }
+            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
+        });
 
-        public void ConfigureServices(IServiceCollection services)
+        app.UseCertificateForwarding();
+        app.UseCookiePolicy();
+
+        app.UseDeveloperExceptionPage();
+        app.UseStaticFiles();
+
+        app.UseRouting();
+        app.UseIdentityServer();
+
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
         {
-            services.AddControllersWithViews();
+            endpoints.MapAreaControllerRoute(
+                "IdentityServer",
+                "IdentityServer",
+                "{controller=Home}/{action=Index}/{id?}");
 
-            services.AddSmartHomeIdentityServer(Configuration);
-
-            services.AddSmartHomeServices();
-        }
-
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
-            });
-
-            app.UseCertificateForwarding();
-            app.UseCookiePolicy();
-
-            app.UseDeveloperExceptionPage();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-            app.UseIdentityServer();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapAreaControllerRoute(
-                    name: "IdentityServer",
-                    areaName: "IdentityServer",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-                endpoints.MapDefaultControllerRoute();
-            });
-        }
+            endpoints.MapDefaultControllerRoute();
+        });
     }
 }

@@ -1,15 +1,14 @@
-﻿namespace Yandex.Alice.Sdk.Demo.SmartHome.Services
+﻿namespace Yandex.Alice.Sdk.Demo.SmartHome.Services;
+
+using Microsoft.Extensions.DependencyInjection;
+
+public static class ServiceCollectionExtensions
 {
-    using Microsoft.Extensions.DependencyInjection;
-
-    public static class ServiceCollectionExtensions
+    public static IServiceCollection AddSmartHomeServices(this IServiceCollection services)
     {
-        public static IServiceCollection AddSmartHomeServices(this IServiceCollection services)
-        {
-            services.AddSingleton<IContextUserService, ContextUserService>();
-            services.AddSingleton<IDeviceService, DeviceService>();
+        services.AddSingleton<IContextUserService, ContextUserService>();
+        services.AddSingleton<IDeviceService, DeviceService>();
 
-            return services;
-        }
+        return services;
     }
 }

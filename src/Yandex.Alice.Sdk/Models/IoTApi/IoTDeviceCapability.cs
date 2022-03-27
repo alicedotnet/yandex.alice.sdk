@@ -1,8 +1,10 @@
 ﻿namespace Yandex.Alice.Sdk.Models.IoTApi
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
     using Yandex.Alice.Sdk.Converters;
 
+    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     [JsonConverter(typeof(IoTDeviceCapabilityConverter))]
     public abstract class IoTDeviceCapability
     {

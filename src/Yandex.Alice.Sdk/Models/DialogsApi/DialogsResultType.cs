@@ -2,7 +2,6 @@
 {
     public enum DialogsResultType
     {
-        Undefined,
         Ok,
         Fail,
     }

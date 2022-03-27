@@ -1,28 +1,27 @@
-﻿namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure
+﻿namespace Yandex.Alice.Sdk.Tests.TestsInfrastructure;
+
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
+using Xunit.Abstractions;
+
+public abstract class BaseTests
 {
-    using System.Text.Encodings.Web;
-    using System.Text.Json;
-    using System.Text.Unicode;
-    using Xunit.Abstractions;
+    protected ITestOutputHelper TestOutputHelper { get; }
 
-    public abstract class BaseTests
+    protected BaseTests(ITestOutputHelper testOutputHelper)
     {
-        public ITestOutputHelper TestOutputHelper { get; }
+        TestOutputHelper = testOutputHelper;
+    }
 
-        protected BaseTests(ITestOutputHelper testOutputHelper)
+    protected void WritePrettyJson<T>(T value)
+    {
+        var options = new JsonSerializerOptions
         {
-            TestOutputHelper = testOutputHelper;
-        }
-
-        protected void WritePrettyJson<T>(T value)
-        {
-            var options = new JsonSerializerOptions()
-            {
-                WriteIndented = true,
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
-            };
-            string json = JsonSerializer.Serialize(value, options);
-            TestOutputHelper.WriteLine(json);
-        }
+            WriteIndented = true,
+            Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+        };
+        var json = JsonSerializer.Serialize(value, options);
+        TestOutputHelper.WriteLine(json);
     }
 }
