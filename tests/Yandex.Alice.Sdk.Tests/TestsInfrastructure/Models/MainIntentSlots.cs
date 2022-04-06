@@ -8,15 +8,14 @@ using Yandex.Alice.Sdk.Models;
 [UsedImplicitly]
 public class MainIntentSlots
 {
-    public MainIntentSlots(AliceEntityModel whatSlot, AliceEntityModel whereSlot)
+    public MainIntentSlots(AliceEntityStringModel whatSlot, AliceEntityModel whereSlot)
     {
         WhatSlot = whatSlot;
         WhereSlot = whereSlot;
     }
 
     [JsonPropertyName("what")]
-    [JsonConverter(typeof(AliceEntityModelConverter))]
-    public AliceEntityModel WhatSlot { get; }
+    public AliceEntityStringModel WhatSlot { get; }
 
     [JsonPropertyName("where")]
     [JsonConverter(typeof(AliceEntityModelConverter))]

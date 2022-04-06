@@ -65,8 +65,7 @@ public class AliceRequestTests : BaseTests
         Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot);
         Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot.Tokens);
         Assert.Equal(AliceEntityType.String, aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot.Type);
-        Assert.True(aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot is AliceEntityStringModel);
-        Assert.NotNull((aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot as AliceEntityStringModel).Value);
+        Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main.Slots.WhatSlot.Value);
 
         Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main.Slots.WhereSlot);
         Assert.NotNull(aliceRequest.Request.Nlu.Intents.Main.Slots.WhereSlot.Tokens);
