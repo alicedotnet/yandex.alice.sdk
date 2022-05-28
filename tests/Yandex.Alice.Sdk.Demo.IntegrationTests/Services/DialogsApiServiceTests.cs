@@ -1,30 +1,32 @@
-﻿namespace Yandex.Alice.Sdk.Tests.Services;
+﻿namespace Yandex.Alice.Sdk.Demo.IntegrationTests.Services;
 
 using System;
 using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
+using TestsInfrastructure.Fixtures;
 using Xunit;
 using Xunit.Abstractions;
 using Yandex.Alice.Sdk.Models.DialogsApi;
 using Yandex.Alice.Sdk.Resources;
 using Yandex.Alice.Sdk.Services;
-using Yandex.Alice.Sdk.Tests.TestsInfrastructure;
-using Yandex.Alice.Sdk.Tests.TestsInfrastructure.Fixtures;
+using Microsoft.Extensions.DependencyInjection;
+using Models;
 
-[Collection(TestsConstants.DialogsApiCollectionName)]
-public class DialogsApiServiceTests : BaseTests
+[Collection(TestsConstants.TestServerCollectionName)]
+public class DialogsApiServiceTests
 {
     private const string _imageUrl = "https://raw.githubusercontent.com/alexvolchetsky/yandex.alice.sdk/master/src/Yandex.Alice.Sdk/Resources/icon.png";
 
+    private readonly ITestOutputHelper _testOutputHelper;
     private readonly IDialogsApiService _dialogsApiService;
     private readonly Guid _skillId;
 
-    public DialogsApiServiceTests(DialogsApiFixture dialogsApiFixture, ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
+    public DialogsApiServiceTests(TestServerFixture testServerFixture, ITestOutputHelper testOutputHelper)
     {
-        _dialogsApiService = dialogsApiFixture.DialogsApiService;
-        _skillId = dialogsApiFixture.AliceSettings.SkillId;
+        _testOutputHelper = testOutputHelper;
+        _dialogsApiService = testServerFixture.Services.GetService<IDialogsApiService>();
+        _skillId = testServerFixture.Services.GetService<AliceSettings>().SkillId;
     }
 
     [Fact]
@@ -47,7 +49,6 @@ public class DialogsApiServiceTests : BaseTests
         Assert.NotNull(response.Content.Images.Quota);
         Assert.NotNull(response.Content.Sounds);
         Assert.NotNull(response.Content.Sounds.Quota);
-        WritePrettyJson(response);
     }
 
     [Fact]
@@ -89,7 +90,7 @@ public class DialogsApiServiceTests : BaseTests
         Assert.NotNull(uploadResponse.Content.Image.OriginalUrl);
         Assert.True(uploadResponse.Content.Image.Size > 0);
         Assert.NotEqual(default, uploadResponse.Content.Image.CreatedAt);
-        TestOutputHelper.WriteLine($"CreatedAt: {uploadResponse.Content.Image.CreatedAt.ToString(AliceConstants.DateTimeFormat, CultureInfo.InvariantCulture)}");
+        _testOutputHelper.WriteLine($"CreatedAt: {uploadResponse.Content.Image.CreatedAt.ToString(AliceConstants.DateTimeFormat, CultureInfo.InvariantCulture)}");
         await _dialogsApiService.DeleteImageAsync(_skillId, uploadResponse.Content.Image.Id).ConfigureAwait(false);
     }
 
@@ -98,8 +99,8 @@ public class DialogsApiServiceTests : BaseTests
     {
         var settings = new DialogsApiSettings("i'm invalid for sure");
         using var dialogsApiService = new DialogsApiService(settings);
-        var bytes = await File.ReadAllBytesAsync(TestsConstants.Assets.IconFilePath);
-        var request = new DialogsFileUploadRequest(TestsConstants.Assets.IconFileName, bytes);
+        var bytes = await File.ReadAllBytesAsync(TestsConstants.IconFilePath);
+        var request = new DialogsFileUploadRequest(TestsConstants.IconFileName, bytes);
         var uploadResponse = await dialogsApiService.UploadImageAsync(_skillId, request).ConfigureAwait(false);
         Assert.False(uploadResponse.IsSuccess);
         Assert.Contains(TestsConstants.InvalidCredentialsMessage, uploadResponse.ErrorMessage, StringComparison.OrdinalIgnoreCase);
@@ -108,7 +109,7 @@ public class DialogsApiServiceTests : BaseTests
     [Fact]
     public async Task UploadFileImage_NotImage_Fail()
     {
-        var bytes = await File.ReadAllBytesAsync(TestsConstants.Assets.DialogsImageInfoFilePath);
+        var bytes = await File.ReadAllBytesAsync(TestsConstants.AliceRequestPingFilePath);
         var request = new DialogsFileUploadRequest("test.jpg", bytes);
         var response = await _dialogsApiService.UploadImageAsync(_skillId, request).ConfigureAwait(false);
         Assert.False(response.IsSuccess);
@@ -117,8 +118,8 @@ public class DialogsApiServiceTests : BaseTests
     [Fact]
     public async Task UploadFileImage_Ok()
     {
-        var bytes = await File.ReadAllBytesAsync(TestsConstants.Assets.IconFilePath);
-        var request = new DialogsFileUploadRequest(TestsConstants.Assets.IconFileName, bytes);
+        var bytes = await File.ReadAllBytesAsync(TestsConstants.IconFilePath);
+        var request = new DialogsFileUploadRequest(TestsConstants.IconFileName, bytes);
         var uploadResponse = await _dialogsApiService.UploadImageAsync(_skillId, request).ConfigureAwait(false);
         Assert.True(uploadResponse.IsSuccess);
 
@@ -192,8 +193,8 @@ public class DialogsApiServiceTests : BaseTests
     [Fact]
     public async Task UploadSound_Ok()
     {
-        var bytes = await File.ReadAllBytesAsync(TestsConstants.Assets.SoundFilePath);
-        var request = new DialogsFileUploadRequest(TestsConstants.Assets.SoundFileName, bytes);
+        var bytes = await File.ReadAllBytesAsync(TestsConstants.SoundFilePath);
+        var request = new DialogsFileUploadRequest(TestsConstants.SoundFileName, bytes);
         var uploadResponse = await _dialogsApiService.UploadSoundAsync(_skillId, request).ConfigureAwait(false);
         Assert.True(uploadResponse.IsSuccess);
         Assert.NotNull(uploadResponse.Content);
@@ -218,8 +219,8 @@ public class DialogsApiServiceTests : BaseTests
     [Fact]
     public async Task GetSound_Ok()
     {
-        var bytes = await File.ReadAllBytesAsync(TestsConstants.Assets.SoundFilePath);
-        var request = new DialogsFileUploadRequest(TestsConstants.Assets.SoundFileName, bytes);
+        var bytes = await File.ReadAllBytesAsync(TestsConstants.SoundFilePath);
+        var request = new DialogsFileUploadRequest(TestsConstants.SoundFileName, bytes);
         var uploadResponse = await _dialogsApiService.UploadSoundAsync(_skillId, request).ConfigureAwait(false);
 
         var soundId = uploadResponse.Content.Sound.Id;
@@ -235,8 +236,8 @@ public class DialogsApiServiceTests : BaseTests
     [Fact]
     public async Task GetSounds_Ok()
     {
-        var bytes = await File.ReadAllBytesAsync(TestsConstants.Assets.SoundFilePath);
-        var request = new DialogsFileUploadRequest(TestsConstants.Assets.SoundFileName, bytes);
+        var bytes = await File.ReadAllBytesAsync(TestsConstants.SoundFilePath);
+        var request = new DialogsFileUploadRequest(TestsConstants.SoundFileName, bytes);
         var uploadResponse = await _dialogsApiService.UploadSoundAsync(_skillId, request).ConfigureAwait(false);
 
         var response = await _dialogsApiService.GetSoundsAsync(_skillId).ConfigureAwait(false);
@@ -249,8 +250,8 @@ public class DialogsApiServiceTests : BaseTests
     [Fact]
     public async Task DeleteSound_Ok()
     {
-        var bytes = await File.ReadAllBytesAsync(TestsConstants.Assets.SoundFilePath);
-        var request = new DialogsFileUploadRequest(TestsConstants.Assets.SoundFileName, bytes);
+        var bytes = await File.ReadAllBytesAsync(TestsConstants.SoundFilePath);
+        var request = new DialogsFileUploadRequest(TestsConstants.SoundFileName, bytes);
         var uploadResponse = await _dialogsApiService.UploadSoundAsync(_skillId, request).ConfigureAwait(false);
         var soundId = uploadResponse.Content.Sound.Id;
         var response = await _dialogsApiService.DeleteSoundAsync(_skillId, soundId).ConfigureAwait(false);
