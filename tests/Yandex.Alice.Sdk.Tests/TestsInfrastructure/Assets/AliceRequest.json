@@ -35,6 +35,8 @@
           },
           "type": "YANDEX.GEO",
           "value": {
+            "country": "россия",
+            "city": "москва",
             "house_number": "16",
             "street": "льва толстого"
           }
