@@ -38,7 +38,8 @@
             "country": "россия",
             "city": "москва",
             "house_number": "16",
-            "street": "льва толстого"
+            "street": "льва толстого",
+            "airport": "внуково"
           }
         },
         {
@@ -67,8 +68,16 @@
           },
           "type": "YANDEX.DATETIME",
           "value": {
-            "day": 1,
-            "day_is_relative": true
+            "day_is_relative": true,
+            "month_is_relative": true,
+            "year_is_relative": true,
+            "minute_is_relative": true,
+            "hour_is_relative": true,
+            "year": 1982,
+            "month": 9,
+            "day": 8,
+            "hour": 22,
+            "minute": 30
           }
         }
       ],

@@ -17,5 +17,8 @@
 
         [JsonPropertyName("street")]
         public string Street { get; set; }
+
+        [JsonPropertyName("airport")]
+        public string Airport { get; set; }
     }
 }
