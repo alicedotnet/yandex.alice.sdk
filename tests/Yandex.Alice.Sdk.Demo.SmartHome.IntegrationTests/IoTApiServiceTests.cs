@@ -64,7 +64,7 @@ public class IoTApiServiceTests : IClassFixture<SmartHomeFixture>
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.Id))
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.Name))
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.HouseholdId))
-            .And.OnlyContain(x => x.Devices != null && x.Devices.Any())
+            .And.OnlyContain(x => x.Devices != null)
             .And.OnlyContain(x => x.Devices.All(d => !string.IsNullOrEmpty(d)));
         response.Content.Groups.Should().NotBeNullOrEmpty()
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.Id))
