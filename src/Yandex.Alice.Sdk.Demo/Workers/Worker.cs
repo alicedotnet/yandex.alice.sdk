@@ -24,6 +24,14 @@ public abstract class Worker : BackgroundService
         return base.StopAsync(cancellationToken);
     }
 
+    public override void Dispose()
+    {
+        base.Dispose();
+
+        _timer?.Dispose();
+        GC.SuppressFinalize(this);
+    }
+
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
         _timer = new Timer(DoWork, null, TimeSpan.Zero, TimerInterval);

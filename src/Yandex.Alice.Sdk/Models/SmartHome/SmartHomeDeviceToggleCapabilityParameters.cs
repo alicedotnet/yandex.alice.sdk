@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class SmartHomeDeviceToggleCapabilityParameters : SmartHomeDeviceCapabilityParameters
+    public class SmartHomeDeviceToggleCapabilityParameters : ISmartHomeDeviceCapabilityParameters
     {
         [JsonPropertyName("instance")]
         public string Instance { get; set; }

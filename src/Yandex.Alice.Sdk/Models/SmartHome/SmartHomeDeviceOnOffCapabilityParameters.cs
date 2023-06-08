@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class SmartHomeDeviceOnOffCapabilityParameters : SmartHomeDeviceCapabilityParameters
+    public class SmartHomeDeviceOnOffCapabilityParameters : ISmartHomeDeviceCapabilityParameters
     {
         [JsonPropertyName("split")]
         public bool Split { get; set; }

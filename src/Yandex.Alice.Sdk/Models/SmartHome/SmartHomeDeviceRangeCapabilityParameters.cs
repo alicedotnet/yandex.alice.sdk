@@ -4,7 +4,7 @@
     using JetBrains.Annotations;
 
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
-    public class SmartHomeDeviceRangeCapabilityParameters : SmartHomeDeviceCapabilityParameters
+    public class SmartHomeDeviceRangeCapabilityParameters : ISmartHomeDeviceCapabilityParameters
     {
         [JsonPropertyName("instance")]
         public string Instance { get; set; }

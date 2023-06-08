@@ -7,7 +7,7 @@
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public abstract class IoTDeviceCapability<TStateValue, TParameters> : IoTDeviceCapability
         where TStateValue : SmartHomeDeviceCapabilityStateValue
-        where TParameters : SmartHomeDeviceCapabilityParameters
+        where TParameters : ISmartHomeDeviceCapabilityParameters
     {
         [JsonPropertyName("state")]
         public TStateValue State { get; set; }

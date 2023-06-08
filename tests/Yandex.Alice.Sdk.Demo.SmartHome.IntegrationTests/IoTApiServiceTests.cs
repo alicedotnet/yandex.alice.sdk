@@ -65,7 +65,7 @@ public class IoTApiServiceTests : IClassFixture<SmartHomeFixture>
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.Name))
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.HouseholdId))
             .And.OnlyContain(x => x.Devices != null)
-            .And.OnlyContain(x => x.Devices.All(d => !string.IsNullOrEmpty(d)));
+            .And.OnlyContain(x => x.Devices.TrueForAll(d => !string.IsNullOrEmpty(d)));
         response.Content.Groups.Should().NotBeNullOrEmpty()
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.Id))
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.Name))
@@ -73,11 +73,11 @@ public class IoTApiServiceTests : IClassFixture<SmartHomeFixture>
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.HouseholdId))
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.Type))
             .And.OnlyContain(x => x.Devices != null && x.Devices.Any())
-            .And.OnlyContain(x => x.Devices.All(d => !string.IsNullOrEmpty(d)))
+            .And.OnlyContain(x => x.Devices.TrueForAll(d => !string.IsNullOrEmpty(d)))
             .And.OnlyContain(x => x.Capabilities != null && x.Capabilities.Any())
-            .And.OnlyContain(x => x.Capabilities.All(c => c.Retrievable))
-            .And.OnlyContain(x => x.Capabilities.All(c => !string.IsNullOrEmpty(c.Type)))
-            .And.OnlyContain(x => x.Capabilities.Any(c => c is IoTGroupOnOffCapability))
+            .And.OnlyContain(x => x.Capabilities.TrueForAll(c => c.Retrievable))
+            .And.OnlyContain(x => x.Capabilities.TrueForAll(c => !string.IsNullOrEmpty(c.Type)))
+            .And.OnlyContain(x => x.Capabilities.Exists(c => c is IoTGroupOnOffCapability))
             .And.OnlyContain(x => x.Capabilities
                 .Where(c => c is IoTGroupOnOffCapability)
                 .Any(c => (c as IoTGroupOnOffCapability).State != null))
@@ -257,7 +257,7 @@ public class IoTApiServiceTests : IClassFixture<SmartHomeFixture>
         response.Content.Devices.Should().NotBeNullOrEmpty()
             .And.OnlyContain(x => x.Id == deviceId);
 
-        var device = response.Content.Devices.First();
+        var device = response.Content.Devices[0];
         device.Capabilities.Should().NotBeNullOrEmpty()
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.Type))
             .And.OnlyContain(x => x.State != null)
@@ -300,7 +300,7 @@ public class IoTApiServiceTests : IClassFixture<SmartHomeFixture>
     {
         // arrange
         var userInfo = await _ioTApiService.GetUserInfoAsync(_authToken);
-        var groupId = userInfo.Content.Groups.First().Id;
+        var groupId = userInfo.Content.Groups[0].Id;
 
         // act
         var response = await _ioTApiService.GetGroupAsync(_authToken, groupId);
@@ -375,7 +375,7 @@ public class IoTApiServiceTests : IClassFixture<SmartHomeFixture>
     {
         // arrange
         var userInfo = await _ioTApiService.GetUserInfoAsync(_authToken);
-        var groupId = userInfo.Content.Groups.First().Id;
+        var groupId = userInfo.Content.Groups[0].Id;
 
         var request = new IoTManageGroupRequest
         {
@@ -405,7 +405,7 @@ public class IoTApiServiceTests : IClassFixture<SmartHomeFixture>
         response.Content.Message.Should().BeNullOrEmpty();
         response.Content.Devices.Should().NotBeNullOrEmpty();
 
-        var device = response.Content.Devices.First();
+        var device = response.Content.Devices[0];
         device.Capabilities.Should().NotBeNullOrEmpty()
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.Type))
             .And.OnlyContain(x => x.State != null)
