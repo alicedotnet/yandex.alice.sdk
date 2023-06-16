@@ -1,0 +1,32 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "docker-compose build test"
+        },
+        {
+            "label": "unit-test",
+            "type": "shell",
+            "command": "docker-compose build unit-test"
+        },
+        {
+            "label": "demo",
+            "type": "shell",
+            "command": "docker-compose build demo"
+        },
+        {
+            "label": "nuget-pack",
+            "type": "shell",
+            "command": "docker-compose build nuget-pack"
+        },
+        {
+            "label": "nuget",
+            "type": "shell",
+            "command": "docker-compose build nuget"
+        }
+    ]
+}

@@ -4,9 +4,9 @@
     <TargetFramework>net7.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <Configurations>Debug;Release</Configurations>
-	<UserSecretsId>2bdb1cce-3c44-4345-a424-b53ba0a1b882</UserSecretsId>
+	  <UserSecretsId>2bdb1cce-3c44-4345-a424-b53ba0a1b882</UserSecretsId>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,0 +1,51 @@
+version: "3.9"
+services:
+  test:
+    build:
+      context: .
+      target: test
+      args:
+        AliceSettings__SkillId: ${ALICESETTINGS_SKILLID}
+        AliceSettings__DialogsOAuthToken: ${ALICESETTINGS_DIALOGSOAUTHTOKEN}
+        AliceSettings__IoTOAuthToken: ${ALICESETTINGS_IOTOAUTHTOKEN}
+        AliceSettings__SmartHomeSkillId: ${ALICESETTINGS_SMARTHOMESKILLID}
+  unit-test:
+    build:
+      context: .
+      target: unit-test
+  demo:
+    build:
+      context: .
+      target: demo
+      args:
+        AliceSettings__SkillId: ${ALICESETTINGS_SKILLID}
+        AliceSettings__DialogsOAuthToken: ${ALICESETTINGS_DIALOGSOAUTHTOKEN}
+        AliceSettings__IoTOAuthToken: ${ALICESETTINGS_IOTOAUTHTOKEN}
+        AliceSettings__SmartHomeSkillId: ${ALICESETTINGS_SMARTHOMESKILLID}
+    ports:
+      - "8000:80"
+      - "8001:443"    
+    environment:
+      - AliceSettings__SkillId=${ALICESETTINGS_SKILLID}
+      - AliceSettings__DialogsOAuthToken=${ALICESETTINGS_DIALOGSOAUTHTOKEN}
+      - AliceSettings__IoTOAuthToken=${ALICESETTINGS_IOTOAUTHTOKEN}
+  nuget-pack:
+    build:
+      context: .
+      target: nuget-pack
+      args:
+        AliceSettings__SkillId: ${ALICESETTINGS_SKILLID}
+        AliceSettings__DialogsOAuthToken: ${ALICESETTINGS_DIALOGSOAUTHTOKEN}
+        AliceSettings__IoTOAuthToken: ${ALICESETTINGS_IOTOAUTHTOKEN}
+        AliceSettings__SmartHomeSkillId: ${ALICESETTINGS_SMARTHOMESKILLID}
+  nuget:
+    build:
+      context: .
+      target: nuget
+      args:
+        AliceSettings__SkillId: ${ALICESETTINGS_SKILLID}
+        AliceSettings__DialogsOAuthToken: ${ALICESETTINGS_DIALOGSOAUTHTOKEN}
+        AliceSettings__IoTOAuthToken: ${ALICESETTINGS_IOTOAUTHTOKEN}
+        AliceSettings__SmartHomeSkillId: ${ALICESETTINGS_SMARTHOMESKILLID}
+        Nuget_Url: ${NUGET_URL}
+        Nuget_Api_Key: ${NUGET_API_KEY}

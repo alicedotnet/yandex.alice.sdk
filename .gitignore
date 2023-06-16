@@ -346,3 +346,4 @@ profile.arm.json
 dotnet-tools.json
 identityserver.db
 .DS_Store
+*.snupkg

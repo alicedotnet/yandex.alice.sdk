@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <IsPackable>false</IsPackable>
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-	<EnableNETAnalyzers>true</EnableNETAnalyzers>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+	  <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,9 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="TestsInfrastructure\Assets\AliceRequest_PurchaseConfirmation.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>false</IsPackable>
     <UserSecretsId>648a49bf-137e-401d-9fa2-3060a5eecb19</UserSecretsId>
   </PropertyGroup>
