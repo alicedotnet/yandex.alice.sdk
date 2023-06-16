@@ -1,7 +1,6 @@
 ﻿namespace Yandex.Alice.Sdk.Tests.Models;
 
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 using FluentAssertions;
 using Xunit;
