@@ -112,9 +112,7 @@ public class ConsentController : Controller
         };
     }
 
-    /*****************************************/
     /* helper APIs for the ConsentController */
-    /*****************************************/
     private async Task<ProcessConsentResult> ProcessConsent(ConsentInputModel model)
     {
         var result = new ProcessConsentResult();

@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine
+FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine
 ARG AliceSettings__SkillId
 ENV AliceSettings__SkillId ${AliceSettings__SkillId}
 ARG AliceSettings__DialogsOAuthToken

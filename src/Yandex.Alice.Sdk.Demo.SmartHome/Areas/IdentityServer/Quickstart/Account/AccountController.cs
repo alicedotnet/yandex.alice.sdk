@@ -216,9 +216,7 @@ public class AccountController : Controller
         return View();
     }
 
-    /*****************************************/
     /* helper APIs for the AccountController */
-    /*****************************************/
     private async Task<LoginViewModel> BuildLoginViewModelAsync(string returnUrl)
     {
         var context = await _interaction.GetAuthorizationContextAsync(returnUrl);

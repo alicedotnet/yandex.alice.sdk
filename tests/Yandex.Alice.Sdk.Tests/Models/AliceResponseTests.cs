@@ -75,7 +75,7 @@ public class AliceResponseTests : BaseTests
         aliceResponse.Response.Directives.StartPurchase.TestPayment.Should().BeTrue();
         aliceResponse.Response.Directives.StartPurchase.Products.Should().NotBeNullOrEmpty();
 
-        var product = aliceResponse.Response.Directives.StartPurchase.Products.First();
+        var product = aliceResponse.Response.Directives.StartPurchase.Products[0];
         product.ProductId.Should().NotBeNullOrEmpty()
             .And.Be("5e4cf57a-8497-11ea-bc55-0242ac130209");
         product.Title.Should().NotBeNullOrEmpty()
@@ -101,7 +101,7 @@ public class AliceResponseTests : BaseTests
         aliceResponse.Analytics.Events.Should().NotBeNullOrEmpty()
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.Name))
             .And.OnlyContain(x => x.Value != null);
-        var aliceEvent = aliceResponse.Analytics.Events.First();
+        var aliceEvent = aliceResponse.Analytics.Events[0];
         aliceEvent.Name.Should().Be("custom event");
         ((JsonElement)aliceEvent.Value).GetString().Should().Be("value");
 

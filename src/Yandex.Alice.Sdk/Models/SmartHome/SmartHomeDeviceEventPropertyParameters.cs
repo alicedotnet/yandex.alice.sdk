@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
-    public class SmartHomeDeviceEventPropertyParameters : SmartHomeDevicePropertyParameters
+    public class SmartHomeDeviceEventPropertyParameters : ISmartHomeDevicePropertyParameters
     {
         [JsonPropertyName("instance")]
         public string Instance { get; set; }

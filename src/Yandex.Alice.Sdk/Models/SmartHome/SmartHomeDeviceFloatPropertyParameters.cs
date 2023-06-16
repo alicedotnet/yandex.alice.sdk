@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class SmartHomeDeviceFloatPropertyParameters : SmartHomeDevicePropertyParameters
+    public class SmartHomeDeviceFloatPropertyParameters : ISmartHomeDevicePropertyParameters
     {
         [JsonPropertyName("instance")]
         public string Instance { get; set; }

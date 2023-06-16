@@ -989,7 +989,7 @@ public class DeviceService : IDeviceService
 
     public SmartHomeResponseDevicesQuery GetDevicesQueryResponse(SmartHomeRequestHeaders requestHeaders, SmartHomeRequestDevicesQuery payload)
     {
-        var returnDevices = _devicesStates.Where(x => payload.Devices.Any(d => d.Id == x.Id)).ToList();
+        var returnDevices = _devicesStates.Where(x => payload.Devices.Exists(d => d.Id == x.Id)).ToList();
         if (!returnDevices.Any())
         {
             throw new DeviceNotFoundException();
@@ -1008,7 +1008,7 @@ public class DeviceService : IDeviceService
 
     public SmartHomeResponseDevicesAction ChangeDeviceState(SmartHomeRequestHeaders requestHeaders, SmartHomeRequestDevicesAction payload)
     {
-        var devicesToChange = _devicesStates.Where(x => payload.Payload.Devices.Any(d => d.Id == x.Id)).ToList();
+        var devicesToChange = _devicesStates.Where(x => payload.Payload.Devices.Exists(d => d.Id == x.Id)).ToList();
         if (!devicesToChange.Any())
         {
             throw new DeviceNotFoundException();
@@ -1032,7 +1032,7 @@ public class DeviceService : IDeviceService
             };
             foreach (var requestedCapability in requestedDevice.Capabilities)
             {
-                var capabilityToChange = deviceToChange.Capabilities.FirstOrDefault(x => x.Type == requestedCapability.Type);
+                var capabilityToChange = deviceToChange.Capabilities.Find(x => x.Type == requestedCapability.Type);
                 if (capabilityToChange == null)
                 {
                     continue;

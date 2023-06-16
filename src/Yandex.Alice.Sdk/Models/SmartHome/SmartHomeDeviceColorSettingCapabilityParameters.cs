@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class SmartHomeDeviceColorSettingCapabilityParameters : SmartHomeDeviceCapabilityParameters
+    public class SmartHomeDeviceColorSettingCapabilityParameters : ISmartHomeDeviceCapabilityParameters
     {
         [JsonPropertyName("color_model")]
         public string ColorModel { get; set; }
