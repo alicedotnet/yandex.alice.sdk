@@ -36,7 +36,5 @@
 
         [JsonPropertyName("minute_is_relative")]
         public bool MinuteIsRelative { get; set; }
-
-        public DateTime DateTime => new DateTime(Year, Month, Day, Hour, Minute, 0);
     }
 }
