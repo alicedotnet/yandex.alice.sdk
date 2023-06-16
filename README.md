@@ -7,6 +7,7 @@
 [![NuGet](https://buildstats.info/nuget/Yandex.Alice.Sdk)](https://www.nuget.org/packages/Yandex.Alice.Sdk)
 
 
+
 It supports the following skill types:
 - ![General skills](https://raw.githubusercontent.com/alexvolchetsky/yandex.alice.sdk/master/media/images/general-skill.png) [General skills](#general-skills)
 - ![Smart home skills](https://raw.githubusercontent.com/alexvolchetsky/yandex.alice.sdk/master/media/images/smart-home-skill.png) [Smart home skills](#smart-home-skills)
