@@ -39,7 +39,7 @@ ENTRYPOINT ["dotnet", "Yandex.Alice.Sdk.Demo.dll"]
 
 FROM test as nuget-pack
 RUN dotnet build ./src/Yandex.Alice.Sdk/*.csproj -c Release --no-restore
-RUN dotnet pack ./src/Yandex.Alice.Sdk/*.csproj -c Release --include-symbols -p:SymbolPackageFormat=snupkg -o ./packages/
+RUN dotnet pack ./src/Yandex.Alice.Sdk/*.csproj -c Release -o ./packages/
 
 FROM nuget-pack as nuget
 ARG Nuget_Url=https://api.nuget.org/v3/index.json

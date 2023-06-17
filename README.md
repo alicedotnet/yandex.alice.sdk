@@ -2,8 +2,7 @@
 
 .Net SDK for development of Yandex Alice skills using C# language.
 
-![yandex.alice.sdk](https://github.com/alexvolchetsky/yandex.alice.sdk/workflows/yandex.alice.sdk/badge.svg)
-![yandex.alice.sdk.demo](https://github.com/alexvolchetsky/yandex.alice.sdk/workflows/yandex.alice.sdk.demo/badge.svg)
+![test](https://github.com/alexvolchetsky/yandex.alice.sdk/workflows/test/badge.svg)
 [![NuGet](https://buildstats.info/nuget/Yandex.Alice.Sdk)](https://www.nuget.org/packages/Yandex.Alice.Sdk)
 
 It supports the following skill types:
