@@ -89,6 +89,7 @@ public class AliceResponseTests : BaseTests
             .And.Be("2");
 
         aliceResponse.Response.Directives.ConfirmPurchase.Should().NotBeNull();
+        aliceResponse.Response.Directives.StartAccountLinking.Should().NotBeNull();
 
         aliceResponse.Response.Buttons.Should().NotBeNullOrEmpty()
             .And.OnlyContain(x => !string.IsNullOrEmpty(x.Title))
