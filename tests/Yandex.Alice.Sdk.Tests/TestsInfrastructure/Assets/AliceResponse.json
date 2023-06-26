@@ -42,7 +42,8 @@
           }
         ]
       },
-      "confirm_purchase": {}
+      "confirm_purchase": {},
+      "start_account_linking" : {}
     }
   },
   "analytics": {

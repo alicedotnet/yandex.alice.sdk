@@ -14,5 +14,8 @@
 
         [JsonPropertyName("confirm_purchase")]
         public AliceConfirmPurchaseDirective ConfirmPurchase { get; set; }
+
+        [JsonPropertyName("start_account_linking")]
+        public AliceStartAccountLinkingDirective StartAccountLinking { get; set; }
     }
 }
