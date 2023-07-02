@@ -8,7 +8,7 @@
     <Product />
     <Description>SDK for Yandex Alice skills development</Description>
     <PackageProjectUrl>https://alexvolchetsky.github.io/yandex.alice.sdk</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/alexvolchetsky/yandex.alice.sdk</RepositoryUrl>
+    <RepositoryUrl>https://github.com/alicedotnet/yandex.alice.sdk</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>yandex alice sdk skill dialogs models smart home</PackageTags>
     <PackageIcon>icon.png</PackageIcon>

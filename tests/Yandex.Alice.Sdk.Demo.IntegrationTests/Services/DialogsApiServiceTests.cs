@@ -16,7 +16,7 @@ using Models;
 [Collection(TestsConstants.TestServerCollectionName)]
 public class DialogsApiServiceTests
 {
-    private const string _imageUrl = "https://raw.githubusercontent.com/alexvolchetsky/yandex.alice.sdk/master/src/Yandex.Alice.Sdk/Resources/icon.png";
+    private const string _imageUrl = "https://raw.githubusercontent.com/alicedotnet/yandex.alice.sdk/master/src/Yandex.Alice.Sdk/Resources/icon.png";
 
     private readonly ITestOutputHelper _testOutputHelper;
     private readonly IDialogsApiService _dialogsApiService;

@@ -23,8 +23,8 @@
     "new": true
   },
   "request": {
-    "command": "https / / raw githubusercontent com/alexvolchetsky/yandex alice sdk/master/src/yandex alice sdk/resources/icon png",
-    "original_utterance": "https://raw.githubusercontent.com/alexvolchetsky/yandex.alice.sdk/master/src/Yandex.Alice.Sdk/Resources/icon.png",
+    "command": "https / / raw githubusercontent com/alicedotnet/yandex alice sdk/master/src/yandex alice sdk/resources/icon png",
+    "original_utterance": "https://raw.githubusercontent.com/alicedotnet/yandex.alice.sdk/master/src/Yandex.Alice.Sdk/Resources/icon.png",
     "nlu": {
       "tokens": [],
       "entities": [],
@@ -37,7 +37,7 @@
                 "start": 1,
                 "end": 2
               },
-              "value": "свет"
+              "value": "пїЅпїЅпїЅпїЅ"
             },
             "where": {
               "type": "YANDEX.STRING",
@@ -45,7 +45,7 @@
                 "start": 2,
                 "end": 4
               },
-              "value": "в ванной"
+              "value": "пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ"
             }
           }
         }

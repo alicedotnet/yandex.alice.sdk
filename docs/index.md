@@ -2,27 +2,27 @@
 
 layout: default
 ---
-![Yandex.Alice.SDK](https://raw.githubusercontent.com/alexvolchetsky/yandex.alice.sdk/master/src/Yandex.Alice.Sdk/Resources/icon.png "Yandex.Alice.SDK")
+![Yandex.Alice.SDK](https://raw.githubusercontent.com/alicedotnet/yandex.alice.sdk/master/src/Yandex.Alice.Sdk/Resources/icon.png "Yandex.Alice.SDK")
 
 .Net SDK for development of Yandex Alice skills using C# language.
 
-![test](https://github.com/alexvolchetsky/yandex.alice.sdk/workflows/test/badge.svg)
+![test](https://github.com/alicedotnet/yandex.alice.sdk/workflows/test/badge.svg)
 [![NuGet](https://buildstats.info/nuget/Yandex.Alice.Sdk)](https://www.nuget.org/packages/Yandex.Alice.Sdk)
 
 It supports the following skill types:
-- ![General skills](https://raw.githubusercontent.com/alexvolchetsky/yandex.alice.sdk/master/media/images/general-skill.png) [General skills](#general-skills)
-- ![Smart home skills](https://raw.githubusercontent.com/alexvolchetsky/yandex.alice.sdk/master/media/images/smart-home-skill.png) [Smart home skills](#smart-home-skills)
+- ![General skills](https://raw.githubusercontent.com/alicedotnet/yandex.alice.sdk/master/media/images/general-skill.png) [General skills](#general-skills)
+- ![Smart home skills](https://raw.githubusercontent.com/alicedotnet/yandex.alice.sdk/master/media/images/smart-home-skill.png) [Smart home skills](#smart-home-skills)
 
 # Installation
 Install NuGet package with SDK: 
 
 `Install-Package Yandex.Alice.Sdk`
 # General skills
-This repository has a [demo project](https://github.com/alexvolchetsky/yandex.alice.sdk/tree/master/src/Yandex.Alice.Sdk.Demo) written on ASP.NET Core Web Api, which demonstrates the usage of SDK.
+This repository has a [demo project](https://github.com/alicedotnet/yandex.alice.sdk/tree/master/src/Yandex.Alice.Sdk.Demo) written on ASP.NET Core Web Api, which demonstrates the usage of SDK.
 
 Demo project skill was published in the Alice catalog:
 
-[![alice](https://raw.githubusercontent.com/alexvolchetsky/yandex.alice.sdk/master/media/images/skill-badge.svg)](https://dialogs.yandex.ru/store/skills/245ea3a4-net-sdk?utm_source=https://github.com&utm_medium=badge&utm_campaign=v1&utm_term=d1)
+[![alice](https://raw.githubusercontent.com/alicedotnet/yandex.alice.sdk/master/media/images/skill-badge.svg)](https://dialogs.yandex.ru/store/skills/245ea3a4-net-sdk?utm_source=https://github.com&utm_medium=badge&utm_campaign=v1&utm_term=d1)
 
 In general, you would need to create a controller with the POST action method which receives an object of AliceRequest class as a parameter. 
 
@@ -50,12 +50,12 @@ public class AliceController : ControllerBase
 }
 ```
 
-More info you can find in the [wiki](https://github.com/alexvolchetsky/yandex.alice.sdk/wiki)
+More info you can find in the [wiki](https://github.com/alicedotnet/yandex.alice.sdk/wiki)
 
 # Smart home skills
 For Smart home skills in addition to the server that receives requests from Alice, you would need an additional OAuth server.
-In this [smart home demo project](https://github.com/alexvolchetsky/yandex.alice.sdk/tree/master/src/Yandex.Alice.Sdk.Demo.SmartHome), both servers were combined in one for simplicity.
-This [wiki page](https://github.com/alexvolchetsky/yandex.alice.sdk/wiki/Smart-Home) has a guide that you can use to quickly create a skill and test library.
+In this [smart home demo project](https://github.com/alicedotnet/yandex.alice.sdk/tree/master/src/Yandex.Alice.Sdk.Demo.SmartHome), both servers were combined in one for simplicity.
+This [wiki page](https://github.com/alicedotnet/yandex.alice.sdk/wiki/Smart-Home) has a guide that you can use to quickly create a skill and test library.
 
 # Contributing
-Please check out the [Contributing guide](https://github.com/alexvolchetsky/yandex.alice.sdk/tree/master/CONTRIBUTING.md) for guidelines about how to start.
+Please check out the [Contributing guide](https://github.com/alicedotnet/yandex.alice.sdk/tree/master/CONTRIBUTING.md) for guidelines about how to start.
