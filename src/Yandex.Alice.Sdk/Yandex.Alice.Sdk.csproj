@@ -12,9 +12,9 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>yandex alice sdk skill dialogs models smart home</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
-    <Version>2.2.1</Version>
+    <Version>2.3.1</Version>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <PackageReleaseNotes>Bug fixes</PackageReleaseNotes>
+    <PackageReleaseNotes>Add start_account_linking directive</PackageReleaseNotes>
     <Configurations>Debug;Release</Configurations>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
